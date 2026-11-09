@@ -26,6 +26,7 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     {noindex && <meta name="robots" content="noindex, follow" />}
     {markdownAlt && <link rel="alternate" type="text/markdown" href={markdownAlt} />}
     <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
