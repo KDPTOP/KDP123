@@ -48,6 +48,7 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
         <nav aria-label="Primary" class="flex flex-wrap gap-x-4 gap-y-1 text-sm">
           {STAGES.map((s) => <a href={`/stages/${s.slug}/`} class="text-ink">{s.name}</a>)}
           <a href="/facts/" class="font-medium">KDP facts</a>
+          <a href="/free-tools/" class="font-medium">Free tools</a>
           <a href="/research/" class="font-medium">Market data</a>
           <a href="/tools/" class="font-medium">All tools</a>
           <a href="/search/" class="text-ink">Search</a>

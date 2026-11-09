@@ -1,0 +1,76 @@
+---
+import FreeToolPage from '../../components/FreeToolPage.astro';
+
+const sources = [
+  'https://kdp.amazon.com/en_US/help/topic/G200634560',
+  'https://kdp.amazon.com/en_US/help/topic/G200634500',
+];
+const faq = [
+  {
+    q: 'What is the highest price for the 70% Kindle royalty?',
+    a: 'On Amazon.com the 70% option allows $2.99 to $12.99. The cap rose from $9.99 on July 7, 2026. If the book has a print edition, the ebook must also be at least 20% below its Amazon list price.',
+  },
+  {
+    q: 'Why can\'t I price my ebook at $0.99?',
+    a: 'On the 35% option $0.99 is only allowed for files under 3 MB. Files of 3 MB to under 10 MB start at $1.99, and 10 MB or more start at $2.99.',
+  },
+  {
+    q: 'My paperback is $14.99. What is the most I can charge for the ebook at 70%?',
+    a: '$11.99: 20% below $14.99, which is lower than the $12.99 cap.',
+  },
+];
+---
+
+<FreeToolPage
+  slug="ebook-price-checker"
+  answer="On Amazon.com a Kindle ebook on the 35% option can be $0.99 to $200, with the minimum rising to $1.99 at 3 MB and $2.99 at 10 MB. The 70% option allows $2.99 to $12.99 and must be at least 20% below the Amazon list price of any print edition. Enter your price to see which options it fits."
+  faq={faq}
+  sources={sources}
+>
+  <form id="ebp" class="grid gap-4 sm:grid-cols-3" onsubmit="return false">
+    <label class="field">Ebook list price (USD)<input class="input" name="price" type="number" min="0" step="0.01" value="4.99" inputmode="decimal" /></label>
+    <label class="field">File size after conversion (MB)<input class="input" name="mb" type="number" min="0" step="0.1" value="2" inputmode="decimal" /></label>
+    <label class="field">Print edition list price (optional)<input class="input" name="print" type="number" min="0" step="0.01" placeholder="e.g. 14.99" inputmode="decimal" /></label>
+  </form>
+  <ul id="ebp-out" class="mt-6 space-y-2" aria-live="polite"></ul>
+  <p class="mt-4 text-sm"><a href="/free-tools/royalty-calculator/">See the royalty per sale at this price</a></p>
+
+  <Fragment slot="how">
+    <h2>What it checks</h2>
+    <ul>
+      <li>35% option: $0.99 to $200 under 3 MB, $1.99 to $200 from 3 MB, $2.99 to $200 from 10 MB.</li>
+      <li>70% option: $2.99 to $12.99, and no more than 80% of the print edition's Amazon list price.</li>
+    </ul>
+    <p>Limits are for Amazon.com in USD. Other marketplaces have their own tables, for example £1.77 to £12.99 in the UK on the 70% option. The 70% option also needs the book to be eligible in the buyer's country; see the linked pages.</p>
+  </Fragment>
+</FreeToolPage>
+
+<script>
+  import { ebookPriceCheck } from '../../lib/calc/listing';
+
+  const form = document.getElementById('ebp') as HTMLFormElement;
+  const out = document.getElementById('ebp-out')!;
+  const usd = (v: number) => `$${v.toFixed(2)}`;
+
+  function run() {
+    const f = new FormData(form);
+    const price = Number(f.get('price'));
+    const mb = Number(f.get('mb')) || 0;
+    const print = Number(f.get('print')) || undefined;
+    const r = ebookPriceCheck(price, mb, print);
+    const rows: [string, string][] = [];
+    if (!(price > 0)) rows.push(['issue-error', 'KDP does not allow a free list price. Free days need KDP Select.']);
+    else {
+      rows.push(r.ok35
+        ? ['issue-ok', `35% option: OK (allowed ${usd(r.min35)} to ${usd(r.max35)} for a ${mb} MB file).`]
+        : ['issue-error', `35% option: not allowed. For a ${mb} MB file the price must be ${usd(r.min35)} to ${usd(r.max35)}.`]);
+      if (r.ok70) rows.push(['issue-ok', `70% option: OK (allowed ${usd(r.min70)} to ${usd(r.max70)}${print ? `, capped by the ${usd(print)} print edition` : ''}).`]);
+      else if (r.max70 < r.min70) rows.push(['issue-error', `70% option: not possible. The print edition at ${usd(print!)} would need the ebook below ${usd(r.min70)}.`]);
+      else rows.push(['issue-warn', `70% option: not allowed. Price it ${usd(r.min70)} to ${usd(r.max70)}${print && r.max70 < 12.99 ? ` (20% below the ${usd(print)} print edition)` : ''}.`]);
+    }
+    out.replaceChildren(...rows.map(([cls, text]) => Object.assign(document.createElement('li'), { className: cls, textContent: text })));
+  }
+
+  form.addEventListener('input', run);
+  run();
+</script>

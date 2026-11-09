@@ -15,6 +15,22 @@ import Base from '../layouts/Base.astro';
   const ui = new PagefindUI({ element: '#search', showSubResults: true, showImages: false, resetStyles: false });
   const q = new URLSearchParams(location.search).get('q');
   if (q) ui.triggerSearch(q);
+
+  // Settled searches and their result counts go to /s, a 204 endpoint the server logs without IPs. The weekly
+  // review of zero-result terms decides what to list or write next.
+  let timer, last = '';
+  new MutationObserver(() => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      const term = (document.querySelector('#search input')?.value || '').trim().toLowerCase().slice(0, 100);
+      const msg = document.querySelector('#search .pagefind-ui__message')?.textContent || '';
+      const m = msg.match(/^(\d+|No) results?/i);
+      if (term.length < 2 || !m || term === last) return;
+      last = term;
+      const n = m[1].toLowerCase() === 'no' ? 0 : Number(m[1]);
+      navigator.sendBeacon?.(`/s?${new URLSearchParams({ q: term, n: String(n) })}`);
+    }, 1500);
+  }).observe(document.getElementById('search'), { childList: true, subtree: true, characterData: true });
 </script>
 
 <style is:global>

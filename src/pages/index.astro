@@ -7,6 +7,7 @@ import TeamPick from '../components/TeamPick.astro';
 import { getFacts } from '../lib/facts';
 import research from '../../data/research/reports.json';
 import { addedDates } from '../lib/added';
+import { FREE_TOOLS } from '../lib/freeTools';
 
 const tools = await getTools();
 const facts = await getFacts();
@@ -101,6 +102,17 @@ const jsonLd = [
       </section>
     )
   }
+
+  <section class="mt-12" aria-labelledby="free">
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 id="free" class="text-2xl font-semibold">Free KDP calculators</h2>
+      <a href="/free-tools/" class="text-sm">All free tools</a>
+    </div>
+    <p class="mt-1 text-sm text-muted">Royalties, cover size, pricing and listing checks, built on the same rules as the facts above. No sign-up.</p>
+    <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+      {FREE_TOOLS.map((t) => <li><a href={`/free-tools/${t.slug}/`}>{t.name}</a></li>)}
+    </ul>
+  </section>
 
   <section class="mt-12" aria-labelledby="official">
     <h2 id="official" class="text-2xl font-semibold">Official sources first</h2>

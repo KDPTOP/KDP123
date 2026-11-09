@@ -1,0 +1,82 @@
+---
+import FreeToolPage from '../../components/FreeToolPage.astro';
+import { SITE } from '../../lib/site';
+import { BSR_CURVE, dailySales } from '../../lib/calc/bsr';
+
+const sources = ['https://kdp.amazon.com/en_US/help/topic/G201648140', `${SITE.related.url}/methodology`];
+const ranks = [1, 100, 1000, 5000, 10000, 50000, 100000, 250000, 500000, 1000000];
+const faq = [
+  {
+    q: 'How many books a day is a BSR of 100,000?',
+    a: `On this curve, about ${dailySales(100000, 'books')} print books a day, or ${dailySales(100000, 'kindle')} Kindle ebooks a day, on Amazon.com. Treat it as an order of magnitude: real sales at the same rank vary by season and by how steady the sales are.`,
+  },
+  {
+    q: 'Is there an official formula for BSR?',
+    a: 'No. Amazon says rank is based on a book\'s customer activity relative to other books, weights recent activity more heavily, updates at least once a day (changes can take up to 2 days to show), and is not an accurate way to track sales. Every BSR-to-sales tool is an estimate.',
+  },
+  {
+    q: 'Do paperback and ebook share one rank?',
+    a: 'No. Each format has its own Best Sellers Rank, so convert each one with the matching store. Category ranks in Books lists combine all of a title\'s formats in that category; Kindle Store ranks are for the ebook only.',
+  },
+];
+---
+
+<FreeToolPage
+  slug="bsr-sales-estimator"
+  answer={`Amazon does not publish how Best Sellers Rank maps to sales, so every converter is an estimate. This one uses KDPTop's curve for Amazon.com: daily units = ${BSR_CURVE.A.books.toLocaleString('en-US')} x BSR^-${BSR_CURVE.exp} for print books and ${BSR_CURVE.A.kindle.toLocaleString('en-US')} x BSR^-${BSR_CURVE.exp} for Kindle ebooks. Use it for orders of magnitude, not forecasts.`}
+  faq={faq}
+  sources={sources}
+  poweredBy="Curve from KDPTop's sales model, by the team behind kdp123. Calculated in your browser."
+>
+  <form id="bsr" class="grid gap-4 sm:grid-cols-3" onsubmit="return false">
+    <label class="field">Best Sellers Rank<input class="input" name="rank" type="number" min="1" step="1" value="50000" inputmode="numeric" /></label>
+    <label class="field">Store
+      <select class="input" name="store">
+        <option value="books">Books (paperback, hardcover)</option>
+        <option value="kindle">Kindle Store (ebooks)</option>
+      </select>
+    </label>
+    <label class="field">Royalty per sale, optional (USD)<input class="input" name="royalty" type="number" min="0" step="0.01" placeholder="e.g. 3.19" inputmode="decimal" /></label>
+  </form>
+  <dl class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3" aria-live="polite">
+    <div class="stat"><dt>Sales per day (estimate)</dt><dd data-k="day">-</dd></div>
+    <div class="stat"><dt>Sales per month (30 days)</dt><dd data-k="month">-</dd></div>
+    <div class="stat"><dt>Royalty per month</dt><dd data-k="money">-</dd></div>
+  </dl>
+  <p class="mt-2 text-sm text-muted">Estimate only. Rank weights recent activity more heavily, so one good day can lift it well above what the book sells on average. <a href="/free-tools/royalty-calculator/">Work out your royalty per sale</a>.</p>
+
+  <Fragment slot="how">
+    <h2>Rank to sales on this curve</h2>
+    <table>
+      <thead><tr><th>BSR</th><th>Print books / day</th><th>Kindle ebooks / day</th></tr></thead>
+      <tbody>{ranks.map((r) => <tr><td>{r.toLocaleString('en-US')}</td><td>{dailySales(r, 'books')}</td><td>{dailySales(r, 'kindle')}</td></tr>)}</tbody>
+    </table>
+    <h2>Limits</h2>
+    <ul>
+      <li>Only for the overall Amazon.com rank in Books or the Kindle Store, not sub-category ranks.</li>
+      <li>Rank is relative: it can move when other books sell more or less, even if your sales stay the same. Seasonality and promotions shift the curve.</li>
+      <li>Units only. Kindle Unlimited page reads are paid from the KDP Select fund, not per sale.</li>
+      <li>Results under 10 a day are rounded to one decimal; above that, to whole units.</li>
+    </ul>
+  </Fragment>
+</FreeToolPage>
+
+<script>
+  import { dailySales, type Store } from '../../lib/calc/bsr';
+
+  const form = document.getElementById('bsr') as HTMLFormElement;
+  const q = (k: string) => document.querySelector(`[data-k="${k}"]`)!;
+
+  function run() {
+    const f = new FormData(form);
+    const d = dailySales(Math.round(Number(f.get('rank'))), f.get('store') as Store);
+    const royalty = Number(f.get('royalty'));
+    q('day').textContent = d === null ? '-' : `~${d.toLocaleString('en-US')}`;
+    const month = d === null ? null : d * 30;
+    q('month').textContent = month === null ? '-' : `~${Math.round(month).toLocaleString('en-US')}`;
+    q('money').textContent = month !== null && royalty > 0 ? `~$${Math.round(month * royalty).toLocaleString('en-US')}` : '-';
+  }
+
+  form.addEventListener('input', run);
+  run();
+</script>

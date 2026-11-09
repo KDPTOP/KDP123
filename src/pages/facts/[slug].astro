@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { getFacts, topicName } from '../../lib/facts';
 import { getTools, isoDate, SITE } from '../../lib/site';
+import { freeToolsForFact } from '../../lib/freeTools';
 
 export async function getStaticPaths() {
   const facts = await getFacts();
@@ -19,6 +20,7 @@ const { Content } = await render(fact);
 const url = `${SITE.url}/facts/${fact.id}/`;
 const tools = d.related_tools.map((s) => toolById.get(s)).filter((t) => t !== undefined);
 const checked = isoDate(d.verified_at);
+const calculators = freeToolsForFact(fact.id);
 
 const jsonLd: object[] = [
   {
@@ -78,6 +80,14 @@ jsonLd.push({
             ))}
           </tbody>
         </table>
+      )
+    }
+
+    {
+      calculators.length > 0 && (
+        <p class="mt-4 text-sm">
+          Free calculator: {calculators.map((t, i) => <>{i > 0 && ' · '}<a href={`/free-tools/${t.slug}/`}>{t.name}</a></>)}
+        </p>
       )
     }
 

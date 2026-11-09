@@ -3,6 +3,7 @@ import { getTools, priceLabel, SITE } from '../lib/site';
 import { CATEGORIES, STAGES } from '../lib/taxonomy';
 import { getFacts } from '../lib/facts';
 import research from '../../data/research/reports.json';
+import { FREE_TOOLS } from '../lib/freeTools';
 
 export const GET: APIRoute = async () => {
   const tools = await getTools();
@@ -28,6 +29,8 @@ export const GET: APIRoute = async () => {
     out.push('', '## KDP facts', '', `Rules and numbers sourced to Amazon's help pages: ${SITE.url}/facts/`, '');
     for (const f of facts) out.push(`- [${f.data.title}](${SITE.url}/facts/${f.id}/): ${f.data.question}`);
   }
+  out.push('', '## Free tools', '', `Browser calculators and checkers built on the KDP facts above: ${SITE.url}/free-tools/`, '');
+  for (const t of FREE_TOOLS) out.push(`- [${t.name}](${SITE.url}/free-tools/${t.slug}/): ${t.blurb}`);
   out.push('', '## KDP market data', '', `Reports from KDPTop Research (same team as kdp123; CC BY 4.0, CSV included): ${SITE.url}/research/`, '');
   for (const r of research.reports) out.push(`- [${r.title}](${r.url}): ${r.summary}`);
   out.push('', '## Listings', '');

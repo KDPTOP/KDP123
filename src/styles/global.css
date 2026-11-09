@@ -37,5 +37,15 @@
   .badge-ok { @apply border-ok/30 bg-ok/5 text-ok; }
   .badge-warn { @apply border-warn/30 bg-warn/5 text-warn; }
   .chip { @apply inline-flex cursor-pointer items-center rounded-full border border-line bg-white px-3 py-1 text-sm text-ink hover:border-accent; }
-  .chip[aria-pressed='true'] { @apply border-accent bg-accent-soft text-accent; }
+  .chip[aria-pressed='true'], .chip:has(input:checked) { @apply border-accent bg-accent-soft text-accent; }
+  .field { @apply flex flex-col gap-1 text-sm font-medium; }
+  .input { @apply w-full rounded-md border border-line bg-white px-3 py-2 text-base font-normal text-ink focus:border-accent; }
+  .btn { @apply inline-flex cursor-pointer items-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60; }
+  .btn-ghost { @apply inline-flex cursor-pointer items-center rounded-md border border-line bg-white px-3 py-1.5 text-sm text-ink hover:border-accent; }
+  .stat { @apply rounded-lg border border-line bg-paper p-3; }
+  .stat dt { @apply text-xs text-muted; }
+  .stat dd { @apply mt-1 text-xl font-semibold tabular-nums; }
+  .issue-error { @apply border-l-4 border-red-600 bg-red-50 px-3 py-2 text-sm; }
+  .issue-warn { @apply border-l-4 border-warn bg-warn/5 px-3 py-2 text-sm; }
+  .issue-ok { @apply border-l-4 border-ok bg-ok/5 px-3 py-2 text-sm; }
 }
