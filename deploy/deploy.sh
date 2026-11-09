@@ -55,9 +55,11 @@ changed=$(cd "releases/$REL" && find . -name index.html | sed 's#^\./##' | while
 done | grep -v -E '/(go|search)/' | head -n 10000)
 [ -n "$changed" ] || { echo "IndexNow: no changed pages"; exit 0; }
 urls=$(printf '%s\n' "$changed" | sed 's/.*/"&"/' | paste -sd, -)
-code=$(curl -s -o /dev/null -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
-  -H 'Content-Type: application/json; charset=utf-8' \
-  --data "{\"host\":\"kdp123.com\",\"key\":\"$key\",\"keyLocation\":\"https://kdp123.com/$key.txt\",\"urlList\":[$urls]}")
+body="{\"host\":\"kdp123.com\",\"key\":\"$key\",\"keyLocation\":\"https://kdp123.com/$key.txt\",\"urlList\":[$urls]}"
+submit() { curl -s -o /dev/null -w '%{http_code}' -X POST https://api.indexnow.org/indexnow -H 'Content-Type: application/json; charset=utf-8' --data "$body"; }
+code=$(submit)
+# 403 means the key has not been validated yet; the first fetch of the key file is asynchronous.
+if [ "$code" = 403 ]; then sleep 20; code=$(submit); fi
 echo "IndexNow: $(printf '%s\n' "$changed" | wc -l) changed pages, HTTP $code"
 EOF
 purge
