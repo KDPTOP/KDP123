@@ -1,13 +1,14 @@
 name: Ideogram
 url: https://ideogram.ai
 categories: [ai-tools, cover-design]
-tagline: Ideogram is an AI image generator with a free tier that is known for rendering readable text, useful for typographic book covers.
+tagline: Ideogram is an AI image generator with typography tools, including editable text layers, useful for typographic book cover concepts.
 summary: >-
-  Ideogram is the usual pick when a cover needs legible title text built into the artwork, where other generators often
-  fail. The free tier is limited to roughly ten generations a day as reported by a third-party review. It outputs images,
-  not KDP-ready cover wraps.
-pricing: { model: freemium, currency: USD, free_tier: true, note: "Free tier reported at ~10 generations/day." }
-platforms: [web]
+  Ideogram generates images and offers editing apps such as Layerize Text, which turns lettering in an image into
+  editable text layers so you can change wording and fonts. It outputs images, not KDP-ready cover wraps, so you still
+  need a layout step for spine, bleed and safe zones. Ideogram says it does not claim ownership of generated images and
+  allows commercial use.
+pricing: { model: freemium, from: 20, currency: USD, period: month, free_tier: true, note: "Plus $20/mo or $180/yr ($15/mo), 2,400 priority credits/mo; Pro $60/mo or $504/yr ($42/mo), 7,500 priority credits/mo; Team $30/user/mo or $240/user/yr ($20/user/mo); Enterprise postpaid. Pay as you go at 1 cent per credit. Eligible free accounts get weekly credits (amount varies). No free trials or discounts on plans. Prices exclude tax." }
+platforms: [web, ios]
 kdp:
   outputs_kdp_files: false
   touches_kdp_account: false
@@ -15,4 +16,6 @@ alternatives: [midjourney, leonardo-ai, recraft]
 status: published
 verified_at: 2026-11-09
 sources:
-  - https://creatorgear.ai/blog/best-ai-tools-for-kdp-sellers
+  - https://ideogram.ai/
+  - https://ideogram.ai/pricing/
+  - https://ideogram.ai/features/text-layers/

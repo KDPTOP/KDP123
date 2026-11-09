@@ -3,10 +3,11 @@ url: https://bookbolt.io
 categories: [book-research, low-content]
 tagline: Book Bolt is a subscription app that combines niche research with a KDP-sized cover and interior designer for low-content and puzzle books.
 summary: >-
-  Book Bolt puts product and keyword research, a cover and interior studio, puzzle generators and AI credits under one
-  login. The studio handles KDP spine and bleed for you. It is built for journals, planners, puzzle and activity books and
-  is less useful for novelists. Its KDP Spy extension needs a Book Bolt login.
-pricing: { model: subscription, from: 23.99, currency: USD, period: month, free_tier: false, note: "$19.99/mo billed yearly as of 2026-10-31. 3-day free trial." }
+  Book Bolt puts product and keyword research, a cover and interior studio, puzzle generators, AI credits and the KDP Spy
+  browser extension under one login. The cover designer sizes trim, bleed and spine to KDP specs from your page count.
+  Its tools center on journals, planners, puzzle, coloring and activity books. It does not need access to your KDP
+  account; you upload the finished files yourself.
+pricing: { model: subscription, from: 23.99, currency: USD, period: month, free_tier: false, note: "Pro $23.99/mo monthly or $19.99/mo billed annually (1,000 AI credits/mo); Premium $35.99/mo monthly or $29.99/mo billed annually (4,000 AI credits/mo). 3-day free trial. Refunds after a charge are reviewed case by case." }
 platforms: [web, chrome-extension]
 kdp:
   outputs_kdp_files: true
@@ -14,14 +15,14 @@ kdp:
   content_types: [low-content, puzzle, coloring]
 pros:
   - Research and design in one place
-  - Puzzle generators save manual work
+  - Puzzle generators for sudoku, mazes, word search and crosswords
 cons:
   - The trial lasts only three days
-  - Built for low-content, less suited to fiction
+  - AI credits are capped per month
 best_for: [Journals, planners, puzzle and activity books]
 alternatives: [self-publishing-titans, kdp-coloring-book-studio, publisher-rocket]
 status: published
 verified_at: 2026-11-09
 sources:
-  - https://publishflow.ai/knowledge-hub/comparisons/best-kdp-niche-research-tools/
-  - https://www.iwrity.com/tools/best/kdp-keyword-research-tools
+  - https://bookbolt.io/
+  - https://bookbolt.io/pricing/

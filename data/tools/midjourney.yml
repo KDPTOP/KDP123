@@ -3,10 +3,11 @@ url: https://www.midjourney.com
 categories: [ai-tools, cover-design]
 tagline: Midjourney is a paid AI image generator that many publishers use for cover art and coloring page concepts, but it outputs images only.
 summary: >-
-  Midjourney produces high-quality illustrated and photorealistic imagery, which makes it a common choice for cover art.
-  It does not do layout, spine calculation or KDP-compliant PDFs, so you need a second tool for the final files. Plans
-  start from about $10 a month. Check KDP's current AI-generated content disclosure rules before publishing.
-pricing: { model: subscription, from: 10, currency: USD, period: month, free_tier: false }
+  Midjourney produces illustrated and photorealistic imagery, which makes it a common choice for cover art. It does not
+  do layout, spine calculation or KDP-compliant PDFs, so you need a second tool for the final files. All plans are
+  subscriptions starting at $10 a month, and companies with more than $1M in yearly revenue must buy Pro or Mega. Check
+  KDP's current AI-generated content disclosure rules before publishing.
+pricing: { model: subscription, from: 10, currency: USD, period: month, note: "Basic $10/mo or $96/yr ($8/mo); Standard $30/mo or $288/yr; Pro $60/mo or $576/yr; Mega $120/mo or $1,152/yr. Relax mode (unlimited images) from Standard; Stealth mode only on Pro and Mega." }
 platforms: [web]
 kdp:
   outputs_kdp_files: false
@@ -16,5 +17,4 @@ alternatives: [ideogram, leonardo-ai, recraft]
 status: published
 verified_at: 2026-11-09
 sources:
-  - https://kdptools.io/blog/ai-book-interior-generator-kdp
-  - https://creatorgear.ai/blog/best-ai-tools-for-kdp-sellers
+  - https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans

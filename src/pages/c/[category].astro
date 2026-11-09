@@ -1,6 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ToolTable from '../../components/ToolTable.astro';
+import ToolFilters from '../../components/ToolFilters.astro';
+import TeamPick from '../../components/TeamPick.astro';
 import { getTools, SITE } from '../../lib/site';
 import { nonEmpty, stageBySlug } from '../../lib/taxonomy';
 
@@ -13,6 +15,12 @@ const all = await getTools();
 const tools = all.filter((t) => t.data.categories.includes(category.slug));
 const stage = stageBySlug(category.stage);
 const url = `${SITE.url}/c/${category.slug}/`;
+const TEAM_TASKS: Record<string, string> = {
+  'book-research': 'see what sells in a category and whether new books can break in',
+  'keywords-categories': 'find which KDP categories a book is listed in and how crowded they are',
+  analytics: 'follow bestseller lists and catch new books breaking into the categories you track',
+};
+const teamTask = TEAM_TASKS[category.slug];
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -48,5 +56,8 @@ const jsonLd = [
   </nav>
   <h1 class="mt-2 text-4xl font-bold">{category.name}</h1>
   <p class="mt-3 max-w-2xl text-lg text-muted">{category.blurb}</p>
-  <div class="mt-6"><ToolTable tools={tools} /></div>
+  <p class="mt-2 text-sm text-muted">{tools.length} listed, sorted by name. A tool can appear in more than one category.</p>
+  {teamTask && <div class="mt-6 max-w-3xl"><TeamPick task={teamTask} /></div>}
+  {tools.length >= 6 && <div class="mt-6"><ToolFilters showSearch={false} showOfficial={tools.some((t) => t.data.official)} /></div>}
+  <div class="mt-4"><ToolTable tools={tools} filterable={tools.length >= 6} /></div>
 </Base>

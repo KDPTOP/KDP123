@@ -1,20 +1,27 @@
 name: Draft2Digital
 url: https://draft2digital.com
 categories: [writing-formatting, print-distribution]
-tagline: Draft2Digital is a free ebook and print distribution service that also offers free automated book formatting.
+tagline: Draft2Digital is an ebook and print-on-demand distribution service for publishing wide that also formats Word manuscripts into EPUB and print PDF.
 summary: >-
-  Draft2Digital converts a Word document into a publish-ready ebook or print-ready PDF using free templates, even if you
-  do not publish through it, and distributes to multiple retailers beyond Amazon. Formatting is free to use. Distribution
-  is paid for out of book sales rather than by an upfront fee.
-pricing: { model: free, currency: USD, note: "Free to use; it earns a share of sales when it distributes your book." }
+  Draft2Digital converts a Word document into an ebook EPUB or print-ready paperback PDF with layout templates, and you
+  can download those files free even if you do not publish through it. Publishing requires a $20 one-time activation
+  fee; it then takes about 10% of the retail price as commission and distributes to many retailers and libraries. D2D
+  Print paperbacks also reach Amazon. It does not accept content generated entirely by AI without extensive human editing.
+pricing: { model: freemium, from: 20, currency: USD, period: one-time, free_tier: true, note: "Formatting and file download are free. To publish: $20 one-time non-refundable activation fee; $12/yr maintenance fee for accounts with titles in distribution earning under $100/yr (waived the first year); commission of about 10% of retail price per sale." }
 platforms: [web]
 kdp:
   outputs_kdp_files: true
   touches_kdp_account: false
   content_types: [fiction, nonfiction]
+pros:
+  - Free EPUB and print PDF conversion you can use anywhere
+  - One dashboard for many ebook stores and library platforms
+cons:
+  - Publishing now needs a $20 activation fee
+  - Small accounts pay a $12 yearly maintenance fee
 alternatives: [ingramspark, atticus, reedsy-studio]
 status: published
 verified_at: 2026-11-09
 sources:
-  - https://selfpublishingdirectory.com/llms.txt
-  - https://csulb.libguides.com/SelfPublishing/Resources
+  - https://draft2digital.com/
+  - https://draft2digital.com/faq/

@@ -3,22 +3,21 @@ url: https://www.atticus.io
 categories: [writing-formatting]
 tagline: Atticus is a cross-platform book writing and formatting app that exports print-ready PDF and EPUB, sold for a one-time price.
 summary: >-
-  Atticus is an all-in-one writing and formatting app with professional themes. It runs on Windows, Mac, Linux and
-  Chromebook, and exports EPUB and print PDF suitable for KDP. It is made by the founder of Kindlepreneur and Publisher
-  Rocket, so reviews on that site are not independent of the vendor.
-pricing: { model: one-time, from: 147, currency: USD, period: one-time }
+  Atticus is an all-in-one writing and formatting app with 17 templates and a custom theme builder. It is a progressive
+  web app that runs on Windows, Mac, Linux and Chromebook, online or offline, and exports EPUB, PDF and DOCX for ebook and
+  print. It is made by the founder of Kindlepreneur and Publisher Rocket, so reviews on that site are not independent of
+  the vendor.
+pricing: { model: one-time, from: 147, currency: USD, period: one-time, refund_days: 30, note: "$147 one-time for unlimited ebooks and print books, with ongoing updates. 30-day money-back guarantee." }
 platforms: [web, windows, mac, linux]
 kdp:
   outputs_kdp_files: true
   touches_kdp_account: false
   content_types: [fiction, nonfiction]
 pros:
-  - Cross-platform alternative to Vellum
-  - One-time price
+  - Runs on Windows, Mac, Linux and Chromebook
+  - One-time price for unlimited books
 alternatives: [vellum, reedsy-studio, draft2digital]
 status: published
 verified_at: 2026-11-09
 sources:
-  - https://selfpublishingdirectory.com/llms.txt
-  - https://kdptools.io/blog/ai-book-interior-generator-kdp
-  - https://kindlepreneur.com/
+  - https://www.atticus.io/

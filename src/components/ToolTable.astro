@@ -10,9 +10,10 @@ interface Props {
 const { tools, showCategory = false, filterable = false } = Astro.props;
 ---
 
-<div class="overflow-x-auto rounded-lg border border-line bg-white">
-  <table class="w-full min-w-[720px] text-left text-sm" data-tool-table={filterable ? '' : undefined}>
-    <thead class="border-b border-line bg-paper text-xs uppercase tracking-wide text-muted">
+<!-- One DOM for both layouts: below md each row is a card, so the filter script only ever hides <tr> elements. -->
+<div class="md:overflow-x-auto md:rounded-lg md:border md:border-line md:bg-white">
+  <table class="block w-full text-left text-sm md:table md:min-w-[720px]" data-tool-table={filterable ? '' : undefined}>
+    <thead class="hidden border-b border-line bg-paper text-xs uppercase tracking-wide text-muted md:table-header-group">
       <tr>
         <th class="px-3 py-2 font-medium">Tool</th>
         <th class="px-3 py-2 font-medium">What it is</th>
@@ -21,38 +22,44 @@ const { tools, showCategory = false, filterable = false } = Astro.props;
         <th class="px-3 py-2 font-medium">Checked</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="block space-y-3 md:table-row-group md:space-y-0">
       {
         tools.map((t) => {
           const link = outbound(t);
           return (
             <tr
-              class="border-b border-line align-top last:border-0"
+              class="block rounded-lg border border-line bg-white p-3 align-top md:table-row md:rounded-none md:border-0 md:border-b md:p-0 md:last:border-0"
               data-price={t.data.pricing.model}
               data-official={t.data.official ? '1' : '0'}
               data-kdp-files={t.data.kdp.outputs_kdp_files ? '1' : '0'}
               data-name={t.data.name.toLowerCase()}
             >
-              <td class="px-3 py-3">
-                <a href={`/t/${t.id}/`} class="font-medium">{t.data.name}</a>
+              <td class="block md:table-cell md:px-3 md:py-3">
+                <a href={`/t/${t.id}/`} class="text-base font-medium md:text-sm">{t.data.name}</a>
                 <div class="mt-1 flex flex-wrap gap-1">
                   {t.data.official && <span class="badge badge-ok">Official</span>}
                   {t.data.related_to_directory && <span class="badge badge-warn">Same team as kdp123</span>}
                   {showCategory && t.data.categories.slice(0, 2).map((c) => <span class="badge">{categoryBySlug(c)?.name}</span>)}
                 </div>
               </td>
-              <td class="px-3 py-3 text-muted">
+              <td class="mt-2 block text-muted md:mt-0 md:table-cell md:px-3 md:py-3">
                 {t.data.tagline}
                 <div class="mt-1"><a href={link.href} rel={link.rel} class="text-xs">Visit site</a></div>
               </td>
-              <td class="whitespace-nowrap px-3 py-3">{priceLabel(t)}</td>
-              <td class="px-3 py-3">
-                <div class="flex flex-wrap gap-1">
-                  {t.data.kdp.outputs_kdp_files && <span class="badge badge-ok">KDP-ready files</span>}
-                  {t.data.kdp.touches_kdp_account && <span class="badge badge-warn">Touches KDP account</span>}
-                </div>
+              <td class="mt-2 block md:mt-0 md:table-cell md:whitespace-nowrap md:px-3 md:py-3">
+                <span class="text-muted md:hidden">Price: </span>{priceLabel(t)}
               </td>
-              <td class="whitespace-nowrap px-3 py-3 text-muted">{isoDate(t.data.verified_at)}</td>
+              <td class="mt-1 block max-md:empty:hidden md:mt-0 md:table-cell md:px-3 md:py-3">
+                {(t.data.kdp.outputs_kdp_files || t.data.kdp.touches_kdp_account) && (
+                  <div class="flex flex-wrap gap-1 md:whitespace-nowrap">
+                    {t.data.kdp.outputs_kdp_files && <span class="badge badge-ok">KDP-ready files</span>}
+                    {t.data.kdp.touches_kdp_account && <span class="badge badge-warn">Touches KDP account</span>}
+                  </div>
+                )}
+              </td>
+              <td class="mt-1 block text-xs text-muted md:mt-0 md:table-cell md:whitespace-nowrap md:px-3 md:py-3 md:text-sm">
+                <span class="md:hidden">Checked </span>{isoDate(t.data.verified_at)}
+              </td>
             </tr>
           );
         })

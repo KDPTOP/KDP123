@@ -3,7 +3,10 @@ import Base from '../layouts/Base.astro';
 import ToolTable from '../components/ToolTable.astro';
 import { getTools, SITE, isoDate } from '../lib/site';
 import { STAGES, CATEGORIES, nonEmpty } from '../lib/taxonomy';
+import TeamPick from '../components/TeamPick.astro';
 import { getFacts } from '../lib/facts';
+import research from '../../data/research/reports.json';
+import { addedDates } from '../lib/added';
 
 const tools = await getTools();
 const facts = await getFacts();
@@ -12,8 +15,20 @@ const countOf = (cat: string) => tools.filter((t) => t.data.categories.includes(
 const stageCount = (stage: string) =>
   new Set(tools.filter((t) => t.data.categories.some((c) => CATEGORIES.find((x) => x.slug === c)?.stage === stage)).map((t) => t.id)).size;
 const official = tools.filter((t) => t.data.official);
-const latest = [...tools].sort((a, b) => +(b.data.verified_at ?? 0) - +(a.data.verified_at ?? 0)).slice(0, 8);
-const lastChecked = isoDate(latest[0]?.data.verified_at);
+const byChecked = [...tools].sort((a, b) => +(b.data.verified_at ?? 0) - +(a.data.verified_at ?? 0));
+const lastChecked = isoDate(byChecked[0]?.data.verified_at);
+// Official entries already have their own section; this one shows the rest of the directory moving.
+const added = addedDates();
+const addedAt = (id: string) => added.get(id)?.getTime() ?? Date.now();
+const latest = byChecked
+  .filter((t) => !t.data.official && !t.data.related_to_directory)
+  .sort((a, b) => addedAt(b.id) - addedAt(a.id) || +(b.data.verified_at ?? 0) - +(a.data.verified_at ?? 0))
+  .slice(0, 8);
+const changes = tools
+  .flatMap((t) => t.data.price_history.map((h) => ({ tool: t, ...h })))
+  .sort((a, b) => b.date.getTime() - a.date.getTime())
+  .slice(0, 5);
+const reports = research.reports.slice(0, 3);
 
 const jsonLd = [
   {
@@ -69,6 +84,7 @@ const jsonLd = [
         ))
       }
     </div>
+    <p class="mt-3 text-sm text-muted">Many tools help at more than one stage, so they appear in each; the counts overlap.</p>
   </section>
 
   {
@@ -105,8 +121,30 @@ const jsonLd = [
     </ul>
   </section>
 
+  <section class="mt-12" aria-labelledby="market">
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 id="market" class="text-2xl font-semibold">KDP market data</h2>
+      <a href="/research/" class="text-sm">All reports</a>
+    </div>
+    <p class="mt-1 text-sm text-muted">Open data on book prices, reviews and niche competition, with CSV downloads.</p>
+    <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+      {reports.map((r) => <li><a href={`/research/#${r.slug}`}>{r.title}</a></li>)}
+    </ul>
+    <div class="mt-6 max-w-3xl"><TeamPick /></div>
+  </section>
+
   <section class="mt-12" aria-labelledby="recent">
-    <h2 id="recent" class="text-2xl font-semibold">Recently checked</h2>
+    <h2 id="recent" class="text-2xl font-semibold">Recently added</h2>
+    <p class="mt-1 text-sm text-muted">The newest listings, each checked on the vendor's own site.</p>
     <div class="mt-4"><ToolTable tools={latest} showCategory /></div>
+    {changes.length > 0 && (
+      <>
+        <h3 class="mt-8 text-lg font-semibold">Price and plan changes</h3>
+        <ul class="mt-2 space-y-1 text-sm">
+          {changes.map((c) => <li><span class="text-muted">{isoDate(c.date)}</span> <a href={`/t/${c.tool.id}/`}>{c.tool.data.name}</a>: {c.note}</li>)}
+        </ul>
+        <p class="mt-2 text-sm"><a href="/changes/">All changes</a></p>
+      </>
+    )}
   </section>
 </Base>

@@ -3,24 +3,25 @@ url: https://bookbeam.io
 categories: [book-research, keywords-categories, analytics]
 tagline: BookBeam is a subscription web app and Chrome extension for niche research, keyword research and ongoing tracking of books on Amazon.
 summary: >-
-  BookBeam offers keyword and niche research, sales history, a tracker for watching niches over time, trademark checks and
-  listing and creation tools. It is the only one of the mainstream research tools built around ongoing tracking, and you
-  pay for that every month. Plans start at $47 a month, or $29 a month billed yearly.
-pricing: { model: subscription, from: 47, currency: USD, period: month, refund_days: 7, note: "$29/mo billed yearly on the lowest plan." }
+  BookBeam offers keyword and niche research, category history, a book tracker with keyword rank tracking, a USPTO and
+  EUIPO trademark checker, listing tools and BookBeam Create for KDP interiors. Data covers seven Amazon marketplaces.
+  Paid plans start at $47 a month, or $29 a month billed yearly; a limited Chrome Extension Lite is free.
+pricing: { model: subscription, from: 47, currency: USD, period: month, free_tier: true, refund_days: 7, note: "Basic $47/mo, $129 per 3 months, or $348/yr ($29/mo); Publisher $69/mo, $187 per 3 months, or $576/yr ($48/mo); Publisher Pro (5 seats) $119/mo, $327 per 3 months, or $984/yr ($82/mo). 7-day money-back guarantee. Free tier is the Chrome Extension Lite." }
 platforms: [web, chrome-extension]
 kdp:
-  outputs_kdp_files: false
+  outputs_kdp_files: true
   touches_kdp_account: false
   content_types: [any]
 pros:
-  - Ongoing tracking and a large database
-  - Research and production tools in one suite
+  - Tracking of books and keyword ranks over time
+  - Research, trademark checks and interior creation in one suite
 cons:
   - Monthly cost is higher than one-time tools
+  - Lower plans cap history, searches and tracked books
 best_for: [Publishers who research and track a catalog seriously]
 alternatives: [publisher-rocket, kdspy, authorscout]
 status: published
 verified_at: 2026-11-09
 sources:
-  - https://book-business-kdp-amazon.com/en/blog/best-kdp-tools/
-  - https://inkario.app/blog/best-kdp-tools-2026
+  - https://bookbeam.io/
+  - https://bookbeam.io/pricing/

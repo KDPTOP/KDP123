@@ -1,0 +1,86 @@
+---
+import { PRICE_FILTERS } from '../lib/site';
+
+interface Props {
+  showOfficial?: boolean;
+  showSearch?: boolean;
+}
+const { showOfficial = true, showSearch = true } = Astro.props;
+---
+
+<div class="space-y-3" id="filters">
+  {showSearch && (
+    <div>
+      <label for="filter-q" class="sr-only">Search</label>
+      <input id="filter-q" type="search" placeholder="Filter by name or description" class="w-full max-w-md rounded-lg border border-line bg-white px-3 py-2 text-sm" />
+    </div>
+  )}
+  <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Price type">
+    <span class="text-sm text-muted">Price:</span>
+    {PRICE_FILTERS.map((f) => <button type="button" class="chip" data-price-filter={f.value} aria-pressed="false">{f.label}</button>)}
+  </div>
+  <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Attributes">
+    <span class="text-sm text-muted">Only:</span>
+    {showOfficial && <button type="button" class="chip" data-flag="official" aria-pressed="false">Official Amazon</button>}
+    <button type="button" class="chip" data-flag="kdpFiles" aria-pressed="false">Outputs KDP-ready files</button>
+    <button type="button" id="clear" class="ml-2 text-sm text-accent underline">Clear all</button>
+  </div>
+  <p id="count" class="text-sm text-muted" aria-live="polite"></p>
+</div>
+<p id="empty" class="mt-4 hidden rounded-lg border border-line bg-white p-4 text-muted">
+  No listings match these filters. <button type="button" id="empty-clear" class="text-accent underline">Clear all filters</button>
+</p>
+
+<script>
+  const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>('[data-tool-table] tbody tr'));
+  const q = document.getElementById('filter-q') as HTMLInputElement | null;
+  const count = document.getElementById('count')!;
+  const empty = document.getElementById('empty')!;
+  const priceBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-price-filter]'));
+  const flagBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-flag]'));
+
+  const state = { q: '', price: new Set<string>(), flags: new Set<string>() };
+
+  const params = new URLSearchParams(location.search);
+  state.q = q ? (params.get('q') ?? '') : '';
+  (params.get('price') ?? '').split(',').filter(Boolean).forEach((p) => state.price.add(p));
+  (params.get('only') ?? '').split(',').filter(Boolean).forEach((p) => state.flags.add(p));
+  if (q) q.value = state.q;
+
+  function save() {
+    const p = new URLSearchParams();
+    if (state.q) p.set('q', state.q);
+    if (state.price.size) p.set('price', [...state.price].join(','));
+    if (state.flags.size) p.set('only', [...state.flags].join(','));
+    const qs = p.toString();
+    history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
+  }
+
+  function apply() {
+    const needle = state.q.trim().toLowerCase();
+    let shown = 0;
+    for (const r of rows) {
+      const ok =
+        (!needle || r.textContent!.toLowerCase().includes(needle)) &&
+        (!state.price.size || state.price.has(r.dataset.price!)) &&
+        (!state.flags.has('official') || r.dataset.official === '1') &&
+        (!state.flags.has('kdpFiles') || r.dataset.kdpFiles === '1');
+      r.hidden = !ok;
+      if (ok) shown++;
+    }
+    priceBtns.forEach((b) => b.setAttribute('aria-pressed', String(state.price.has(b.dataset.priceFilter!))));
+    flagBtns.forEach((b) => b.setAttribute('aria-pressed', String(state.flags.has(b.dataset.flag!))));
+    count.textContent = `${shown} of ${rows.length} shown`;
+    empty.classList.toggle('hidden', shown > 0);
+    save();
+  }
+
+  const toggle = (set: Set<string>, v: string) => (set.has(v) ? set.delete(v) : set.add(v));
+  priceBtns.forEach((b) => b.addEventListener('click', () => { toggle(state.price, b.dataset.priceFilter!); apply(); }));
+  flagBtns.forEach((b) => b.addEventListener('click', () => { toggle(state.flags, b.dataset.flag!); apply(); }));
+  q?.addEventListener('input', () => { state.q = q.value; apply(); });
+  const clear = () => { state.q = ''; if (q) q.value = ''; state.price.clear(); state.flags.clear(); apply(); };
+  document.getElementById('clear')!.addEventListener('click', clear);
+  document.getElementById('empty-clear')!.addEventListener('click', clear);
+  apply();
+</script>

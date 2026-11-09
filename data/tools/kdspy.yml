@@ -3,25 +3,25 @@ url: https://www.kdspy.com
 categories: [book-research, keywords-categories]
 tagline: KDSPY is a paid browser extension that shows category, keyword, competitor and revenue estimates directly on Amazon pages.
 summary: >-
-  KDSPY works inside the browser while you browse Amazon: category breakdowns with estimated revenue, keyword analysis,
-  author and publisher analysis, and 30-day book tracking. It is sold as a one-time purchase with a long refund window.
-  Search volume is not stated by the vendor, so treat its numbers as estimates.
-pricing: { model: one-time, from: 79, currency: USD, period: one-time, refund_days: 60, note: "Listed at $79 once as of 2026-10-31, down from a regular $197. Licence covers two devices." }
+  KDSPY works inside the browser while you browse Amazon: category breakdowns with estimated revenue and daily sales
+  needed to rank, keyword analysis, author and publisher analysis, and 30-day book tracking. It is sold as a one-time
+  purchase with a 60-day refund window. Its sales and revenue figures are estimates. It is not affiliated with Amazon.
+pricing: { model: one-time, from: 79, currency: USD, period: one-time, refund_days: 60, note: "$79 one-time plus tax, shown as down from a regular $197. Dual license for two devices. 60-day money-back guarantee." }
 platforms: [chrome-extension, firefox-extension]
 kdp:
+  marketplaces: [us, uk, ca, de, au, it, es, fr, in, jp, mx, br, pl]
   outputs_kdp_files: false
   touches_kdp_account: false
   content_types: [any]
 pros:
-  - Lowest one-time price of the paid research tools compared
-  - Works on any desktop browser
+  - One-time price with a 60-day refund window
+  - Works in Chrome, Firefox, Edge, Opera and Brave
 cons:
-  - No free plan and tracking is 30 days, not a long history
-  - Desktop browsers only
+  - Book tracking covers 30 days
+  - Does not work on iPads, tablets or phones
 best_for: [Quick niche and competitor checks while browsing Amazon]
 alternatives: [publisher-rocket, bookbeam, ds-amazon-quick-view]
 status: published
 verified_at: 2026-11-09
 sources:
-  - https://publishflow.ai/knowledge-hub/comparisons/best-kdp-niche-research-tools/
-  - https://www.iwrity.com/tools/best/kdp-keyword-research-tools
+  - https://www.kdspy.com/

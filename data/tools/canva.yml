@@ -3,11 +3,11 @@ url: https://www.canva.com
 categories: [cover-design, low-content]
 tagline: Canva is a template-based design tool widely used for KDP ebook covers, simple low-content interiors and marketing graphics.
 summary: >-
-  Canva has a large template library and a free tier that is enough for many low-content interiors. For print books it does
-  not calculate KDP spine width for you, and you must set bleed, trim size and safe zones yourself. Pro is reported at
-  about $120 a year. Templates are often overused, so covers can look generic.
-pricing: { model: freemium, from: 120, currency: USD, period: year, free_tier: true, note: "Pro price as reported by a third-party review." }
-platforms: [web, ios, android]
+  Canva has a large template library and a free plan that is enough for many low-content interiors and ebook covers.
+  For print books it does not calculate KDP spine width for you, and you must set bleed, trim size and safe zones
+  yourself. Pro costs US$18 a month or US$144 a year in the US, and Canva shows regional prices in other countries.
+pricing: { model: freemium, from: 18, currency: USD, period: month, free_tier: true, note: "US prices, excluding tax: Pro US$18/mo or US$144/yr for one person; Business US$25/mo or US$250/yr per person; Enterprise on request. Free trial of Pro and Business. Prices vary by country." }
+platforms: [web, windows, mac, ios, android]
 kdp:
   outputs_kdp_files: false
   touches_kdp_account: false
@@ -19,5 +19,5 @@ alternatives: [book-bolt, placeit]
 status: published
 verified_at: 2026-11-09
 sources:
+  - https://www.canva.com/en/pricing/?countryCode=us
   - https://www.kdpeasy.com/blog/best-kdp-cover-generator-tools-2025
-  - https://creatorgear.ai/blog/best-ai-tools-for-kdp-sellers

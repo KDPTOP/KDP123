@@ -1,19 +1,22 @@
 name: Recraft
 url: https://www.recraft.ai
 categories: [ai-tools, low-content]
-tagline: Recraft is an AI tool that generates original vector illustrations and patterns, useful for decorative journal interiors and coloring pages.
+tagline: Recraft is an AI image and vector generator with custom styles, useful for decorative journal interiors and coloring page art.
 summary: >-
-  Recraft generates vector illustrations and repeat patterns, which suit decorative journal interiors, activity book
-  imagery and coloring page backgrounds. The free tier is reported at 50 images a day. Check the licence for commercial
-  use on your plan before selling books that contain its output.
-pricing: { model: freemium, currency: USD, free_tier: true, note: "Free tier reported at 50 images/day. Verify commercial-use terms per plan." }
+  Recraft generates raster and vector images with custom styles, which suit decorative journal interiors, activity book
+  imagery and coloring page art. The free plan allows 3 generations per style per day, but its images are public, owned
+  by Recraft and not licensed for commercial use, so you need a paid plan before selling books that contain its output.
+pricing: { model: freemium, from: 12, currency: USD, period: month, free_tier: true, note: "Prices exclude VAT. Basic $12/mo or $10/mo billed annually ($120/yr), 1,000 credits/mo; Pro $20/mo or $16/mo billed annually ($192/yr), 2,000 credits/mo; Teams $22/seat/mo or $18/seat/mo billed annually. Refunds at Recraft's discretion within 30 days if credits are unused. Free plan: no commercial use." }
 platforms: [web]
 kdp:
   outputs_kdp_files: false
   touches_kdp_account: false
   content_types: [low-content, coloring]
+cons:
+  - Free-plan images cannot be used commercially
 alternatives: [midjourney, leonardo-ai]
 status: published
 verified_at: 2026-11-09
 sources:
-  - https://creatorgear.ai/blog/best-ai-tools-for-kdp-sellers
+  - https://www.recraft.ai/
+  - https://www.recraft.ai/pricing

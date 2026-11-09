@@ -3,10 +3,11 @@ url: https://leonardo.ai
 categories: [ai-tools, cover-design]
 tagline: Leonardo AI is an AI image generator with a daily free allowance that publishers use to test cover concepts before paying for a tool.
 summary: >-
-  Leonardo AI gives a daily free token allowance, reported at about 150 tokens a day, which is enough to test cover
-  concepts properly. Like other image generators it produces images, not print-ready KDP covers, so you still need a
-  layout step for spine, bleed and safe zones.
-pricing: { model: freemium, currency: USD, free_tier: true, note: "Free allowance reported at ~150 tokens/day." }
+  Leonardo AI gives free accounts 150 fast tokens a day, which is enough to test cover concepts. Free creations are
+  public and limited to its automatic model choice; paid plans make creations private and open 80+ models. Like other
+  image generators it produces images, not print-ready KDP covers, so you still need a layout step for spine, bleed and
+  safe zones.
+pricing: { model: freemium, from: 12, currency: USD, period: month, free_tier: true, note: "Prices ex. tax. Essential $12/mo monthly or $10/mo billed yearly (8,500 fast tokens/mo); Premium $30/mo or $24/mo yearly (25,000); Ultimate $60/mo or $48/mo yearly (60,000). Team plans from $24/seat/mo. Free: 150 fast tokens/day, public creations." }
 platforms: [web]
 kdp:
   outputs_kdp_files: false
@@ -15,4 +16,4 @@ alternatives: [midjourney, ideogram, recraft]
 status: published
 verified_at: 2026-11-09
 sources:
-  - https://creatorgear.ai/blog/best-ai-tools-for-kdp-sellers
+  - https://leonardo.ai/pricing/
