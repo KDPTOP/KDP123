@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "check": "astro check",
     "links": "node scripts/check-links.mjs"
@@ -28,5 +28,8 @@
     "type": "git",
     "url": "git+https://github.com/KDPTOP/KDP123.git"
   },
-  "homepage": "https://kdp123.com"
+  "homepage": "https://kdp123.com",
+  "devDependencies": {
+    "pagefind": "^1.6.0"
+  }
 }

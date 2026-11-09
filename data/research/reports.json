@@ -1,0 +1,304 @@
+{
+  "source": "https://github.com/ttion01/kdptop-research",
+  "license": "CC BY 4.0",
+  "fetched_at": "2026-11-09",
+  "reports": [
+    {
+      "slug": "kdp-book-prices",
+      "title": "How Much Do KDP Books Cost? Price Benchmarks from 508,737 Best Sellers (November 2026)",
+      "type": "Pricing benchmarks",
+      "window": "2026-11-02 to 2026-11-08",
+      "version": "v1",
+      "url": "https://kdptop.com/research/pricing/kdp-book-prices/",
+      "summary": "KDP Best Sellers pricing, estimated sales, Kindle royalties and KU, plus print prices by page count, based on 508,737 books from November 2–8, 2026.",
+      "sample": "508,737 books on Amazon.com Best Sellers lists",
+      "headline": [
+        {
+          "label": "Median Print books price",
+          "value": "$14.99"
+        },
+        {
+          "label": "Median Kindle eBooks price",
+          "value": "$6.99"
+        },
+        {
+          "label": "Kindle books in the 70% band",
+          "value": "63.5%"
+        }
+      ],
+      "findings": [
+        "Amazon Best Sellers covered 508,737 unique books from November 2–8, 2026: 287,153 Print books and 221,584 Kindle eBooks. Median prices were $14.99 for Print books and $6.99 for Kindle eBooks.",
+        "During November 2–8, 2026, 63.5% of Amazon Kindle Best Sellers were priced within the $2.99–$9.99 range eligible for the 70% royalty rate. Books priced under $1 accounted for 6.4% of Kindle eBooks.",
+        "The largest price band in Amazon Kindle Best Sellers was $5–$10, with 76,835 books representing 34.7% of the store during November 2–8, 2026. The under $1 band had the highest median estimated monthly sales at 9 units.",
+        "The largest price band in Amazon Print Best Sellers was $10–$15, with 68,356 books representing 23.8% of the store during November 2–8, 2026. The under $7 band had the highest median estimated monthly sales at 9 units.",
+        "Median prices in Amazon Print Best Sellers ranged from $9.99 for books under 50 pages to $24.99 for books with 400+ pages during November 2–8, 2026. The 250–399-page category contained 32,127 books."
+      ],
+      "data_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/kdp-book-prices/data",
+      "source_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/kdp-book-prices"
+    },
+    {
+      "slug": "kids-coloring-ages-3-5-kdp",
+      "title": "Kids coloring, ages 3-5 on Amazon KDP: Market Size, Competition and Prices (November 2026)",
+      "type": "Niche report",
+      "window": "2026-10-27 to 2026-11-08",
+      "version": "v1",
+      "url": "https://kdptop.com/research/niches/kids-coloring-ages-3-5-kdp/",
+      "summary": "Kids coloring books for ages 3-5 rank 4 of 1,605 niches, with 444 estimated daily sales and a median price of $9.99 across Amazon KDP lists.",
+      "sample": "1,184 books in this niche on Amazon.com lists",
+      "headline": [
+        {
+          "label": "Books on the lists",
+          "value": "1,184"
+        },
+        {
+          "label": "Median reviews",
+          "value": "4"
+        },
+        {
+          "label": "Niche score rank",
+          "value": "4/1605"
+        }
+      ],
+      "findings": [
+        "Kids coloring books for ages 3-5 have a niche score of 78 and rank 4 of 1,605 niches as of November 8, 2026. The lists contain 1,184 books, with estimated sales of 444 units per day.",
+        "Amazon search demand for Halloween coloring books reached 92,401 searches and 14,442 purchases during the measured period ending November 8, 2026. Christmas coloring book recorded 24,240 searches and 2,628 purchases.",
+        "The Kids coloring, ages 3-5 niche has a median review count of 4 as of November 8, 2026. Among the sampled books, 92.3% have fewer than 50 reviews, while 1.9% sell 100 or more copies monthly.",
+        "Independently published books account for 82.1% of the Kids coloring, ages 3-5 niche as of November 8, 2026. The sample shows 90.2% indie participation, and 64.2% of books were published within the last year.",
+        "Kids coloring Christian, ages 3-5 has the highest sub-niche score at 73, with 84 books and a median of 4 reviews as of November 8, 2026. Christmas kids coloring, ages 3-5 has the same median review count of 4 and a score of 68."
+      ],
+      "data_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/kids-coloring-ages-3-5-kdp/data",
+      "source_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/kids-coloring-ages-3-5-kdp"
+    },
+    {
+      "slug": "christmas-sudoku-logic-kdp",
+      "title": "Christmas sudoku & logic on Amazon KDP: Market Size, Competition and Prices (November 2026)",
+      "type": "Niche report",
+      "window": "2026-10-27 to 2026-11-08",
+      "version": "v1",
+      "url": "https://kdptop.com/research/niches/christmas-sudoku-logic-kdp/",
+      "summary": "Christmas sudoku and logic books rank 3rd among 1,605 KDP niches, with 132 books and estimated daily sales of 274 units.",
+      "sample": "132 books in this niche on Amazon.com lists",
+      "headline": [
+        {
+          "label": "Books on the lists",
+          "value": "132"
+        },
+        {
+          "label": "Median reviews",
+          "value": "14"
+        },
+        {
+          "label": "Niche score rank",
+          "value": "3/1605"
+        }
+      ],
+      "findings": [
+        "Christmas sudoku & logic ranked 3rd among 1,605 niches, scoring 78, with 132 books across Amazon Best Sellers and New Releases lists as of November 8, 2026.",
+        "Christmas sudoku & logic recorded estimated daily sales of 274 units across 132 books during the October 27 to November 8, 2026 data period.",
+        "Christmas sudoku & logic has a median review count of 14. Of the 132 sampled books, 81 have fewer than 10 reviews as of November 8, 2026.",
+        "Independently published books make up 71.4% of Christmas sudoku & logic niche books. As of November 8, 2026, 93.5% of sampled books had been published within the last year.",
+        "December is the peak month for Christmas sudoku & logic. The 2026 seasonal data identifies September to October as the recommended publishing window."
+      ],
+      "data_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/christmas-sudoku-logic-kdp/data",
+      "source_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/christmas-sudoku-logic-kdp"
+    },
+    {
+      "slug": "kids-coloring-ages-6-8-kdp",
+      "title": "Kids coloring, ages 6-8 on Amazon KDP: Market Size, Competition and Prices (November 2026)",
+      "type": "Niche report",
+      "window": "2026-10-27 to 2026-11-08",
+      "version": "v1",
+      "url": "https://kdptop.com/research/niches/kids-coloring-ages-6-8-kdp/",
+      "summary": "Kids coloring books for ages 6-8 score 80 and rank 2nd among 1,605 KDP niches. The niche has 615 estimated daily sales and a low review barrier.",
+      "sample": "1,979 books in this niche on Amazon.com lists",
+      "headline": [
+        {
+          "label": "Books on the lists",
+          "value": "1,979"
+        },
+        {
+          "label": "Median reviews",
+          "value": "3"
+        },
+        {
+          "label": "Niche score rank",
+          "value": "2/1605"
+        }
+      ],
+      "findings": [
+        "Kids coloring, ages 6-8, scored 80 out of 100 and ranked 2nd among 1,605 niches as of November 8, 2026. The market includes 1,979 books across Amazon Best Sellers and New Releases lists.",
+        "Amazon search data for children's coloring books recorded 92,401 searches for \"halloween coloring book\" and 24,240 for \"christmas coloring book\" during the measured period, October 27 to November 8, 2026.",
+        "The Kids coloring, ages 6-8 niche has a median of 3 reviews. A total of 93.8% of sampled books have fewer than 50 reviews, and 84.1% of niche books are independently published.",
+        "The Amazon Kids coloring, ages 6-8 market has a median price of $9.99 and a median length of 71 pages. The most common recorded trim size is 8.5x10.98, with 551 books.",
+        "Kids coloring Christian, ages 6-8, scored 74 with 168 books and a median of 2 reviews. Christmas kids coloring, ages 6-8, scored 73 with 126 books and the same median review count."
+      ],
+      "data_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/kids-coloring-ages-6-8-kdp/data",
+      "source_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/kids-coloring-ages-6-8-kdp"
+    },
+    {
+      "slug": "reviews-to-rank-on-kdp",
+      "title": "How Many Reviews Does It Take to Rank on Amazon KDP? Data from 450,681 Best Sellers (November 2026)",
+      "type": "Review barrier",
+      "window": "2026-10-27 to 2026-11-08",
+      "version": "v1",
+      "url": "https://kdptop.com/research/reviews/reviews-to-rank-on-kdp/",
+      "summary": "How many reviews does it take to rank on Amazon KDP? A comparison of 450,681 books by store, product type, rank tier and category in November 2026.",
+      "sample": "450,681 books on Amazon.com Best Sellers lists",
+      "headline": [
+        {
+          "label": "Median reviews, Print books",
+          "value": "55"
+        },
+        {
+          "label": "Median reviews, Kindle eBooks",
+          "value": "62"
+        },
+        {
+          "label": "Median reviews at breakout",
+          "value": "0"
+        }
+      ],
+      "findings": [
+        "Amazon.com Best Sellers lists included 450,681 unique books across Print books and Kindle eBooks during the October 27 to November 8, 2026 data period. The median review count was 55 for Print books and 62 for Kindle eBooks.",
+        "Books with fewer than 10 reviews accounted for 25.0% of Print books and 23.7% of Kindle eBooks on Amazon.com Best Sellers in November 2026.",
+        "Median review counts on Amazon.com Best Sellers rose with rank in November 2026: 624 at #1, 197 at #2-10, 96 at #11-25, 58 at #26-50 and 37 at #51-100.",
+        "Notebook had the lowest median review count among the measured product types on Amazon.com Best Sellers in November 2026, at 7 reviews. Biography & memoir had the highest, at 155 reviews.",
+        "Among 23,188 breakout books published during the October 10 to November 8, 2026 report window, the median review count at first reaching an Amazon.com Best Sellers list was 0. A total of 80.7% had fewer than 10 reviews."
+      ],
+      "data_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/reviews-to-rank-on-kdp/data",
+      "source_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/reviews-to-rank-on-kdp"
+    },
+    {
+      "slug": "winter-adult-coloring-kdp",
+      "title": "Winter adult coloring on Amazon KDP: Market Size, Competition and Prices (November 2026)",
+      "type": "Niche report",
+      "window": "2026-10-27 to 2026-11-08",
+      "version": "v2",
+      "url": "https://kdptop.com/research/niches/winter-adult-coloring-kdp/",
+      "summary": "Winter adult coloring ranks 8th among 1,612 niches, with 223 estimated daily sales, an 85.3% indie share and a median of 10 reviews.",
+      "sample": "240 books in this niche on Amazon.com lists",
+      "headline": [
+        {
+          "label": "Books on the lists",
+          "value": "240"
+        },
+        {
+          "label": "Median reviews",
+          "value": "10"
+        },
+        {
+          "label": "Niche score rank",
+          "value": "8/1612"
+        }
+      ],
+      "findings": [
+        "Winter adult coloring ranked 8th among 1,612 KDP niches as of November 8, 2026, with a niche score of 76 and 223 estimated daily sales.",
+        "Amazon.com Best Sellers and New Releases lists included 240 winter adult coloring books during the data period, with 144 Best Sellers and 146 New Releases list appearances.",
+        "The niche had a median of 10 reviews as of November 8, 2026. Among 237 sampled print books, 170 had fewer than 10 reviews.",
+        "Independently published books made up 86.5% of the sampled winter adult coloring print books. A further 71.7% had been published within the last year.",
+        "Demand for winter adult coloring peaks in January. October and November are the indicated publishing months for books targeting the seasonal market."
+      ],
+      "data_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/winter-adult-coloring-kdp/data",
+      "source_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/winter-adult-coloring-kdp"
+    },
+    {
+      "slug": "christmas-kids-coloring-kdp",
+      "title": "Christmas kids coloring on Amazon KDP: Market Size, Competition and Prices (November 2026)",
+      "type": "Niche report",
+      "window": "2026-10-27 to 2026-11-08",
+      "version": "v2",
+      "url": "https://kdptop.com/research/niches/christmas-kids-coloring-kdp/",
+      "summary": "Christmas kids coloring has 257 books and estimated daily sales of 219. It scores 77 and ranks 5 of 1612 markets, with a median of just 4 reviews.",
+      "sample": "257 books in this niche on Amazon.com lists",
+      "headline": [
+        {
+          "label": "Books on the lists",
+          "value": "257"
+        },
+        {
+          "label": "Median reviews",
+          "value": "4"
+        },
+        {
+          "label": "Niche score rank",
+          "value": "5/1612"
+        }
+      ],
+      "findings": [
+        "Christmas kids coloring ranks 5 of 1612 niches as of November 8, 2026. It has a niche score of 77 and 257 books across Amazon Best Sellers and New Releases lists.",
+        "The Amazon search term \"christmas coloring book\" records 24240 searches and 2628 purchases. December is the peak month for demand.",
+        "The Christmas kids coloring sample has a median of 0 reviews, and 92.9% of sampled books have fewer than 50 reviews. This points to a relatively low review barrier for new publishers.",
+        "Independently published books account for 85.0% of the Christmas kids coloring niche. A further 73.1% of sampled books were published within the last year.",
+        "Christmas kids coloring for ages 6-8 scores 73 across 125 books. The segment has a median of just 2 reviews and a median price of $9.99."
+      ],
+      "data_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/christmas-kids-coloring-kdp/data",
+      "source_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/christmas-kids-coloring-kdp"
+    },
+    {
+      "slug": "christmas-2026",
+      "title": "Christmas 2026 on Amazon KDP: What Sells and When to Publish",
+      "type": "Seasonal report",
+      "window": "2026-10-27 to 2026-11-08",
+      "version": "v1",
+      "url": "https://kdptop.com/research/seasonal/christmas-2026/",
+      "summary": "Christmas KDP market data for 2026 covers 6419 books, estimated sales, product types, reader ages, backlist titles and seasonal search demand.",
+      "sample": "6,419 Christmas books on Amazon.com lists",
+      "headline": [
+        {
+          "label": "Christmas books on the lists",
+          "value": "6,419"
+        },
+        {
+          "label": "Est. daily sales (Best Sellers)",
+          "value": "22,025"
+        },
+        {
+          "label": "Published in the last 120 days",
+          "value": "46.7%"
+        }
+      ],
+      "findings": [
+        "Amazon.com Christmas book lists contained 6419 tracked books as of November 8, 2026, including 4561 Best Sellers and 3110 New Releases entries. Estimated daily sales were 21886.",
+        "Fiction led Amazon.com Christmas book sales by product type as of November 8, 2026, with 10890 estimated daily units across 1386 books. Picture books had the largest catalog, with 1449 titles.",
+        "Amazon.com Christmas book listings included 2198 books published in the last 120 days as of November 8, 2026. Titles older than one year accounted for 48.4% of books with publication dates.",
+        "Amazon.com Christmas best sellers included Cozy Girl Season at 8010 estimated monthly units and Baby's First Bible Stories Padded Board Book at 4920. The newest listed title, A Married Little Christmas, recorded 1980 estimated monthly units.",
+        "Amazon.com Christmas search demand included 338142 searches for christmas gift card book and 24240 searches for christmas coloring book. The latter recorded 114% reported search growth."
+      ],
+      "data_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/christmas-2026/data",
+      "source_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/christmas-2026"
+    },
+    {
+      "slug": "kids-coloring-kdp",
+      "title": "Kids coloring on Amazon KDP: Market Size, Competition and Prices (November 2026)",
+      "type": "Niche report",
+      "window": "2026-10-27 to 2026-11-08",
+      "version": "v2",
+      "url": "https://kdptop.com/research/niches/kids-coloring-kdp/",
+      "summary": "Kids coloring ranks 1 of 1612 Amazon KDP niches, with 2175 estimated daily sales. The market has a low review barrier, with opportunities in specific age groups and holiday themes.",
+      "sample": "4,203 books in this niche on Amazon.com lists",
+      "headline": [
+        {
+          "label": "Books on the lists",
+          "value": "4,203"
+        },
+        {
+          "label": "Median reviews",
+          "value": "4"
+        },
+        {
+          "label": "Niche score rank",
+          "value": "1/1612"
+        }
+      ],
+      "findings": [
+        "Kids coloring ranked 1 of 1612 niches as of November 8, 2026, with a niche score of 81 and 2175 estimated daily sales across 4203 books.",
+        "Halloween coloring book had the strongest Amazon search demand among kids coloring-related terms, recording 92401 searches and 14442 purchases during the measured period.",
+        "The review barrier in Kids coloring was low as of November 8, 2026. The niche median was 4 reviews, and 3440 books in the sample had fewer than 10 reviews.",
+        "Independently published books accounted for 82.1% of the Kids coloring niche as of November 8, 2026. In the sample, 62.8% of books were published within the last year.",
+        "Kids coloring, ages 6-8 scored 80 across 1956 books, with a median of 3 reviews. Kids coloring Christian scored 77 across 302 books, also with a median of 3 reviews."
+      ],
+      "data_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/kids-coloring-kdp/data",
+      "source_url": "https://github.com/ttion01/kdptop-research/tree/HEAD/reports/kids-coloring-kdp"
+    }
+  ]
+}

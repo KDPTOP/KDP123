@@ -1,0 +1,44 @@
+name: Link and freshness check
+
+on:
+  schedule:
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Check listing and source URLs
+        id: links
+        run: npm run --silent links -- --sources > links.txt 2>&1 || echo "failed=1" >> "$GITHUB_OUTPUT"
+      - name: Check last-checked dates
+        id: stale
+        run: node scripts/check-stale.mjs 120 > stale.txt 2>&1 || echo "failed=1" >> "$GITHUB_OUTPUT"
+      - name: Open or update the tracking issue
+        if: steps.links.outputs.failed == '1' || steps.stale.outputs.failed == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "Weekly check from [this run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)."
+            echo
+            echo "## Links"
+            echo '```'; grep -E '^(DEAD|MOVED|BOT)|checked' links.txt || true; echo '```'
+            echo
+            echo "## Not checked in 120 days"
+            echo '```'; cat stale.txt; echo '```'
+          } > body.md
+          gh label create maintenance --color c5def5 --description "Link and freshness checks" 2>/dev/null || true
+          num=$(gh issue list --label maintenance --state open --search "Weekly link and freshness check" --json number --jq '.[0].number')
+          if [ -n "$num" ]; then gh issue edit "$num" --body-file body.md; else gh issue create --title "Weekly link and freshness check" --label maintenance --body-file body.md; fi

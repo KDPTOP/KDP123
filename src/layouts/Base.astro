@@ -10,8 +10,10 @@ interface Props {
   jsonLd?: object | object[];
   noindex?: boolean;
   markdownAlt?: string;
+  /** Include this page in the Pagefind index. Off by default so list pages do not crowd out the pages they link to. */
+  searchable?: boolean;
 }
-const { title, description = SITE.description, canonicalPath, jsonLd, noindex = false, markdownAlt } = Astro.props;
+const { title, description = SITE.description, canonicalPath, jsonLd, noindex = false, markdownAlt, searchable = false } = Astro.props;
 const path = canonicalPath ?? Astro.url.pathname;
 const canonical = new URL(path, SITE.url).toString();
 const fullTitle = title === SITE.name ? `${SITE.name} - ${SITE.tagline}` : `${title} | ${SITE.name}`;
@@ -45,11 +47,14 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
         <a href="/" class="font-serif text-xl font-bold text-ink no-underline hover:no-underline">kdp<span class="text-accent">123</span></a>
         <nav aria-label="Primary" class="flex flex-wrap gap-x-4 gap-y-1 text-sm">
           {STAGES.map((s) => <a href={`/stages/${s.slug}/`} class="text-ink">{s.name}</a>)}
+          <a href="/facts/" class="font-medium">KDP facts</a>
+          <a href="/research/" class="font-medium">Market data</a>
           <a href="/tools/" class="font-medium">All tools</a>
+          <a href="/search/" class="text-ink">Search</a>
         </nav>
       </div>
     </header>
-    <main id="main" class="mx-auto max-w-6xl px-4 py-8">
+    <main id="main" class="mx-auto max-w-6xl px-4 py-8" {...(searchable && !noindex ? { 'data-pagefind-body': '' } : {})}>
       <slot />
     </main>
     <footer class="mt-16 border-t border-line bg-white">

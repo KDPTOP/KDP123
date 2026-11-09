@@ -8,8 +8,8 @@ export default defineConfig({
   build: { format: 'directory' },
   integrations: [
     sitemap({
-      // /go/ redirects and the 404 page are not content.
-      filter: (page) => !page.includes('/go/'),
+      // /go/ redirects, search results and the 404 page are not content.
+      filter: (page) => !page.includes('/go/') && !page.endsWith('/search/'),
     }),
   ],
   vite: { plugins: [tailwindcss()] },

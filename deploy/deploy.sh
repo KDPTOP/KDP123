@@ -42,8 +42,22 @@ ssh "$HOST" "REL=$REL KEEP=$KEEP bash -s" <<'EOF'
 set -euo pipefail
 cd /opt/kdp123
 chmod -R a+rX "releases/$REL"
+prev=$(readlink -f current 2>/dev/null || true)
 ln -sfn "releases/$REL" current.tmp && mv -T current.tmp current
 ls -1 releases | sort | head -n "-$KEEP" | while read -r old; do rm -rf "releases/$old"; done
 echo "current -> $REL"
+
+# IndexNow: tell Bing, Yandex and others which pages changed (new or different index.html) in this release.
+key=$(cd "releases/$REL" && ls -1 | grep -E '^[0-9a-f]{32}\.txt$' | head -n 1 | sed 's/\.txt$//')
+[ -n "$key" ] || exit 0
+changed=$(cd "releases/$REL" && find . -name index.html | sed 's#^\./##' | while read -r f; do
+  if [ -z "$prev" ] || ! cmp -s "$f" "$prev/$f"; then echo "https://kdp123.com/${f%index.html}"; fi
+done | grep -v -E '/(go|search)/' | head -n 10000)
+[ -n "$changed" ] || { echo "IndexNow: no changed pages"; exit 0; }
+urls=$(printf '%s\n' "$changed" | sed 's/.*/"&"/' | paste -sd, -)
+code=$(curl -s -o /dev/null -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
+  -H 'Content-Type: application/json; charset=utf-8' \
+  --data "{\"host\":\"kdp123.com\",\"key\":\"$key\",\"keyLocation\":\"https://kdp123.com/$key.txt\",\"urlList\":[$urls]}")
+echo "IndexNow: $(printf '%s\n' "$changed" | wc -l) changed pages, HTTP $code"
 EOF
 purge

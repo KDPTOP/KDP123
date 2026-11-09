@@ -39,6 +39,18 @@ export const nonEmpty = (used: Iterable<string>) => {
   return CATEGORIES.filter((c) => set.has(c.slug));
 };
 
+export const FACT_TOPICS = [
+  { slug: 'royalties', name: 'Royalties & payments' },
+  { slug: 'print', name: 'Print books' },
+  { slug: 'ebooks', name: 'Ebooks' },
+  { slug: 'programs', name: 'KDP Select & programs' },
+  { slug: 'content', name: 'Content rules' },
+  { slug: 'metadata', name: 'Metadata & listing' },
+  { slug: 'account', name: 'Account & tax' },
+] as const;
+export type FactTopicSlug = (typeof FACT_TOPICS)[number]['slug'];
+export const FACT_TOPIC_SLUGS = FACT_TOPICS.map((t) => t.slug) as unknown as [FactTopicSlug, ...FactTopicSlug[]];
+
 export const stageBySlug = (slug: string) => STAGES.find((s) => s.slug === slug);
 export const categoryBySlug = (slug: string) => CATEGORIES.find((c) => c.slug === slug);
 export const categoriesOfStage = (stage: string) => CATEGORIES.filter((c) => c.stage === stage);

@@ -57,12 +57,13 @@ const jsonLd = [
   description={`${d.tagline} Price: ${priceLabel(tool)}. Last checked ${isoDate(d.verified_at)}.`}
   jsonLd={jsonLd}
   markdownAlt={`/t/${tool.id}.md`}
+  searchable
 >
   <nav class="text-sm text-muted" aria-label="Breadcrumb">
     <a href="/">Home</a> / <a href={`/c/${d.categories[0]}/`}>{categoryBySlug(d.categories[0])?.name}</a> / {d.name}
   </nav>
 
-  <article class="mt-2 max-w-3xl">
+  <article class="mt-2 max-w-3xl" data-pagefind-filter="type:Tool">
     <h1 class="text-4xl font-bold">{d.name}</h1>
     <div class="mt-2 flex flex-wrap gap-1">
       {d.official && <span class="badge badge-ok">Official Amazon</span>}

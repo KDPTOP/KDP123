@@ -1,7 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { CATEGORY_SLUGS } from './lib/taxonomy';
+import { CATEGORY_SLUGS, FACT_TOPIC_SLUGS } from './lib/taxonomy';
 
 const pricingModels = ['free', 'freemium', 'one-time', 'subscription', 'paid', 'unknown'] as const;
 const platforms = ['web', 'windows', 'mac', 'linux', 'chrome-extension', 'firefox-extension', 'ios', 'android'] as const;
@@ -60,4 +60,50 @@ const tools = defineCollection({
     }),
 });
 
-export const collections = { tools };
+// One KDP rule per file, answered first and sourced to Amazon's own pages.
+const facts = defineCollection({
+  loader: glob({ pattern: '*.md', base: './data/facts' }),
+  schema: z
+    .object({
+      title: z.string().min(10).max(90),
+      // The question people actually ask, phrased as they would type it.
+      question: z.string().min(10).max(160),
+      // Two or three sentences that answer the question on their own, with the numbers.
+      answer: z.string().min(40).max(500),
+      topic: z.enum(FACT_TOPIC_SLUGS),
+      key_facts: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
+      faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
+      related_tools: z.array(z.string()).default([]),
+      status: z.enum(['draft', 'published']).default('draft'),
+      verified_at: z.coerce.date().optional(),
+      sources: z.array(z.url()).default([]),
+    })
+    .superRefine((f, ctx) => {
+      if (f.status === 'published') {
+        if (!f.verified_at) ctx.addIssue({ code: 'custom', path: ['verified_at'], message: 'published facts need verified_at' });
+        if (!f.sources.some((s) => /amazon\.|audible\.|acx\.com/.test(s)))
+          ctx.addIssue({ code: 'custom', path: ['sources'], message: 'published facts need at least one Amazon source' });
+      }
+    }),
+});
+
+// "Best X for KDP" pages: stated criteria first, then picks drawn only from published listings, each with its reason.
+const best = defineCollection({
+  loader: glob({ pattern: '*.yml', base: './data/best' }),
+  schema: z.object({
+    title: z.string().min(10).max(90),
+    question: z.string().min(10).max(160),
+    // Answer-first summary naming the picks, quotable on its own.
+    answer: z.string().min(40).max(600),
+    category: z.enum(CATEGORY_SLUGS).optional(),
+    criteria: z.array(z.string()).min(2),
+    picks: z
+      .array(z.object({ tool: z.string(), label: z.string().max(60), why: z.string().min(20) }))
+      .min(2),
+    not_included: z.array(z.object({ tool: z.string(), why: z.string() })).default([]),
+    status: z.enum(['draft', 'published']).default('draft'),
+    verified_at: z.coerce.date(),
+  }),
+});
+
+export const collections = { tools, facts, best };

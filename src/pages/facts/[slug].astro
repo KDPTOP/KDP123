@@ -1,0 +1,129 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getFacts, topicName } from '../../lib/facts';
+import { getTools, isoDate, SITE } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const facts = await getFacts();
+  const tools = await getTools();
+  const toolById = new Map(tools.map((t) => [t.id, t]));
+  return facts.map((f) => ({
+    params: { slug: f.id },
+    props: { fact: f, related: facts.filter((o) => o.id !== f.id && o.data.topic === f.data.topic).slice(0, 6), toolById },
+  }));
+}
+const { fact, related, toolById } = Astro.props;
+const d = fact.data;
+const { Content } = await render(fact);
+const url = `${SITE.url}/facts/${fact.id}/`;
+const tools = d.related_tools.map((s) => toolById.get(s)).filter((t) => t !== undefined);
+const checked = isoDate(d.verified_at);
+
+const jsonLd: object[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: d.title,
+    description: d.answer,
+    url,
+    dateModified: checked,
+    author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    citation: d.sources,
+    isAccessibleForFree: true,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url + '/' },
+      { '@type': 'ListItem', position: 2, name: 'KDP facts', item: `${SITE.url}/facts/` },
+      { '@type': 'ListItem', position: 3, name: d.title, item: url },
+    ],
+  },
+];
+const faq = [{ q: d.question, a: d.answer }, ...d.faq];
+jsonLd.push({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((x) => ({ '@type': 'Question', name: x.q, acceptedAnswer: { '@type': 'Answer', text: x.a } })),
+});
+---
+
+<Base title={d.title} description={d.answer.length > 158 ? d.answer.slice(0, 155).replace(/\s+\S*$/, '') + '…' : d.answer} jsonLd={jsonLd} markdownAlt={`/facts/${fact.id}.md`} searchable>
+  <nav class="text-sm text-muted" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <a href="/facts/">KDP facts</a> / {topicName(d.topic)}
+  </nav>
+
+  <article class="mt-2 max-w-3xl" data-pagefind-filter="type:KDP fact">
+    <h1 class="text-4xl font-bold">{d.title}</h1>
+    <p class="mt-2 text-sm text-muted">Checked against Amazon’s pages on {checked}. Not affiliated with Amazon.</p>
+
+    <section class="mt-6 rounded-lg border border-accent/30 bg-accent-soft/50 p-4" aria-label="Short answer">
+      <p class="font-medium">{d.question}</p>
+      <p class="mt-2 leading-7">{d.answer}</p>
+    </section>
+
+    {
+      d.key_facts.length > 0 && (
+        <table class="mt-6 w-full border-collapse overflow-hidden rounded-lg border border-line bg-white text-sm">
+          <caption class="sr-only">Key facts</caption>
+          <tbody>
+            {d.key_facts.map((k) => (
+              <tr class="border-b border-line last:border-0">
+                <th scope="row" class="w-2/5 px-4 py-2 text-left font-normal text-muted">{k.label}</th>
+                <td class="px-4 py-2">{k.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )
+    }
+
+    <div class="prose-kdp mt-4"><Content /></div>
+
+    {
+      d.faq.length > 0 && (
+        <>
+          <h2 class="mt-10 text-2xl font-semibold">Questions</h2>
+          <dl class="mt-3 space-y-4">
+            {d.faq.map((x) => (
+              <div>
+                <dt class="font-medium">{x.q}</dt>
+                <dd class="mt-1 leading-7">{x.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </>
+      )
+    }
+
+    {
+      tools.length > 0 && (
+        <>
+          <h2 class="mt-10 text-2xl font-semibold">Related tools</h2>
+          <ul class="mt-2 list-disc pl-6 leading-7">
+            {tools.map((t) => (
+              <li><a href={`/t/${t!.id}/`}>{t!.data.name}</a>: <span class="text-muted">{t!.data.tagline}</span></li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+
+    <h2 class="mt-10 text-2xl font-semibold">Sources</h2>
+    <ul class="mt-2 list-disc pl-6 text-sm">{d.sources.map((s) => <li><a href={s} rel="noopener">{s}</a></li>)}</ul>
+
+    {
+      related.length > 0 && (
+        <>
+          <h2 class="mt-10 text-2xl font-semibold">More on {topicName(d.topic).toLowerCase()}</h2>
+          <ul class="mt-2 list-disc pl-6 leading-7">{related.map((r) => <li><a href={`/facts/${r.id}/`}>{r.data.title}</a></li>)}</ul>
+        </>
+      )
+    }
+
+    <p class="mt-8 text-sm text-muted">Spotted a change on Amazon’s side? <a href="/submit/">Send a correction</a>. <a href={`/facts/${fact.id}.md`}>Plain-text version</a>.</p>
+  </article>
+</Base>

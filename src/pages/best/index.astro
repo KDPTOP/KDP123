@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getBest } from '../../lib/best';
+import { isoDate, SITE } from '../../lib/site';
+
+const lists = await getBest();
+const url = `${SITE.url}/best/`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Best tools for KDP publishers, by task',
+  url,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: lists.length,
+    itemListElement: lists.map(({ list }, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.url}/best/${list.id}/`, name: list.data.title })),
+  },
+};
+---
+
+<Base title="Best tools for KDP publishers, by task" description="Short, sourced best-of lists for Amazon KDP publishers: keyword research, formatting, covers, low-content books and more. Criteria stated first; no paid placements." jsonLd={jsonLd}>
+  <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / Best-of lists</nav>
+  <section class="mt-2 max-w-3xl">
+    <h1 class="text-4xl font-bold">Best-of lists</h1>
+    <p class="mt-4 text-lg text-muted">Each list states its criteria first and picks only from listings we have checked, with the reason for each pick. No vendor pays to be listed or ranked.</p>
+  </section>
+  <ul class="mt-8 max-w-3xl divide-y divide-line rounded-lg border border-line bg-white">
+    {
+      lists.map(({ list }) => (
+        <li class="px-4 py-3">
+          <a href={`/best/${list.id}/`} class="font-medium">{list.data.title}</a>
+          <p class="mt-1 text-sm text-muted">{list.data.question} Reviewed {isoDate(list.data.verified_at)}.</p>
+        </li>
+      ))
+    }
+  </ul>
+</Base>

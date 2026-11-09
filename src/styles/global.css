@@ -26,7 +26,13 @@
   .prose-kdp h2 { @apply mt-10 mb-3 text-2xl font-semibold; }
   .prose-kdp h3 { @apply mt-6 mb-2 text-lg font-semibold; }
   .prose-kdp ul { @apply my-4 list-disc pl-6 leading-7; }
+  .prose-kdp ol { @apply my-4 list-decimal pl-6 leading-7; }
   .prose-kdp li { @apply my-1; }
+  .prose-kdp strong { @apply font-semibold; }
+  .prose-kdp code { @apply rounded bg-line/60 px-1 text-sm; }
+  .prose-kdp table { @apply my-4 w-full border-collapse text-sm; }
+  .prose-kdp th { @apply border-b border-line px-3 py-2 text-left font-semibold; }
+  .prose-kdp td { @apply border-b border-line px-3 py-2 align-top; }
   .badge { @apply inline-flex items-center rounded border border-line bg-white px-1.5 py-0.5 text-xs text-muted; }
   .badge-ok { @apply border-ok/30 bg-ok/5 text-ok; }
   .badge-warn { @apply border-warn/30 bg-warn/5 text-warn; }

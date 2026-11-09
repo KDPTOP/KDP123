@@ -1,9 +1,12 @@
 import type { APIRoute } from 'astro';
 import { getTools, priceLabel, SITE } from '../lib/site';
 import { CATEGORIES, STAGES } from '../lib/taxonomy';
+import { getFacts } from '../lib/facts';
+import research from '../../data/research/reports.json';
 
 export const GET: APIRoute = async () => {
   const tools = await getTools();
+  const facts = await getFacts();
   const out: string[] = [];
   out.push(`# ${SITE.name}`, '', `> ${SITE.description}`, '');
   out.push('kdp123 is an independent directory. Every entry lists price, KDP-specific attributes, sources and a last-checked date.');
@@ -21,6 +24,12 @@ export const GET: APIRoute = async () => {
     if (n === 0) continue;
     out.push(`- [${c.name}](${SITE.url}/c/${c.slug}/) (${n}): ${c.blurb}`);
   }
+  if (facts.length) {
+    out.push('', '## KDP facts', '', `Rules and numbers sourced to Amazon's help pages: ${SITE.url}/facts/`, '');
+    for (const f of facts) out.push(`- [${f.data.title}](${SITE.url}/facts/${f.id}/): ${f.data.question}`);
+  }
+  out.push('', '## KDP market data', '', `Reports from KDPTop Research (same team as kdp123; CC BY 4.0, CSV included): ${SITE.url}/research/`, '');
+  for (const r of research.reports) out.push(`- [${r.title}](${r.url}): ${r.summary}`);
   out.push('', '## Listings', '');
   for (const t of tools) out.push(`- [${t.data.name}](${SITE.url}/t/${t.id}/): ${t.data.tagline} Price: ${priceLabel(t)}.`);
   out.push('');

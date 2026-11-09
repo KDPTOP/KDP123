@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getTools, priceLabel, isoDate, SITE } from '../lib/site';
 import { categoryBySlug } from '../lib/taxonomy';
+import { getFacts } from '../lib/facts';
 
 const yn = (v?: boolean) => (v === undefined ? 'not stated' : v ? 'yes' : 'no');
 
@@ -18,6 +19,13 @@ export const GET: APIRoute = async () => {
     out.push(`- kdp-ready files: ${yn(d.kdp.outputs_kdp_files)}; touches kdp account: ${yn(d.kdp.touches_kdp_account)}`);
     if (d.related_to_directory) out.push('- disclosure: same team as kdp123');
     out.push(`- checked: ${isoDate(d.verified_at)}`, '');
+  }
+  const facts = await getFacts();
+  if (facts.length) out.push('# KDP facts', '');
+  for (const f of facts) {
+    out.push(`## ${f.data.title}`, `Q: ${f.data.question}`, `A: ${f.data.answer}`);
+    for (const k of f.data.key_facts) out.push(`- ${k.label}: ${k.value}`);
+    out.push(`- page: ${SITE.url}/facts/${f.id}/`, `- sources: ${f.data.sources.join(' ')}`, `- checked: ${isoDate(f.data.verified_at)}`, '');
   }
   return new Response(out.join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 };

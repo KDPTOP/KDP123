@@ -3,8 +3,10 @@ import Base from '../layouts/Base.astro';
 import ToolTable from '../components/ToolTable.astro';
 import { getTools, SITE, isoDate } from '../lib/site';
 import { STAGES, CATEGORIES, nonEmpty } from '../lib/taxonomy';
+import { getFacts } from '../lib/facts';
 
 const tools = await getTools();
+const facts = await getFacts();
 const liveCategories = nonEmpty(tools.flatMap((t) => t.data.categories));
 const countOf = (cat: string) => tools.filter((t) => t.data.categories.includes(cat as never)).length;
 const stageCount = (stage: string) =>
@@ -39,13 +41,13 @@ const jsonLd = [
       Open data, no pay-to-rank.
     </p>
     <p class="mt-2 text-sm text-muted">Last checked {lastChecked}. Not affiliated with Amazon.</p>
-    <form action="/tools/" method="get" class="mt-6 flex gap-2" role="search">
-      <label for="q" class="sr-only">Search tools</label>
+    <form action="/search/" method="get" class="mt-6 flex gap-2" role="search">
+      <label for="q" class="sr-only">Search tools and KDP facts</label>
       <input
         id="q"
         name="q"
         type="search"
-        placeholder="Search tools, e.g. keyword research, coloring book, ISBN"
+        placeholder="Search, e.g. keyword research, coloring book, 70% royalty, ISBN"
         class="w-full rounded-lg border border-line bg-white px-4 py-2.5 text-base"
       />
       <button class="rounded-lg bg-accent px-5 py-2.5 font-medium text-white">Search</button>
@@ -68,6 +70,21 @@ const jsonLd = [
       }
     </div>
   </section>
+
+  {
+    facts.length > 0 && (
+      <section class="mt-12" aria-labelledby="facts">
+        <div class="flex items-baseline justify-between gap-4">
+          <h2 id="facts" class="text-2xl font-semibold">KDP facts</h2>
+          <a href="/facts/" class="text-sm">All {facts.length} facts</a>
+        </div>
+        <p class="mt-1 text-sm text-muted">Royalties, print specs and program rules, sourced to Amazon’s help pages.</p>
+        <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+          {facts.slice(0, 12).map((f) => <li><a href={`/facts/${f.id}/`}>{f.data.title}</a></li>)}
+        </ul>
+      </section>
+    )
+  }
 
   <section class="mt-12" aria-labelledby="official">
     <h2 id="official" class="text-2xl font-semibold">Official sources first</h2>

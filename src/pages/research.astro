@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import research from '../../data/research/reports.json';
+import { SITE } from '../lib/site';
+
+const { reports, fetched_at, source } = research;
+const url = `${SITE.url}/research/`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'KDP market data reports',
+    url,
+    description: 'Data reports on the Amazon KDP book market from KDPTop Research, with headline numbers and CSV downloads.',
+    hasPart: reports.map((r) => ({
+      '@type': 'Dataset',
+      name: r.title,
+      description: r.summary,
+      url: r.url,
+      temporalCoverage: r.window.replace(' to ', '/'),
+      version: r.version,
+      license: 'https://creativecommons.org/licenses/by/4.0/',
+      creator: { '@type': 'Organization', name: 'KDPTop', url: SITE.related.url },
+      isAccessibleForFree: true,
+      distribution: [{ '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: r.data_url }],
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url + '/' },
+      { '@type': 'ListItem', position: 2, name: 'KDP market data', item: url },
+    ],
+  },
+];
+---
+
+<Base title="KDP market data: prices, reviews and niche reports" description="Amazon KDP market data from Best Sellers and New Releases lists: median book prices, reviews needed to rank, niche size and competition, with CSV downloads (CC BY 4.0)." jsonLd={jsonLd} searchable>
+  <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / KDP market data</nav>
+  <section class="mt-2 max-w-3xl">
+    <h1 class="text-4xl font-bold">KDP market data</h1>
+    <p class="mt-4 text-lg text-muted">
+      Numbers about the Amazon KDP book market itself: what books cost, how many reviews it takes to rank, and how crowded a niche is.
+      Each report states its sample and data window and ships its tables as CSV.
+    </p>
+    <p class="mt-4 rounded-lg border border-warn/30 bg-warn/5 p-3 text-sm">
+      Disclosure: these reports are published by <a href={SITE.related.url}>KDPTop</a>, made by the same team as kdp123, from the Best Sellers,
+      New Releases and search data it collects. They are listed here because they are open data (CC BY 4.0) that KDP publishers can check
+      and reuse; the methodology is public. Summaries synced from <a href={source}>the public repository</a> on {fetched_at}.
+    </p>
+  </section>
+
+  <div class="mt-8 grid gap-6">
+    {
+      reports.map((r) => (
+        <article class="rounded-lg border border-line bg-white p-5" id={r.slug}>
+          <p class="text-xs uppercase tracking-wide text-muted">{r.type} · {r.window} · {r.version}</p>
+          <h2 class="mt-1 text-xl font-semibold"><a href={r.url}>{r.title}</a></h2>
+          <p class="mt-2 text-sm text-muted">{r.summary}</p>
+          {r.headline.length > 0 && (
+            <dl class="mt-4 grid gap-3 sm:grid-cols-3">
+              {r.headline.map((h) => (
+                <div class="rounded-md bg-paper p-3">
+                  <dt class="text-xs text-muted">{h.label}</dt>
+                  <dd class="mt-1 font-serif text-2xl font-semibold">{h.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+          {r.findings.length > 0 && (
+            <ul class="mt-4 list-disc space-y-1 pl-6 text-sm leading-6">{r.findings.slice(0, 3).map((f) => <li>{f}</li>)}</ul>
+          )}
+          <p class="mt-4 text-sm">
+            <a href={r.url}>Full report</a> · <a href={r.data_url}>CSV data</a> · <span class="text-muted">Sample: {r.sample}</span>
+          </p>
+        </article>
+      ))
+    }
+  </div>
+
+  <p class="mt-8 text-sm text-muted">Cite as: KDPTop Research (2026). Report title. Version, date. URL. Source: KDPTop (kdptop.com), CC BY 4.0.</p>
+</Base>
