@@ -1,0 +1,27 @@
+name: Bookvault
+url: https://bookvault.app
+categories: [print-distribution]
+tagline: Bookvault is a UK print-on-demand service for indie authors that fulfills direct-store orders and lists print books with retailers including Amazon.
+summary: >-
+  Bookvault prints books on demand from the UK, ships worldwide, and connects to Shopify, Wix, WooCommerce, Payhip and
+  Kickstarter for direct sales. It also lists titles with retailers such as Amazon, Gardners and Alibris, and offers
+  special-edition finishes like sprayed edges and foiling from a single copy. It is print only, so it does not affect KDP
+  Select ebook exclusivity, but a retail listing on Amazon could duplicate a KDP paperback.
+pricing: { model: freemium, from: 24.95, currency: GBP, period: month, free_tier: true, note: "Free plan charges a £19.95 setup fee per title; Indie plan £24.95/month with £4.95 setup; Pro £89.95/month with free setup. Print costs extra." }
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Special editions (sprayed edges, foil, endpapers) available on single copies
+  - Integrations for Shopify, Wix, WooCommerce, Payhip and Kickstarter
+cons:
+  - Plans are priced in GBP and books ship from the UK
+  - Per-title setup fee on the free plan
+best_for: [Direct-sale and special-edition print books]
+alternatives: [lulu, ingramspark, shopify]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://bookvault.app/

@@ -1,16 +1,18 @@
-name: Self Publishing Formula
+name: Self Publishing Formula (Learn Self Publishing)
 url: https://www.learnselfpublishing.com
 categories: [courses-blogs, communities]
-tagline: Self Publishing Formula is Mark Dawson's training brand with a free Facebook community, a podcast and paid courses on ads and launches.
+tagline: Self Publishing Formula, now branded Learn Self Publishing with James Blatch, sells author courses and runs the Self Publishing Show podcast and events.
 summary: >-
-  Self Publishing Formula runs a free Facebook community of roughly 54,000 members as of late 2025, the Self Publishing
-  Show podcast (relaunched February 2026) and paid courses on launches and advertising. It leans toward fiction authors
-  learning Facebook and Amazon ads, email lists and launch strategy.
-pricing: { model: freemium, currency: USD, free_tier: true, note: "Free community and podcast; paid courses are sold separately." }
+  Self Publishing Formula's site is now branded "Learn Self Publishing with James Blatch". It sells courses on launches,
+  advertising and author business, runs The Self Publishing Show podcast with James Blatch and Cecelia Mecca, and holds
+  paid Self Publishing Show Live events in London and the USA. Older guides describe it as Mark Dawson's brand; the
+  current site is led by James Blatch. The free content leans toward fiction authors and promotes its paid courses.
+pricing: { model: freemium, currency: USD, free_tier: true, note: "Podcast and newsletter are free; courses and live events are sold separately with prices per course." }
 platforms: [web]
 best_for: [Fiction authors learning ads, email lists and launches]
-alternatives: [kindlepreneur]
+alternatives: [the-self-publishing-show, kindlepreneur, the-creative-penn]
 status: published
 verified_at: 2026-11-09
 sources:
-  - https://selfpublishingdirectory.com/communities/spf-community
+  - https://www.learnselfpublishing.com
+  - https://www.learnselfpublishing.com/podcast-sps-audio

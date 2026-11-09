@@ -1,0 +1,29 @@
+name: Adobe InDesign
+url: https://www.adobe.com/products/indesign.html
+categories: [writing-formatting]
+tagline: Adobe InDesign is a professional page layout app for Windows and Mac that exports print PDF with bleed and EPUB, sold only by subscription.
+summary: >-
+  InDesign is the industry-standard tool for book typesetting: you set the page size to a KDP trim size (plus bleed when
+  needed), then export a PDF/X print interior and a reflowable or fixed-layout EPUB. It gives full typographic control
+  but has a steep learning curve and is not a writing app. It is available only as a Creative Cloud membership; there is
+  no one-time license.
+pricing: { model: subscription, from: 22.99, currency: USD, period: month, note: "US price for the single-app annual plan billed monthly; month-to-month costs more. Annual plans carry a 14-day full refund window and a 50% fee for cancelling later." }
+platforms: [windows, mac]
+kdp:
+  outputs_kdp_files: true
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Full control of typography, bleed and image placement
+  - Exports both print PDF (PDF/X presets) and EPUB
+cons:
+  - Subscription only, with an early-cancellation fee on annual plans
+  - Steep learning curve for a single book
+best_for: [Illustrated, image-heavy or design-led interiors]
+alternatives: [vellum, atticus, book-design-templates, canva]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.adobe.com/products/indesign.html
+  - https://www.adobe.com/products/indesign/pricing-info.html
+  - https://www.adobe.com/creativecloud/plans.html

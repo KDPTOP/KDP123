@@ -84,6 +84,12 @@ const jsonLd = [
       </p>
     )}
 
+    {d.kdp.touches_kdp_account && !d.official && (
+      <p class="mt-4 rounded-lg border border-warn/30 bg-warn/5 p-3 text-sm">
+        This tool works inside your logged-in KDP account, for example through a browser extension that reads reports or fills in forms. Check what it can access before you install it; automating your KDP account can carry a terms-of-service risk, and you should never give a third party your Amazon password.
+      </p>
+    )}
+
     <h2 class="mt-8 text-2xl font-semibold">At a glance</h2>
     <dl class="mt-3 divide-y divide-line rounded-lg border border-line bg-white text-sm">
       <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Price</dt><dd class="col-span-2">{priceLabel(tool)}{d.pricing.note ? ` (${d.pricing.note})` : ''}</dd></div>
@@ -95,6 +101,14 @@ const jsonLd = [
       <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Categories</dt><dd class="col-span-2">{d.categories.map((c, i) => (<><a href={`/c/${c}/`}>{categoryBySlug(c)?.name}</a>{i < d.categories.length - 1 ? ', ' : ''}</>))}</dd></div>
       <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Last checked</dt><dd class="col-span-2">{isoDate(d.verified_at)}</dd></div>
     </dl>
+
+    {d.price_history.length > 0 && (
+      <>
+        <h2 class="mt-8 text-2xl font-semibold">Price history</h2>
+        <ul class="mt-2 list-disc pl-6 text-sm leading-6">{d.price_history.map((h) => <li><span class="text-muted">{isoDate(h.date)}</span>: {h.note}</li>)}</ul>
+        <p class="mt-1 text-xs text-muted">All changes across the directory: <a href="/changes/">price and plan changes</a>.</p>
+      </>
+    )}
 
     <h2 class="mt-8 text-2xl font-semibold">Summary</h2>
     <p class="mt-2 leading-7">{d.summary}</p>

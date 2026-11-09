@@ -31,6 +31,17 @@ const tools = defineCollection({
           note: z.string().optional(),
         })
         .default({ model: 'unknown', currency: 'USD' }),
+      // Newest first. Each row is something we saw on the vendor's own page on that date.
+      price_history: z
+        .array(
+          z.object({
+            date: z.coerce.date(),
+            from: z.number().nonnegative().optional(),
+            kind: z.enum(['price', 'plan', 'correction', 'status']).default('price'),
+            note: z.string().min(10),
+          }),
+        )
+        .default([]),
       platforms: z.array(z.enum(platforms)).default([]),
       kdp: z
         .object({

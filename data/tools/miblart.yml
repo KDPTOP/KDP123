@@ -1,0 +1,27 @@
+name: MiblArt
+url: https://miblart.com
+categories: [cover-design]
+tagline: MiblArt is a book cover design studio for indie authors that offers custom ebook and print covers with payment after you approve the design.
+summary: >-
+  MiblArt designs custom ebook and print covers, illustrated covers, special-edition extras such as sprayed edges, and
+  author branding. For stock-photo covers it takes no prepayment, sends a first concept within 5 business days, and
+  allows unlimited revisions, according to its site. Prices start where its packages show them, and the result depends
+  on the designer assigned. Budget brand GetCovers says it belongs to the same Miblgroup family.
+pricing: { model: paid, from: 220, currency: USD, period: one-time, note: "Ebook cover package shown at $220 and ebook plus print at $270 at check time, while a promo code was running; illustrated and premium covers cost more. Payment can be split into two monthly installments." }
+platforms: [web]
+kdp:
+  touches_kdp_account: false
+  content_types: [fiction, nonfiction, children]
+pros:
+  - No prepayment for stock-photo covers; you pay once you approve
+  - Print package includes print-ready PDF and an ISBN barcode
+cons:
+  - Several times the price of budget services such as GetCovers
+  - Advertised prices change with running promotions
+best_for: [Genre fiction authors who want a custom cover without paying up front]
+alternatives: [getcovers, damonza, reedsy-marketplace]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://miblart.com/services/ebook-cover-design/
+  - https://getcovers.com/

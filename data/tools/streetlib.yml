@@ -1,0 +1,28 @@
+name: StreetLib
+url: https://www.streetlib.com
+categories: [print-distribution, audio]
+tagline: StreetLib is an ebook and audiobook distributor for authors and small publishers that reaches 50+ stores, subscription services and library platforms for a one-time fee.
+summary: >-
+  StreetLib is still operating. Its StreetLib One plan costs 299 EUR once and pays 85% of net revenue across ebook and
+  audiobook retail, subscription and library channels, and includes the StreetLib Write formatting tool. Print
+  distribution is available only in Italy. StreetLib's own FAQ warns that an ebook enrolled in KDP Select must stay
+  exclusive to Amazon, so distributing that ebook through StreetLib conflicts with Select.
+pricing: { model: one-time, from: 299, currency: EUR, period: one-time, free_tier: false, note: "StreetLib One: 299 EUR once, 85% of net revenue, not refundable, account approval required. Older help articles still describe a $99/year plan for existing subscribers." }
+platforms: [web]
+kdp:
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - One payment, no renewal, for ebook and audiobook distribution
+  - Single royalty report across all channels
+cons:
+  - Upfront fee is not refundable, and approval is not guaranteed
+  - Print distribution only for Italy
+best_for: [Wide ebook and audiobook distribution with a single upfront cost]
+alternatives: [publishdrive, draft2digital, authors-republic]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.streetlib.com/pricing
+  - https://www.streetlib.com/
+  - https://kdp.amazon.com/en_US/help/topic/GD9PMU58BV24QFZ7

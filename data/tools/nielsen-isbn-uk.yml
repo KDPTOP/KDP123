@@ -1,0 +1,25 @@
+name: Nielsen ISBN Store (UK & Ireland)
+url: https://www.nielsenisbnstore.com
+categories: [legal-isbn]
+tagline: The Nielsen ISBN Store is the official ISBN agency for publishers based in the UK, Ireland and British Overseas Territories, selling single ISBNs and blocks.
+summary: >-
+  Nielsen (now NielsenIQ BookData) runs the ISBN agency for the UK and Ireland. Its store sells a single ISBN for £93 or
+  blocks of 10, 100 and 1,000, all including UK VAT, and unused ISBNs do not expire. Buying here makes you the publisher of
+  record, unlike the free KDP ISBN, which can only be used on KDP. You must be based in the UK, Ireland or a British
+  Overseas Territory; publishers elsewhere should use their own national agency.
+official: true
+pricing: { model: paid, from: 93, currency: GBP, period: one-time, note: "£93 for one ISBN, £174 for 10, £387 for 100, £994 for 1,000, including UK VAT." }
+platforms: [web]
+pros:
+  - Official UK and Ireland agency, so you are the publisher of record
+  - A block of 10 costs less than two single ISBNs
+cons:
+  - Only for publishers based in the UK, Ireland or a British Overseas Territory
+  - A single ISBN is expensive compared with the per-ISBN price of a block
+best_for: [UK and Irish authors who want their own ISBNs for print and wide distribution]
+alternatives: [bowker-myidentifiers, isbn-international]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.nielsenisbnstore.com/Home/ISBN
+  - https://www.isbn-international.org/agencies

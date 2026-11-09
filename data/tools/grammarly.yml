@@ -1,0 +1,30 @@
+name: Grammarly
+url: https://www.grammarly.com
+categories: [editing]
+tagline: Grammarly is a grammar, spelling and style checker that works in browsers, desktop apps and phones, with a free tier and a paid Pro plan.
+summary: >-
+  Grammarly flags spelling, grammar, clarity and tone issues as you write and can rewrite sentences, check for accidental
+  plagiarism and generate text from prompts. It is built for general and business writing rather than fiction, is not a
+  replacement for a human editor on a book manuscript, and is now part of Superhuman's software suite. Corrections and
+  rewrites of your own text count as AI-assisted under KDP rules and need no disclosure, but text generated from prompts
+  counts as AI-generated and must be disclosed.
+pricing: { model: freemium, from: 144, currency: USD, period: year, free_tier: true, note: "Pro is $144/year ($12/month average); $60 per quarter or $30 billed monthly." }
+platforms: [web, windows, mac, chrome-extension, ios, android]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Works almost everywhere you type
+  - Free tier covers basic spelling and grammar
+cons:
+  - Monthly billing costs more than twice the annual rate
+  - Tuned for business writing; fiction style suggestions can be off
+best_for: [Catching typos and grammar errors before a human edit]
+alternatives: [prowritingaid, hemingway-editor, editorial-freelancers-association]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.grammarly.com/plans
+  - https://help.superhuman.com/hc/en-us/articles/46242163049229-How-much-does-Grammarly-Pro-cost
+  - https://kdp.amazon.com/en_US/help/topic/G200672390

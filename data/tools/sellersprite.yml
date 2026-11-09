@@ -1,0 +1,28 @@
+name: SellerSprite
+url: https://sellersprite.ai
+categories: [keywords-categories, book-research]
+tagline: SellerSprite is a subscription research suite for Amazon FBA and FBM sellers covering keywords, categories, competitors and BSR-based sales estimates.
+summary: >-
+  SellerSprite is built for physical-product sellers: product research, category insights, ASIN traffic analysis, review
+  mining and sourcing-oriented filters. A KDP publisher can use its keyword research, reverse-ASIN traffic data and up to
+  three years of BSR and sales history on competing listings, but it has no book-specific features and its sales
+  estimates are generic BSR models. Its English site moved to sellersprite.ai; the older sellersprite.com pages still
+  load and point there.
+pricing: { model: freemium, from: 39, currency: USD, period: month, free_tier: true, note: "Basic is $39/month or $390/year. Sign-up needs no card and the Chrome extension is free to install; most data needs a paid plan. Refunds only for the unused part of a subscription." }
+platforms: [web, chrome-extension]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+pros:
+  - Lower entry price than most Amazon seller suites
+  - Shows up to three years of BSR and sales history for a listing
+cons:
+  - Nothing is designed for books; categories, filters and profit tools assume physical products
+  - Product Tracker is not included on the Basic plan
+best_for: [Publishers who also sell physical products on Amazon]
+alternatives: [helium-10, jungle-scout, publisher-rocket]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.sellersprite.com/en/price
+  - https://sellersprite.ai/

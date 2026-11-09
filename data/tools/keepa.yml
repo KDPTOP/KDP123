@@ -1,0 +1,29 @@
+name: Keepa
+url: https://keepa.com
+categories: [analytics, book-research]
+tagline: Keepa is a price and sales rank history tracker for Amazon products, available as a website and browser extension with a paid Pro tier.
+summary: >-
+  Keepa charts the price and Best Sellers Rank history of Amazon listings, which lets a KDP publisher see how steadily a
+  competing paperback has sold over months or years and when it peaks seasonally. Free accounts get price charts and
+  alerts but only a short window of history; sales rank history, Product Finder and full data need Keepa Pro. Keepa's
+  own FAQ says live price and offer tracking for ebooks and digital products ended on April 20, 2026, with only historical
+  data and infrequent updates remaining, so it is now much less useful for Kindle editions.
+pricing: { model: freemium, from: 29, currency: EUR, period: month, free_tier: true, note: "Keepa Pro is 29 EUR/month or 290 EUR/year, billed in euros only, VAT included. No free trial, no pro-rata refunds. One seat per subscription. The API is a separate subscription." }
+platforms: [web, chrome-extension, firefox-extension]
+kdp:
+  marketplaces: [us, uk, de, fr, jp, ca, it, es, in, mx, br]
+  outputs_kdp_files: false
+  touches_kdp_account: false
+pros:
+  - Years of BSR history show whether a competing book sells steadily or only spikes
+  - Free tier covers price history charts and price alerts
+cons:
+  - Live tracking for ebooks ended in April 2026
+  - Sales rank history requires the paid Pro plan, billed only in euros
+best_for: [Checking a competing paperback's long-term sales rank before entering a niche]
+alternatives: [ds-amazon-quick-view, bookbeam, kdspy]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://keepa.com/cdn/languages/en.json
+  - https://keepa.com

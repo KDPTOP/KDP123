@@ -1,0 +1,29 @@
+name: PublishDrive
+url: https://publishdrive.com
+categories: [print-distribution, audio]
+tagline: PublishDrive is a subscription ebook, print and audiobook distributor for self-publishers that sends one upload to 50+ stores and takes no royalty commission.
+summary: >-
+  PublishDrive distributes ebooks, print-on-demand books and audiobooks to stores and library networks from one dashboard,
+  and charges a flat subscription instead of a cut of sales (0% revenue share on its plans). The free plan covers one
+  ebook to Apple Books, Barnes & Noble and Kobo only. Distributing an ebook through it conflicts with KDP Select, which
+  requires the enrolled ebook to be exclusive to Amazon; print and audio editions are not covered. It can also deliver to
+  Amazon, so a publisher already on KDP should leave that channel off to avoid duplicate listings.
+pricing: { model: freemium, from: 16.99, currency: USD, period: month, free_tier: true, refund_days: 30, note: "Starter is $16.99/month billed monthly or $13.99/month billed annually, for 3 titles. Free plan: 1 ebook to 3 stores. Paid plans keep 100% of royalties." }
+platforms: [web]
+kdp:
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - No percentage taken from royalties on any plan
+  - One upload covers ebook, print and audiobook distribution
+cons:
+  - Monthly fee is charged whether or not the books sell
+  - Free plan reaches only three stores
+best_for: [Publishers with steady sales across several stores who prefer a flat fee to a commission]
+alternatives: [draft2digital, streetlib, kobo-writing-life]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://publishdrive.com/pricing.html
+  - https://publishdrive.com/
+  - https://kdp.amazon.com/en_US/help/topic/GD9PMU58BV24QFZ7

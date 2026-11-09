@@ -1,0 +1,24 @@
+name: KBoards Writers' Cafe
+url: https://www.kboards.com/forums/writers-cafe.60/
+categories: [communities]
+tagline: The KBoards Writers' Cafe is a long-running forum for Kindle self-publishers, now quieter but still open, with an archive of early KDP discussion.
+summary: >-
+  The Writers' Cafe on KBoards, originally KindleBoards, was a central forum for indie authors in the early Kindle
+  years and still takes new posts in 2026, though activity is much lower than at its peak. The site is owned by
+  VerticalScope, a forum network, and sells banner ads and book promotion slots. Its rules ban self-promotion inside
+  posts; authors may promote in their signature and keep one thread per book in the Book Bazaar section.
+pricing: { model: free, currency: USD, note: "Free to join; paid ads and book promotions are sold separately." }
+platforms: [web]
+pros:
+  - Searchable archive of more than a decade of KDP discussion
+  - Clear promotion rules with a separate Book Bazaar area
+cons:
+  - Low activity now; many older threads are out of date
+  - Recent threads include service sellers and promotion offers
+best_for: [Researching how KDP practices developed over time]
+alternatives: [reddit-r-selfpublish, reddit-r-kdp, absolute-write]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.kboards.com/threads/faqs-rules-tips-and-forum-decorum-for-the-writers-cafe.41454/
+  - https://scribecount.com/author-resource/indie-author-communities/kboards-indie-author-community

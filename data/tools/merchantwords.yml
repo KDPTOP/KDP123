@@ -1,0 +1,27 @@
+name: MerchantWords
+url: https://www.merchantwords.com
+categories: [keywords-categories]
+tagline: MerchantWords is a subscription Amazon keyword database for product sellers, built from Amazon search bar autocomplete data since 2012.
+summary: >-
+  MerchantWords sells access to a large database of Amazon shopper search phrases with search volume estimates, a
+  keyword multiplier for related terms and a Page 1 view of top-ranking products. It is built for product sellers and
+  PPC agencies; for a KDP publisher it can help brainstorm the seven backend keywords and Amazon Ads targets, but it is
+  not specific to the Kindle Store or Books department and has no category, BSR or book sales data. Its ASIN Plus
+  feature is US-only.
+pricing: { model: subscription, from: 35, currency: USD, period: month, note: "Silver ($35/month) covers a single country; $79/month adds a region and $149/month all 11 marketplaces." }
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+pros:
+  - Single-country plan is cheaper than full seller suites
+  - Historical keyword data back to 2012
+cons:
+  - No book categories, BSR or sales estimates
+  - Not designed around Kindle or Books searches
+best_for: [Expanding a list of Amazon search phrases for backend keywords and ads]
+alternatives: [publisher-rocket, helium-10, data-dive]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.merchantwords.com/pricing

@@ -1,0 +1,25 @@
+name: The Self Publishing Show
+url: https://www.learnselfpublishing.com/podcast-sps-audio
+categories: [courses-blogs]
+tagline: The Self Publishing Show is a free weekly podcast for indie authors about marketing, ads, AI and the business of self-publishing.
+summary: >-
+  The Self Publishing Show is produced by The Self Publishing Formula Ltd and, since its February 2026 relaunch after an
+  18-month break, is hosted by James Blatch and Cecelia Mecca rather than Mark Dawson. Episodes cover Amazon and Meta
+  ads, KDP changes, launches and AI tools, often with guest authors. It promotes the hosts' paid courses on Learn
+  Self Publishing and the paid Self Publishing Show Live events, and episodes carry sponsor discount codes.
+pricing: { model: free, currency: USD, note: "Podcast is free; courses and live events are sold separately." }
+platforms: [web]
+pros:
+  - Weekly episodes on current KDP and ad platform changes
+  - Long backlist of interviews with working indie authors
+cons:
+  - Episodes promote the hosts' own courses and events
+  - Fiction-focused; little on low-content or nonfiction
+best_for: [Fiction authors following ads and marketing trends]
+alternatives: [self-publishing-formula, the-creative-penn, kindlepreneur]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.learnselfpublishing.com/podcast-sps-audio
+  - https://selfpublishingformula.libsyn.com/
+  - https://podcasts.apple.com/us/podcast/the-self-publishing-show/id1090684236

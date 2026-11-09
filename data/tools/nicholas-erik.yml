@@ -1,0 +1,25 @@
+name: Nicholas Erik
+url: https://nicholaserik.com
+categories: [courses-blogs]
+tagline: Nicholas Erik's site is a book marketing and advertising resource for fiction authors, with long free guides, paid courses and consulting.
+summary: >-
+  Nicholas Erik is a science fiction author and ads consultant who writes long free guides on book marketing,
+  Amazon Ads and Facebook Ads, aimed at authors already selling fiction. He sells his own courses, some of which open
+  and close, and one-to-one consulting, so the free material also markets those products. It covers marketing only,
+  not writing, formatting or publishing setup.
+pricing: { model: freemium, currency: USD, free_tier: true, note: "Guides are free. Course prices vary and several courses are closed; consulting is listed at $750 for a 60-minute call." }
+platforms: [web]
+pros:
+  - Detailed, data-driven guides on Amazon and Facebook ads
+  - Case studies with launch numbers
+cons:
+  - Several courses are closed at any given time
+  - Consulting is expensive
+best_for: [Fiction authors scaling Amazon and Facebook ads]
+alternatives: [kindlepreneur, self-publishing-formula, bookbub-insights]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://nicholaserik.com/
+  - https://nicholaserik.com/products/
+  - https://nicholaserik.com/consulting/

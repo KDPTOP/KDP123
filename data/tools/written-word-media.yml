@@ -1,0 +1,35 @@
+name: Written Word Media
+url: https://www.writtenwordmedia.com
+categories: [ads-promotion]
+tagline: Written Word Media is a book promotion company for authors that runs the Freebooksy, Bargain Booksy, Red Feather Romance and NewInBooks reader newsletters.
+summary: >-
+  Written Word Media sells one-day placements in its own genre newsletters: Freebooksy for free ebooks, Bargain Booksy for
+  ebooks priced $0.99 to $5, Red Feather Romance for romance, and NewInBooks for recent full-price releases. It also sells
+  multi-site Promo Stacks, managed Facebook and Amazon ad campaigns, and an annual Gold or Platinum membership that takes
+  10% off promos. It does not guarantee sales or rank, and since October 2025 it also books Robin Reads placements, so
+  several "different" promo sites in a stack may share one seller.
+pricing:
+  model: paid
+  from: 20
+  currency: USD
+  period: one-time
+  note: "Prices vary by newsletter and genre. Bargain Booksy runs $20-$240 and Freebooksy $25-$550 per its pricing pages (effective Feb 4, 2025); NewInBooks Book Launches are $299-$799. A free account can book all promos except Limelight; paid memberships are annual only."
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [fiction, nonfiction, children]
+pros:
+  - Genre prices and list sizes are published for Freebooksy and Bargain Booksy
+  - One account and calendar books promos across its own and partner newsletters
+cons:
+  - List sizes are self-reported and results vary widely by genre
+  - NewInBooks costs far more than its discount newsletters
+best_for: [Stacking low-cost newsletter promos around a KDP Select free or Countdown deal]
+alternatives: [bookbub, robin-reads, ereader-news-today, the-fussy-librarian]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.bargainbooksy.com/sell-more-books/
+  - https://www.freebooksy.com/freebooksy-feature-pricing/
+  - https://secure.writtenwordmedia.com/membership

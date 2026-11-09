@@ -1,0 +1,24 @@
+name: Residual Royalty Academy
+url: https://residual-royalty-academy.teachable.com
+categories: [courses-blogs]
+tagline: Residual Royalty Academy is a Teachable course site for KDP publishers that sells a low-content publishing program and gives away a niche ebook.
+summary: >-
+  Residual Royalty Academy (residualroyaltyacademy.com redirects to its Teachable school) offers a free 17-page niche
+  ebook and one paid program, the Low Content Elite Society, covering low-content publishing, children's story books,
+  audiobook basics and Amazon Ads, with a Discord group. The sales pages are labeled 2022, cite 2021-2022 results and
+  show an expired coupon, so the course may no longer be updated. Income claims on the page are the seller's own and
+  are not verified.
+pricing: { model: one-time, currency: USD, free_tier: true, note: "Course page shows $597 one-time or 2 x $249 alongside an expired offer; refund within 14 days if under 30% watched. Price not confirmed as current." }
+platforms: [web]
+kdp:
+  touches_kdp_account: false
+  content_types: [low-content, children]
+cons:
+  - Sales pages appear unchanged since 2022
+  - Heavy income-claim marketing
+alternatives: [low-content-profits, the-home-boss, self-publishing-titans]
+status: draft
+verified_at: 2026-11-09
+sources:
+  - https://residual-royalty-academy.teachable.com/p/the-low-content-elite-society
+  - https://society.residualroyaltyacademy.com/

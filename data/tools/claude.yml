@@ -1,0 +1,28 @@
+name: Claude
+url: https://claude.com
+categories: [ai-tools]
+tagline: Claude is Anthropic's general-purpose AI assistant that publishers use for brainstorming, outlining, drafting, editing feedback and book descriptions.
+summary: >-
+  Claude is a chat assistant on web, desktop and mobile that can discuss and revise long manuscripts, draft blurbs and
+  ad copy, and create files. It is not built for books: it has no KDP formatting, trim or cover tools, so final files
+  need a formatter. KDP requires you to disclose AI-generated text, images or translations when publishing, even if you
+  edited them heavily; using Claude only to edit, error-check or brainstorm your own writing counts as AI-assisted and
+  does not need disclosure.
+pricing: { model: freemium, from: 20, currency: USD, period: month, free_tier: true, note: "Pro is $20 billed monthly or $200/year ($17/month); Max $100/month and Ultra $200/month. Free plan has tighter usage limits. Payments are generally non-refundable." }
+platforms: [web, windows, mac, ios, android]
+kdp:
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Handles long manuscripts in a single conversation
+  - Free plan available to try it
+cons:
+  - Usage limits reset every 5 hours and weekly, even on paid plans
+  - AI-generated text must be disclosed to KDP
+best_for: [Brainstorming, developmental feedback and marketing copy]
+alternatives: [sudowrite, novelcrafter, grammarly]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://claude.com/pricing
+  - https://kdp.amazon.com/en_US/help/topic/G200672390

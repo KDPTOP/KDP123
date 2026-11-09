@@ -9,7 +9,7 @@ summary: >-
 pricing: { model: freemium, currency: USD, free_tier: true }
 platforms: [web]
 best_for: [Low-content publishers looking for tool and course comparisons]
-alternatives: [self-publishing-ninja, self-publishing-titans]
+alternatives: [self-publishing-titans]
 status: published
 verified_at: 2026-11-09
 sources:

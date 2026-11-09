@@ -1,0 +1,24 @@
+name: International ISBN Agency
+url: https://www.isbn-international.org
+categories: [legal-isbn]
+tagline: The International ISBN Agency is the global registration authority for ISBNs, with a free directory that tells publishers which national agency to buy from.
+summary: >-
+  The International ISBN Agency coordinates the ISBN system and its network of about 150 national and regional agencies.
+  For a KDP publisher outside the US and UK, its Find an agency page is the reliable way to locate the official ISBN
+  source for your country, including special cases such as language-based or regional agencies. It does not sell ISBNs to
+  individual publishers in countries that have an agency; you buy from that agency, and prices and rules vary by country.
+official: true
+pricing: { model: free, currency: USD, note: "The directory is free; ISBN prices are set by each national agency." }
+platforms: [web]
+pros:
+  - Official list of national agencies, so you avoid unofficial resellers
+  - Explains regional and language-group exceptions per country
+cons:
+  - A directory only; buying happens on each national agency's site
+best_for: [Finding the official ISBN agency for your country]
+alternatives: [bowker-myidentifiers, nielsen-isbn-uk]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.isbn-international.org/agencies
+  - https://www.isbn-international.org

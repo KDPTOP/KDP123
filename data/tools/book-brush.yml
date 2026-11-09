@@ -1,0 +1,30 @@
+name: Book Brush
+url: https://bookbrush.com
+categories: [cover-design]
+tagline: Book Brush is an online design tool for authors that makes book ads, 3D mockups and ebook or print-wrap covers sized to KDP trim sizes.
+summary: >-
+  Book Brush combines author-specific ad and social templates, 3D book mockups and a Cover Creator that builds ebook,
+  audiobook and paperback or hardcover wraps from your trim size, paper type and page count, with the spine width
+  calculated for you. Covers are assembled from templates and stock images, so they can look similar to other authors'
+  covers. The Cover Creator and mockup tools sit on paid annual plans; it also sells done-for-you design and social media
+  services.
+pricing: { model: subscription, from: 149, currency: USD, period: year, note: "Plus ($149/yr) includes the Cover Creator; Gold (listed $199/yr, discounted to $149 at check time) adds Instant Mockups and the Box Set Creator; Platinum is $246/yr." }
+platforms: [web]
+kdp:
+  outputs_kdp_files: true
+  touches_kdp_account: false
+  content_types: [fiction, nonfiction, children]
+pros:
+  - Print-wrap template calculates spine width from page count and paper type
+  - Built for authors, with genre templates and book mockups in one place
+cons:
+  - Annual billing only on the single-author plans
+  - Template and stock-photo covers can look generic
+best_for: [Authors who want ads, mockups and a simple cover in one subscription]
+alternatives: [canva, placeit, diy-book-covers]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://bookbrush.com/pricing/
+  - https://bookbrush.com/how-to-create-a-cover-for-your-print-book/
+  - https://bookbrush.com/cover-creator-software/

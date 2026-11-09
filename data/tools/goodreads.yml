@@ -1,0 +1,37 @@
+name: Goodreads
+url: https://www.goodreads.com
+categories: [reviews-arc, ads-promotion]
+tagline: Goodreads is Amazon's reader community and review site where authors can claim a profile and run paid Kindle or print book giveaways.
+summary: >-
+  Goodreads is owned by Amazon. Authors can join the free Author Program to claim their profile, and run Giveaways in
+  Kindle or print format before or after publication; every entrant adds the book to their Want to Read shelf. Kindle
+  giveaways require linking your KDP account and are open to US entrants only, while for print giveaways you mail the
+  books yourself to winners in the US and/or Canada. Goodreads sends winners a review reminder; any review request of your
+  own must stay optional, since Amazon allows free copies only when a review is not required or influenced.
+official: true
+pricing:
+  model: freemium
+  from: 119
+  currency: USD
+  period: one-time
+  free_tier: true
+  note: "Author Program is free. Giveaways cost $119 (Standard) or $599 (Premium) per giveaway, per Amazon's KDP setup guide; print copies and postage are extra."
+platforms: [web]
+kdp:
+  marketplaces: [us, ca]
+  outputs_kdp_files: false
+  content_types: [any]
+pros:
+  - Kindle giveaways deliver copies automatically, with no shipping
+  - Entrants must shelve the book as Want to Read, and Goodreads emails your followers and those shelvers
+cons:
+  - Kindle giveaways are open to US entrants only
+  - Entrants are giveaway hunters; many never read or review
+best_for: [Building pre-launch Want to Read shelves for a new release]
+alternatives: [netgalley, booksprout, bookbub, amazon-ads]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.goodreads.com/giveaway/about
+  - https://m.media-amazon.com/images/G/01/kindle-publication/webinars/Goodreads_Giveaways_Author_PrintAndKindle_SetupGuide_v41.pdf
+  - https://kdp.amazon.com/en_US/help/topic/G202101910

@@ -1,0 +1,26 @@
+name: Damonza
+url: https://damonza.com
+categories: [cover-design]
+tagline: Damonza is a New Zealand book design studio for self-publishers that sells custom covers, interior formatting and full launch packages.
+summary: >-
+  Damonza designs print, ebook and audiobook covers and also formats interiors and makes promotional graphics, either
+  built to order or as an all-in-one package. It says it has completed over 14,000 projects since 2012, delivers first
+  drafts within 14 days and offers a deposit-back guarantee if it cannot get the design right. It is a premium-priced
+  service; prices start at what its site lists, and results still depend on your brief and the designer.
+pricing: { model: paid, from: 495, currency: USD, period: one-time, note: "Custom ebook/front cover from $495, interior formatting from $275, Everything Package $1,995 fiction or $2,595 nonfiction. Multi-cover subscriptions are paid over 12 monthly installments." }
+platforms: [web]
+kdp:
+  touches_kdp_account: false
+  content_types: [fiction, nonfiction]
+pros:
+  - Cover, formatting and promo graphics from one studio
+  - Free short video calls with project managers before ordering
+cons:
+  - Far more expensive than budget cover services
+  - First drafts take up to 14 days
+best_for: [Authors with a budget who want cover and interior done by one team]
+alternatives: [miblart, 99designs, reedsy-marketplace]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://damonza.com/

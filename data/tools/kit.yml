@@ -1,0 +1,36 @@
+name: Kit
+url: https://kit.com
+categories: [email-tools]
+tagline: Kit, formerly ConvertKit, is an email marketing platform for creators that offers a free plan up to 10,000 subscribers and paid automation plans.
+summary: >-
+  Kit is the renamed ConvertKit. Its Free plan allows up to 10,000 subscribers with unlimited forms, landing pages and
+  broadcasts, plus selling digital products; visual automations and email sequences, such as a reader-magnet welcome
+  series, need the Creator or Pro plan. It is a general creator email tool, not book-specific, and paid pricing scales by
+  subscriber tier.
+pricing:
+  model: freemium
+  from: 39
+  currency: USD
+  period: month
+  free_tier: true
+  refund_days: 30
+  note: "Creator is $39/month for up to 1,000 subscribers (annual billing gives 12 months for the price of 10); Pro costs more. 14-day free trial of paid plans. Prices rose for existing customers from October 15, 2025."
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Free plan holds a large list (up to 10,000 subscribers)
+  - Automatic tier upgrades, so sending never stops as the list grows
+cons:
+  - Sequences and automations require a paid plan
+  - Paid plans cost more than MailerLite at small list sizes
+best_for: [Authors with a growing list who want automated welcome sequences]
+alternatives: [mailerlite, mailchimp, storyorigin]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://kit.com/pricing
+  - https://help.kit.com/en/articles/2502679-billing-at-kit
+  - https://help.kit.com/en/articles/16627071-the-kit-free-plan

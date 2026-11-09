@@ -1,0 +1,29 @@
+name: Photopea
+url: https://www.photopea.com
+categories: [cover-design]
+tagline: Photopea is a free browser-based image editor similar to Photoshop that opens PSD files and can export PDF for print covers.
+summary: >-
+  Photopea runs in the browser without an install, opens and saves PSD files, and exports PDF, so you can lay out a KDP
+  paperback wrap on the cover calculator template and save it as the single PDF KDP asks for. Its CMYK mode is a print
+  preview only: Photopea stores documents in sRGB, so it does not produce true CMYK files, although KDP recommends CMYK
+  images. It does not calculate spine width or provide book templates.
+pricing: { model: freemium, currency: USD, free_tier: true, note: "All editing features are free with ads. Premium removes ads and is priced in the app's Account window; team premium covers every member." }
+platforms: [web]
+kdp:
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Free, in the browser, and reads Photoshop PSD templates
+  - Exports PDF directly
+cons:
+  - No true CMYK output; CMYK mode is a preview
+  - Ads on the free version
+best_for: [Editing PSD cover templates without paying for Photoshop]
+alternatives: [gimp, krita, canva]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.photopea.com/api/accounts
+  - https://www.photopea.com/tuts/prepare-graphics-for-printing/
+  - https://blog.photopea.com/photopea-5-2-color-profiles-and-cmyk-mode.html
+  - https://kdp.amazon.com/en_US/help/topic/G201953020

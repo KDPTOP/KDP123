@@ -1,0 +1,29 @@
+name: ElevenLabs
+url: https://elevenlabs.io
+categories: [audio, ai-tools]
+tagline: ElevenLabs is an AI voice platform for creators and publishers that turns an EPUB manuscript into an AI-narrated audiobook and can publish it to ElevenReader.
+summary: >-
+  ElevenLabs generates audiobook narration from a manuscript with AI voices or a clone of your own, with character casting
+  and pronunciation tools. Finished books can be downloaded, sent to Spotify or INaudio, or published to ElevenReader (60%
+  of net revenue on direct sales, $0.20 per verified subscriber listening hour, no exclusivity). ACX requires audiobooks to
+  be narrated by a human unless otherwise authorized and prohibits unauthorized AI or text-to-speech, so ElevenLabs output
+  cannot go to Audible through ACX; Spotify for Authors accepts AI narration for Spotify only.
+pricing: { model: freemium, from: 6, currency: USD, period: month, free_tier: true, note: "Starter $6/month ($5/month billed annually; a $1 first-month offer was shown). Commercial license starts on Starter, not the free plan. Usage is metered in credits." }
+platforms: [web]
+kdp:
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Character casting and a pronunciation dictionary across the whole book
+  - Files can be downloaded and distributed anywhere that accepts AI narration
+cons:
+  - AI-narrated audiobooks are not accepted by ACX for Audible
+  - Long books can need a higher plan, since narration consumes credits per character
+best_for: [Producing an AI-narrated audiobook for stores that accept digital voices]
+alternatives: [spotify-for-authors, authors-republic]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://elevenlabs.io/pricing
+  - https://elevenlabs.io/audiobooks
+  - https://help.acx.com/s/article/what-are-the-acx-audio-submission-requirements

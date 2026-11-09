@@ -1,0 +1,30 @@
+name: Adobe Express
+url: https://www.adobe.com/express/
+categories: [cover-design]
+tagline: Adobe Express is Adobe's template-based online design app for quick graphics that KDP publishers use for ebook covers, ads and social images.
+summary: >-
+  Adobe Express offers templates, Adobe Stock assets, Adobe Fonts and Firefly generative AI in a browser and mobile app.
+  Premium Adobe Stock assets inside Express carry the "Limited License – Adobe Express": you may not put them into
+  merchandise or template files for sale unless the final work is an original work of authorship, you cannot export
+  them as stand-alone files, and you cannot use them in new projects after your paid membership ends. It is a general
+  design tool, so you size print covers yourself from KDP's cover calculator. Images generated with Firefly count as
+  AI-generated content that KDP requires you to disclose.
+pricing: { model: freemium, from: 9.99, currency: USD, period: month, free_tier: true, note: "Premium is US$9.99/month on Adobe's plans page; also included with most Creative Cloud plans." }
+platforms: [web, ios, android]
+kdp:
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Included at no extra cost if you already pay for most Creative Cloud plans
+  - Large stock library with a published license
+cons:
+  - Premium assets cannot be used in new work after you cancel
+  - Template-based covers can look generic
+best_for: [Ebook covers and marketing graphics for Creative Cloud users]
+alternatives: [canva, affinity, creative-fabrica]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.adobe.com/creativecloud/plans.html?filter=all-apps&plan=individual
+  - https://stock.adobe.com/license-terms
+  - https://helpx.adobe.com/express/web/adobe-express-subscription/premium.html

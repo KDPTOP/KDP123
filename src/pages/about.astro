@@ -1,15 +1,57 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE } from '../lib/site';
+
+const email = 'hello@kdp123.com';
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About kdp123',
+    url: `${SITE.url}/about/`,
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'kdp123',
+      url: SITE.url,
+      email,
+      sameAs: [SITE.github],
+      parentOrganization: { '@type': 'Organization', name: 'KDPTop', url: SITE.related.url },
+      contactPoint: { '@type': 'ContactPoint', contactType: 'editorial', email, availableLanguage: ['English'] },
+    },
+  },
+];
 ---
 
-<Base title="About kdp123" description="kdp123 is an independent, open-data directory for Amazon KDP publishers.">
+<Base title="About kdp123: who maintains it and how" description="Who runs kdp123, how listings are checked and kept current, what we will not do, and how to contact the editorial team." jsonLd={jsonLd}>
   <article class="prose-kdp max-w-3xl">
     <h1 class="text-4xl font-bold">About kdp123</h1>
-    <p>kdp123 is a directory of tools, official sources and communities for people who publish on Amazon KDP. It is built for one job: let a publisher find the right resource for what they are doing now, and see what it costs and when it was last checked.</p>
-    <p>It is made by the team behind <a href={SITE.related.url}>KDPTop</a>, a KDP research service. That relationship is disclosed on every KDPTop entry and in the <a href="/methodology/">methodology</a>.</p>
+    <p>kdp123 is a directory of tools, official rules and communities for people who publish on Amazon KDP. It is built for one job: let a publisher find the right resource for what they are doing now, and see what it costs and when it was last checked.</p>
+
+    <h2>Who runs it</h2>
+    <p>kdp123 is maintained by the kdp123 editorial team, the same team that builds <a href={SITE.related.url}>KDPTop</a>, a KDP research service. That relationship is disclosed on the KDPTop listing, on every page where KDPTop is recommended, and in the <a href="/methodology/">methodology</a>. KDPTop is held to the same fields and sourcing rules as every other entry, and category tables stay sorted by name.</p>
+
+    <h2>How listings are checked</h2>
+    <ol>
+      <li><strong>Source first.</strong> Every price and claim comes from the vendor's own site or Amazon's help pages. Third-party reviews are never the source for a price. If we cannot read a price on the vendor's page, the listing says so instead of guessing.</li>
+      <li><strong>Dated.</strong> Each listing shows the date someone last re-read the vendor's site. Rules pages show the date they were checked against Amazon.</li>
+      <li><strong>Re-checked.</strong> A weekly job tests every outbound link and lists entries not checked in 120 days; those are re-verified first. Price and plan changes go on the <a href="/changes/">changes page</a>.</li>
+      <li><strong>Removed when gone.</strong> Tools that shut down, park their domain or stop serving KDP publishers are taken off the site, not left as dead links.</li>
+    </ol>
+
+    <h2>What we will not do</h2>
+    <ul>
+      <li>Sell placements or rankings. There is no paid listing, and affiliate links (marked where they exist) never change order or wording.</li>
+      <li>Publish an entry without a source.</li>
+      <li>List tools that ask for your Amazon password or promise to game reviews or rankings.</li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>Email the editorial team at <a href={`mailto:${email}`}>{email}</a>. Use it for corrections, a tool you think is missing, a vendor update to your own listing, or press. To suggest a listing, the <a href="/submit/">submit page</a> is faster.</p>
+    <p>Vendors: we will update your listing when you point us to the page on your own site that shows the change. We do not accept payment to add, keep or reorder a listing.</p>
+
     <h2>Open by default</h2>
-    <p>The data and the site code are open on <a href={SITE.github}>GitHub</a>. Anyone can suggest a listing or a correction with a source.</p>
+    <p>The data (CC BY 4.0) and the site code (MIT) are on <a href={SITE.github}>GitHub</a>. You can download the whole directory as <a href="/tools.json">JSON</a> or <a href="/tools.csv">CSV</a>, and every page has a plain-text version for AI tools.</p>
+
     <h2>Not affiliated with Amazon</h2>
     <p>kdp123 is not affiliated with, endorsed by or sponsored by Amazon. "Amazon", "Kindle" and "KDP" are trademarks of Amazon.com, Inc.</p>
   </article>

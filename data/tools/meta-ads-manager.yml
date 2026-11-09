@@ -1,0 +1,30 @@
+name: Meta Ads Manager
+url: https://www.facebook.com/business/tools/ads-manager
+categories: [ads-promotion]
+tagline: Meta Ads Manager is Meta's self-serve tool for creating and managing auction-priced ads on Facebook, Instagram, Messenger and WhatsApp.
+summary: >-
+  Ads Manager lets authors target readers by interests and demographics and send clicks to a book's Amazon page, a landing
+  page or a reader-magnet signup. Ads are bought in an auction with budgets you set, so there is no fixed price. It is a
+  general advertising tool, not book-specific: Meta's pixel cannot run on Amazon product pages, so sales from ads that
+  link straight to Amazon are hard to attribute, and ads for list-building are easier to measure.
+pricing:
+  model: paid
+  currency: USD
+  note: "Auction-based; you set daily or lifetime budgets and pay for delivered results. Meta applies minimum daily budgets per ad set that depend on the optimization goal and currency."
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Detailed interest and demographic targeting across Facebook and Instagram
+  - Budgets can start small and be paused at any time
+cons:
+  - Hard to measure Amazon sales from ad clicks
+  - Learning curve; spend can be wasted without testing
+best_for: [Building an email list or promoting a series starter to targeted readers]
+alternatives: [amazon-ads, bookbub, pinterest-business]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://developers.facebook.com/docs/marketing-api/reference/minimum-budget/

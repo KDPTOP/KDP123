@@ -1,0 +1,33 @@
+name: BookSirens
+url: https://booksirens.com
+categories: [reviews-arc]
+tagline: BookSirens is an ARC distribution service for authors that promotes review copies to vetted readers and charges per download or a flat yearly fee.
+summary: >-
+  BookSirens promotes each accepted book to its reader community for three months, delivers ARCs securely and sends review
+  reminders. It reports that about 75% of downloads lead to a review on average, but guarantees neither reviews nor
+  ratings. You pay BookSirens to find readers, not readers for reviews: Amazon permits free copies only if a review is not
+  required and not influenced, and offering anything more invalidates the review.
+pricing:
+  model: paid
+  from: 10
+  currency: USD
+  period: one-time
+  note: "Promote plan: $10 per accepted book plus $2 per reader who downloads it (you can cap readers). Author plan: $8.33/month billed annually for unlimited ARCs under two pen names. Books must meet acceptance criteria."
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [fiction, nonfiction]
+pros:
+  - Pay-per-download option lets you cap spend per book
+  - No per-reader fee for readers you invite yourself
+cons:
+  - Books must pass its acceptance criteria
+  - Downloads depend on your cover and blurb; none are guaranteed
+best_for: [Getting first reviews on a new release without a big upfront cost]
+alternatives: [booksprout, storyorigin, hidden-gems-books, netgalley]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://booksirens.com/pricing
+  - https://kdp.amazon.com/en_US/help/topic/G202101910

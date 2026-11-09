@@ -1,0 +1,30 @@
+name: Book2Color
+url: https://book2color.com/en
+categories: [low-content, ai-tools]
+tagline: Book2Color is a web-based AI coloring book generator for KDP sellers that creates line-art pages and exports interior PDFs in KDP trim sizes.
+summary: >-
+  Book2Color generates coloring pages from text prompts using Google's Imagen models, arranges them into a book and
+  exports a PDF interior with margins and bleed for standard KDP trim sizes. Its terms grant commercial rights only for
+  images made with paid credits; free-tier output is for personal, non-commercial use, even though the homepage says all
+  plans include commercial rights. The images are AI-generated, so KDP requires you to disclose them when you publish.
+  The domain was registered in January 2026, so the service has a short track record.
+pricing: { model: freemium, from: 9.99, currency: USD, period: month, free_tier: true, note: "Basic $9.99/month for 100 image credits, Pro $19.99/month for 600. Used credits are non-refundable." }
+platforms: [web]
+kdp:
+  outputs_kdp_files: true
+  touches_kdp_account: false
+  content_types: [coloring, children]
+pros:
+  - Generates pages and assembles the KDP interior in one place
+  - Cancel anytime; you keep commercial rights to what you made on a paid plan
+cons:
+  - Free-tier images cannot be used commercially
+  - AI-generated images must be disclosed to KDP, and niches full of AI coloring books are crowded
+best_for: [Producing AI coloring book interiors quickly]
+alternatives: [kdp-coloring-book-studio, colorcraft, midjourney]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://book2color.com/en/pricing
+  - https://book2color.com/en/legal/terms
+  - https://kdp.amazon.com/en_US/help/topic/G200672390

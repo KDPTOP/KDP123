@@ -1,0 +1,30 @@
+name: ProWritingAid
+url: https://prowritingaid.com
+categories: [editing]
+tagline: ProWritingAid is a grammar and style editor aimed at fiction and long-form writers that runs line-editing reports on whole manuscripts.
+summary: >-
+  ProWritingAid checks grammar and style, runs reports on pacing, overused words and dialogue, and sells AI manuscript
+  critiques through Story Credits; it works inside Word, Scrivener, Google Docs and browsers. The free tier checks only
+  500 words at a time, so a full book needs a paid plan, and it does not format books for KDP. Fixing your own prose with
+  it is AI-assisted under KDP rules and needs no disclosure, but any text it generates for you counts as AI-generated and
+  must be disclosed.
+pricing: { model: freemium, from: 120, currency: USD, period: year, free_tier: true, refund_days: 3, note: "Premium $120/year ($10/month) or $30 billed monthly; Premium Pro $144/year; lifetime $399. Refunds within 3 days for yearly and lifetime plans only. Story Credits cost extra." }
+platforms: [web, windows, mac, chrome-extension, firefox-extension]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [fiction, nonfiction]
+pros:
+  - Reports built for fiction, such as pacing and dialogue tags
+  - Lifetime license available
+cons:
+  - Free tier limited to 500 words per check
+  - Very short refund window; manuscript analysis costs extra credits
+best_for: [Self-editing a full manuscript before hiring an editor]
+alternatives: [grammarly, hemingway-editor, editorial-freelancers-association]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://prowritingaid.com/pricing
+  - https://prowritingaid.com/integrations
+  - https://kdp.amazon.com/en_US/help/topic/G200672390

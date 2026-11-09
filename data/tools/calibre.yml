@@ -1,0 +1,28 @@
+name: calibre
+url: https://calibre-ebook.com
+categories: [writing-formatting]
+tagline: calibre is a free, open-source ebook manager for Windows, Mac and Linux that converts Word and other files to EPUB and includes an EPUB editor.
+summary: >-
+  calibre is mainly an ebook library manager, but its converter turns DOCX and many other formats into EPUB and its
+  built-in editor lets you fix the HTML and CSS inside an EPUB or Kindle file. KDP publishers use it to make or repair an
+  ebook file; check the result in Kindle Previewer before uploading. It is not a print layout tool, so it does not
+  produce paperback interiors at KDP trim sizes.
+pricing: { model: free, currency: USD, note: "Free and open source (GPL-3.0); funded by donations." }
+platforms: [windows, mac, linux]
+kdp:
+  outputs_kdp_files: true
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Free and runs on all three desktop systems
+  - Converts between dozens of ebook formats and can edit EPUB internals
+cons:
+  - Ebook only; no print PDF layout
+  - Conversion output often needs manual cleanup for a polished book
+best_for: [Converting a Word manuscript to EPUB or fixing an existing EPUB for free]
+alternatives: [sigil, pandoc, jutoh, draft2digital]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://calibre-ebook.com/about
+  - https://github.com/kovidgoyal/calibre

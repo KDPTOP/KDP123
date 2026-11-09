@@ -1,0 +1,25 @@
+name: 20BooksTo50K
+url: https://www.facebook.com/groups/20Booksto50K/
+categories: [communities]
+tagline: 20BooksTo50K is a large Facebook group for indie fiction authors that shares data and tactics for earning a living from a deep backlist.
+summary: >-
+  20BooksTo50K was started in 2016 by authors Michael Anderle and Craig Martelle around the idea that about twenty books
+  can earn $50,000 a year. The Facebook group still exists with tens of thousands of members, but the founders have
+  stepped back and the 20Books Vegas conference became Author Nation, run by a separate team, from 2024. Membership
+  requests are screened, and members report a strict no self-promotion rule. Advice leans to rapid-release genre
+  fiction in Kindle Unlimited.
+pricing: { model: free, currency: USD, note: "Free Facebook group; Author Nation conference tickets are separate." }
+platforms: [web]
+pros:
+  - Large archive of real sales and ad data from working fiction authors
+  - Free to join
+cons:
+  - Requires a Facebook account and admin approval to join
+  - Founders no longer run it day to day; the conference moved to Author Nation
+best_for: [Fiction authors planning a series or a large backlist]
+alternatives: [self-publishing-formula, reddit-r-selfpublish, kboards-writers-cafe]
+status: draft
+verified_at: 2026-11-09
+sources:
+  - https://scribecount.com/author-resource/indie-author-communities/20books-to-50k-community-inside-look
+  - https://indieauthormagazine.com/writing-the-end-on-the-story-of-20books-vegas/

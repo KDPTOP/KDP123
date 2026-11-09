@@ -4,19 +4,28 @@ categories: [writing-formatting]
 tagline: Vellum is a Mac-only book formatter known for polished ebook and print output, sold for a one-time price.
 summary: >-
   Vellum formats manuscripts into ebook and print-ready files and is widely treated as the benchmark for fiction
-  formatting. It only runs on Mac. Pricing is one-time, in the range of $199 to $249 depending on the edition, with free
-  lifetime updates reported.
-pricing: { model: one-time, from: 199, currency: USD, period: one-time, note: "Reported range $199-249 depending on edition." }
+  formatting. It only runs on Mac. Two one-time licenses are sold: Vellum Ebooks for unlimited ebooks and Vellum Press
+  for unlimited ebooks plus paperbacks and hardcovers, with 24 trim sizes and PDF/X-1a print output.
+pricing: { model: one-time, from: 199.99, currency: USD, period: one-time, note: "Vellum Ebooks $199.99 (unlimited ebooks); Vellum Press $249.99 (unlimited ebooks and paperbacks). Price excludes tax." }
+price_history:
+  - date: 2026-11-09
+    from: 199.99
+    kind: correction
+    note: "Corrected from a third-party estimate ($199-249) to the vendor store prices: Vellum Ebooks $199.99, Vellum Press $249.99."
 platforms: [mac]
 kdp:
   outputs_kdp_files: true
   touches_kdp_account: false
   content_types: [fiction, nonfiction]
+pros:
+  - One payment, unlimited books
+  - Clean, consistent ebook and print styles
 cons:
   - Mac only
+  - Limited layout control compared with InDesign
 alternatives: [atticus, reedsy-studio, draft2digital]
 status: published
 verified_at: 2026-11-09
 sources:
-  - https://selfpublishingdirectory.com/llms.txt
-  - https://kdptools.io/blog/ai-book-interior-generator-kdp
+  - https://vellum.pub/
+  - https://store.vellum.pub/product/vellum-press

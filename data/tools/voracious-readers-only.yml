@@ -1,0 +1,36 @@
+name: Voracious Readers Only
+url: https://voraciousreadersonly.com
+categories: [reviews-arc, email-tools]
+tagline: Voracious Readers Only is a reader-matching service for novelists that sends free review copies to readers who agree to be contacted by the author.
+summary: >-
+  Voracious Readers Only matches novels with readers by sub-genre; readers who request a copy give permission for the
+  author to email them, and weekly digests point them to Amazon and Goodreads review links. It offers one free 20-book
+  giveaway per author, then paid ongoing promotions, and does not guarantee reviews. Third-party sites reported a hiatus
+  earlier in 2026; its reader site and author page are live again, but confirm submissions are open before planning
+  around it. Free copies are allowed by Amazon only when a review is not required.
+pricing:
+  model: freemium
+  from: 30
+  currency: USD
+  period: month
+  free_tier: true
+  note: "One free 20-book giveaway per author; ongoing promotion \"starting at\" $30/month per its author page."
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [fiction]
+pros:
+  - Free first giveaway to test the fit
+  - Readers opt in to hear from you, so they can join your mailing list
+cons:
+  - Fiction (novels) only
+  - Only the starting price of paid plans is published
+best_for: [Debut novelists looking for their first readers and reviews]
+alternatives: [booksirens, booksprout, storyorigin, hidden-gems-books]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://voraciousreadersonly.com/authors/
+  - https://voraciousreadersonly.com/
+  - https://www.amazon.com/gp/help/customer/display.html?nodeId=GLHXEX85MENUE4XF

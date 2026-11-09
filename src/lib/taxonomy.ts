@@ -17,6 +17,7 @@ export const CATEGORIES = [
   { slug: 'editing', stage: 'create', name: 'Editing & Proofreading', blurb: 'Editing software and services.' },
   { slug: 'official', stage: 'publish', name: 'Official KDP & Amazon', blurb: 'First-party Amazon tools and help. The source of truth for rules.' },
   { slug: 'print-distribution', stage: 'publish', name: 'Print & Distribution', blurb: 'Print-on-demand and wide distribution beyond KDP.' },
+  { slug: 'direct-sales', stage: 'publish', name: 'Direct Sales & Storefronts', blurb: 'Sell ebooks, PDFs and print books from your own store. Not allowed for ebooks enrolled in KDP Select.' },
   { slug: 'audio', stage: 'publish', name: 'Audiobooks', blurb: 'Audiobook production and distribution.' },
   { slug: 'legal-isbn', stage: 'publish', name: 'ISBN, Copyright & Trademark', blurb: 'Registries and search tools for identifiers, copyright and brand names.' },
   { slug: 'ads-promotion', stage: 'market', name: 'Ads & Promotion', blurb: 'Amazon Ads, book promotion sites and newsletter deals.' },

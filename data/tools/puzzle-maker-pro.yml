@@ -1,0 +1,31 @@
+name: Puzzle Maker Pro
+url: https://www.bookpublishertools.com/puzzle-maker-pro/
+categories: [low-content]
+tagline: Puzzle Maker Pro is Windows software for puzzle book publishers that batch-generates 60+ puzzle types and assembles print-ready PDF interiors.
+summary: >-
+  Puzzle Maker Pro, sold by BookPublisherTools, generates word searches, sudoku variants, mazes, crossword variants and
+  other logic puzzles with solutions, then builds a book interior with your trim size, margins and titles as PDF or
+  PowerPoint. Every edition includes a commercial license to sell the finished books on KDP, Etsy and Teachers Pay
+  Teachers; the right to sell or supply the generated puzzles themselves to other publishers needs the Productivity
+  edition or the yearly Everything Unlimited plan. It runs on Windows only. The puzzlemakerpro.com site is a free
+  puzzle showcase that links back to BookPublisherTools.
+pricing: { model: paid, from: 47, currency: USD, period: one-time, note: "Single puzzle modules from $47 one-time (higher editions up to $177); all modules $97/month or $970/year. Free demo available." }
+platforms: [windows]
+kdp:
+  outputs_kdp_files: true
+  touches_kdp_account: false
+  content_types: [puzzle]
+pros:
+  - Wide range of puzzle types with batch generation
+  - License terms for KDP are stated on each product page
+cons:
+  - Windows only; Mac needs Parallels or similar
+  - Edition and add-on pricing is complex to compare
+best_for: [Producing puzzle book interiors in volume]
+alternatives: [book-bolt, tangent-templates]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.bookpublishertools.com/puzzle-maker-pro/
+  - https://www.bookpublishertools.com/product/codeword/
+  - https://www.bookpublishertools.com/product/puzzle-maker-pro-everything-bundle/

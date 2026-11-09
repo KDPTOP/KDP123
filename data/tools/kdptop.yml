@@ -1,21 +1,51 @@
 name: KDPTop
 url: https://kdptop.com
 categories: [book-research, keywords-categories, analytics]
-tagline: KDPTop is a KDP research service that tracks Amazon Books and Kindle eBooks bestseller lists, category trees and category opportunity scores.
+tagline: KDPTop is a KDP research service that tracks Amazon Books and Kindle bestseller lists daily and scores whether a category is worth entering.
 summary: >-
-  KDPTop collects Best Sellers, New Releases and Top 100 Free lists for Amazon Books and Kindle eBooks, keeps a category
-  tree, ASIN history and category opportunity scores, and maps books or ASINs to the KDP categories they are listed in.
-  It is made by the same team as this directory and is described with the same fields as every other entry.
+  KDPTop crawls Amazon Best Sellers, New Releases and Top 100 Free lists daily for about 11,000 Books and Kindle
+  categories (Top 10,000 in 762 of them) and turns each category into a decision card: price band, review barrier,
+  estimated daily sales from BSR, how many new books broke in during the last 90 days and churn, ending in Go,
+  Crowded, Watch or Skip. It also tracks authors and their release histories, maps a book or ASIN to its KDP
+  categories, has an AI research assistant, a Chrome extension, and a REST API and MCP server for use from ChatGPT
+  or Claude. Sales figures are estimates and exclude Kindle+ reads. It is made by the same team as this directory
+  and is described with the same fields as every other entry.
 related_to_directory: true
-pricing: { model: freemium, currency: USD, free_tier: true, note: "Free, Pro and Team plans; see the vendor site for current prices." }
+pricing:
+  model: freemium
+  from: 19.99
+  currency: USD
+  period: month
+  free_tier: true
+  refund_days: 14
+  note: >-
+    Free: 1 full category decision card a day, first 10 rows of lists, 3 days of history. Creator $19.99/month or
+    $199/year (90 days of history, 2,000-row CSV). Pro $39/month or $390/year (365 days, 20,000 rows, 10,000 API/MCP
+    calls a day). Team $99/month or $990/year (5 seats, 730 days, 100,000 rows). New customers get a 7-day trial,
+    then half price on the first month or year.
+price_history:
+  - date: 2026-11-09
+    from: 19.99
+    kind: plan
+    note: "Plans listed as Free, Creator $19.99/mo ($199/yr), Pro $39/mo ($390/yr), Team $99/mo ($990/yr); first period 50% off after a 7-day trial."
 platforms: [web, chrome-extension]
 kdp:
   outputs_kdp_files: false
   touches_kdp_account: false
   content_types: [any]
-best_for: [Finding category-level opportunities and mapping books to KDP categories]
-alternatives: [publisher-rocket, bookbeam, kdspy]
+pros:
+  - Daily Top 100 lists across about 11,000 categories, with history
+  - One-card verdict per category with the inputs shown, not a black-box score
+  - REST API and MCP server on every plan, including Free
+  - Author pages with release histories
+cons:
+  - Sales are estimated from BSR and do not include Kindle+ page reads
+  - Free plan opens only one full category a day
+  - History for many categories is still building, so churn metrics fill in over time
+best_for: [Deciding whether a category is worth writing for before you start a book, Tracking new books breaking into categories you follow]
+alternatives: [publisher-rocket, bookbeam, kdspy, book-bolt]
 status: published
 verified_at: 2026-11-09
 sources:
-  - https://kdptop.com
+  - https://kdptop.com/pricing
+  - https://kdptop.com/

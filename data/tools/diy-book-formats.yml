@@ -1,0 +1,27 @@
+name: DIY Book Formats
+url: https://diybookformats.com
+categories: [writing-formatting]
+tagline: DIY Book Formats is a site by author Derek Murphy that gives away 6x9 Word and InDesign interior templates and sells a larger premium template pack.
+summary: >-
+  The free pack has five Word and InDesign templates at 6x9 with styles, margins and page numbers set, plus video
+  tutorials; you add your text and export the print PDF yourself, and the site links a free converter for the EPUB. It
+  is not software, and the site itself recommends a formatter like Vellum for ebooks. The free templates are a lead-in to
+  an email list and paid courses at Creativindie, and the Vellum links on the page are affiliate links.
+pricing: { model: freemium, from: 47, currency: USD, period: one-time, free_tier: true, refund_days: 30, note: "Free starter pack. The premium template pack is listed as normally $47; the page also shows a $17 promotional price." }
+platforms: [windows, mac]
+kdp:
+  outputs_kdp_files: true
+  touches_kdp_account: false
+  content_types: [fiction, nonfiction]
+pros:
+  - Free starter templates with video walkthroughs
+  - Blog covers KDP margins, gutters and trim sizes
+cons:
+  - Templates are 6x9 by default; other trims need manual resizing
+  - Heavy email-list and upsell funnel, with affiliate links to Vellum
+best_for: [Trying DIY paperback formatting in Word at no cost]
+alternatives: [book-design-templates, atticus, vellum, microsoft-word]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://diybookformats.com/

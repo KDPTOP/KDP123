@@ -1,0 +1,33 @@
+name: Robin Reads
+url: https://robinreads.com
+categories: [ads-promotion]
+tagline: Robin Reads is a curated ebook deal newsletter for authors that features free or $0.99 books in genre emails for a flat per-day fee.
+summary: >-
+  Robin Reads reviews each submission and, if accepted, places a free or $0.99 ebook on its homepage and in a genre email
+  for one day, invoicing only after acceptance. It reports about 194,000 subscribers in total, with genre lists of roughly
+  50,000 to 130,000, and requires 90 days between promotions of the same book. You must set the discount at every retailer
+  yourself, and since October 2025 its placements are also sold through Written Word Media.
+pricing:
+  model: paid
+  from: 40
+  currency: USD
+  period: one-time
+  note: "Per-genre prices on its author page: $40 (Horror/Dystopia, $0.99) to $75 (Romance, free); the all-list Featured slot is $85 and accepts about 1% of submissions."
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [fiction, nonfiction]
+pros:
+  - Pay only after the book is accepted
+  - Simple flat price table by genre
+cons:
+  - Smaller lists than BookBub or Freebooksy
+  - Only free or $0.99 books are considered
+best_for: [Adding a mid-size newsletter to a $0.99 or free promo stack]
+alternatives: [written-word-media, ereader-news-today, the-fussy-librarian, bookbub]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://robinreads.com/author-signup/
+  - https://www.writtenwordmedia.com/press-release-written-word-media-and-robin-reads-partner-to-connect-authors-with-nearly-200000-new-readers/

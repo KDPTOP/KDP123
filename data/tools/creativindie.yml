@@ -1,0 +1,24 @@
+name: Creativindie
+url: https://www.creativindie.com
+categories: [courses-blogs]
+tagline: Creativindie is Derek Murphy's free blog for indie authors on writing, cover design, formatting and book marketing, alongside his paid courses and templates.
+summary: >-
+  Creativindie is run by Derek Murphy, an author and cover designer. It has free guides on KDP printing costs, cover
+  design, formatting and book marketing, plus free tools such as a 3D mockup maker. He sells his own courses, cover
+  templates and design and editing services on the site, and its footer says it uses Amazon Associate and other
+  affiliate links, so "best tool" posts are not neutral. Many recent posts are general literature explainers rather
+  than publishing advice.
+pricing: { model: free, currency: USD, note: "Blog is free; courses, template bundles and design services are sold separately." }
+platforms: [web]
+pros:
+  - Practical cover design and formatting tips from a working designer
+  - Free tools such as a 3D book mockup maker
+cons:
+  - Heavy promotion of his own courses and templates, plus affiliate links
+  - Recent posts mix in unrelated poetry and literature explainers
+best_for: [Indie authors designing their own covers]
+alternatives: [the-book-designer, kindlepreneur, reedsy-blog]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.creativindie.com/

@@ -1,0 +1,29 @@
+name: Blurb
+url: https://www.blurb.com
+categories: [print-distribution]
+tagline: Blurb is a print-on-demand book maker for photographers and self-publishers that prints photo books, trade books and magazines and can list them with retailers.
+summary: >-
+  Blurb offers free design tools (an online editor, BookWright and Adobe plugins) or PDF upload, prints on demand, and
+  sells through its bookstore, Ingram's Global Retail Network and, for photo books only, Amazon.com. Blurb says it charges
+  no distribution fee or commission on print sales; on retail channels you set the list price and wholesale discount, and
+  Amazon's photo-book fee is $1.35 plus 15% of list price. It is print only, so it does not affect KDP Select ebook
+  exclusivity.
+pricing: { model: free, currency: USD, note: "Design tools and listing are free; you pay print cost for copies. Paperback and hardcover from US $4.99, photo books from US $12.00. Volume discounts from 10 copies." }
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Photo-book papers, layflat and magazine formats KDP does not offer
+  - Free design software and Adobe InDesign and Lightroom plugins
+cons:
+  - Blurb adds an ISBN to every paperback and hardcover, which cannot be omitted
+  - Retail listings may stay on Amazon and other sites after you remove a book
+best_for: [Photo, art and coffee-table books]
+alternatives: [lulu, bookvault, ingramspark]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.blurb.com/
+  - https://www.blurb.com/ingram

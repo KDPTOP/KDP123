@@ -1,0 +1,26 @@
+name: Plottr
+url: https://plottr.com
+categories: [writing-formatting]
+tagline: Plottr is a visual outlining app for novelists and series writers that maps plot lines, scenes and characters on a timeline, with no AI features.
+summary: >-
+  Plottr lays out a book or series as a timeline of scenes across plot lines, with templates for common story structures
+  and a series bible for characters and places. It is for planning only: it does not write, edit or format books, so it
+  produces nothing you upload to KDP. Every plan is advertised as having no AI features.
+pricing: { model: subscription, from: 60, currency: USD, period: year, note: "Desktop Plottr $60/year (shown as reduced from $80); Plottr Pro with web app and sync from $9.99/month or $99/year; lifetime licenses from $150. 30-day free trial; no refunds after purchase." }
+platforms: [windows, mac, web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [fiction]
+pros:
+  - Unlimited household devices on every plan
+  - Lifetime purchase option
+cons:
+  - Outlining only; you still need a writing app and a formatter
+  - No refunds, only a free trial and an outlining guarantee
+best_for: [Planning plots across a multi-book series]
+alternatives: [scrivener, dabble, novelcrafter]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://plottr.com/pricing/

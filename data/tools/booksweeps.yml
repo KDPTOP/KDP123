@@ -1,0 +1,28 @@
+name: BookSweeps
+url: https://booksweeps.com
+categories: [email-tools, ads-promotion]
+tagline: BookSweeps is a multi-author giveaway platform for authors that grows email lists and follower counts through genre book sweepstakes.
+summary: >-
+  BookSweeps runs genre giveaways in which readers enter to win books and opt in to the mailing lists of participating
+  authors, who then receive the new subscribers. Giveaway subscribers are often prize-seekers, so expect lower engagement
+  than organic signups. As of November 2026 its author pricing page redirects to a waitlist saying it is closed to new
+  members while it rebuilds its author tools; the reader site is still live.
+pricing:
+  model: unknown
+  currency: USD
+  note: "Author signups are paused (waitlist page). No current prices are published; earlier per-promo prices quoted by third parties could not be confirmed."
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [fiction, nonfiction]
+cons:
+  - Closed to new authors at the time of checking
+  - Giveaway-driven subscribers tend to unsubscribe or ignore emails more often
+best_for: [Building a genre mailing list through group giveaways, once it reopens]
+alternatives: [storyorigin, voracious-readers-only, mailerlite]
+status: draft
+verified_at: 2026-11-09
+sources:
+  - https://partners.booksweeps.com/waitlist
+  - https://booksweeps.com/

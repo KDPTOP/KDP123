@@ -1,0 +1,30 @@
+name: Affinity
+url: https://www.affinity.studio
+categories: [cover-design, low-content]
+tagline: Affinity is Canva's free all-in-one photo, vector and page layout app for designers that KDP publishers use to build print covers and illustrated interiors.
+summary: >-
+  In October 2025 Canva replaced the paid Affinity Photo, Designer and Publisher apps with a single app, now just called
+  Affinity, which is free for individuals with a free Canva account; the site moved from affinity.serif.com to
+  affinity.studio. It runs on Windows and Mac, and an iPad version launched on November 2, 2026. Its layout tools suit
+  print covers with bleed and image-heavy interiors such as coloring, picture and planner books, but it is a general
+  design app rather than a book formatter, so you take trim, bleed and spine sizes from KDP yourself. Canva AI Studio tools inside it (generative fill, expand) need a paid Canva plan, and
+  images made with them must be disclosed to KDP as AI-generated.
+pricing: { model: freemium, currency: USD, free_tier: true, note: "Core app is free for individuals; Canva AI features need a paid Canva plan; enterprise licensing is sold separately." }
+platforms: [windows, mac, ios]
+kdp:
+  touches_kdp_account: false
+  content_types: [low-content, coloring, children, any]
+pros:
+  - Professional layout, vector and photo tools at no cost
+  - Opens PSD, AI, IDML and PDF files
+cons:
+  - AI tools inside the app need a paid Canva plan
+  - Requires a Canva account even for the free app
+best_for: [Designing print covers and illustrated interiors without paying for Adobe]
+alternatives: [adobe-express, canva, procreate]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.affinity.studio/
+  - https://www.canva.com/newsroom/news/all-new-affinity/
+  - https://www.canva.com/newsroom/news/affinity-for-ipad/

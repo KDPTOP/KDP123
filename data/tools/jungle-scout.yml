@@ -1,0 +1,30 @@
+name: Jungle Scout
+url: https://www.junglescout.com
+categories: [book-research, keywords-categories]
+tagline: Jungle Scout is a subscription research platform for Amazon product sellers with keyword search volume and BSR-based sales estimates.
+summary: >-
+  Jungle Scout (the Catalyst plans) is built for physical-product sellers: product and supplier databases, inventory,
+  FBA tools and listing optimization. For a KDP publisher the transferable parts are Keyword Scout's Amazon search volume
+  data and the browser extension's view of competing listings. Its own help center lists Books and Kindle as unsupported
+  categories for its Competitive Intelligence feature, so do not expect book-specific sales data; use the 7-day refund
+  window to check book results before committing.
+pricing: { model: subscription, from: 49, currency: USD, period: month, refund_days: 7, note: "Catalyst Starter is $49/month billed monthly or $348/year. No free trial; a 7-day money-back guarantee applies to new standard plans." }
+platforms: [web, chrome-extension, firefox-extension]
+kdp:
+  marketplaces: [us, ca, mx, uk, fr, de, it, es]
+  outputs_kdp_files: false
+  touches_kdp_account: false
+pros:
+  - Keyword Scout gives Amazon search volume estimates for a seed keyword
+  - 7-day money-back guarantee on new plans
+cons:
+  - Books and Kindle are listed as unsupported categories for Competitive Intelligence
+  - Starter plan caps Keyword Scout at 50 searches a month
+best_for: [Publishers who also sell physical products on Amazon]
+alternatives: [helium-10, publisher-rocket, kdspy, bookbeam]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.junglescout.com/pricing/catalyst-plans/
+  - https://support.junglescout.com/hc/en-us/articles/26264588139799-Information-about-our-Membership-Plans
+  - https://support.junglescout.com/hc/en-us/articles/25105595832727-Supported-and-Unsupported-Categories

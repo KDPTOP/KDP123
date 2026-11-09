@@ -9,7 +9,7 @@ summary: >-
 pricing: { model: free, currency: USD }
 platforms: [web]
 alternatives: [low-content-profits]
-status: published
+status: draft
 verified_at: 2026-11-09
 sources:
   - https://selfpublishing.ninja/resources/

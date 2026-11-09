@@ -20,6 +20,8 @@ export function toolMarkdown(t: Tool, byId: Map<string, Tool>): string {
   if (d.related_to_directory) lines.push(`- Disclosure: made by the same team as kdp123`);
   lines.push(`- Last checked: ${isoDate(d.verified_at)}`, '');
   lines.push('## Summary', '', d.summary.trim(), '');
+  if (d.price_history.length)
+    lines.push('## Price history', '', ...d.price_history.map((h) => `- ${isoDate(h.date)}: ${h.note}`), '');
   if (d.pros.length) lines.push('## Pros', '', ...d.pros.map((p) => `- ${p}`), '');
   if (d.cons.length) lines.push('## Cons', '', ...d.cons.map((p) => `- ${p}`), '');
   const alts = d.alternatives.map((a) => byId.get(a)).filter(Boolean) as Tool[];

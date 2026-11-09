@@ -1,0 +1,27 @@
+name: Fiverr
+url: https://www.fiverr.com
+categories: [cover-design, editing]
+tagline: Fiverr is a freelance services marketplace where KDP publishers buy cover design, formatting, editing and other gigs at seller-set prices.
+summary: >-
+  Fiverr lists fixed-price gigs from freelancers worldwide, including book cover design, interior formatting,
+  proofreading and editing. Sellers set their own prices and quality varies widely, so check portfolios, reviews and
+  whether the seller uses licensed images and fonts. Fiverr adds a buyer service fee at checkout. Do not give a seller
+  your KDP login; ask for files and upload them yourself.
+pricing: { model: paid, from: 5, currency: USD, period: one-time, note: "Minimum gig price is $5 (higher in some categories). Buyers pay a 5.5% service fee plus $3.50 on orders under $200." }
+platforms: [web]
+kdp:
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Very wide price range and fast turnaround options
+  - Covers, formatting and editing in one marketplace
+cons:
+  - Quality and licensing practices vary a lot between sellers
+  - Service fee makes small orders noticeably more expensive
+best_for: [Budget one-off design or editing jobs where you can vet the seller]
+alternatives: [99designs, reedsy-marketplace, getcovers]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://help.fiverr.com/hc/en-us/articles/360050216133-Paying-for-orders-extras-or-custom-offers
+  - https://help.fiverr.com/hc/en-us/articles/360010451397-Creating-a-Gig

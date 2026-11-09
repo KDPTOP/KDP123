@@ -1,0 +1,30 @@
+name: Microsoft Word
+url: https://www.microsoft.com/en-us/microsoft-365/word
+categories: [writing-formatting]
+tagline: Microsoft Word is a word processor that KDP accepts directly for ebooks and that can set custom page sizes for print interiors exported to PDF.
+summary: >-
+  KDP lists DOC/DOCX as a recommended ebook upload format and offers downloadable Word templates in each paperback trim
+  size, so many publishers format both editions in Word and export the print interior as PDF. Bleed, section page
+  numbering and mirrored margins are possible but fiddly, and typography is plainer than a dedicated formatter. Word on
+  the web is free; the desktop apps need Microsoft 365 or a one-time Office license. Copilot AI drafting is built in;
+  text it generates must be disclosed to KDP as AI-generated.
+pricing: { model: freemium, from: 99.99, currency: USD, period: year, free_tier: true, note: "Word for the web is free. Microsoft 365 Personal is $99.99/year or $9.99/month; Office Home 2024 is $179.99 one-time. One-month free trial." }
+platforms: [web, windows, mac, ios, android]
+kdp:
+  outputs_kdp_files: true
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - KDP accepts DOCX directly and provides Word templates per trim size
+  - Custom page sizes, mirrored margins and PDF export
+cons:
+  - Long books with images can be fragile to lay out
+  - Desktop app needs a subscription or a one-time Office purchase
+best_for: [Formatting a text-only book with KDP's own Word templates]
+alternatives: [google-docs, book-design-templates, atticus, vellum]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.microsoft.com/en-us/microsoft-365/word
+  - https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products
+  - https://kdp.amazon.com/en_US/help/topic/G200634390

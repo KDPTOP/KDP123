@@ -1,0 +1,28 @@
+name: Sudowrite
+url: https://sudowrite.com
+categories: [ai-tools]
+tagline: Sudowrite is a subscription AI writing app for fiction authors that drafts, rewrites, expands and critiques prose using credit-metered AI models.
+summary: >-
+  Sudowrite brainstorms, generates outlines and draft scenes, rewrites passages and gives AI feedback, with story and
+  series context to keep characters consistent. It is a drafting tool, not a formatter, so you still need separate
+  software for KDP-ready EPUB and print files. KDP requires you to disclose AI-generated text when you publish, including
+  text you edited heavily afterwards; using AI only to edit or brainstorm (AI-assisted) does not need disclosure.
+pricing: { model: subscription, from: 10, currency: USD, period: month, note: "Hobby & Student plan with 225,000 credits a month; Professional $22 and Max $44. Yearly billing is advertised at up to 50% off. Free trial without a credit card." }
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [fiction]
+pros:
+  - Built specifically for fiction, with series continuity features
+  - Free trial with no credit card and easy cancellation
+cons:
+  - Usage is capped by monthly credits
+  - AI-generated text must be disclosed to KDP
+best_for: [Fiction authors who want AI help drafting and revising]
+alternatives: [novelcrafter, claude, prowritingaid]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://sudowrite.com/pricing
+  - https://kdp.amazon.com/en_US/help/topic/G200672390

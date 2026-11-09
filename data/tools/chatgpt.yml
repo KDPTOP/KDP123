@@ -1,0 +1,30 @@
+name: ChatGPT
+url: https://chatgpt.com
+categories: [ai-tools]
+tagline: ChatGPT is OpenAI's general-purpose AI assistant that publishers use to brainstorm, draft and edit text and to generate images.
+summary: >-
+  ChatGPT can help with outlines, book descriptions, keyword ideas, proofreading and image generation, but it does not
+  format interiors, build KDP cover files or check facts reliably. KDP's content guidelines require you to disclose
+  AI-generated text, images or translations when you publish; content you wrote yourself and only edited or brainstormed
+  with AI counts as AI-assisted and does not need disclosure. You remain responsible for accuracy and rights in
+  anything it produces.
+pricing: { model: freemium, from: 8, currency: USD, period: month, free_tier: true, note: "Go is $8/mo in the US (localized elsewhere), Plus is $20/mo, Pro costs more. Prices from OpenAI's announcement and third-party trackers; the pricing page loads prices by region." }
+platforms: [web, ios, android]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Free tier covers brainstorming and light editing
+  - Text and image generation in one app
+cons:
+  - Can state wrong facts confidently; nonfiction needs checking
+  - AI-generated text and images must be disclosed to KDP
+best_for: [Brainstorming, blurbs and editing help on your own writing]
+alternatives: [google-gemini, adobe-firefly]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://chatgpt.com/pricing
+  - https://kdp.amazon.com/en_US/help/topic/G200672390
+  - https://openai.com/da-DK/index/introducing-chatgpt-go/

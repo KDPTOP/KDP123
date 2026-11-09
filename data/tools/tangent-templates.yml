@@ -1,0 +1,30 @@
+name: Tangent Templates
+url: https://templates.tangent.rocks
+categories: [low-content, cover-design]
+tagline: Tangent Templates is a web app for low-content publishers that builds KDP interiors and covers from 130+ templates, sold for a one-time price.
+summary: >-
+  Tangent Templates generates low- and medium-content interiors (journals, planners, logs, worksheets, picture and
+  coloring book layouts) in KDP trim sizes, plus a cover designer that lays out spine and barcode area, a PDF inspector,
+  a price calculator and a 3D mockup tool. Its Listing Helper Chrome extension fills title, keywords, description and
+  categories into the KDP form in your own browser; the vendor says it is not upload automation, but it does act on
+  your KDP dashboard, so check KDP's terms yourself. The old tangenttemplates.com domain is now a parked page; the
+  product lives at templates.tangent.rocks.
+pricing: { model: one-time, from: 59, currency: USD, period: one-time, note: "One-off price with permanent access and no subscription, per the vendor's page." }
+platforms: [web, chrome-extension]
+kdp:
+  outputs_kdp_files: true
+  touches_kdp_account: true
+  content_types: [low-content, coloring, children]
+pros:
+  - One-time $59 price with updates included
+  - Interiors, covers, listing helper and PDF checker in one tool
+cons:
+  - Listing Helper fills forms inside your KDP account
+  - Template-based interiors are easy for other sellers to copy, so they need your own customization
+best_for: [Making many low-content interiors and covers without design software]
+alternatives: [book-bolt, canva, puzzle-maker-pro]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://templates.tangent.rocks/
+  - https://www.youtube.com/watch?v=vFyvwc83TVE

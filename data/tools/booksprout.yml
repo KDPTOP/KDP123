@@ -1,0 +1,37 @@
+name: Booksprout
+url: https://booksprout.co
+categories: [reviews-arc]
+tagline: Booksprout is an advance reader copy platform for authors that distributes review copies to its reader community and sends automatic review reminders.
+summary: >-
+  Booksprout lists your ARC to its reviewer community and your own followers, delivers watermarked copies, and reminds
+  readers to post reviews; it says authors can expect about 8 reviews per 10 participants but guarantees neither numbers
+  nor ratings. Amazon allows free or discounted copies only if you do not require a review in exchange or try to influence
+  it, and anything beyond the book (such as gift cards) invalidates a review. Booksprout says it complies and asks
+  reviewers to disclose the free copy, but its "free copy in exchange for honest feedback" wording sits close to that line,
+  so never make a review a condition in your own campaign text.
+pricing:
+  model: freemium
+  from: 9
+  currency: USD
+  period: month
+  free_tier: true
+  note: "Growing Author $9/month, Pro Author $19, Bestselling Author $29, Publisher and Review Service $59. The free plan lets you build a following but not run review campaigns. No free trial; 30-day money-back guarantee. Annual billing is offered."
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [fiction, nonfiction]
+pros:
+  - Automatic copy delivery and review reminders
+  - Can restrict campaigns to manually vetted top reviewers on higher plans
+cons:
+  - Running any review campaign needs a paid plan
+  - The entry plan caps active campaigns and copies per campaign
+best_for: [Running a recurring ARC team for a series]
+alternatives: [booksirens, storyorigin, hidden-gems-books, netgalley]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://booksprout.co/pricing
+  - https://help.booksprout.co/article/226-do-booksprout-services-violate-amazons-terms-of-service-regarding-reviews
+  - https://kdp.amazon.com/en_US/help/topic/G202101910

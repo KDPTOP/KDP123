@@ -1,0 +1,29 @@
+name: Self-Publishing School
+url: https://self-publishingschool.com
+categories: [courses-blogs]
+tagline: Self-Publishing School is a paid coaching program for first-time authors that pairs one-to-one coaching with done-for-you formatting, covers and publishing.
+summary: >-
+  Self-Publishing School is Chandler Bolt's coaching business, now run under the selfpublishing.com brand, where its
+  program pages and prices live. Programs bundle a year of coaching, a video course, a community and done-for-you
+  formatting, cover design, ISBN and publishing to Amazon; enrollment goes through a sales call. It is aimed at
+  first-time nonfiction, fiction, memoir and children's authors, not at low-content or volume KDP publishers. The same
+  company owns The Book Designer and The Write Life, so reviews on those sites are not independent of it.
+pricing: { model: paid, from: 6000, currency: USD, period: one-time, note: "Program pages show $6K (Children's Book School) and $9K (Become a Bestseller); higher tiers cost more. Payment plans are offered; enrollment requires a call." }
+platforms: [web]
+kdp:
+  outputs_kdp_files: true
+  content_types: [nonfiction, fiction, children]
+pros:
+  - One-to-one coaching plus formatting, cover and publishing handled for you
+  - Prices are listed on each selfpublishing.com program page
+cons:
+  - Costs thousands of dollars for work KDP lets you do yourself for free
+  - Enrollment goes through a sales call
+best_for: [First-time authors who want a coach and done-for-you publishing]
+alternatives: [self-publishing-formula, kindlepreneur, the-book-designer]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://self-publishingschool.com/
+  - https://selfpublishing.com/become-a-bestseller/
+  - https://selfpublishing.com/childrens-book-school/

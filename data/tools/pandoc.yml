@@ -1,0 +1,28 @@
+name: Pandoc
+url: https://pandoc.org
+categories: [writing-formatting]
+tagline: Pandoc is a free, open-source command-line converter that turns Markdown, Word and other formats into EPUB, DOCX and, through LaTeX, PDF.
+summary: >-
+  Pandoc converts between dozens of document formats, so a KDP publisher who writes in Markdown can produce an EPUB for
+  Kindle or a DOCX from one source file. Print PDFs go through a LaTeX engine, which can be set to a KDP trim size but
+  takes template and command-line work. It has no graphical interface and no book design themes.
+pricing: { model: free, currency: USD, note: "Free and open source." }
+platforms: [windows, mac, linux]
+kdp:
+  outputs_kdp_files: true
+  touches_kdp_account: false
+  content_types: [nonfiction, fiction]
+pros:
+  - Free, scriptable, and repeatable for many books or editions
+  - Handles footnotes, citations and math well
+cons:
+  - Command line only
+  - Print-ready PDF requires installing and configuring LaTeX
+best_for: [Technical authors who write in Markdown and want automated EPUB builds]
+alternatives: [calibre, sigil, scrivener]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://pandoc.org/
+  - https://pandoc.org/installing.html
+  - https://pandoc.org/MANUAL.html

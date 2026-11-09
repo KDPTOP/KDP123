@@ -1,0 +1,28 @@
+name: KDP Help Center
+url: https://kdp.amazon.com/en_US/help
+categories: [official]
+tagline: The KDP Help Center is Amazon's official documentation for KDP publishers that sets out the rules on formatting, pricing, royalties, content and account setup.
+summary: >-
+  The KDP Help Center is where Amazon publishes its own rules and how-to pages for KDP: manuscript and cover
+  requirements, pricing and royalty bands, categories and keywords, KDP Select, taxes and identity verification. Its home
+  page also carries current announcements, such as Kindle Unlimited being renamed Kindle+ and the 70% eBook royalty band
+  widening to $2.99 to $12.99 on Amazon.com. Topic URLs move often, so search from the home page rather than relying on old
+  links, and treat third-party summaries as secondary to it.
+official: true
+pricing: { model: free, currency: USD }
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - The source of truth for KDP rules and limits
+  - Free to read without signing in, in several languages
+cons:
+  - Help article URLs change and old links often redirect or break
+best_for: [Checking the current official rule before acting on advice from elsewhere]
+alternatives: [kdp-community]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://kdp.amazon.com/en_US/help

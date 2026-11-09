@@ -1,0 +1,28 @@
+name: GIMP
+url: https://www.gimp.org
+categories: [cover-design]
+tagline: GIMP is a free, open-source desktop image editor for Windows, Mac and Linux that publishers use to build and edit book cover artwork.
+summary: >-
+  GIMP edits raster images with layers, text and filters, and can lay out a KDP paperback wrap on the cover calculator
+  template and export it as PDF. It edits in RGB only: GIMP 3 can export CMYK JPEG, TIFF, PSD and JPEG XL using a
+  soft-proofing profile, but has no CMYK editing mode, while KDP recommends CMYK images and a single PDF cover. There are
+  no built-in book templates or spine calculation.
+pricing: { model: free, currency: USD }
+platforms: [windows, mac, linux]
+kdp:
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Free and open source, no account or subscription
+  - CMYK export to TIFF, JPEG and PSD with a soft-proof profile since GIMP 3
+cons:
+  - No native CMYK editing mode
+  - Steeper learning curve than template tools
+best_for: [Free photo editing and compositing for cover artwork]
+alternatives: [krita, photopea, inkscape]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.gimp.org/
+  - https://www.gimp.org/release-notes/gimp-3.0.html
+  - https://kdp.amazon.com/en_US/help/topic/G201953020

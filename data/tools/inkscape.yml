@@ -1,0 +1,28 @@
+name: Inkscape
+url: https://inkscape.org
+categories: [cover-design]
+tagline: Inkscape is a free, open-source vector graphics editor for Windows, Mac and Linux that can lay out covers and low-content pages and export PDF.
+summary: >-
+  Inkscape works with vector shapes and text, which suits cover typography, spine text and line-based low-content pages,
+  and it exports PDF, the file type KDP requires for print. The current stable release (1.4.4) works in sRGB and has no
+  full CMYK workflow; native CMYK color management is planned for version 1.5, which is still in development. It does
+  not calculate spine width or include book templates.
+pricing: { model: free, currency: USD }
+platforms: [windows, mac, linux]
+kdp:
+  touches_kdp_account: false
+  content_types: [low-content, coloring, any]
+pros:
+  - Free and open source with direct PDF export
+  - Multipage documents and precise vector layout
+cons:
+  - No full CMYK workflow in the current stable release
+  - Not suited to photo editing
+best_for: [Vector cover layouts, typography and line-art pages]
+alternatives: [gimp, krita, canva]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://inkscape.org/release/
+  - https://wiki.inkscape.org/wiki/Release_notes/1.5
+  - https://kdp.amazon.com/en_US/help/topic/G201953020

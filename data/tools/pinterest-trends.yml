@@ -1,0 +1,29 @@
+name: Pinterest Trends
+url: https://trends.pinterest.com
+categories: [book-research]
+tagline: Pinterest Trends is a free Pinterest tool that shows rising and seasonal search trends on Pinterest by region and audience over the last two years.
+summary: >-
+  Pinterest Trends charts up to two years of top search, save and shopping trends on Pinterest, with filters for region,
+  age and interest, and flags seasonal patterns. For KDP it is most useful for visual and gift-driven niches such as
+  journals, planners, coloring books and cookbooks, and for timing seasonal releases. It measures Pinterest
+  activity, not Amazon searches or book sales; full features require logging in with a free Pinterest Business account,
+  and some features are only available in certain regions.
+pricing: { model: free, currency: USD, note: "Free; some features need a free Pinterest Business account." }
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [low-content, coloring, nonfiction]
+pros:
+  - Free view of what topics are rising and when they peak each year
+  - Filters by region, age and interest
+cons:
+  - Pinterest activity only, no Amazon or sales data
+  - Full features need a Pinterest Business login and vary by region
+best_for: [Timing seasonal journals, planners and coloring books]
+alternatives: [google-trends]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://trends.pinterest.com
+  - https://help.pinterest.com/en/business/article/pinterest-trends

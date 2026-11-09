@@ -1,0 +1,23 @@
+name: BookBub Partners Blog
+url: https://insights.bookbub.com
+categories: [courses-blogs]
+tagline: The BookBub Partners Blog is a free book marketing blog from BookBub with case studies and tips on pricing, promotions and ads.
+summary: >-
+  BookBub's own blog publishes weekly posts on ebook price promotions, launch planning, author newsletters and BookBub
+  Ads, often with author case studies and data from BookBub's audience. It is useful for KDP authors planning price
+  drops or free runs. It is run by BookBub, which sells Featured Deals and BookBub Ads, so its advice usually points to
+  those paid products.
+pricing: { model: free, currency: USD }
+platforms: [web]
+pros:
+  - Regular case studies with real numbers from authors
+  - Practical detail on discount and free-book promotions
+cons:
+  - Content promotes BookBub's own paid promotions and ads
+  - Little on writing, formatting or KDP setup
+best_for: [Planning price promotions and BookBub Ads]
+alternatives: [kindlepreneur, reedsy-blog, the-self-publishing-show]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://insights.bookbub.com/

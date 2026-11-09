@@ -1,0 +1,29 @@
+name: Adobe Firefly
+url: https://firefly.adobe.com
+categories: [ai-tools, cover-design]
+tagline: Adobe Firefly is Adobe's generative AI app for creators that makes images, vectors, video and audio from text prompts and edits existing images.
+summary: >-
+  Firefly can generate cover art, backgrounds and interior illustrations, and offers partner models from other AI
+  companies alongside Adobe's own. It produces images, not a KDP-ready cover: you still need layout software for the
+  title, spine, bleed and the single PDF KDP requires for print. KDP's content guidelines require you to disclose
+  AI-generated text, images or translations, including cover and interior images, when you publish or republish.
+pricing: { model: freemium, from: 9.99, currency: USD, period: month, free_tier: true, note: "Firefly Standard is $9.99/mo with 2,000 monthly credits for premium features; Pro is $19.99/mo and Premium $199.99/mo. The free tier has limited generations." }
+platforms: [web, ios, android]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Unlimited standard image generation on paid plans
+  - Pro and Premium plans include Photoshop on web and mobile
+cons:
+  - Credits are needed for premium and partner models and do not roll over
+  - AI-generated cover or interior images must be disclosed to KDP
+best_for: [Generating cover backgrounds and art you will finish in another tool]
+alternatives: [midjourney, ideogram, canva]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://blog.adobe.com/en/publish/2025/10/28/explore-new-adobe-firefly-your-all-in-one-home-ai-powered-creativity
+  - https://kdp.amazon.com/en_US/help/topic/G200672390
+  - https://www.renderahouse.com/blog/adobe-firefly-pricing

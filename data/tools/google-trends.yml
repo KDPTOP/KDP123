@@ -1,0 +1,27 @@
+name: Google Trends
+url: https://trends.google.com/trends/
+categories: [book-research, keywords-categories]
+tagline: Google Trends is a free Google tool that charts relative search interest in a topic over time and by region, useful for checking book niche seasonality.
+summary: >-
+  Google Trends shows how interest in a search term on Google rises and falls, scaled 0 to 100 relative to all searches
+  for the chosen time and place. A KDP publisher can use it to see whether a niche is growing, fading or seasonal (for
+  example planners or holiday books) and to compare candidate topics. It reflects Google searches, not Amazon searches
+  or book sales, gives no absolute volumes, and shows low-volume terms as zero.
+pricing: { model: free, currency: USD }
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+pros:
+  - Free, no account needed
+  - Shows seasonality and long-term direction for a topic
+cons:
+  - Google search interest, not Amazon or book sales data
+  - Relative index only, with no search volume numbers
+best_for: [Checking whether a niche is seasonal or trending before writing]
+alternatives: [pinterest-trends, publisher-rocket]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://trends.google.com/trends/
+  - https://support.google.com/trends/answer/4365533?hl=en

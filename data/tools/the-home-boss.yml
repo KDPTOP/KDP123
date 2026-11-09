@@ -1,0 +1,28 @@
+name: The Home Boss
+url: https://thehomeboss.com
+categories: [courses-blogs, communities]
+tagline: The Home Boss is a self-publishing training brand by Nuria Corbi for KDP publishers that offers a monthly academy, paid courses and free resources.
+summary: >-
+  The Home Boss covers the KDP process from niche research to publishing and growing a catalog, with a focus on
+  low-content, puzzle and activity books, children's books and branding. The Academy membership adds tools, templates,
+  weekly live calls and a community; standalone courses on Podia are taught mainly in Canva. It is teaching only: it
+  does not publish or upload books for you. Standalone courses have no refunds.
+pricing: { model: freemium, from: 27, currency: USD, period: one-time, free_tier: true, note: "Courses and kits $27-$147 one-time on Podia; Academy membership $37/month, cancel anytime; free resources available." }
+platforms: [web]
+kdp:
+  touches_kdp_account: false
+  content_types: [low-content, puzzle, children]
+pros:
+  - Free resources and a large YouTube channel to try first
+  - Monthly academy can be cancelled anytime
+cons:
+  - No refunds on standalone courses
+  - Lessons assume Canva
+best_for: [Beginners making low-content, activity or children's books in Canva]
+alternatives: [low-content-profits, self-publishing-titans, laura-jane-illustrations]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://thehomeboss.com/
+  - https://thehomeboss.com/academy/
+  - https://thehomeboss.podia.com/

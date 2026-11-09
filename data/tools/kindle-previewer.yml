@@ -1,0 +1,28 @@
+name: Kindle Previewer
+url: https://kdp.amazon.com/en_US/help/topic/G202131170
+categories: [official, writing-formatting]
+tagline: Kindle Previewer is Amazon's free desktop app for KDP publishers that shows how an eBook will look on Kindle tablets, phones and E-readers before publishing.
+summary: >-
+  Kindle Previewer opens an eBook file and renders it as Kindle devices and apps will, with filters for device type,
+  orientation and font size, an auto-advance mode for a full read-through, and a check for Enhanced Typesetting support.
+  Version 4 is current and runs on Windows 10 or later and macOS 12 or later. It is a checking tool, not a formatter:
+  fix problems in your source file, then preview again. KDP also offers a simpler Online Previewer during upload.
+official: true
+pricing: { model: free, currency: USD }
+platforms: [windows, mac]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Free and closer to the real Kindle rendering than sideloading to a device
+  - Can jump through every image, table or list in a book to check them in one pass
+cons:
+  - Does not edit or fix the manuscript
+  - Word files may fail to preview if they are not in English or are password protected
+best_for: [Checking an EPUB, DOCX or KPF file before uploading it to KDP]
+alternatives: [kindle-create]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://kdp.amazon.com/en_US/help/topic/G202131170

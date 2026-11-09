@@ -1,0 +1,28 @@
+name: Dabble
+url: https://www.dabblewriter.com
+categories: [writing-formatting]
+tagline: Dabble is a browser-based novel writing app with plot grid, character notes, co-authoring and offline sync, sold by subscription.
+summary: >-
+  Dabble covers planning, drafting and revising a novel: a drag-and-drop manuscript binder, a plot grid, goals, track
+  changes and beta-reader sharing, synced across devices with offline writing. It exports Word and text manuscripts, not
+  formatted EPUB or print PDF, so KDP files need a separate formatter. Dabble says it does not use your writing to train
+  AI and that any future AI features would be opt-in.
+pricing: { model: subscription, from: 180, currency: USD, period: year, note: "Writer plan $15/month billed annually ($180/year); Author plan $23/month. Lifetime plans are offered. 14-day free trial, no card required; money-back guarantee." }
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [fiction]
+pros:
+  - Works on any device, including offline
+  - Plot grid and track changes in one app
+cons:
+  - No publication formatting; exports Word and text only
+  - Subscription, with lifetime plans priced separately
+best_for: [Novelists who write across several devices]
+alternatives: [scrivener, plottr, novelcrafter, atticus]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.dabblewriter.com/pricing
+  - https://www.dabblewriter.com/features

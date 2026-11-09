@@ -1,0 +1,33 @@
+name: Mailchimp
+url: https://mailchimp.com
+categories: [email-tools]
+tagline: Mailchimp is an email and SMS marketing platform for small businesses, owned by Intuit, with a small free plan and contact-based paid tiers.
+summary: >-
+  Mailchimp is a general email marketing platform that authors can use for a newsletter, signup forms and automated flows.
+  The Free plan covers up to 250 contacts and 500 sends a month with no scheduling, and paid plans bill by contact tier,
+  with overage charges if you go over. It is not book-specific, and Kit's free plan holds far more subscribers.
+pricing:
+  model: freemium
+  from: 13
+  currency: USD
+  period: month
+  free_tier: true
+  note: "Essentials starts at $13/month and Standard at $20/month for up to 500 contacts; Premium is sales-led. 14-day free trial on Essentials and Standard. Pay As You Go email credits are also offered."
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - 300+ integrations
+  - Pay As You Go credits suit infrequent senders
+cons:
+  - Free plan is small (250 contacts, 500 sends a month)
+  - Free plan cannot schedule emails or remove Mailchimp branding
+best_for: [Authors who need a specific Mailchimp integration or pay-as-you-go sending]
+alternatives: [mailerlite, kit]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://mailchimp.com/pricing/marketing/
+  - https://mailchimp.com/landers/pricing/essentials/
