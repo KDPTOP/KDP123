@@ -1,21 +1,106 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE } from '../lib/site';
+
+const TURNSTILE_SITEKEY = '0x4AAAAAAF5sKyu1iD-AaBc9';
+const input = 'mt-1 w-full rounded-lg border border-line bg-white px-3 py-2 text-base';
 ---
 
-<Base title="Suggest or correct a listing" description="How to suggest a new KDP tool or correct an existing kdp123 listing.">
-  <article class="prose-kdp max-w-3xl">
+<Base title="Suggest or correct a listing" description="Suggest a KDP tool for kdp123 or correct an existing listing. Free, never paid, and every change needs a source.">
+  <div class="max-w-3xl">
     <h1 class="text-4xl font-bold">Suggest or correct a listing</h1>
-    <p>Listing is free and cannot be bought. Every change needs a source.</p>
-    <ul>
-      <li><a href={`${SITE.github}/issues/new/choose`}>Open an issue</a> using the "New listing" or "Correction" form.</li>
-      <li>Or send a pull request that adds or edits one file in <a href={`${SITE.github}/tree/main/data/tools`}>data/tools</a>.</li>
-    </ul>
-    <h2>What we need</h2>
-    <ul>
-      <li>The official URL and a one-sentence description of what it does for KDP publishers.</li>
-      <li>The current price, with a link to the pricing page.</li>
-      <li>If you are the vendor, say so. We will mark the entry "Verified by vendor" once the details check out. That does not change its placement.</li>
-    </ul>
-  </article>
+    <p class="mt-4 text-lg text-muted">Listing is free and cannot be bought. Every change needs a source, ideally the vendor's own pricing or feature page.</p>
+
+    <p id="sent" class="mt-6 hidden rounded-lg border border-ok/30 bg-ok/5 p-4" role="status">
+      Thanks, your message reached the editorial team. If you left an email address we will reply there, usually within a week.
+    </p>
+    <p id="failed" class="mt-6 hidden rounded-lg border border-warn/30 bg-warn/5 p-4" role="alert"></p>
+
+    <form id="suggest" action="/api/suggest" method="post" class="mt-6 space-y-4 rounded-lg border border-line bg-white p-5">
+      <fieldset>
+        <legend class="text-sm font-medium">What is this about?</legend>
+        <div class="mt-2 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          <label><input type="radio" name="kind" value="new" checked /> A tool we should list</label>
+          <label><input type="radio" name="kind" value="correction" /> Something wrong on a listing</label>
+          <label><input type="radio" name="kind" value="vendor" /> I make this tool</label>
+          <label><input type="radio" name="kind" value="other" /> Something else</label>
+        </div>
+      </fieldset>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <label class="block text-sm font-medium">Tool name
+          <input name="tool" maxlength="120" class={input} autocomplete="off" />
+        </label>
+        <label class="block text-sm font-medium">Link (official site or the page that shows the change)
+          <input name="url" type="url" maxlength="500" placeholder="https://" class={input} />
+        </label>
+      </div>
+      <label class="block text-sm font-medium">Details
+        <textarea name="details" required minlength="10" maxlength="4000" rows="6" class={input}
+          placeholder="What it does for KDP publishers and what it costs, or what is wrong and what it should say."></textarea>
+      </label>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <label class="block text-sm font-medium">Your name <span class="font-normal text-muted">(optional)</span>
+          <input name="name" maxlength="120" autocomplete="name" class={input} />
+        </label>
+        <label class="block text-sm font-medium">Email for a reply <span class="font-normal text-muted">(optional)</span>
+          <input name="email" type="email" maxlength="200" autocomplete="email" class={input} />
+        </label>
+      </div>
+      <div class="hidden" aria-hidden="true">
+        <label>Leave this empty <input name="website" tabindex="-1" autocomplete="off" /></label>
+      </div>
+      <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY} data-action="suggest"></div>
+      <div class="flex flex-wrap items-center gap-3">
+        <button type="submit" class="rounded-lg bg-accent px-5 py-2.5 font-medium text-white disabled:opacity-60">Send to the editors</button>
+        <span class="text-xs text-muted">We use your email only to reply. It is not added to any list.</span>
+      </div>
+    </form>
+
+    <div class="prose-kdp mt-10">
+      <h2>Prefer GitHub or email?</h2>
+      <ul>
+        <li><a href={`${SITE.github}/issues/new/choose`}>Open an issue</a> using the "New listing" or "Correction" form.</li>
+        <li>Send a pull request that adds or edits one file in <a href={`${SITE.github}/tree/main/data/tools`}>data/tools</a>.</li>
+        <li>Email <a href="mailto:hello@kdp123.com">hello@kdp123.com</a>.</li>
+      </ul>
+      <h2>What we need</h2>
+      <ul>
+        <li>The official URL and one sentence on what it does for KDP publishers.</li>
+        <li>The current price, with a link to the vendor's pricing page.</li>
+        <li>If you are the vendor, say so. We mark the entry "Verified by vendor" once the details check out. That does not change its placement.</li>
+      </ul>
+    </div>
+  </div>
 </Base>
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+  const form = document.getElementById('suggest') as HTMLFormElement;
+  const sent = document.getElementById('sent')!;
+  const failed = document.getElementById('failed')!;
+  const params = new URLSearchParams(location.search);
+  if (params.has('sent')) sent.classList.remove('hidden');
+  if (params.get('error')) { failed.textContent = params.get('error'); failed.classList.remove('hidden'); }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const button = form.querySelector('button')!;
+    button.disabled = true;
+    failed.classList.add('hidden');
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      const data = await res.json();
+      if (!data.ok) throw new Error(data.error || 'Something went wrong.');
+      form.reset();
+      form.classList.add('hidden');
+      sent.classList.remove('hidden');
+      sent.scrollIntoView({ block: 'center' });
+    } catch (err) {
+      failed.textContent = err instanceof Error ? err.message : String(err);
+      failed.classList.remove('hidden');
+      (window as unknown as { turnstile?: { reset: () => void } }).turnstile?.reset();
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
