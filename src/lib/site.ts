@@ -8,7 +8,7 @@ export const SITE = {
   tagline: 'The reference directory for Amazon KDP publishers',
   description:
     'Verified tools, official rules and open data for Amazon KDP publishers. Every listing shows what it costs, what it does for KDP, and when we last checked.',
-  github: 'https://github.com/kdp123/kdp123',
+  github: 'https://github.com/KDPTOP/KDP123',
   related: { name: 'KDPTop', url: 'https://kdptop.com' },
 };
 
