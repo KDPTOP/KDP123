@@ -7,6 +7,11 @@ summary: >-
   imagery and coloring page art. The free plan allows 3 generations per style per day, but its images are public, owned
   by Recraft and not licensed for commercial use, so you need a paid plan before selling books that contain its output.
 pricing: { model: freemium, from: 12, currency: USD, period: month, free_tier: true, note: "Prices exclude VAT. Basic $12/mo or $10/mo billed annually ($120/yr), 1,000 credits/mo; Pro $20/mo or $16/mo billed annually ($192/yr), 2,000 credits/mo; Teams $22/seat/mo or $18/seat/mo billed annually. Refunds at Recraft's discretion within 30 days if credits are unused. Free plan: no commercial use." }
+price_history:
+  - date: 2026-11-09
+    from: 12
+    kind: correction
+    note: "Corrected from an unsourced free-tier figure (50 images a day) to Recraft's pricing page: paid plans from $12/mo; the free plan does not allow commercial use."
 platforms: [web]
 kdp:
   outputs_kdp_files: false

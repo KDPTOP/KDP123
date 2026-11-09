@@ -13,8 +13,10 @@ interface Props {
   sources: string[];
   /** Name the KDPTop model or data the tool uses, when it does. */
   poweredBy?: string;
+  /** The tool sends the visitor's input to a server. */
+  remote?: boolean;
 }
-const { slug, answer, faq = [], sources, poweredBy } = Astro.props;
+const { slug, answer, faq = [], sources, poweredBy, remote = false } = Astro.props;
 const tool = freeTool(slug);
 const title = Astro.props.title ?? tool.name;
 const url = `${SITE.url}/free-tools/${slug}/`;
@@ -57,7 +59,7 @@ if (faq.length)
   <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/free-tools/">Free tools</a></nav>
   <article class="mt-2 max-w-3xl" data-pagefind-filter="type:Free tool">
     <h1 class="text-4xl font-bold">{title}</h1>
-    <p class="mt-2 text-sm text-muted">Free, no sign-up. Runs in your browser{poweredBy ? '' : ' and sends nothing to us'}. Not affiliated with Amazon.</p>
+    <p class="mt-2 text-sm text-muted">Free, no sign-up.{remote ? '' : ' Runs in your browser and sends nothing to us.'} Not affiliated with Amazon.</p>
     <p class="mt-4 leading-7">{answer}</p>
 
     <section class="mt-6 rounded-lg border border-line bg-white p-4 md:p-6" aria-label="Calculator">

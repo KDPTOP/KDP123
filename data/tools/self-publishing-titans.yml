@@ -3,20 +3,26 @@ url: https://selfpublishingtitans.com
 categories: [book-research, low-content, courses-blogs]
 tagline: Self Publishing Titans is a KDP training brand that also sells a Chrome research extension, puzzle and coloring makers, design tools and the KDP Masterclass.
 summary: >-
-  Self Publishing Titans runs the KDP Masterclass (80+ video lectures, about 10 hours, a private Facebook group) and the
-  Titans Pro Chrome extension for niche and keyword research with demand and opportunity analysis. Its tools cover
-  low and medium content books. Plans are reported at $15 to $65 a month billed yearly.
-pricing: { model: subscription, from: 20, currency: USD, period: month, note: "Reported as $15-65/mo billed yearly ($20-90 monthly). Courses are priced separately." }
+  Self Publishing Titans sells a suite of KDP tools on four plans, from a Chrome extension for Amazon research on the
+  lowest plan to extensions for ACX, Etsy and Pinterest, puzzle and coloring book makers and listing tools on higher
+  ones. It also offers free tools and sells the KDP Masterclass separately: 80+ videos, 100+ resources and a private
+  Facebook group for a one-time $199.
+pricing: { model: subscription, from: 20, currency: USD, period: month, free_tier: true, refund_days: 7, note: "Monthly: Hobbyist $20, Author $35, Publisher $60, Empire $90. Billed yearly: $15, $25, $45 and $65 a month ($180, $300, $540, $780 a year). A lifetime option is also offered. 7-day money-back guarantee. Free tools available without a plan. KDP Masterclass $199 one-time with a 7-day guarantee." }
 platforms: [chrome-extension, web]
 kdp:
   outputs_kdp_files: true
   touches_kdp_account: false
   content_types: [low-content, puzzle, coloring]
+pros:
+  - Research extension, design tools and training from one vendor
+  - Free tools to try before paying
+cons:
+  - ACX, Etsy and Pinterest research need the higher plans
 best_for: [Low and medium content publishers who want training plus tools]
 alternatives: [book-bolt, bookbeam]
 affiliate: false
 status: published
 verified_at: 2026-11-09
 sources:
-  - https://book-business-kdp-amazon.com/en/blog/best-kdp-tools/
-  - https://lowcontentprofits.com/best-amazon-kdp-courses/
+  - https://selfpublishingtitans.com/pricing
+  - https://selfpublishingtitans.com/masterclass

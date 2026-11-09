@@ -8,6 +8,11 @@ summary: >-
   image generators it produces images, not print-ready KDP covers, so you still need a layout step for spine, bleed and
   safe zones.
 pricing: { model: freemium, from: 12, currency: USD, period: month, free_tier: true, note: "Prices ex. tax. Essential $12/mo monthly or $10/mo billed yearly (8,500 fast tokens/mo); Premium $30/mo or $24/mo yearly (25,000); Ultimate $60/mo or $48/mo yearly (60,000). Team plans from $24/seat/mo. Free: 150 fast tokens/day, public creations." }
+price_history:
+  - date: 2026-11-09
+    from: 12
+    kind: correction
+    note: "Added the paid starting price from Leonardo's pricing page: Essential $12/mo, or $10/mo billed yearly. Free plan confirmed at 150 fast tokens a day."
 platforms: [web]
 kdp:
   outputs_kdp_files: false

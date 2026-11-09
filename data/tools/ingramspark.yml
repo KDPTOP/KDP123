@@ -8,6 +8,10 @@ summary: >-
   not exclusive, so many KDP publishers use it alongside KDP for wider print reach; IngramSpark advises not selecting
   KDP Expanded Distribution for the same print book. It does not offer editing or design services.
 pricing: { model: free, currency: USD, note: "No cost to create an account or set up a book. Print and shipping costs per copy via its calculators. Optional: ISBN $85 (US) or a free non-transferable IngramSpark ISBN; ebook conversion $0.60/page." }
+price_history:
+  - date: 2026-11-09
+    kind: correction
+    note: "Corrected from 'fees not verified' to IngramSpark's pricing page: free account and title setup; you pay print costs per copy."
 platforms: [web]
 kdp:
   touches_kdp_account: false

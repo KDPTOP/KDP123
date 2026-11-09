@@ -8,6 +8,11 @@ summary: >-
   fee; it then takes about 10% of the retail price as commission and distributes to many retailers and libraries. D2D
   Print paperbacks also reach Amazon. It does not accept content generated entirely by AI without extensive human editing.
 pricing: { model: freemium, from: 20, currency: USD, period: one-time, free_tier: true, note: "Formatting and file download are free. To publish: $20 one-time non-refundable activation fee; $12/yr maintenance fee for accounts with titles in distribution earning under $100/yr (waived the first year); commission of about 10% of retail price per sale." }
+price_history:
+  - date: 2026-11-09
+    from: 20
+    kind: correction
+    note: "Corrected from 'free' after checking D2D's FAQ: publishing needs a $20 one-time activation fee, plus a $12/yr fee for small accounts after the first year."
 platforms: [web]
 kdp:
   outputs_kdp_files: true

@@ -8,6 +8,11 @@ summary: >-
   need a layout step for spine, bleed and safe zones. Ideogram says it does not claim ownership of generated images and
   allows commercial use.
 pricing: { model: freemium, from: 20, currency: USD, period: month, free_tier: true, note: "Plus $20/mo or $180/yr ($15/mo), 2,400 priority credits/mo; Pro $60/mo or $504/yr ($42/mo), 7,500 priority credits/mo; Team $30/user/mo or $240/user/yr ($20/user/mo); Enterprise postpaid. Pay as you go at 1 cent per credit. Eligible free accounts get weekly credits (amount varies). No free trials or discounts on plans. Prices exclude tax." }
+price_history:
+  - date: 2026-11-09
+    from: 20
+    kind: correction
+    note: "Corrected from an unsourced free-tier estimate (~10 a day) to Ideogram's pricing page: weekly free credits that vary, paid plans from $20/mo."
 platforms: [web, ios]
 kdp:
   outputs_kdp_files: false
