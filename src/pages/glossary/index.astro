@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getTerms } from '../../lib/glossary';
+import { getFacts } from '../../lib/facts';
+import { freeTool } from '../../lib/freeTools';
+import { SITE, isoDate } from '../../lib/site';
+
+const terms = await getTerms();
+const factTitles = new Map((await getFacts()).map((f) => [f.id, f.data.title]));
+const names = new Map(terms.map((t) => [t.id, t.data.term]));
+const url = `${SITE.url}/glossary/`;
+const letters = [...new Set(terms.map((t) => t.data.term[0].toUpperCase()))];
+const sourceLabel = (s: string) => {
+  const u = new URL(s);
+  const topic = u.pathname.match(/G[0-9A-Z]{8,}/)?.[0];
+  return topic ? `KDP Help ${topic}` : u.hostname.replace(/^www\./, '');
+};
+const checked = isoDate(new Date(Math.max(...terms.map((t) => t.data.verified_at.getTime()))));
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'DefinedTermSet',
+    '@id': url,
+    name: 'KDP glossary',
+    url,
+    description: 'Amazon KDP terms defined in one or two sentences, each sourced to Amazon.',
+    hasDefinedTerm: terms.map((t) => ({
+      '@type': 'DefinedTerm',
+      '@id': `${url}#${t.id}`,
+      name: t.data.term,
+      ...(t.data.aka.length ? { alternateName: t.data.aka } : {}),
+      description: t.data.definition,
+      url: `${url}#${t.id}`,
+      inDefinedTermSet: url,
+      subjectOf: t.data.facts.map((f) => `${SITE.url}/facts/${f}/`),
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Glossary', item: url },
+    ],
+  },
+];
+---
+
+<Base title="KDP glossary: BSR, KENP, KDP Select, bleed, trim size and more" description={`${terms.length} Amazon KDP terms defined in plain English, from A+ Content and ACoS to KENP, Kindle+ and trim size. Each definition cites Amazon.`} jsonLd={jsonLd}>
+  <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / Glossary</nav>
+  <section class="mt-2 max-w-3xl">
+    <h1 class="text-4xl font-bold">KDP glossary</h1>
+    <p class="mt-4 text-lg text-muted">
+      {terms.length} terms KDP publishers run into, each defined in a sentence or two with the numbers that matter and a link to Amazon's own page.
+      For the full rules, follow the link to the fact page. Checked against Amazon on {checked}.
+    </p>
+    <p class="mt-4 flex flex-wrap gap-x-3 gap-y-1 text-sm" aria-label="Jump to letter">{letters.map((l) => <a href={`#letter-${l}`}>{l}</a>)}</p>
+  </section>
+
+  <dl class="mt-8 max-w-3xl">
+    {
+      terms.map((t, i) => (
+        <div id={t.id} class="scroll-mt-24 border-t border-line py-5">
+          {(i === 0 || terms[i - 1].data.term[0].toUpperCase() !== t.data.term[0].toUpperCase()) && <span id={`letter-${t.data.term[0].toUpperCase()}`} />}
+          <dt class="text-xl font-semibold">
+            <a href={`#${t.id}`} class="text-ink no-underline">{t.data.term}</a>
+            {t.data.aka.length > 0 && <span class="ml-2 text-sm font-normal text-muted">also {t.data.aka.join(', ')}</span>}
+          </dt>
+          <dd class="mt-2 leading-7">{t.data.definition}</dd>
+          <dd class="mt-2 text-sm text-muted">
+            {t.data.facts.map((f) => <span class="mr-3">Rules: <a href={`/facts/${f}/`}>{factTitles.get(f)}</a></span>)}
+            {t.data.tool && <span class="mr-3">Calculator: <a href={`/free-tools/${t.data.tool}/`}>{freeTool(t.data.tool)!.name}</a></span>}
+            {t.data.see.length > 0 && <span class="mr-3">See also: {t.data.see.map((s, j) => <>{j > 0 && ', '}<a href={`#${s}`}>{names.get(s)}</a></>)}</span>}
+            <span>Source: {t.data.sources.map((s, j) => <>{j > 0 && ', '}<a href={s} rel="noopener">{sourceLabel(s)}</a></>)}</span>
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+  <p class="mt-8 text-sm text-muted">Missing a term or found one out of date? <a href="/submit/">Tell us</a>. <a href="/glossary.md">Plain-text version</a>.</p>
+</Base>

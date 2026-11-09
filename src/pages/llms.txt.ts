@@ -5,6 +5,7 @@ import { getFacts } from '../lib/facts';
 import research from '../../data/research/reports.json';
 import { FREE_TOOLS } from '../lib/freeTools';
 import { getBest } from '../lib/best';
+import { getTerms } from '../lib/glossary';
 import { getCompares, compareTitle } from '../lib/compare';
 
 export const GET: APIRoute = async () => {
@@ -30,6 +31,10 @@ export const GET: APIRoute = async () => {
   if (facts.length) {
     out.push('', '## KDP facts', '', `Rules and numbers sourced to Amazon's help pages: ${SITE.url}/facts/`, '');
     for (const f of facts) out.push(`- [${f.data.title}](${SITE.url}/facts/${f.id}/): ${f.data.question}`);
+  }
+  const terms = await getTerms();
+  if (terms.length) {
+    out.push('', '## Glossary', '', `${terms.length} KDP terms, one or two sentences each, sourced to Amazon: ${SITE.url}/glossary/ (plain text: ${SITE.url}/glossary.md)`);
   }
   const lists = await getBest();
   if (lists.length) {

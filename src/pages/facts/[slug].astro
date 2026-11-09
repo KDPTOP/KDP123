@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import { getFacts, topicName } from '../../lib/facts';
 import { getTools, isoDate, SITE } from '../../lib/site';
 import { freeToolsForFact } from '../../lib/freeTools';
+import { termsForFact, termUrl } from '../../lib/glossary';
 
 export async function getStaticPaths() {
   const facts = await getFacts();
@@ -21,6 +22,7 @@ const url = `${SITE.url}/facts/${fact.id}/`;
 const tools = d.related_tools.map((s) => toolById.get(s)).filter((t) => t !== undefined);
 const checked = isoDate(d.verified_at);
 const calculators = freeToolsForFact(fact.id);
+const terms = await termsForFact(fact.id);
 
 const jsonLd: object[] = [
   {
@@ -87,6 +89,13 @@ jsonLd.push({
       calculators.length > 0 && (
         <p class="mt-4 text-sm">
           Free calculator: {calculators.map((t, i) => <>{i > 0 && ' · '}<a href={`/free-tools/${t.slug}/`}>{t.name}</a></>)}
+        </p>
+      )
+    }
+    {
+      terms.length > 0 && (
+        <p class="mt-2 text-sm">
+          Terms on this page: {terms.map((t, i) => <>{i > 0 && ' · '}<a href={termUrl(t.id)}>{t.data.term}</a></>)}
         </p>
       )
     }

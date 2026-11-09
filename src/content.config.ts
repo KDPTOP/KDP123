@@ -134,4 +134,20 @@ const compare = defineCollection({
   }),
 });
 
-export const collections = { tools, facts, best, compare };
+// One entry per term on /glossary/. The definition stands on its own and every number in it comes from the sources.
+const glossary = defineCollection({
+  loader: glob({ pattern: '*.md', base: './data/glossary' }),
+  schema: z.object({
+    term: z.string().min(2).max(60),
+    aka: z.array(z.string()).default([]),
+    definition: z.string().min(40).max(420),
+    facts: z.array(z.string()).default([]),
+    tool: z.string().optional(),
+    see: z.array(z.string()).default([]),
+    sources: z.array(z.url()).min(1),
+    status: z.enum(['draft', 'published']).default('draft'),
+    verified_at: z.coerce.date(),
+  }),
+});
+
+export const collections = { tools, facts, best, compare, glossary };
