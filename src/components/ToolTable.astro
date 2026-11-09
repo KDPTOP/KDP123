@@ -1,0 +1,62 @@
+---
+import { priceLabel, isoDate, outbound, type Tool } from '../lib/site';
+import { categoryBySlug } from '../lib/taxonomy';
+
+interface Props {
+  tools: Tool[];
+  showCategory?: boolean;
+  filterable?: boolean;
+}
+const { tools, showCategory = false, filterable = false } = Astro.props;
+---
+
+<div class="overflow-x-auto rounded-lg border border-line bg-white">
+  <table class="w-full min-w-[720px] text-left text-sm" data-tool-table={filterable ? '' : undefined}>
+    <thead class="border-b border-line bg-paper text-xs uppercase tracking-wide text-muted">
+      <tr>
+        <th class="px-3 py-2 font-medium">Tool</th>
+        <th class="px-3 py-2 font-medium">What it is</th>
+        <th class="px-3 py-2 font-medium">Price</th>
+        <th class="px-3 py-2 font-medium">KDP</th>
+        <th class="px-3 py-2 font-medium">Checked</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        tools.map((t) => {
+          const link = outbound(t);
+          return (
+            <tr
+              class="border-b border-line align-top last:border-0"
+              data-price={t.data.pricing.model}
+              data-official={t.data.official ? '1' : '0'}
+              data-kdp-files={t.data.kdp.outputs_kdp_files ? '1' : '0'}
+              data-name={t.data.name.toLowerCase()}
+            >
+              <td class="px-3 py-3">
+                <a href={`/t/${t.id}/`} class="font-medium">{t.data.name}</a>
+                <div class="mt-1 flex flex-wrap gap-1">
+                  {t.data.official && <span class="badge badge-ok">Official</span>}
+                  {t.data.related_to_directory && <span class="badge badge-warn">Same team as kdp123</span>}
+                  {showCategory && t.data.categories.slice(0, 2).map((c) => <span class="badge">{categoryBySlug(c)?.name}</span>)}
+                </div>
+              </td>
+              <td class="px-3 py-3 text-muted">
+                {t.data.tagline}
+                <div class="mt-1"><a href={link.href} rel={link.rel} class="text-xs">Visit site</a></div>
+              </td>
+              <td class="whitespace-nowrap px-3 py-3">{priceLabel(t)}</td>
+              <td class="px-3 py-3">
+                <div class="flex flex-wrap gap-1">
+                  {t.data.kdp.outputs_kdp_files && <span class="badge badge-ok">KDP-ready files</span>}
+                  {t.data.kdp.touches_kdp_account && <span class="badge badge-warn">Touches KDP account</span>}
+                </div>
+              </td>
+              <td class="whitespace-nowrap px-3 py-3 text-muted">{isoDate(t.data.verified_at)}</td>
+            </tr>
+          );
+        })
+      }
+    </tbody>
+  </table>
+</div>

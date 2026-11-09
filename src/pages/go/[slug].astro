@@ -1,0 +1,24 @@
+---
+import { getTools, affiliateUrl } from '../../lib/site';
+
+// Only tools that have a private affiliate URL get a /go/ page. Without the private overlay none are generated.
+export async function getStaticPaths() {
+  const tools = await getTools();
+  return tools.filter((t) => affiliateUrl(t.id)).map((t) => ({ params: { slug: t.id }, props: { to: affiliateUrl(t.id)!, name: t.data.name } }));
+}
+const { to, name } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting to {name}</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta http-equiv="refresh" content={`0;url=${to}`} />
+    <link rel="canonical" href={to} />
+  </head>
+  <body>
+    <p>Redirecting to <a href={to} rel="sponsored nofollow noopener">{name}</a>.</p>
+  </body>
+</html>

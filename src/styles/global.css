@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+  --color-ink: #14171f;
+  --color-muted: #5b6270;
+  --color-line: #e3e6ec;
+  --color-paper: #fbfbfa;
+  --color-accent: #1f4fd6;
+  --color-accent-soft: #eaf0ff;
+  --color-ok: #14733f;
+  --color-warn: #8a5a00;
+}
+
+@layer base {
+  html { color-scheme: light; }
+  body { @apply bg-paper font-sans text-ink antialiased; }
+  h1, h2, h3 { @apply font-serif tracking-tight; }
+  a { @apply text-accent underline-offset-2 hover:underline; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-accent; }
+}
+
+@layer components {
+  .prose-kdp p { @apply my-4 leading-7; }
+  .prose-kdp h2 { @apply mt-10 mb-3 text-2xl font-semibold; }
+  .prose-kdp h3 { @apply mt-6 mb-2 text-lg font-semibold; }
+  .prose-kdp ul { @apply my-4 list-disc pl-6 leading-7; }
+  .prose-kdp li { @apply my-1; }
+  .badge { @apply inline-flex items-center rounded border border-line bg-white px-1.5 py-0.5 text-xs text-muted; }
+  .badge-ok { @apply border-ok/30 bg-ok/5 text-ok; }
+  .badge-warn { @apply border-warn/30 bg-warn/5 text-warn; }
+  .chip { @apply inline-flex cursor-pointer items-center rounded-full border border-line bg-white px-3 py-1 text-sm text-ink hover:border-accent; }
+  .chip[aria-pressed='true'] { @apply border-accent bg-accent-soft text-accent; }
+}

@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site';
+---
+
+<Base title="About kdp123" description="kdp123 is an independent, open-data directory for Amazon KDP publishers.">
+  <article class="prose-kdp max-w-3xl">
+    <h1 class="text-4xl font-bold">About kdp123</h1>
+    <p>kdp123 is a directory of tools, official sources and communities for people who publish on Amazon KDP. It is built for one job: let a publisher find the right resource for what they are doing now, and see what it costs and when it was last checked.</p>
+    <p>It is made by the team behind <a href={SITE.related.url}>KDPTop</a>, a KDP research service. That relationship is disclosed on every KDPTop entry and in the <a href="/methodology/">methodology</a>.</p>
+    <h2>Open by default</h2>
+    <p>The data and the site code are open on <a href={SITE.github}>GitHub</a>. Anyone can suggest a listing or a correction with a source.</p>
+    <h2>Not affiliated with Amazon</h2>
+    <p>kdp123 is not affiliated with, endorsed by or sponsored by Amazon. "Amazon", "Kindle" and "KDP" are trademarks of Amazon.com, Inc.</p>
+  </article>
+</Base>

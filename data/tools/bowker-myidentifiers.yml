@@ -1,0 +1,15 @@
+name: Bowker MyIdentifiers
+url: https://www.myidentifiers.com
+categories: [legal-isbn]
+tagline: Bowker MyIdentifiers is the official U.S. agency where publishers buy ISBNs.
+summary: >-
+  Bowker is the ISBN agency for the United States. KDP can assign a free ISBN to a print book, but that ISBN lists KDP as
+  the publisher and cannot be used elsewhere. Buying your own ISBN from Bowker makes you the publisher of record and lets
+  you use the same ISBN across distributors. Check current prices on its site.
+pricing: { model: paid, currency: USD, note: "Price per ISBN not verified for this entry." }
+platforms: [web]
+alternatives: []
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.myidentifiers.com

@@ -1,0 +1,19 @@
+name: Recraft
+url: https://www.recraft.ai
+categories: [ai-tools, low-content]
+tagline: Recraft is an AI tool that generates original vector illustrations and patterns, useful for decorative journal interiors and coloring pages.
+summary: >-
+  Recraft generates vector illustrations and repeat patterns, which suit decorative journal interiors, activity book
+  imagery and coloring page backgrounds. The free tier is reported at 50 images a day. Check the licence for commercial
+  use on your plan before selling books that contain its output.
+pricing: { model: freemium, currency: USD, free_tier: true, note: "Free tier reported at 50 images/day. Verify commercial-use terms per plan." }
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [low-content, coloring]
+alternatives: [midjourney, leonardo-ai]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://creatorgear.ai/blog/best-ai-tools-for-kdp-sellers

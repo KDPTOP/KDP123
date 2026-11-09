@@ -1,0 +1,15 @@
+name: Self Publishing Ninja
+url: https://selfpublishing.ninja
+categories: [courses-blogs, low-content]
+tagline: Self Publishing Ninja is a resources site that lists tools and training for low-content and no-content KDP publishers.
+summary: >-
+  Self Publishing Ninja keeps a resources page covering Tangent Templates and its Listing Helper, Book Bolt, PLR Planners,
+  Canva and YouTube channels such as Residual Royalty Academy. Treat it as a starting list: it is an affiliate-style
+  resources page, so confirm prices and features on each vendor site.
+pricing: { model: free, currency: USD }
+platforms: [web]
+alternatives: [low-content-profits]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://selfpublishing.ninja/resources/

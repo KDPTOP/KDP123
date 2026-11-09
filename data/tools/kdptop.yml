@@ -1,0 +1,21 @@
+name: KDPTop
+url: https://kdptop.com
+categories: [book-research, keywords-categories, analytics]
+tagline: KDPTop is a KDP research service that tracks Amazon Books and Kindle eBooks bestseller lists, category trees and category opportunity scores.
+summary: >-
+  KDPTop collects Best Sellers, New Releases and Top 100 Free lists for Amazon Books and Kindle eBooks, keeps a category
+  tree, ASIN history and category opportunity scores, and maps books or ASINs to the KDP categories they are listed in.
+  It is made by the same team as this directory and is described with the same fields as every other entry.
+related_to_directory: true
+pricing: { model: freemium, currency: USD, free_tier: true, note: "Free, Pro and Team plans; see the vendor site for current prices." }
+platforms: [web, chrome-extension]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+best_for: [Finding category-level opportunities and mapping books to KDP categories]
+alternatives: [publisher-rocket, bookbeam, kdspy]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://kdptop.com

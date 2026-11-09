@@ -1,0 +1,18 @@
+name: Ideogram
+url: https://ideogram.ai
+categories: [ai-tools, cover-design]
+tagline: Ideogram is an AI image generator with a free tier that is known for rendering readable text, useful for typographic book covers.
+summary: >-
+  Ideogram is the usual pick when a cover needs legible title text built into the artwork, where other generators often
+  fail. The free tier is limited to roughly ten generations a day as reported by a third-party review. It outputs images,
+  not KDP-ready cover wraps.
+pricing: { model: freemium, currency: USD, free_tier: true, note: "Free tier reported at ~10 generations/day." }
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+alternatives: [midjourney, leonardo-ai, recraft]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://creatorgear.ai/blog/best-ai-tools-for-kdp-sellers

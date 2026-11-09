@@ -1,0 +1,22 @@
+name: Self Publishing Titans
+url: https://selfpublishingtitans.com
+categories: [book-research, low-content, courses-blogs]
+tagline: Self Publishing Titans is a KDP training brand that also sells a Chrome research extension, puzzle and coloring makers, design tools and the KDP Masterclass.
+summary: >-
+  Self Publishing Titans runs the KDP Masterclass (80+ video lectures, about 10 hours, a private Facebook group) and the
+  Titans Pro Chrome extension for niche and keyword research with demand and opportunity analysis. Its tools cover
+  low and medium content books. Plans are reported at $15 to $65 a month billed yearly.
+pricing: { model: subscription, from: 20, currency: USD, period: month, note: "Reported as $15-65/mo billed yearly ($20-90 monthly). Courses are priced separately." }
+platforms: [chrome-extension, web]
+kdp:
+  outputs_kdp_files: true
+  touches_kdp_account: false
+  content_types: [low-content, puzzle, coloring]
+best_for: [Low and medium content publishers who want training plus tools]
+alternatives: [book-bolt, bookbeam]
+affiliate: false
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://book-business-kdp-amazon.com/en/blog/best-kdp-tools/
+  - https://lowcontentprofits.com/best-amazon-kdp-courses/

@@ -1,0 +1,118 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getTools, priceLabel, isoDate, outbound, SITE } from '../../lib/site';
+import { categoryBySlug } from '../../lib/taxonomy';
+
+export async function getStaticPaths() {
+  const tools = await getTools();
+  const byId = new Map(tools.map((t) => [t.id, t]));
+  return tools.map((t) => ({ params: { slug: t.id }, props: { tool: t, byId } }));
+}
+const { tool, byId } = Astro.props;
+const d = tool.data;
+const link = outbound(tool);
+const alts = d.alternatives.map((a) => byId.get(a)).filter((t) => t !== undefined);
+const url = `${SITE.url}/t/${tool.id}/`;
+const yn = (v?: boolean) => (v === undefined ? 'Not stated' : v ? 'Yes' : 'No');
+const softwarePlatforms = d.platforms.length > 0;
+
+const entity: Record<string, unknown> = softwarePlatforms
+  ? {
+      '@type': 'SoftwareApplication',
+      name: d.name,
+      url: d.url,
+      description: d.tagline,
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: d.platforms.join(', '),
+    }
+  : { '@type': 'WebSite', name: d.name, url: d.url, description: d.tagline };
+if (softwarePlatforms && d.pricing.model !== 'unknown') {
+  const price = d.pricing.model === 'free' ? 0 : d.pricing.from;
+  if (price !== undefined) entity.offers = { '@type': 'Offer', price, priceCurrency: d.pricing.currency };
+}
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `${d.name} for KDP`,
+    url,
+    dateModified: isoDate(d.verified_at),
+    about: entity,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url + '/' },
+      { '@type': 'ListItem', position: 2, name: categoryBySlug(d.categories[0])?.name, item: `${SITE.url}/c/${d.categories[0]}/` },
+      { '@type': 'ListItem', position: 3, name: d.name, item: url },
+    ],
+  },
+];
+---
+
+<Base
+  title={`${d.name}: price, features and KDP fit`}
+  description={`${d.tagline} Price: ${priceLabel(tool)}. Last checked ${isoDate(d.verified_at)}.`}
+  jsonLd={jsonLd}
+  markdownAlt={`/t/${tool.id}.md`}
+>
+  <nav class="text-sm text-muted" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <a href={`/c/${d.categories[0]}/`}>{categoryBySlug(d.categories[0])?.name}</a> / {d.name}
+  </nav>
+
+  <article class="mt-2 max-w-3xl">
+    <h1 class="text-4xl font-bold">{d.name}</h1>
+    <div class="mt-2 flex flex-wrap gap-1">
+      {d.official && <span class="badge badge-ok">Official Amazon</span>}
+      {d.related_to_directory && <span class="badge badge-warn">Same team as kdp123</span>}
+      {d.affiliate && <span class="badge">Affiliate link</span>}
+      {d.vendor_verified && <span class="badge badge-ok">Verified by vendor</span>}
+    </div>
+
+    <p class="mt-4 text-lg leading-7">{d.tagline}</p>
+    <p class="mt-4">
+      <a href={link.href} rel={link.rel} class="inline-block rounded-lg bg-accent px-4 py-2 font-medium text-white no-underline hover:no-underline">Visit {d.name}</a>
+      {d.affiliate && <span class="ml-2 text-xs text-muted">We may earn a commission. It does not change rankings or text.</span>}
+    </p>
+
+    {d.related_to_directory && (
+      <p class="mt-4 rounded-lg border border-warn/30 bg-warn/5 p-3 text-sm">
+        Disclosure: {d.name} is made by the same team as kdp123. It is described with the same fields and held to the same sourcing rules as every other entry; see the <a href="/methodology/">methodology page</a>.
+      </p>
+    )}
+
+    <h2 class="mt-8 text-2xl font-semibold">At a glance</h2>
+    <dl class="mt-3 divide-y divide-line rounded-lg border border-line bg-white text-sm">
+      <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Price</dt><dd class="col-span-2">{priceLabel(tool)}{d.pricing.note ? ` (${d.pricing.note})` : ''}</dd></div>
+      {d.pricing.refund_days !== undefined && <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Refund window</dt><dd class="col-span-2">{d.pricing.refund_days} days</dd></div>}
+      {d.platforms.length > 0 && <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Platforms</dt><dd class="col-span-2">{d.platforms.join(', ')}</dd></div>}
+      <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Outputs KDP-ready files</dt><dd class="col-span-2">{yn(d.kdp.outputs_kdp_files)}</dd></div>
+      <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Touches your KDP account</dt><dd class="col-span-2">{yn(d.kdp.touches_kdp_account)}</dd></div>
+      {d.kdp.marketplaces && <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Amazon marketplaces</dt><dd class="col-span-2">{d.kdp.marketplaces.join(', ')}</dd></div>}
+      <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Categories</dt><dd class="col-span-2">{d.categories.map((c, i) => (<><a href={`/c/${c}/`}>{categoryBySlug(c)?.name}</a>{i < d.categories.length - 1 ? ', ' : ''}</>))}</dd></div>
+      <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Last checked</dt><dd class="col-span-2">{isoDate(d.verified_at)}</dd></div>
+    </dl>
+
+    <h2 class="mt-8 text-2xl font-semibold">Summary</h2>
+    <p class="mt-2 leading-7">{d.summary}</p>
+
+    {d.best_for.length > 0 && (<><h2 class="mt-8 text-2xl font-semibold">Best for</h2><ul class="mt-2 list-disc pl-6 leading-7">{d.best_for.map((x) => <li>{x}</li>)}</ul></>)}
+    {d.pros.length > 0 && (<><h2 class="mt-8 text-2xl font-semibold">Pros</h2><ul class="mt-2 list-disc pl-6 leading-7">{d.pros.map((x) => <li>{x}</li>)}</ul></>)}
+    {d.cons.length > 0 && (<><h2 class="mt-8 text-2xl font-semibold">Cons</h2><ul class="mt-2 list-disc pl-6 leading-7">{d.cons.map((x) => <li>{x}</li>)}</ul></>)}
+
+    {alts.length > 0 && (
+      <>
+        <h2 class="mt-8 text-2xl font-semibold">Alternatives</h2>
+        <ul class="mt-2 list-disc pl-6 leading-7">{alts.map((a) => <li><a href={`/t/${a!.id}/`}>{a!.data.name}</a>: <span class="text-muted">{a!.data.tagline}</span></li>)}</ul>
+      </>
+    )}
+
+    <h2 class="mt-8 text-2xl font-semibold">Sources</h2>
+    <p class="mt-2 text-sm text-muted">Facts on this page come from the vendor and these pages. Prices change; confirm on the vendor site.</p>
+    <ul class="mt-2 list-disc pl-6 text-sm">{d.sources.map((s) => <li><a href={s} rel="noopener">{s}</a></li>)}</ul>
+
+    <p class="mt-8 text-sm text-muted">Something wrong or out of date? <a href="/submit/">Send a correction</a>. <a href={`/t/${tool.id}.md`}>Plain-text version</a>.</p>
+  </article>
+</Base>

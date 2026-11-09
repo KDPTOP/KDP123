@@ -1,0 +1,15 @@
+name: KDP Community
+url: https://kdpcommunity.com
+categories: [official, communities]
+tagline: The KDP Community is Amazon's official forum where publishers ask questions and get answers from peers and KDP staff.
+summary: >-
+  The KDP Community is the official forum for KDP publishers. It is useful for checking how other publishers resolved a
+  specific KDP error or policy question, but answers from other users are not Amazon policy. For rules, use the KDP help
+  pages.
+official: true
+pricing: { model: free, currency: USD }
+platforms: [web]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://kdpcommunity.com

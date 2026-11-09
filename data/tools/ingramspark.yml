@@ -1,0 +1,20 @@
+name: IngramSpark
+url: https://www.ingramspark.com
+categories: [print-distribution]
+tagline: IngramSpark is a print-on-demand and distribution service that reaches bookstores and libraries beyond Amazon.
+summary: >-
+  IngramSpark prints and distributes books to bookstores, libraries and online retailers. Many KDP publishers use it
+  alongside KDP for wider print reach. Check its current setup and revision fees on the vendor site before choosing it,
+  because they have changed over time and are not listed here.
+pricing: { model: unknown, currency: USD, note: "Fees not verified for this entry." }
+platforms: [web]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+alternatives: [draft2digital]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://www.digitalauthorstoolkit.com/post/the-ultimate-list-of-tools-for-indie-authors-150-writing-publishing-promotion-resources
+  - https://selfpublishingdirectory.com/llms.txt

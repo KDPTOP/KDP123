@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Private overlay: affiliate URLs per tool slug. Never committed (see README, "Affiliate links").
+affiliates.private.json

@@ -1,0 +1,28 @@
+name: Publisher Rocket
+url: https://publisherrocket.com
+categories: [book-research, keywords-categories]
+tagline: Publisher Rocket is a downloadable keyword, category and competition research app for Amazon book publishers, sold as a one-time purchase.
+summary: >-
+  Publisher Rocket covers keyword search with estimated monthly searches and a competition score, category search across
+  thousands of Amazon categories, a competition analyzer with rivals' sales and rank, and an Amazon Ads keyword generator.
+  It supports eight Amazon stores. It is research only: it does not create, upload or market books.
+pricing: { model: one-time, from: 199, currency: USD, period: one-time, refund_days: 30, note: "Its page warns it may move to an annual subscription; check terms before buying." }
+platforms: [windows, mac]
+kdp:
+  marketplaces: [us, ca, uk, de, fr, es, it, au]
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - One-time price, no subscription
+  - Category search and the Amazon Ads keyword generator are its strongest parts
+cons:
+  - No free trial, only a refund window
+  - Desktop app, not for phones or tablets
+best_for: [Researching keywords, categories and ad targets for a book you already have in mind]
+alternatives: [kdspy, bookbeam, book-bolt]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://publishflow.ai/knowledge-hub/comparisons/best-kdp-niche-research-tools/
+  - https://book-business-kdp-amazon.com/en/blog/best-kdp-tools/

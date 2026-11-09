@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site';
+---
+
+<Base title="Methodology and disclosures" description="How kdp123 chooses, checks and describes listings, how it is funded, and how it handles conflicts of interest.">
+  <article class="prose-kdp max-w-3xl">
+    <h1 class="text-4xl font-bold">Methodology and disclosures</h1>
+    <p>kdp123 is a reference directory, not a leaderboard. The goal is that a KDP publisher can check a tool's price, what it does for KDP, and how recent that information is, in one place.</p>
+
+    <h2>What gets listed</h2>
+    <ul>
+      <li>The product exists, is reachable, and is relevant to publishing on Amazon KDP.</li>
+      <li>We can cite at least one source for the price and what it does. Entries without a source are not published.</li>
+      <li>Listing is free. Payment, affiliate status or a vendor's request never decides whether or how a tool is listed.</li>
+    </ul>
+
+    <h2>What each entry shows</h2>
+    <ul>
+      <li><strong>Price.</strong> The model (free, free tier, one-time, subscription) and the lowest published price we found, with the date. Prices change often; the vendor site is the authority.</li>
+      <li><strong>KDP fit.</strong> Whether the tool produces KDP-ready files, which Amazon stores it supports where known, and whether it touches your KDP account. Tools that automate a KDP account can break Amazon's terms, so we flag that.</li>
+      <li><strong>Last checked.</strong> The date a person last confirmed the entry against its sources. Not a crawl date.</li>
+      <li><strong>Sources.</strong> The pages the facts came from. Where a source is the vendor's own page, the entry says so.</li>
+    </ul>
+
+    <h2>Conflicts of interest</h2>
+    <ul>
+      <li><strong>KDPTop.</strong> kdp123 is made by the same team as <a href={SITE.related.url}>KDPTop</a>. It is listed, labelled "Same team as kdp123", and described with the same fields as every other tool.</li>
+      <li><strong>Affiliate links.</strong> Some outbound links may be affiliate links. They are marked "Affiliate link" on the page and use <code>rel="sponsored"</code>. Affiliate status is not used in any ranking or text.</li>
+      <li><strong>Vendor-published comparisons.</strong> Several comparison pages we cite are published by vendors or by sites that earn commissions. We use them for facts we can cross-check, not for verdicts.</li>
+    </ul>
+
+    <h2>Official rules</h2>
+    <p>For anything about what KDP allows, Amazon's own help pages are the authority, not this site and not other publishers. Entries marked "Official Amazon" are first-party Amazon products.</p>
+
+    <h2>AI-generated content</h2>
+    <p>KDP has its own disclosure requirements for AI-generated content and Amazon's review decision is final. Tools in the AI category are listed for what they do, not as a promise that output will be accepted.</p>
+
+    <h2>Corrections</h2>
+    <p>If something is wrong, <a href={`${SITE.github}/issues/new/choose`}>open an issue</a> or send a pull request with a source. Corrections are recorded on the <a href="/changelog/">changelog</a>.</p>
+
+    <h2>Data and licence</h2>
+    <p>The data is published as <a href="/tools.json">JSON</a> and <a href="/tools.csv">CSV</a> under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. The site code is MIT licensed. Both are in the <a href={SITE.github}>GitHub repository</a>.</p>
+  </article>
+</Base>

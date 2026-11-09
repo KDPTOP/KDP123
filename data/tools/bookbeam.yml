@@ -1,0 +1,26 @@
+name: BookBeam
+url: https://bookbeam.io
+categories: [book-research, keywords-categories, analytics]
+tagline: BookBeam is a subscription web app and Chrome extension for niche research, keyword research and ongoing tracking of books on Amazon.
+summary: >-
+  BookBeam offers keyword and niche research, sales history, a tracker for watching niches over time, trademark checks and
+  listing and creation tools. It is the only one of the mainstream research tools built around ongoing tracking, and you
+  pay for that every month. Plans start at $47 a month, or $29 a month billed yearly.
+pricing: { model: subscription, from: 47, currency: USD, period: month, refund_days: 7, note: "$29/mo billed yearly on the lowest plan." }
+platforms: [web, chrome-extension]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+pros:
+  - Ongoing tracking and a large database
+  - Research and production tools in one suite
+cons:
+  - Monthly cost is higher than one-time tools
+best_for: [Publishers who research and track a catalog seriously]
+alternatives: [publisher-rocket, kdspy, authorscout]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://book-business-kdp-amazon.com/en/blog/best-kdp-tools/
+  - https://inkario.app/blog/best-kdp-tools-2026

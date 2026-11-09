@@ -1,0 +1,16 @@
+name: Self Publishing Formula
+url: https://www.learnselfpublishing.com
+categories: [courses-blogs, communities]
+tagline: Self Publishing Formula is Mark Dawson's training brand with a free Facebook community, a podcast and paid courses on ads and launches.
+summary: >-
+  Self Publishing Formula runs a free Facebook community of roughly 54,000 members as of late 2025, the Self Publishing
+  Show podcast (relaunched February 2026) and paid courses on launches and advertising. It leans toward fiction authors
+  learning Facebook and Amazon ads, email lists and launch strategy.
+pricing: { model: freemium, currency: USD, free_tier: true, note: "Free community and podcast; paid courses are sold separately." }
+platforms: [web]
+best_for: [Fiction authors learning ads, email lists and launches]
+alternatives: [kindlepreneur]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://selfpublishingdirectory.com/communities/spf-community

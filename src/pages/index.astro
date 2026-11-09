@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import ToolTable from '../components/ToolTable.astro';
+import { getTools, SITE, isoDate } from '../lib/site';
+import { STAGES, CATEGORIES, nonEmpty } from '../lib/taxonomy';
+
+const tools = await getTools();
+const liveCategories = nonEmpty(tools.flatMap((t) => t.data.categories));
+const countOf = (cat: string) => tools.filter((t) => t.data.categories.includes(cat as never)).length;
+const stageCount = (stage: string) =>
+  new Set(tools.filter((t) => t.data.categories.some((c) => CATEGORIES.find((x) => x.slug === c)?.stage === stage)).map((t) => t.id)).size;
+const official = tools.filter((t) => t.data.official);
+const latest = [...tools].sort((a, b) => +(b.data.verified_at ?? 0) - +(a.data.verified_at ?? 0)).slice(0, 8);
+const lastChecked = isoDate(latest[0]?.data.verified_at);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+    description: SITE.description,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE.name,
+    url: SITE.url,
+    sameAs: [SITE.github, SITE.related.url],
+  },
+];
+---
+
+<Base title={SITE.name} jsonLd={jsonLd}>
+  <section class="max-w-3xl">
+    <h1 class="text-4xl font-bold leading-tight md:text-5xl">The reference directory for Amazon KDP publishers</h1>
+    <p class="mt-4 text-lg text-muted">
+      {tools.length} tools, official sources and communities, each with its price, what it does for KDP, and the date we last checked it.
+      Open data, no pay-to-rank.
+    </p>
+    <p class="mt-2 text-sm text-muted">Last checked {lastChecked}. Not affiliated with Amazon.</p>
+    <form action="/tools/" method="get" class="mt-6 flex gap-2" role="search">
+      <label for="q" class="sr-only">Search tools</label>
+      <input
+        id="q"
+        name="q"
+        type="search"
+        placeholder="Search tools, e.g. keyword research, coloring book, ISBN"
+        class="w-full rounded-lg border border-line bg-white px-4 py-2.5 text-base"
+      />
+      <button class="rounded-lg bg-accent px-5 py-2.5 font-medium text-white">Search</button>
+    </form>
+  </section>
+
+  <section class="mt-12" aria-labelledby="start">
+    <h2 id="start" class="text-2xl font-semibold">Start with what you are doing</h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        STAGES.map((s) => (
+          <a href={`/stages/${s.slug}/`} class="block rounded-lg border border-line bg-white p-4 text-ink no-underline hover:border-accent hover:no-underline">
+            <div class="flex items-baseline justify-between">
+              <h3 class="font-serif text-xl font-semibold">{s.name}</h3>
+              <span class="text-sm text-muted">{stageCount(s.slug)} listed</span>
+            </div>
+            <p class="mt-1 text-sm text-muted">{s.blurb}</p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mt-12" aria-labelledby="official">
+    <h2 id="official" class="text-2xl font-semibold">Official sources first</h2>
+    <p class="mt-1 text-sm text-muted">When another site disagrees with Amazon's own pages, Amazon's pages win.</p>
+    <div class="mt-4"><ToolTable tools={official} /></div>
+  </section>
+
+  <section class="mt-12" aria-labelledby="cats">
+    <h2 id="cats" class="text-2xl font-semibold">Browse by category</h2>
+    <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        liveCategories.map((c) => (
+          <li>
+            <a href={`/c/${c.slug}/`}>{c.name}</a> <span class="text-sm text-muted">({countOf(c.slug)})</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mt-12" aria-labelledby="recent">
+    <h2 id="recent" class="text-2xl font-semibold">Recently checked</h2>
+    <div class="mt-4"><ToolTable tools={latest} showCategory /></div>
+  </section>
+</Base>

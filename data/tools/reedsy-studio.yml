@@ -1,0 +1,20 @@
+name: Reedsy Studio
+url: https://reedsy.com/studio
+categories: [writing-formatting, editing]
+tagline: Reedsy Studio is a free browser-based writing and formatting tool that exports EPUB and print-ready PDF, with real-time collaboration.
+summary: >-
+  Reedsy Studio is a browser-based editor with track changes, real-time collaboration and export to EPUB and print-ready
+  PDF. The core tool is free; optional premium planning tiers start at $4.99 a month. It sits alongside Reedsy's
+  marketplace of freelance editors and designers.
+pricing: { model: freemium, from: 4.99, currency: USD, period: month, free_tier: true }
+platforms: [web]
+kdp:
+  outputs_kdp_files: true
+  touches_kdp_account: false
+  content_types: [fiction, nonfiction]
+alternatives: [atticus, vellum, draft2digital]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://selfpublishingdirectory.com/llms.txt
+  - https://csulb.libguides.com/SelfPublishing/Resources

@@ -1,0 +1,39 @@
+name: New listing
+description: Suggest a tool, official source or community for the directory
+labels: [listing]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Listing is free and cannot be bought. Every claim needs a source. Please check the [methodology](https://kdp123.com/methodology/).
+  - type: input
+    id: name
+    attributes: { label: Name }
+    validations: { required: true }
+  - type: input
+    id: url
+    attributes: { label: Official URL }
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes:
+      label: What it does for KDP publishers
+      description: One or two factual sentences, no marketing wording.
+    validations: { required: true }
+  - type: textarea
+    id: price
+    attributes:
+      label: Price and pricing page link
+      description: Model (free, free tier, one-time, subscription), lowest published price, and the link you got it from.
+    validations: { required: true }
+  - type: textarea
+    id: kdp
+    attributes:
+      label: KDP details if known
+      description: Amazon stores supported, whether it outputs KDP-ready files, whether it touches your KDP account.
+  - type: dropdown
+    id: relation
+    attributes:
+      label: Your relationship to it
+      options: [I use it, I am the vendor or work for the vendor, I am a competitor, Other]
+    validations: { required: true }

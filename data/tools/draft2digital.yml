@@ -1,0 +1,20 @@
+name: Draft2Digital
+url: https://draft2digital.com
+categories: [writing-formatting, print-distribution]
+tagline: Draft2Digital is a free ebook and print distribution service that also offers free automated book formatting.
+summary: >-
+  Draft2Digital converts a Word document into a publish-ready ebook or print-ready PDF using free templates, even if you
+  do not publish through it, and distributes to multiple retailers beyond Amazon. Formatting is free to use. Distribution
+  is paid for out of book sales rather than by an upfront fee.
+pricing: { model: free, currency: USD, note: "Free to use; it earns a share of sales when it distributes your book." }
+platforms: [web]
+kdp:
+  outputs_kdp_files: true
+  touches_kdp_account: false
+  content_types: [fiction, nonfiction]
+alternatives: [ingramspark, atticus, reedsy-studio]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://selfpublishingdirectory.com/llms.txt
+  - https://csulb.libguides.com/SelfPublishing/Resources

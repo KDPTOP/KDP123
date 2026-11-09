@@ -1,0 +1,22 @@
+name: DS Amazon Quick View
+url: https://chromewebstore.google.com/detail/ds-amazon-quick-view/jkompbllimaoekaogchhkmkdogpkhojg
+categories: [book-research, analytics]
+tagline: DS Amazon Quick View is a free Chrome extension that shows Best Sellers Rank and ASIN on Amazon.com search results, with a paid Extended version.
+summary: >-
+  DS Amazon Quick View adds Best Sellers Rank, ASIN and seller information to Amazon search and bestseller pages. The free
+  version works only on amazon.com. The Extended version, a one-time $25, supports all Amazon domains and adds filtering
+  and sorting, CSV export, price history, and publisher and page count for books. It is a quick sanity check, not a full
+  research suite: it shows no sales or demand estimates.
+pricing: { model: freemium, from: 25, currency: USD, period: one-time, free_tier: true, note: "Extended is a one-time $25." }
+platforms: [chrome-extension]
+kdp:
+  outputs_kdp_files: false
+  touches_kdp_account: false
+  content_types: [any]
+alternatives: [kdspy, publisher-rocket]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://chromewebstore.google.com/detail/ds-amazon-quick-view/jkompbllimaoekaogchhkmkdogpkhojg
+  - https://chromewebstore.google.com/detail/ds-amazon-quick-view-exte/ilpimgbmpmhfhdaaeepjokoigelkfbee
+  - https://book-business-kdp-amazon.com/en/blog/best-kdp-tools/

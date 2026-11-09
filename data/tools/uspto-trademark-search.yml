@@ -1,0 +1,14 @@
+name: USPTO Trademark Search
+url: https://tmsearch.uspto.gov
+categories: [legal-isbn]
+tagline: USPTO Trademark Search is the free official database for checking whether a book title, series or brand name is already trademarked in the United States.
+summary: >-
+  Before publishing a series or brand name, search the USPTO trademark database for existing marks. Single book titles
+  are generally not registrable as trademarks, but series titles and brand names can be. A clear search does not guarantee
+  you are safe, so use it as a first filter and get legal advice for anything valuable.
+pricing: { model: free, currency: USD }
+platforms: [web]
+status: published
+verified_at: 2026-11-09
+sources:
+  - https://tmsearch.uspto.gov

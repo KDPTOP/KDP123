@@ -1,0 +1,27 @@
+name: Correction
+description: Something on a listing is wrong or out of date
+labels: [correction]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Listing page
+      placeholder: https://kdp123.com/t/...
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong, and what is right
+    validations: { required: true }
+  - type: input
+    id: source
+    attributes:
+      label: Link to a source
+      description: Pricing page, help page, release notes. Required for any price or feature change.
+    validations: { required: true }
+  - type: dropdown
+    id: relation
+    attributes:
+      label: Your relationship to it
+      options: [I use it, I am the vendor or work for the vendor, I am a competitor, Other]
+    validations: { required: true }

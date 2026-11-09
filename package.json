@@ -1,0 +1,32 @@
+{
+  "name": "kdp123",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "kdp123.com - the reference directory for Amazon KDP publishers",
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "links": "node scripts/check-links.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.7",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^6.0.3",
+    "yaml": "^2.9.1"
+  },
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kdp123/kdp123.git"
+  },
+  "homepage": "https://kdp123.com"
+}

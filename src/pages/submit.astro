@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site';
+---
+
+<Base title="Suggest or correct a listing" description="How to suggest a new KDP tool or correct an existing kdp123 listing.">
+  <article class="prose-kdp max-w-3xl">
+    <h1 class="text-4xl font-bold">Suggest or correct a listing</h1>
+    <p>Listing is free and cannot be bought. Every change needs a source.</p>
+    <ul>
+      <li><a href={`${SITE.github}/issues/new/choose`}>Open an issue</a> using the "New listing" or "Correction" form.</li>
+      <li>Or send a pull request that adds or edits one file in <a href={`${SITE.github}/tree/main/data/tools`}>data/tools</a>.</li>
+    </ul>
+    <h2>What we need</h2>
+    <ul>
+      <li>The official URL and a one-sentence description of what it does for KDP publishers.</li>
+      <li>The current price, with a link to the pricing page.</li>
+      <li>If you are the vendor, say so. We will mark the entry "Verified by vendor" once the details check out. That does not change its placement.</li>
+    </ul>
+  </article>
+</Base>

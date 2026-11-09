@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import { getTools, SITE } from '../lib/site';
+const tools = await getTools();
+---
+
+<Base title="Open data" description="The kdp123 directory as JSON and CSV under CC BY 4.0.">
+  <article class="prose-kdp max-w-3xl">
+    <h1 class="text-4xl font-bold">Open data</h1>
+    <p>The whole directory ({tools.length} listings) is published as machine-readable data.</p>
+    <ul>
+      <li><a href="/tools.json">tools.json</a>: full records, including sources</li>
+      <li><a href="/tools.csv">tools.csv</a>: flat table for spreadsheets</li>
+      <li><a href="/llms.txt">llms.txt</a> and <a href="/llms-full.txt">llms-full.txt</a>: short and long text summaries for AI assistants</li>
+      <li>Each listing also has a plain-text version at <code>/t/&#123;slug&#125;.md</code></li>
+    </ul>
+    <h2>Licence</h2>
+    <p>The data is licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Use it freely, including commercially, and credit <strong>kdp123.com</strong> with a link. Prices and features change; the "checked" date on each record says how current it is.</p>
+    <h2>Source</h2>
+    <p>One YAML file per listing in <a href={`${SITE.github}/tree/main/data/tools`}>data/tools</a> on GitHub.</p>
+  </article>
+</Base>

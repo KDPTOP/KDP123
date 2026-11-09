@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: No affiliate or tracking parameters in data
+        run: |
+          if grep -rniE '(\?|&)(ref|aff|affiliate|tag|utm_[a-z]+|via)=' data/; then
+            echo "Remove tracking or affiliate parameters from data/"; exit 1
+          fi
+      - name: Check listing URLs
+        run: npm run links
+        continue-on-error: true
