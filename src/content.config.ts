@@ -117,4 +117,21 @@ const best = defineCollection({
   }),
 });
 
-export const collections = { tools, facts, best };
+// Head-to-head pages (/compare/{a}-vs-{b}/). Price, platforms and refund rows come from the two listings; the rows
+// here add only what those listings and their sources support.
+const compare = defineCollection({
+  loader: glob({ pattern: '*.yml', base: './data/compare' }),
+  schema: z.object({
+    a: z.string(),
+    b: z.string(),
+    question: z.string().min(10).max(160),
+    answer: z.string().min(40).max(600),
+    rows: z.array(z.object({ label: z.string(), a: z.string(), b: z.string() })).min(3),
+    choose_a: z.string().min(20),
+    choose_b: z.string().min(20),
+    status: z.enum(['draft', 'published']).default('draft'),
+    verified_at: z.coerce.date(),
+  }),
+});
+
+export const collections = { tools, facts, best, compare };

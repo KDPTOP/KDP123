@@ -8,6 +8,11 @@ import { getFacts } from '../lib/facts';
 import research from '../../data/research/reports.json';
 import { addedDates } from '../lib/added';
 import { FREE_TOOLS } from '../lib/freeTools';
+import { getBest } from '../lib/best';
+import { getCompares, compareTitle } from '../lib/compare';
+
+const lists = await getBest();
+const compares = await getCompares();
 
 const tools = await getTools();
 const facts = await getFacts();
@@ -111,6 +116,18 @@ const jsonLd = [
     <p class="mt-1 text-sm text-muted">Royalties, cover size, pricing and listing checks, built on the same rules as the facts above. No sign-up.</p>
     <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
       {FREE_TOOLS.map((t) => <li><a href={`/free-tools/${t.slug}/`}>{t.name}</a></li>)}
+    </ul>
+  </section>
+
+  <section class="mt-12" aria-labelledby="guides">
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 id="guides" class="text-2xl font-semibold">Shortlists and comparisons</h2>
+      <a href="/best/" class="text-sm">All guides</a>
+    </div>
+    <p class="mt-1 text-sm text-muted">Criteria first, then picks and the reason for each. No vendor paid to be listed.</p>
+    <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+      {lists.map(({ list }) => <li><a href={`/best/${list.id}/`}>{list.data.title}</a></li>)}
+      {compares.map(({ cmp, a, b }) => <li><a href={`/compare/${cmp.id}/`}>{compareTitle(a, b)}</a></li>)}
     </ul>
   </section>
 

@@ -1,0 +1,41 @@
+a: publisher-rocket
+b: kdspy
+question: "Publisher Rocket or KDSPY: which is better for KDP keyword and category research?"
+answer: >-
+  Both are one-time purchases for researching Amazon books. Publisher Rocket ($199) is a desktop app with keyword
+  search, category search across 19,000+ categories, a competition analyzer and an Amazon Ads keyword generator.
+  KDSPY ($79) is a browser extension that overlays category, keyword and revenue estimates on Amazon pages as you
+  browse, with a longer 60-day refund window. Pick Rocket for structured research and ads; KDSPY for quick checks.
+rows:
+  - label: How you use it
+    a: Desktop app you search in
+    b: Extension that works on Amazon pages while you browse
+  - label: Keyword research
+    a: Keyword search
+    b: Keyword analysis
+  - label: Category research
+    a: Category search across Amazon's 19,000+ categories
+    b: Category breakdowns with estimated revenue and daily sales needed to rank
+  - label: Competitors
+    a: Competition analyzer with rivals' sales and rankings
+    b: Author and publisher analysis
+  - label: Amazon Ads
+    a: Amazon Ads keyword generator
+    b: Not on its feature list
+  - label: Tracking
+    a: Not on its feature list
+    b: 30-day book tracking
+  - label: Amazon stores
+    a: Eight
+    b: 13 (US, UK, CA, DE, AU, IT, ES, FR, IN, JP, MX, BR, PL)
+  - label: Worth knowing
+    a: Made by the founder of Kindlepreneur, which also sells Atticus; its page warns it may move to a subscription
+    b: Sales and revenue figures are estimates; desktop browsers only
+choose_a: >-
+  You want one place to search keywords and categories, size up competing books and build Amazon Ads keyword lists,
+  and you work on Windows or Mac.
+choose_b: >-
+  You mostly want fast estimates while browsing Amazon itself, want to spend less up front, or want more stores and
+  a 60-day refund window.
+status: published
+verified_at: 2026-11-09

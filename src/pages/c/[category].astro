@@ -5,6 +5,8 @@ import ToolFilters from '../../components/ToolFilters.astro';
 import TeamPick from '../../components/TeamPick.astro';
 import { getTools, SITE } from '../../lib/site';
 import { nonEmpty, stageBySlug } from '../../lib/taxonomy';
+import { getBest } from '../../lib/best';
+import { getCompares, compareTitle } from '../../lib/compare';
 
 export async function getStaticPaths() {
   const all = await getTools();
@@ -21,6 +23,11 @@ const TEAM_TASKS: Record<string, string> = {
   analytics: 'follow bestseller lists and catch new books breaking into the categories you track',
 };
 const teamTask = TEAM_TASKS[category.slug];
+const ids = new Set(tools.map((t) => t.id));
+const guides = [
+  ...(await getBest()).filter(({ list }) => list.data.category === category.slug).map(({ list }) => ({ href: `/best/${list.id}/`, title: list.data.title })),
+  ...(await getCompares()).filter(({ a, b }) => ids.has(a.id) && ids.has(b.id)).map(({ cmp, a, b }) => ({ href: `/compare/${cmp.id}/`, title: compareTitle(a, b) })),
+];
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -57,6 +64,13 @@ const jsonLd = [
   <h1 class="mt-2 text-4xl font-bold">{category.name}</h1>
   <p class="mt-3 max-w-2xl text-lg text-muted">{category.blurb}</p>
   <p class="mt-2 text-sm text-muted">{tools.length} listed, sorted by name. A tool can appear in more than one category.</p>
+  {
+    guides.length > 0 && (
+      <p class="mt-4 text-sm">
+        Shortlists: {guides.map((g, i) => <>{i > 0 && ' · '}<a href={g.href}>{g.title}</a></>)}
+      </p>
+    )
+  }
   {teamTask && <div class="mt-6 max-w-3xl"><TeamPick task={teamTask} /></div>}
   {tools.length >= 6 && <div class="mt-6"><ToolFilters showSearch={false} showOfficial={tools.some((t) => t.data.official)} /></div>}
   <div class="mt-4"><ToolTable tools={tools} filterable={tools.length >= 6} /></div>

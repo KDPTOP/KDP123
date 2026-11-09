@@ -1,0 +1,41 @@
+title: "Best tools for KDP coloring, puzzle and low-content books"
+question: "What are the best tools for making coloring, puzzle and other low-content books for KDP?"
+answer: >-
+  Book Bolt combines niche research with KDP-sized cover and interior design and puzzle generators. Tangent Templates
+  is a $59 one-time alternative for interiors and covers, Puzzle Maker Pro builds puzzle books in volume on Windows,
+  and Inkscape is a free way to draw line-art pages. AI coloring generators such as ColorCraft also work, but KDP
+  requires AI images to be disclosed.
+category: low-content
+criteria:
+  - Produces interiors or covers at KDP trim, bleed and spine sizes
+  - States a commercial license that covers books sold on KDP
+  - Price published on the vendor's page
+  - Flags anything that acts on your KDP account or needs AI disclosure
+picks:
+  - tool: book-bolt
+    label: Research plus design in one subscription
+    why: "Product and keyword research, a cover and interior studio that sizes trim, bleed and spine to KDP specs, and puzzle generators for sudoku, mazes, word search and crosswords. From $23.99 a month; the trial lasts three days."
+  - tool: tangent-templates
+    label: One-time interiors and covers
+    why: "Journals, planners, logs and coloring layouts in KDP trim sizes, a cover designer with spine and barcode area, and a PDF checker for $59 once. Its Listing Helper extension fills forms in your KDP account, so check KDP's terms before using that part."
+  - tool: puzzle-maker-pro
+    label: Puzzle books in volume
+    why: "Generates word searches, sudoku, mazes, crosswords and other puzzles with solutions and builds the interior PDF, with a stated license for KDP sales. Windows only."
+  - tool: inkscape
+    label: Free line art and layouts
+    why: "Free vector drawing with multipage documents and direct PDF export, suited to line-based interiors and cover typography."
+  - tool: creative-fabrica
+    label: Fonts and graphics with a clear KDP license
+    why: "A low yearly price for fonts and graphics, and a help page that answers the KDP license question: no-content books need modified designs, not as-is assets."
+  - tool: colorcraft
+    label: AI coloring books, start to finish
+    why: "Finds a niche, generates pages and exports interiors with bleed at 300 DPI plus a full-wrap cover, from $32 a month. You still tick KDP's AI-content box when uploading."
+not_included:
+  - tool: kdpeasy
+    why: "Covers and interiors in one place, but its Chrome extension saves drafts inside your KDP account, which carries terms-of-service risk."
+  - tool: book2color
+    why: "Free-tier images cannot be used commercially, and the service is new (domain registered January 2026)."
+  - tool: kdp-coloring-book-studio
+    why: "Its cost claims come from a comparison page the vendor publishes about itself; we could not verify them independently."
+status: published
+verified_at: 2026-11-09

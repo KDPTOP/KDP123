@@ -21,6 +21,21 @@ export async function getTools(): Promise<Tool[]> {
 
 export const isoDate = (d?: Date) => (d ? d.toISOString().slice(0, 10) : undefined);
 
+const PLATFORM_LABELS: Record<string, string> = {
+  web: 'Web',
+  windows: 'Windows',
+  mac: 'Mac',
+  linux: 'Linux',
+  'chrome-extension': 'Chrome extension',
+  'firefox-extension': 'Firefox extension',
+  ios: 'iOS',
+  android: 'Android',
+};
+
+export function platformsLabel(t: Tool): string {
+  return t.data.platforms.map((p) => PLATFORM_LABELS[p] ?? p).join(', ');
+}
+
 export function priceLabel(t: Tool): string {
   const p = t.data.pricing;
   const per = { 'one-time': ' one-time', week: '/wk', month: '/mo', year: '/yr' } as const;

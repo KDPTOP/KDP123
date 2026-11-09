@@ -1,0 +1,49 @@
+title: "Best free and one-time KDP tools: no subscriptions"
+question: "Which KDP tools can I use for free or buy once, without a monthly subscription?"
+answer: >-
+  Kindle Create and Reedsy Studio format books for free, while Atticus ($147) and Vellum (from $199.99, Mac only)
+  are one-time formatters. Photopea and Inkscape lay out covers on KDP's template for free. For research, Amazon's
+  Best Sellers lists and Google Trends cost nothing, and KDSPY ($79) and Publisher Rocket ($199) are one-time buys.
+criteria:
+  - Free, or one payment with no subscription required
+  - Covers formatting, cover design or market research for KDP
+  - Price checked on the vendor's own page
+  - The main limitation of each free option is stated
+picks:
+  - tool: kindle-create
+    label: Free formatting from Amazon
+    why: "Builds a reflowable ebook and print interior from a Word or PDF manuscript, with output made for KDP. It cannot edit tables, lists or footnotes."
+  - tool: reedsy-studio
+    label: Free formatting in the browser
+    why: "Free EPUB and print-ready PDF export on any device. The free plan keeps 30 days of writing history."
+  - tool: atticus
+    label: One-time formatter for any computer
+    why: "$147 once for unlimited ebooks and print books on Windows, Mac, Linux and Chromebook, with a 30-day refund window. Made by the founder of Kindlepreneur and Publisher Rocket."
+  - tool: vellum
+    label: One-time formatter for Mac
+    why: "Vellum Ebooks $199.99, or Vellum Press $249.99 to add paperbacks and hardcovers, paid once for unlimited books. Runs only on Mac."
+  - tool: photopea
+    label: Free cover editing in the browser
+    why: "Opens PSD templates and exports PDF, so you can build a paperback wrap on KDP's template without Photoshop. Its CMYK mode is a preview only, and the free version shows ads."
+  - tool: inkscape
+    label: Free vector covers and line-art pages
+    why: "Precise vector layout with direct PDF export, good for cover typography, spine text and line-based interiors. The current release has no full CMYK workflow."
+  - tool: amazon-best-sellers
+    label: Free first-party market data
+    why: "The top 100 in every Books and Kindle category plus Hot New Releases, free and without an account. It shows rank, not sales."
+  - tool: google-trends
+    label: Free seasonality check
+    why: "Shows whether interest in a topic is rising, fading or seasonal before you commit to it. It reflects Google searches, not Amazon."
+  - tool: kdspy
+    label: One-time research while you browse Amazon
+    why: "$79 once with a 60-day refund window for category, keyword and competitor estimates on Amazon pages. Desktop browsers only."
+  - tool: publisher-rocket
+    label: One-time keyword and category research
+    why: "$199 once with a 30-day refund for keyword search, category search across 19,000+ categories and an Amazon Ads keyword generator. Its page warns it may move to a subscription."
+not_included:
+  - tool: gimp
+    why: "Free and capable for photo editing, but it has no CMYK editing mode or book templates; Photopea is simpler for PSD templates and Inkscape for vector layouts."
+  - tool: calibre
+    why: "Free and handy for fixing EPUB files, but it does not make print interiors."
+status: published
+verified_at: 2026-11-09

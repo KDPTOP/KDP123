@@ -1,0 +1,38 @@
+a: book-bolt
+b: bookbeam
+question: "Book Bolt or BookBeam: which KDP research tool fits my books?"
+answer: >-
+  Book Bolt (from $23.99 a month) is built around low-content books: research plus a cover and interior studio sized
+  to KDP specs, puzzle generators and AI credits. BookBeam (from $47 a month, or $29 billed yearly) is built around
+  research and tracking for any book: keyword and niche research, category history, rank tracking and trademark
+  checks, plus a free Chrome Extension Lite. Low-content publishers lean to Book Bolt; catalog builders to BookBeam.
+rows:
+  - label: Built around
+    a: Journals, planners, puzzle, coloring and activity books
+    b: Research and tracking for any kind of book
+  - label: Design tools
+    a: Cover and interior studio that sizes trim, bleed and spine to KDP specs; puzzle generators
+    b: BookBeam Create for KDP interiors
+  - label: Research
+    a: Product and keyword research, plus the KDP Spy browser extension
+    b: Keyword and niche research, category history
+  - label: Tracking
+    a: Not on its feature list
+    b: Book tracker with keyword rank tracking
+  - label: Trademark checks
+    a: Not on its feature list
+    b: USPTO and EUIPO trademark checker
+  - label: AI
+    a: 1,000 AI credits a month on Pro, 4,000 on Premium
+    b: Not on its feature list
+  - label: Try before paying
+    a: 3-day free trial
+    b: Free Chrome Extension Lite; 7-day money-back guarantee
+choose_a: >-
+  You make low-content, puzzle or coloring books and want research and KDP-sized design in one subscription at the
+  lower monthly price.
+choose_b: >-
+  You publish books of any kind and want ongoing tracking of books and keyword ranks, category history and trademark
+  checks, and you can pay yearly to bring the price down.
+status: published
+verified_at: 2026-11-09

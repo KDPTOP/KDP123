@@ -1,0 +1,44 @@
+title: "Best KDP tools for romance and fiction authors"
+question: "What tools do romance and other fiction authors use to write, format and promote novels on KDP?"
+answer: >-
+  Fiction on KDP needs a formatter for clean novel interiors, a drafting app for long manuscripts and ways to reach
+  readers. Vellum (Mac) or Atticus (any computer) format novels; Scrivener and Dabble handle drafting; BookFunnel and
+  StoryOrigin deliver reader magnets and ARCs; BookBub and Written Word Media, whose lists include Red Feather Romance,
+  sell genre promotions.
+criteria:
+  - Built for, or widely used for, novels and series
+  - Prices published on the vendor's site
+  - "Fits a series workflow: drafting, formatting, ARCs and promotions"
+  - Works within Amazon's review rules and KDP Select exclusivity
+picks:
+  - tool: vellum
+    label: Novel formatting on Mac
+    why: "Widely treated as the benchmark for fiction formatting, with clean ebook and print styles and a one-time price for unlimited books. Mac only."
+  - tool: atticus
+    label: Novel formatting on any computer
+    why: "Writing and formatting in one app on Windows, Mac, Linux and Chromebook, exporting EPUB, PDF and DOCX, for $147 once."
+  - tool: scrivener
+    label: Drafting long or research-heavy books
+    why: "Splits a manuscript into scenes you can rearrange and keeps research beside the draft. Its Compile step exports EPUB and PDF, though many authors still use a dedicated formatter for print."
+  - tool: dabble
+    label: Drafting on any device
+    why: "Manuscript binder, plot grid, goals and track changes, synced across devices with offline writing. Exports Word, so pair it with a formatter."
+  - tool: bookfunnel
+    label: Reader magnets and ARC delivery
+    why: "Delivers ebook files through download pages, group promos and ARC campaigns. Its own guidance says not to give away a KDP Select ebook, so use a separate reader magnet."
+  - tool: storyorigin
+    label: Newsletter swaps and group promos
+    why: "Reader magnets, ARCs, newsletter swaps and group promos with other authors for $10 a month or less, with a free basic plan. Needs a separate email service to send newsletters."
+  - tool: bookbub
+    label: The biggest price-promotion lists
+    why: "Featured Deals reach genre readers by email, with the full fee table published; editors pick only 10-20% of eligible deals. BookBub Ads are a separate self-serve option."
+  - tool: written-word-media
+    label: Low-cost genre newsletter promos
+    why: "Freebooksy, Bargain Booksy and the romance list Red Feather Romance sell one-day placements with published prices, useful around a free or Countdown deal."
+not_included:
+  - tool: sudowrite
+    why: "A capable fiction AI, but AI-generated text has to be disclosed to KDP. It is in the AI tools category for authors who want it."
+  - tool: booksprout
+    why: "Good for running an ARC team, but any review campaign needs a paid plan; StoryOrigin covers ARCs plus swaps for less."
+status: published
+verified_at: 2026-11-09

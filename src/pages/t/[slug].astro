@@ -1,14 +1,26 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { getTools, priceLabel, isoDate, outbound, SITE } from '../../lib/site';
+import { getTools, priceLabel, platformsLabel, isoDate, outbound, SITE } from '../../lib/site';
 import { categoryBySlug } from '../../lib/taxonomy';
+import { getBest } from '../../lib/best';
+import { getCompares, compareTitle } from '../../lib/compare';
 
 export async function getStaticPaths() {
   const tools = await getTools();
   const byId = new Map(tools.map((t) => [t.id, t]));
-  return tools.map((t) => ({ params: { slug: t.id }, props: { tool: t, byId } }));
+  const lists = (await getBest()).map((b) => b.list);
+  const compares = await getCompares();
+  return tools.map((t) => ({
+    params: { slug: t.id },
+    props: {
+      tool: t,
+      byId,
+      inLists: lists.filter((l) => l.data.picks.some((p) => p.tool === t.id)),
+      inCompares: compares.filter((c) => c.a.id === t.id || c.b.id === t.id),
+    },
+  }));
 }
-const { tool, byId } = Astro.props;
+const { tool, byId, inLists, inCompares } = Astro.props;
 const d = tool.data;
 const link = outbound(tool);
 const alts = d.alternatives.map((a) => byId.get(a)).filter((t) => t !== undefined);
@@ -94,7 +106,7 @@ const jsonLd = [
     <dl class="mt-3 divide-y divide-line rounded-lg border border-line bg-white text-sm">
       <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Price</dt><dd class="col-span-2">{priceLabel(tool)}{d.pricing.note ? ` (${d.pricing.note})` : ''}</dd></div>
       {d.pricing.refund_days !== undefined && <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Refund window</dt><dd class="col-span-2">{d.pricing.refund_days} days</dd></div>}
-      {d.platforms.length > 0 && <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Platforms</dt><dd class="col-span-2">{d.platforms.join(', ')}</dd></div>}
+      {d.platforms.length > 0 && <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Platforms</dt><dd class="col-span-2">{platformsLabel(tool)}</dd></div>}
       <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Outputs KDP-ready files</dt><dd class="col-span-2">{yn(d.kdp.outputs_kdp_files)}</dd></div>
       <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Touches your KDP account</dt><dd class="col-span-2">{yn(d.kdp.touches_kdp_account)}</dd></div>
       {d.kdp.marketplaces && <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Amazon marketplaces</dt><dd class="col-span-2">{d.kdp.marketplaces.join(', ')}</dd></div>}
@@ -116,6 +128,16 @@ const jsonLd = [
     {d.best_for.length > 0 && (<><h2 class="mt-8 text-2xl font-semibold">Best for</h2><ul class="mt-2 list-disc pl-6 leading-7">{d.best_for.map((x) => <li>{x}</li>)}</ul></>)}
     {d.pros.length > 0 && (<><h2 class="mt-8 text-2xl font-semibold">Pros</h2><ul class="mt-2 list-disc pl-6 leading-7">{d.pros.map((x) => <li>{x}</li>)}</ul></>)}
     {d.cons.length > 0 && (<><h2 class="mt-8 text-2xl font-semibold">Cons</h2><ul class="mt-2 list-disc pl-6 leading-7">{d.cons.map((x) => <li>{x}</li>)}</ul></>)}
+
+    {(inLists.length > 0 || inCompares.length > 0) && (
+      <>
+        <h2 class="mt-8 text-2xl font-semibold">In our guides</h2>
+        <ul class="mt-2 list-disc pl-6 leading-7">
+          {inCompares.map((c) => <li><a href={`/compare/${c.cmp.id}/`}>{compareTitle(c.a, c.b)}</a></li>)}
+          {inLists.map((l) => <li><a href={`/best/${l.id}/`}>{l.data.title}</a></li>)}
+        </ul>
+      </>
+    )}
 
     {alts.length > 0 && (
       <>

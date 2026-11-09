@@ -4,6 +4,8 @@ import { CATEGORIES, STAGES } from '../lib/taxonomy';
 import { getFacts } from '../lib/facts';
 import research from '../../data/research/reports.json';
 import { FREE_TOOLS } from '../lib/freeTools';
+import { getBest } from '../lib/best';
+import { getCompares, compareTitle } from '../lib/compare';
 
 export const GET: APIRoute = async () => {
   const tools = await getTools();
@@ -28,6 +30,16 @@ export const GET: APIRoute = async () => {
   if (facts.length) {
     out.push('', '## KDP facts', '', `Rules and numbers sourced to Amazon's help pages: ${SITE.url}/facts/`, '');
     for (const f of facts) out.push(`- [${f.data.title}](${SITE.url}/facts/${f.id}/): ${f.data.question}`);
+  }
+  const lists = await getBest();
+  if (lists.length) {
+    out.push('', '## Best-of lists', '', 'Criteria first, then picks with reasons, drawn from the listings below:', '');
+    for (const { list } of lists) out.push(`- [${list.data.title}](${SITE.url}/best/${list.id}/): ${list.data.question} Plain text: ${SITE.url}/best/${list.id}.md`);
+  }
+  const compares = await getCompares();
+  if (compares.length) {
+    out.push('', '## Comparisons', '');
+    for (const { cmp, a, b } of compares) out.push(`- [${compareTitle(a, b)}](${SITE.url}/compare/${cmp.id}/): ${cmp.data.question}`);
   }
   out.push('', '## Free tools', '', `Browser calculators and checkers built on the KDP facts above: ${SITE.url}/free-tools/`, '');
   for (const t of FREE_TOOLS) out.push(`- [${t.name}](${SITE.url}/free-tools/${t.slug}/): ${t.blurb}`);

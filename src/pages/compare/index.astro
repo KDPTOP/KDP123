@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCompares, compareTitle } from '../../lib/compare';
+import { SITE } from '../../lib/site';
+
+const items = await getCompares();
+const url = `${SITE.url}/compare/`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'KDP tool comparisons',
+  url,
+  hasPart: items.map(({ cmp, a, b }) => ({ '@type': 'Article', name: compareTitle(a, b), url: `${url}${cmp.id}/` })),
+};
+---
+
+<Base title="KDP tool comparisons" description="Side-by-side comparisons of popular KDP tools: price, platforms, features and which to choose, from each vendor's own pages." jsonLd={jsonLd} noindex={items.length === 0}>
+  <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / Comparisons</nav>
+  <h1 class="mt-2 text-4xl font-bold">KDP tool comparisons</h1>
+  <p class="mt-3 max-w-3xl leading-7">Two tools that do the same job, side by side. Prices and platforms come from each listing; we only compare what the vendors' own pages support. For wider shortlists see the <a href="/best/">best-of lists</a>.</p>
+  <ul class="mt-6 space-y-4">
+    {
+      items.map(({ cmp, a, b }) => (
+        <li class="max-w-3xl rounded-lg border border-line bg-white p-4">
+          <a href={`/compare/${cmp.id}/`} class="text-lg font-semibold">{compareTitle(a, b)}</a>
+          <p class="mt-1 text-sm leading-6 text-muted">{cmp.data.answer}</p>
+        </li>
+      ))
+    }
+  </ul>
+</Base>

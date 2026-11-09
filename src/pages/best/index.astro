@@ -1,9 +1,11 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getBest } from '../../lib/best';
+import { getCompares, compareTitle } from '../../lib/compare';
 import { isoDate, SITE } from '../../lib/site';
 
 const lists = await getBest();
+const compares = await getCompares();
 const url = `${SITE.url}/best/`;
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -34,4 +36,19 @@ const jsonLd = {
       ))
     }
   </ul>
+  {
+    compares.length > 0 && (
+      <section class="mt-10 max-w-3xl">
+        <h2 class="text-2xl font-semibold">Head-to-head comparisons</h2>
+        <ul class="mt-3 divide-y divide-line rounded-lg border border-line bg-white">
+          {compares.map(({ cmp, a, b }) => (
+            <li class="px-4 py-3">
+              <a href={`/compare/${cmp.id}/`} class="font-medium">{compareTitle(a, b)}</a>
+              <p class="mt-1 text-sm text-muted">{cmp.data.question}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
 </Base>

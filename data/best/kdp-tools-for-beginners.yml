@@ -1,0 +1,50 @@
+title: "Best KDP tools for beginners: what a first book needs"
+question: "Which tools does a first-time KDP author actually need, and which can wait?"
+answer: >-
+  A first KDP book needs very little beyond KDP itself: Kindle Create or Reedsy Studio to format the interior for
+  free, KDP's Cover Calculator and Canva's free plan for the cover, and KDP's help pages and community for the rules.
+  Paid research, formatting and promotion tools can wait until you know what you will publish next.
+criteria:
+  - Free or close to it, because a first book rarely earns back tool costs
+  - Made by Amazon or produces files KDP accepts
+  - Can be learned in an afternoon
+  - "Covers a step every book has: interior, cover or rules"
+picks:
+  - tool: amazon-kdp
+    label: The platform and its rules
+    why: >-
+      Publishing is free, and KDP's help pages are the authority on content, AI disclosure, royalties and printing.
+      Read the rules for your format before buying anything that promises to make KDP easier.
+  - tool: kindle-create
+    label: Free interior formatting from Amazon
+    why: >-
+      Imports a DOC, DOCX or PDF manuscript and builds a reflowable ebook whose KPF file matches what KDP expects; the
+      same project can also become the print interior. Best for text-heavy novels and memoirs, since it cannot edit
+      tables, lists or footnotes.
+  - tool: reedsy-studio
+    label: Free formatting in the browser
+    why: >-
+      The free core editor exports EPUB and print-ready PDF on any device, so it suits authors who also want files
+      they can use outside Amazon. Paid add-ons only add history, stats and outlining.
+  - tool: kdp-cover-calculator
+    label: Exact cover size
+    why: >-
+      Gives the full-wrap size and a PDF or PNG template from your trim size, page count and paper, straight from
+      KDP. Regenerate it whenever the page count changes.
+  - tool: canva
+    label: Free cover and graphics design
+    why: >-
+      The free plan and template library are enough for many ebook covers and simple graphics. For paperbacks, set
+      trim, bleed and spine yourself from the cover calculator, because Canva does not calculate them.
+  - tool: kdp-community
+    label: Help with specific KDP errors
+    why: >-
+      The official forum is the quickest way to see how other publishers solved a rejection or upload error. Other
+      users' answers are not Amazon policy, so confirm rules on the help pages.
+not_included:
+  - tool: atticus
+    why: "A good one-time formatter at $147, but the free options handle a first book. Worth a look once you publish regularly."
+  - tool: publisher-rocket
+    why: "Useful keyword and category research, but $199 up front is a lot before the first book is out."
+status: published
+verified_at: 2026-11-09

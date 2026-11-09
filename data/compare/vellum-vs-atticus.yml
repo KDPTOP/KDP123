@@ -1,0 +1,35 @@
+a: vellum
+b: atticus
+question: "Vellum or Atticus: which book formatting software should a KDP author buy?"
+answer: >-
+  Both are one-time purchases that turn a manuscript into KDP-ready ebook and print files for unlimited books.
+  Vellum runs only on Mac and costs $199.99 for ebooks or $249.99 with print (24 trim sizes, PDF/X-1a output).
+  Atticus costs $147, runs on Windows, Mac, Linux and Chromebook, and adds writing in the same app. On a Mac,
+  choose by style and budget; on anything else, Atticus is the option of the two.
+rows:
+  - label: What it does
+    a: Formats an imported manuscript into ebook and print files
+    b: Writing and formatting in one app
+  - label: Print books
+    a: Vellum Press only; paperbacks and hardcovers, 24 trim sizes, PDF/X-1a output
+    b: Included; exports print PDF
+  - label: Export formats
+    a: Ebook files and print PDF
+    b: EPUB, PDF and DOCX
+  - label: Design control
+    a: Built-in styles; less layout control than InDesign
+    b: 17 templates and a custom theme builder
+  - label: App type
+    a: Mac desktop app
+    b: Progressive web app that works online or offline
+  - label: Worth knowing
+    a: Mac only; the two editions differ only in print output
+    b: Made by the founder of Kindlepreneur and Publisher Rocket, so reviews on that site are not independent
+choose_a: >-
+  You write on a Mac, care most about polished fiction styles, and either only publish ebooks ($199.99) or want print
+  and hardcover output from the same file ($249.99).
+choose_b: >-
+  You use Windows, Linux or a Chromebook, want to write and format in one place, or want the lower $147 price with a
+  30-day refund window.
+status: published
+verified_at: 2026-11-09

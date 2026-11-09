@@ -1,0 +1,38 @@
+title: "Best KDP keyword and category research tools"
+question: "Which tools are best for researching KDP keywords and categories?"
+answer: >-
+  Publisher Rocket ($199 once) covers keyword search, category search and Amazon Ads keywords; KDSPY ($79 once) shows
+  category and keyword estimates while you browse Amazon; BookBeam (from $47 a month) adds history, rank tracking and
+  trademark checks. Amazon's Best Sellers lists are the free first-party baseline, and Manuscript Report researches a
+  finished manuscript for $69.
+category: keywords-categories
+criteria:
+  - Built for books, or clearly useful for KDP's seven keyword slots and three categories
+  - Labels estimates and says where its numbers come from
+  - Price checked on the vendor's page
+  - Covers Amazon's Books and Kindle stores, not only product categories
+picks:
+  - tool: publisher-rocket
+    label: One-time keyword and category research
+    why: "Keyword search, category search across 19,000+ categories, a competition analyzer and an Amazon Ads keyword generator across eight stores, for $199 once with a 30-day refund. Made by the founder of Kindlepreneur."
+  - tool: kdspy
+    label: Research while you browse Amazon
+    why: "Category breakdowns with estimated revenue and sales needed to rank, keyword and competitor analysis, and 30-day tracking, for $79 once with a 60-day refund. Desktop browsers only."
+  - tool: bookbeam
+    label: Research plus ongoing tracking
+    why: "Keyword and niche research, category history, book and keyword-rank tracking and a USPTO and EUIPO trademark checker. From $47 a month or $29 billed yearly, with a free Chrome Extension Lite."
+  - tool: amazon-best-sellers
+    label: Free first-party baseline
+    why: "The top 100 and Hot New Releases for every category, straight from Amazon. Rank only, so pair it with a tool that estimates sales."
+  - tool: manuscript-report
+    label: Research for one finished manuscript
+    why: "Upload a manuscript and get category suggestions, seven backend keyword fields with search estimates and comparable titles for $69 per book. Much of the copy is AI-written, so edit it."
+not_included:
+  - tool: kdptop
+    why: "Run by the same team as kdp123, so we leave it out of our own ranking. Its listing shows what it does and costs."
+  - tool: helium-10
+    why: "Most of the price pays for physical-product seller tools, and it is reported to return little keyword data for Kindle ebook ASINs."
+  - tool: data-dive
+    why: "Groups keywords well, but has no book-specific features and assumes a Seller Central account."
+status: published
+verified_at: 2026-11-09
