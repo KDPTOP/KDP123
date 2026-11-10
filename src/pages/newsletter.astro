@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import { getReports, monthName } from '../lib/reports';
+
+const TURNSTILE_SITEKEY = '0x4AAAAAAF5sKyu1iD-AaBc9';
+const [latest] = await getReports();
+---
+
+<Base title="The kdp123 monthly email" description="One email a month: KDP rule changes, KDP tool price changes and the monthly market report. Double opt-in, no ads, unsubscribe from any issue.">
+  <div class="max-w-2xl">
+    <h1 class="text-4xl font-bold">The kdp123 monthly email</h1>
+    <p class="mt-4 text-lg text-muted">One email at the start of each month, written by the kdp123 editorial team. No ads, no sponsored tools, and every item links to its source.</p>
+    <ul class="mt-4 list-disc pl-6 leading-7">
+      <li>KDP rules that Amazon changed, and the fact pages we updated.</li>
+      <li>KDP tool prices and plans that changed, from the <a href="/changes/">changes log</a>.</li>
+      <li>The <a href={latest ? `/reports/${latest.data.month}/` : '/reports/'}>monthly market report</a>{latest && <>, most recently {monthName(latest.data.month)}</>}: categories with room for new books, and new listings.</li>
+    </ul>
+
+    <div id="subscribe" class="mt-8 scroll-mt-24">
+      <p id="sent" class="hidden rounded-lg border border-ok/30 bg-ok/5 p-4" role="status">Check your inbox: we sent a link to confirm your subscription. Nothing is sent until you click it.</p>
+      <p id="confirmed" class="hidden rounded-lg border border-ok/30 bg-ok/5 p-4" role="status">You are subscribed. The next issue arrives at the start of the month.</p>
+      <p id="failed" class="hidden rounded-lg border border-warn/30 bg-warn/5 p-4" role="alert"></p>
+
+      <form id="subscribe-form" action="/api/subscribe" method="post" class="mt-4 space-y-4 rounded-lg border border-line bg-white p-5">
+        <label class="block text-sm font-medium">Email address
+          <input name="email" type="email" required maxlength="200" autocomplete="email" class="input mt-1" />
+        </label>
+        <div class="hidden" aria-hidden="true">
+          <label>Leave this empty <input name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY} data-action="subscribe"></div>
+        <div class="flex flex-wrap items-center gap-3">
+          <button type="submit" class="btn">Subscribe</button>
+          <span class="text-xs text-muted">We email a confirmation link first. Your address is used only for this email and never shared.</span>
+        </div>
+      </form>
+    </div>
+
+    <p class="mt-6 text-sm text-muted">
+      Emails are sent through Resend. Every issue has a one-click unsubscribe link; you can also write to <a href="mailto:hello@kdp123.com">hello@kdp123.com</a> to be removed.
+    </p>
+  </div>
+</Base>
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+  const form = document.getElementById('subscribe-form') as HTMLFormElement;
+  const show = (id: string, text?: string) => {
+    const el = document.getElementById(id)!;
+    if (text) el.textContent = text;
+    el.classList.remove('hidden');
+  };
+  const params = new URLSearchParams(location.search);
+  if (params.has('sent')) show('sent');
+  if (params.has('confirmed')) {
+    show('confirmed');
+    form.classList.add('hidden');
+  }
+  if (params.get('error')) show('failed', params.get('error')!);
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const button = form.querySelector('button')!;
+    button.disabled = true;
+    document.getElementById('failed')!.classList.add('hidden');
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      const data = await res.json();
+      if (!data.ok) throw new Error(data.error || 'Something went wrong.');
+      form.reset();
+      form.classList.add('hidden');
+      show('sent');
+    } catch (err) {
+      show('failed', err instanceof Error ? err.message : String(err));
+      (window as unknown as { turnstile?: { reset: () => void } }).turnstile?.reset();
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>

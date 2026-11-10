@@ -8,3 +8,5 @@ dist/
 
 # Private overlay: affiliate URLs per tool slug. Never committed (see README, "Affiliate links").
 affiliates.private.json
+newsletter-*.html
+newsletter-*.txt
