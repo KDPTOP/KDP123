@@ -3,11 +3,7 @@ url: https://www.ereadernewstoday.com
 categories: [ads-promotion]
 tagline: Ereader News Today is an ebook deal newsletter and website for authors that promotes free and discounted books for a per-genre fee.
 summary: >-
-  Ereader News Today (ENT) features accepted free or discounted ebooks on its website, social accounts and daily newsletter.
-  The discount must be live on Amazon.com by 6 a.m. Eastern on the promo day; other retailers are optional. Books need at
-  least 125 pages (except children's, nonfiction and cookbooks), cannot have run with ENT in the past 90 days, and erotica
-  is not accepted. Its terms are strict: no refunds except for ENT's own errors, and authors who raise the price early or
-  do not pay are barred from future promotions.
+  Ereader News Today (ENT) features accepted free or discounted ebooks on its website, social accounts and daily newsletter. The discount must be live on Amazon.com by 6 a.m. Eastern on the promo day; other retailers are optional. Books need at least 125 pages (except children's, nonfiction and cookbooks), cannot have run with ENT in the past 90 days, and erotica is not accepted. Its terms are strict: no refunds except for ENT's own errors, and authors who raise the price early or do not pay are barred from future promotions.
 pricing:
   model: paid
   from: 40
@@ -26,9 +22,11 @@ pros:
 cons:
   - Requires an Amazon.com discount; no refunds if your price is not changed in time
   - Not every submission is accepted, and you must submit at least 2 weeks ahead
-best_for: [Promoting a KDP Select free day or Countdown Deal to US readers]
+best_for:
+  - Readers getting daily free and bargain ebook deal emails by genre
 alternatives: [bookbub, written-word-media, robin-reads, the-fussy-librarian]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.ereadernewstoday.com/bargain-and-free-book-submissions/
+features_checked_at: 2026-11-10

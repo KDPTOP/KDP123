@@ -3,10 +3,8 @@ url: https://colorcraft.ai
 categories: [low-content, ai-tools]
 tagline: ColorCraft is an AI coloring book app that draws the pages and exports KDP-format interior PDFs and spine-aware full-wrap covers.
 summary: >-
-  ColorCraft finds a niche, generates the coloring pages, and exports interior PDFs in KDP's bleed format at 300 DPI plus
-  a full-wrap cover sized to trim size and page count. AI cover art is included from the Creator plan at $32 a month and
-  with the free trial. You still tick KDP's AI-content disclosure box when uploading, and KDP's review decision is final.
-pricing: { model: subscription, from: 32, currency: USD, period: month, note: "AI cover art from the Creator plan; every plan includes each book's first AI cover. From the vendor's own page." }
+  ColorCraft finds a niche, generates the coloring pages, and exports interior PDFs in KDP's bleed format at 300 DPI plus a full-wrap cover sized to trim size and page count. AI cover art is included from the Creator plan at $32 a month and with the free trial. You still tick KDP's AI-content disclosure box when uploading, and KDP's review decision is final.
+pricing: { model: subscription, from: 32, currency: USD, period: month, note: "AI cover art from the Creator plan; every plan includes each book's first AI cover. From the vendor's own page.", annual_from: 7.5, trial_days: 7, region_note: Prices are in US dollars; the app and help docs are English only. }
 platforms: [web]
 kdp:
   outputs_kdp_files: true
@@ -17,3 +15,25 @@ status: published
 verified_at: 2026-11-09
 sources:
   - https://colorcraft.ai/
+kdp_fit:
+  cover: native
+  interior: native
+  ebook: na
+  print: native
+  manual_steps: []
+  sources:
+    - https://colorcraft.ai/
+    - https://colorcraft.ai/pricing
+  checked_at: 2026-11-10
+best_for:
+  - KDP publishers making coloring, story, comic, and puzzle paperbacks
+not_ideal_for:
+  - Authors who need hardcover or Kindle ebook files
+  - Journals, planners, or notebook interiors
+  - Users who need the app in a language other than English
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10
+price_history:
+  - date: 2026-11-10
+    kind: plan
+    note: "Yearly billing read on the vendor's pricing page: from $7.5/mo billed yearly."

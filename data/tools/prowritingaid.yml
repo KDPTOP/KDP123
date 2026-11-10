@@ -3,12 +3,8 @@ url: https://prowritingaid.com
 categories: [editing]
 tagline: ProWritingAid is a grammar and style editor aimed at fiction and long-form writers that runs line-editing reports on whole manuscripts.
 summary: >-
-  ProWritingAid checks grammar and style, runs reports on pacing, overused words and dialogue, and sells AI manuscript
-  critiques through Story Credits; it works inside Word, Scrivener, Google Docs and browsers. The free tier checks only
-  500 words at a time, so a full book needs a paid plan, and it does not format books for KDP. Fixing your own prose with
-  it is AI-assisted under KDP rules and needs no disclosure, but any text it generates for you counts as AI-generated and
-  must be disclosed.
-pricing: { model: freemium, from: 120, currency: USD, period: year, free_tier: true, refund_days: 3, note: "Premium $120/year ($10/month) or $30 billed monthly; Premium Pro $144/year; lifetime $399. Refunds within 3 days for yearly and lifetime plans only. Story Credits cost extra." }
+  ProWritingAid checks grammar and style, runs reports on pacing, overused words and dialogue, and sells AI manuscript critiques through Story Credits; it works inside Word, Scrivener, Google Docs and browsers. The free tier checks only 500 words at a time, so a full book needs a paid plan, and it does not format books for KDP. Fixing your own prose with it is AI-assisted under KDP rules and needs no disclosure, but any text it generates for you counts as AI-generated and must be disclosed.
+pricing: { model: freemium, from: 120, currency: USD, period: year, free_tier: true, refund_days: 3, note: "Premium $120/year ($10/month) or $30 billed monthly; Premium Pro $144/year; lifetime $399. Refunds within 3 days for yearly and lifetime plans only. Story Credits cost extra.", annual_from: 10 }
 platforms: [web, windows, mac, chrome-extension, firefox-extension]
 kdp:
   outputs_kdp_files: false
@@ -20,7 +16,8 @@ pros:
 cons:
   - Free tier limited to 500 words per check
   - Very short refund window; manuscript analysis costs extra credits
-best_for: [Self-editing a full manuscript before hiring an editor]
+best_for:
+  - Writers planning, drafting, and editing novels with ProWritingAid’s story and line tools
 alternatives: [grammarly, hemingway-editor, editorial-freelancers-association]
 status: published
 verified_at: 2026-11-09
@@ -28,3 +25,9 @@ sources:
   - https://prowritingaid.com/pricing
   - https://prowritingaid.com/integrations
   - https://kdp.amazon.com/en_US/help/topic/G200672390
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10
+price_history:
+  - date: 2026-11-10
+    kind: plan
+    note: "Yearly billing read on the vendor's pricing page: from $10/mo billed yearly."

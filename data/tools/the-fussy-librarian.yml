@@ -3,11 +3,7 @@ url: https://www.thefussylibrarian.com
 categories: [ads-promotion]
 tagline: The Fussy Librarian is an ebook recommendation newsletter for authors that sells genre-priced placements for free and bargain ebooks.
 summary: >-
-  The Fussy Librarian sends readers personalized emails based on the genres they choose. Authors can buy a free-ebook
-  promotion (about 570,000 subscribers, with 7-day and 30-day click reports) or a bargain promotion for ebooks priced
-  $0.99 to $5.99 (about 120,000 subscribers, no click data). It does not guarantee or predict sales, and it refunds the fee
-  if a book is not approved. It has a promotion partnership with Written Word Media's Freebooksy, so the two are not
-  independent options.
+  The Fussy Librarian sends readers personalized emails based on the genres they choose. Authors can buy a free-ebook promotion (about 570,000 subscribers, with 7-day and 30-day click reports) or a bargain promotion for ebooks priced $0.99 to $5.99 (about 120,000 subscribers, no click data). It does not guarantee or predict sales, and it refunds the fee if a book is not approved. It has a promotion partnership with Written Word Media's Freebooksy, so the two are not independent options.
 pricing:
   model: paid
   from: 10
@@ -25,10 +21,14 @@ pros:
 cons:
   - Bargain promos report no clicks, only a list of placements after 30 days
   - Bargain genre lists are much smaller than its free list
-best_for: [A low-cost addition to a free or discounted ebook promo stack]
+best_for:
+  - Authors promoting free or bargain ebooks in The Fussy Librarian’s genre newsletters
 alternatives: [written-word-media, ereader-news-today, robin-reads, bookbub]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.thefussylibrarian.com/advertising/prices--genre-statistics
   - https://www.thefussylibrarian.com/advertising
+not_ideal_for:
+  - Bargain titles priced outside the $0.99 to $5.99 promotion window
+features_checked_at: 2026-11-10

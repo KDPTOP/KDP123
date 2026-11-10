@@ -3,12 +3,17 @@ url: https://author.amazon.com
 categories: [official, ads-promotion]
 tagline: Amazon Author Central lets authors manage their author page, biography and book listings across Amazon stores.
 summary: >-
-  Author Central is Amazon's free tool for building an author page, adding a biography and photo, linking your books and
-  following sales rank. Setting it up is a standard step after your first book goes live on KDP.
+  Author Central is Amazon's free tool for building an author page, adding a biography and photo, linking your books and following sales rank. Setting it up is a standard step after your first book goes live on KDP.
 official: true
-pricing: { model: free, currency: USD }
+pricing: { model: free, currency: USD, region_note: Editorial Reviews and BookScan sales information are listed as US features only. }
 platforms: [web]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://author.amazon.com
+best_for:
+  - Authors creating an Amazon Author Page for their books, biography, and reviews
+not_ideal_for:
+  - Authors who need to edit Author Page details on marketplaces that only show US data
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

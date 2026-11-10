@@ -3,15 +3,15 @@ url: https://kindlepreneur.com
 categories: [courses-blogs]
 tagline: Kindlepreneur is a free self-publishing and book marketing site with hundreds of articles, videos and four paid courses.
 summary: >-
-  Kindlepreneur publishes 500+ free articles and 140+ free videos on self-publishing and book marketing, and has over
-  325K email subscribers by its own count. Its founder also makes Publisher Rocket and Atticus, so its tool reviews and
-  recommendations are not independent of those products.
+  Kindlepreneur publishes 500+ free articles and 140+ free videos on self-publishing and book marketing, and has over 325K email subscribers by its own count. Its founder also makes Publisher Rocket and Atticus, so its tool reviews and recommendations are not independent of those products.
 pricing: { model: freemium, currency: USD, free_tier: true, note: "Free content; paid courses sold separately." }
 platforms: [web]
 related_to_directory: false
-best_for: [Learning KDP marketing, metadata and ads]
+best_for:
+  - Authors reading free book-marketing articles and optional self-publishing courses
 alternatives: [self-publishing-formula, low-content-profits]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://kindlepreneur.com/
+features_checked_at: 2026-11-10

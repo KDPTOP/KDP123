@@ -3,11 +3,7 @@ url: https://www.goodreads.com
 categories: [reviews-arc, ads-promotion]
 tagline: Goodreads is Amazon's reader community and review site where authors can claim a profile and run paid Kindle or print book giveaways.
 summary: >-
-  Goodreads is owned by Amazon. Authors can join the free Author Program to claim their profile, and run Giveaways in
-  Kindle or print format before or after publication; every entrant adds the book to their Want to Read shelf. Kindle
-  giveaways require linking your KDP account and are open to US entrants only, while for print giveaways you mail the
-  books yourself to winners in the US and/or Canada. Goodreads sends winners a review reminder; any review request of your
-  own must stay optional, since Amazon allows free copies only when a review is not required or influenced.
+  Goodreads is owned by Amazon. Authors can join the free Author Program to claim their profile, and run Giveaways in Kindle or print format before or after publication; every entrant adds the book to their Want to Read shelf. Kindle giveaways require linking your KDP account and are open to US entrants only, while for print giveaways you mail the books yourself to winners in the US and/or Canada. Goodreads sends winners a review reminder; any review request of your own must stay optional, since Amazon allows free copies only when a review is not required or influenced.
 official: true
 pricing:
   model: freemium
@@ -27,7 +23,8 @@ pros:
 cons:
   - Kindle giveaways are open to US entrants only
   - Entrants are giveaway hunters; many never read or review
-best_for: [Building pre-launch Want to Read shelves for a new release]
+best_for:
+  - Readers tracking books and getting recommendations from titles they already enjoy
 alternatives: [netgalley, booksprout, bookbub, amazon-ads]
 status: published
 verified_at: 2026-11-09
@@ -35,3 +32,4 @@ sources:
   - https://www.goodreads.com/giveaway/about
   - https://m.media-amazon.com/images/G/01/kindle-publication/webinars/Goodreads_Giveaways_Author_PrintAndKindle_SetupGuide_v41.pdf
   - https://kdp.amazon.com/en_US/help/topic/G202101910
+features_checked_at: 2026-11-10

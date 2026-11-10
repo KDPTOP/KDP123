@@ -3,11 +3,8 @@ url: https://bookbolt.io
 categories: [book-research, low-content]
 tagline: Book Bolt is a subscription app that combines niche research with a KDP-sized cover and interior designer for low-content and puzzle books.
 summary: >-
-  Book Bolt puts product and keyword research, a cover and interior studio, puzzle generators, AI credits and the KDP Spy
-  browser extension under one login. The cover designer sizes trim, bleed and spine to KDP specs from your page count.
-  Its tools center on journals, planners, puzzle, coloring and activity books. It does not need access to your KDP
-  account; you upload the finished files yourself.
-pricing: { model: subscription, from: 23.99, currency: USD, period: month, free_tier: false, note: "Pro $23.99/mo monthly or $19.99/mo billed annually (1,000 AI credits/mo); Premium $35.99/mo monthly or $29.99/mo billed annually (4,000 AI credits/mo). 3-day free trial. Refunds after a charge are reviewed case by case." }
+  Book Bolt puts product and keyword research, a cover and interior studio, puzzle generators, AI credits and the KDP Spy browser extension under one login. The cover designer sizes trim, bleed and spine to KDP specs from your page count. Its tools center on journals, planners, puzzle, coloring and activity books. It does not need access to your KDP account; you upload the finished files yourself.
+pricing: { model: subscription, from: 23.99, currency: USD, period: month, free_tier: false, note: "Pro $23.99/mo monthly or $19.99/mo billed annually (1,000 AI credits/mo); Premium $35.99/mo monthly or $29.99/mo billed annually (4,000 AI credits/mo). 3-day free trial. Refunds after a charge are reviewed case by case.", annual_from: 19.99, trial_days: 3 }
 platforms: [web, chrome-extension]
 kdp:
   outputs_kdp_files: true
@@ -19,10 +16,29 @@ pros:
 cons:
   - The trial lasts only three days
   - AI credits are capped per month
-best_for: [Journals, planners, puzzle and activity books]
+best_for:
+  - Amazon KDP sellers designing low-content covers and interiors
+  - Sellers generating puzzle, coloring, journal, and planner books
 alternatives: [self-publishing-titans, kdp-coloring-book-studio, publisher-rocket]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://bookbolt.io/
   - https://bookbolt.io/pricing/
+kdp_fit:
+  cover: native
+  interior: native
+  print: native
+  ebook: unverified
+  manual_steps: []
+  sources:
+    - https://bookbolt.io/studio/
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Users who cannot cancel within the 3-day trial if they do not want to be charged
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10
+price_history:
+  - date: 2026-11-10
+    kind: plan
+    note: "Yearly billing read on the vendor's pricing page: from $19.99/mo billed yearly."

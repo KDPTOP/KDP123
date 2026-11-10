@@ -3,10 +3,7 @@ url: https://calibre-ebook.com
 categories: [writing-formatting]
 tagline: calibre is a free, open-source ebook manager for Windows, Mac and Linux that converts Word and other files to EPUB and includes an EPUB editor.
 summary: >-
-  calibre is mainly an ebook library manager, but its converter turns DOCX and many other formats into EPUB and its
-  built-in editor lets you fix the HTML and CSS inside an EPUB or Kindle file. KDP publishers use it to make or repair an
-  ebook file; check the result in Kindle Previewer before uploading. It is not a print layout tool, so it does not
-  produce paperback interiors at KDP trim sizes.
+  calibre is mainly an ebook library manager, but its converter turns DOCX and many other formats into EPUB and its built-in editor lets you fix the HTML and CSS inside an EPUB or Kindle file. KDP publishers use it to make or repair an ebook file; check the result in Kindle Previewer before uploading. It is not a print layout tool, so it does not produce paperback interiors at KDP trim sizes.
 pricing: { model: free, currency: USD, note: "Free and open source (GPL-3.0); funded by donations." }
 platforms: [windows, mac, linux]
 kdp:
@@ -19,10 +16,26 @@ pros:
 cons:
   - Ebook only; no print PDF layout
   - Conversion output often needs manual cleanup for a polished book
-best_for: [Converting a Word manuscript to EPUB or fixing an existing EPUB for free]
+best_for:
+  - Users converting and managing e-book libraries across devices
+  - Authors converting personal documents into e-book formats
 alternatives: [sigil, pandoc, jutoh, draft2digital]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://calibre-ebook.com/about
   - https://github.com/kovidgoyal/calibre
+kdp_fit:
+  ebook: manual
+  print: manual
+  cover: unverified
+  interior: unverified
+  manual_steps:
+    - Convert to EPUB or another output format, and validate the EPUB yourself if a store requires it
+  sources:
+    - https://manual.calibre-ebook.com/faq.html
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Users who need every calibre-produced EPUB to be valid
+  - Libraries stored on a networked drive or NAS
+features_checked_at: 2026-11-10

@@ -3,11 +3,7 @@ url: https://www.tmdn.org/tmview/
 categories: [legal-isbn]
 tagline: TMview is the EUIPO-led free trademark search tool for checking whether a series, imprint or brand name is already registered across the EU and partner offices.
 summary: >-
-  TMview searches trademark applications and registrations from the EUIPO, all EU national offices and a number of partner
-  offices outside the EU through one interface, with fuzzy, phrase and image search and filters by office, status and Nice
-  class. For a KDP publisher it is a quick first check on a series title or imprint name before selling in European Amazon
-  stores. Each office supplies its own data, so coverage and update timing vary, and a clear result is not legal
-  clearance.
+  TMview searches trademark applications and registrations from the EUIPO, all EU national offices and a number of partner offices outside the EU through one interface, with fuzzy, phrase and image search and filters by office, status and Nice class. For a KDP publisher it is a quick first check on a series title or imprint name before selling in European Amazon stores. Each office supplies its own data, so coverage and update timing vary, and a clear result is not legal clearance.
 official: true
 pricing: { model: free, currency: EUR }
 platforms: [web]
@@ -17,7 +13,8 @@ pros:
 cons:
   - Coverage and update timing depend on each participating office
   - Not a substitute for legal advice on a valuable name
-best_for: [Checking a series or imprint name before publishing in European markets]
+best_for:
+  - Users searching national, EUIPO, and Madrid-system trade marks in TMview
 alternatives: [wipo-global-brand-database, uspto-trademark-search]
 status: published
 verified_at: 2026-11-09
@@ -25,3 +22,4 @@ sources:
   - https://www.tmdn.org/tmview/
   - https://www.euipn.org/en/tools/TMview
   - https://www.wipo.int/en/web/global-brand-database/faqs_branddb
+features_checked_at: 2026-11-10

@@ -3,11 +3,7 @@ url: https://readersfavorite.com
 categories: [reviews-arc]
 tagline: Readers' Favorite is a book review and award contest site for authors that offers free reviews and paid express reviews by volunteer reviewers.
 summary: >-
-  Readers' Favorite reviewers pick books from its submission list; free reviews are not guaranteed (it says about 65% are
-  picked within three months), while paid Express reviews guarantee a turnaround. Reviews appear on its own site and
-  partner sites as editorial-style reviews, not as Amazon customer reviews, and only reviews of 4 stars or more are posted
-  publicly, so its seals and ratings are not a neutral sample. It also runs a paid award contest. Do not post a paid
-  review as an Amazon customer review: Amazon prohibits reviews in exchange for compensation.
+  Readers' Favorite reviewers pick books from its submission list; free reviews are not guaranteed (it says about 65% are picked within three months), while paid Express reviews guarantee a turnaround. Reviews appear on its own site and partner sites as editorial-style reviews, not as Amazon customer reviews, and only reviews of 4 stars or more are posted publicly, so its seals and ratings are not a neutral sample. It also runs a paid award contest. Do not post a paid review as an Amazon customer review: Amazon prohibits reviews in exchange for compensation.
 pricing:
   model: freemium
   from: 59
@@ -26,7 +22,8 @@ pros:
 cons:
   - Reviews under 4 stars are not published on its site
   - Paid reviews do not count as Amazon customer reviews
-best_for: [A quotable editorial review or seal for the book page and marketing]
+best_for:
+  - Authors requesting a free book review or entering the annual award contest
 alternatives: [netgalley, booksirens, booksprout]
 status: published
 verified_at: 2026-11-09
@@ -34,3 +31,4 @@ sources:
   - https://readersfavorite.com/book-reviews.htm
   - https://www.amazon.com/gp/help/customer/display.html?nodeId=GLHXEX85MENUE4XF
   - https://kdp.amazon.com/en_US/help/topic/G202101910
+features_checked_at: 2026-11-10

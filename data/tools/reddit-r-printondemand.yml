@@ -3,10 +3,7 @@ url: https://www.reddit.com/r/printondemand/
 categories: [communities]
 tagline: r/printondemand is a Reddit community for print-on-demand sellers, mostly of apparel and merch on Etsy, Merch by Amazon and similar platforms.
 summary: >-
-  r/printondemand, created in 2011, is a public subreddit where sellers discuss print-on-demand shops, designs, niches
-  and platforms. Most posts are about T-shirts and merch on Etsy and Merch by Amazon rather than books, so it is of
-  limited use for KDP publishers. Its rules ban selling print-on-demand "classes", shortened links and links posted for
-  reviews; post a screenshot instead.
+  r/printondemand, created in 2011, is a public subreddit where sellers discuss print-on-demand shops, designs, niches and platforms. Most posts are about T-shirts and merch on Etsy and Merch by Amazon rather than books, so it is of limited use for KDP publishers. Its rules ban selling print-on-demand "classes", shortened links and links posted for reviews; post a screenshot instead.
 pricing: { model: free, currency: USD }
 platforms: [web, ios, android]
 pros:
@@ -15,9 +12,11 @@ pros:
 cons:
   - Very little about books or KDP
   - Peer advice of varying quality
-best_for: [Publishers who also sell print-on-demand merch]
+best_for:
+  - People discussing print-on-demand work in a community that bars spam and class ads
 alternatives: [reddit-r-kdp, reddit-r-selfpublish]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.reddit.com/r/printondemand/
+features_checked_at: 2026-11-10

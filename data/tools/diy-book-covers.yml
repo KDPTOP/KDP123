@@ -3,11 +3,7 @@ url: https://diybookcovers.com
 categories: [cover-design, ai-tools]
 tagline: DIY Book Covers is a site by designer Derek Murphy for self-publishers that offers a free cover editor, an AI cover generator and 3D mockups.
 summary: >-
-  DIY Book Covers offers genre cover templates in a browser editor, a free 3D book mockup tool, a cover critique tool,
-  Word cover templates, and an AI "Instant Book Cover Creator" with a few free covers a day and one-time credit packs. Its
-  owner also runs a paid custom-cover studio and courses, which the site promotes. AI-generated cover art counts as
-  AI-generated content that KDP asks you to disclose when publishing, and you still need to check the print wrap
-  against KDP's cover specs.
+  DIY Book Covers offers genre cover templates in a browser editor, a free 3D book mockup tool, a cover critique tool, Word cover templates, and an AI "Instant Book Cover Creator" with a few free covers a day and one-time credit packs. Its owner also runs a paid custom-cover studio and courses, which the site promotes. AI-generated cover art counts as AI-generated content that KDP asks you to disclose when publishing, and you still need to check the print wrap against KDP's cover specs.
 pricing: { model: freemium, from: 19, currency: USD, period: one-time, free_tier: true, note: "AI cover maker credit packs are $19, $39 and $59 one-time; the free tier gives 3 AI covers a day. Template bundles and courses are sold separately." }
 platforms: [web]
 kdp:
@@ -19,7 +15,8 @@ pros:
 cons:
   - Site mixes free tools with upsells for courses and a design studio
   - AI-generated covers must be disclosed to KDP
-best_for: [Low-budget authors designing their own ebook cover]
+best_for:
+  - Authors editing free or paid Microsoft Word cover templates
 alternatives: [book-brush, canva, getcovers]
 status: published
 verified_at: 2026-11-09
@@ -27,3 +24,17 @@ sources:
   - https://diybookcovers.com/
   - https://diybookcovers.com/covermaker/
   - https://kdp.amazon.com/en_US/help/topic/G200672390
+kdp_fit:
+  cover: manual
+  interior: unverified
+  ebook: unverified
+  print: unverified
+  manual_steps:
+    - Replace stock images in the Word templates and work out spine width for a print wrap
+  sources:
+    - https://www.diybookcovers.com/
+    - https://diybookcovers.com/download-templates/
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Authors planning to publish the six free templates unchanged
+features_checked_at: 2026-11-10

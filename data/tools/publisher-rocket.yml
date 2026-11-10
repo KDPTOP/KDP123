@@ -3,9 +3,7 @@ url: https://publisherrocket.com
 categories: [book-research, keywords-categories]
 tagline: Publisher Rocket is a downloadable keyword, category and competition research app for Amazon book publishers, sold as a one-time purchase.
 summary: >-
-  Publisher Rocket covers keyword search, category search across Amazon's 19,000+ categories, a competition analyzer
-  with rivals' sales and rankings, and an Amazon Ads keyword generator. It supports eight Amazon stores. It is research
-  only: it does not create, upload or market books. It is made by the founder of Kindlepreneur, which also sells Atticus.
+  Publisher Rocket covers keyword search, category search across Amazon's 19,000+ categories, a competition analyzer with rivals' sales and rankings, and an Amazon Ads keyword generator. It supports eight Amazon stores. It is research only: it does not create, upload or market books. It is made by the founder of Kindlepreneur, which also sells Atticus.
 pricing: { model: one-time, from: 199, currency: USD, period: one-time, refund_days: 30, note: "$199 one-time for lifetime access, shown as down from $299. 30-day money-back guarantee. Its page warns it may move to an annual subscription; check terms before buying." }
 platforms: [windows, mac]
 kdp:
@@ -19,10 +17,12 @@ pros:
 cons:
   - Paid up front; the only trial is the 30-day refund window
   - Desktop download for Windows, Mac or Chromebook, not a web app
-best_for: [Researching keywords, categories and ad targets for a book you already have in mind]
+best_for:
+  - Authors researching Amazon keywords and categories to optimize book listings
 alternatives: [kdspy, bookbeam, book-bolt]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://publisherrocket.com/
   - https://publisherrocket.com/download/
+features_checked_at: 2026-11-10

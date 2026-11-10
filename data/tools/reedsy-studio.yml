@@ -3,10 +3,7 @@ url: https://reedsy.com/studio
 categories: [writing-formatting, editing]
 tagline: Reedsy Studio is a free browser-based writing and formatting tool that exports EPUB and print-ready PDF, with real-time collaboration.
 summary: >-
-  Reedsy Studio is a browser-based editor with track changes, real-time collaboration and export to EPUB and print-ready
-  PDF. The core editor is free for unlimited books and devices. Paid add-ons add features on top: Craft ($4.99 a month)
-  for unlimited history, advanced stats and goals, and Outlining ($7.99 a month) for unlimited boards and notes. It sits
-  alongside Reedsy's marketplace of freelance editors and designers.
+  Reedsy Studio is a browser-based editor with track changes, real-time collaboration and export to EPUB and print-ready PDF. The core editor is free for unlimited books and devices. Paid add-ons add features on top: Craft ($4.99 a month) for unlimited history, advanced stats and goals, and Outlining ($7.99 a month) for unlimited boards and notes. It sits alongside Reedsy's marketplace of freelance editors and designers.
 pricing: { model: freemium, from: 4.99, currency: USD, period: month, free_tier: true, note: "Core editor free, including PDF and EPUB export. Add-ons: Craft $4.99/mo, Outlining $7.99/mo; 10% off billed annually. 30-day free trial of both add-ons; no card needed to start." }
 price_history:
   - date: 2026-11-09
@@ -23,10 +20,21 @@ pros:
   - Works in any browser on unlimited devices
 cons:
   - Free plan keeps 30 days of writing history
-best_for: [Writing and formatting a book for free in the browser]
+best_for:
+  - Authors writing and typesetting books to EPUB 3 and print-ready PDF
 alternatives: [atticus, vellum, draft2digital]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://reedsy.com/studio/
   - https://reedsy.com/studio/pricing/
+kdp_fit:
+  interior: native
+  ebook: manual
+  print: native
+  cover: unverified
+  manual_steps: []
+  sources:
+    - https://reedsy.com/studio/format-a-book/
+  checked_at: 2026-11-10
+features_checked_at: 2026-11-10

@@ -3,10 +3,8 @@ url: https://www.canva.com
 categories: [cover-design, low-content]
 tagline: Canva is a template-based design tool widely used for KDP ebook covers, simple low-content interiors and marketing graphics.
 summary: >-
-  Canva has a large template library and a free plan that is enough for many low-content interiors and ebook covers.
-  For print books it does not calculate KDP spine width for you, and you must set bleed, trim size and safe zones
-  yourself. Pro costs US$18 a month or US$144 a year in the US, and Canva shows regional prices in other countries.
-pricing: { model: freemium, from: 18, currency: USD, period: month, free_tier: true, note: "US prices, excluding tax: Pro US$18/mo or US$144/yr for one person; Business US$25/mo or US$250/yr per person; Enterprise on request. Free trial of Pro and Business. Prices vary by country." }
+  Canva has a large template library and a free plan that is enough for many low-content interiors and ebook covers. For print books it does not calculate KDP spine width for you, and you must set bleed, trim size and safe zones yourself. Pro costs US$18 a month or US$144 a year in the US, and Canva shows regional prices in other countries.
+pricing: { model: freemium, from: 18, currency: USD, period: month, free_tier: true, note: "US prices, excluding tax: Pro US$18/mo or US$144/yr for one person; Business US$25/mo or US$250/yr per person; Enterprise on request. Free trial of Pro and Business. Prices vary by country.", per: user, region_note: Prices on the pricing page exclude tax; applicable tax is calculated from billing details. }
 price_history:
   - date: 2026-11-09
     from: 18
@@ -26,3 +24,21 @@ verified_at: 2026-11-09
 sources:
   - https://www.canva.com/en/pricing/?countryCode=us
   - https://www.kdpeasy.com/blog/best-kdp-cover-generator-tools-2025
+kdp_fit:
+  cover: manual
+  print: manual
+  interior: unverified
+  ebook: unverified
+  manual_steps:
+    - Set the cover canvas to the publisher's required dimensions, such as Kindle's 2560 x 1600 pixels
+  sources:
+    - https://www.canva.com/sizes/book/
+    - https://www.canva.com/create/ebook-covers/
+  checked_at: 2026-11-10
+best_for:
+  - Writers designing Kindle ebook covers in a drag-and-drop editor
+  - Solo creators on Canva Pro, which is limited to one person
+not_ideal_for:
+  - Teams that need more than one login on a Canva Pro account
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

@@ -3,10 +3,7 @@ url: https://www.kobo.com/writinglife
 categories: [print-distribution, audio]
 tagline: Kobo Writing Life is Rakuten Kobo's free self-publishing platform for ebooks and audiobooks that sells direct to the Kobo store, Kobo Plus and OverDrive libraries.
 summary: >-
-  Kobo Writing Life lets you upload ebooks and audiobooks directly to Kobo, with optional OverDrive library distribution
-  and Kobo Plus, which Kobo says is non-exclusive. It is free to use. Ebooks earn 70% of list price at $2.99 USD or more and
-  45% below that; audiobooks earn 45% a la carte. Selling the same ebook here conflicts with KDP Select, which requires the
-  enrolled ebook to be exclusive to Amazon.
+  Kobo Writing Life lets you upload ebooks and audiobooks directly to Kobo, with optional OverDrive library distribution and Kobo Plus, which Kobo says is non-exclusive. It is free to use. Ebooks earn 70% of list price at $2.99 USD or more and 45% below that; audiobooks earn 45% a la carte. Selling the same ebook here conflicts with KDP Select, which requires the enrolled ebook to be exclusive to Amazon.
 pricing: { model: free, currency: USD, note: "Free to publish. Ebooks 70% of list price at $2.99 USD or more, 45% below, 20% for public domain. Audiobooks 45% a la carte (35% below the threshold), 32% for subscription tokens." }
 platforms: [web]
 kdp:
@@ -18,7 +15,8 @@ pros:
 cons:
   - Ebooks priced under $2.99 USD earn 45%, not 70%
   - Reaches Kobo and its partners only, not other ebook stores
-best_for: [Wide authors adding Kobo direct for higher control over promotions]
+best_for:
+  - Authors self-publishing ebooks and audiobooks on Kobo without exclusivity
 alternatives: [apple-books-for-authors, google-play-books-partner, publishdrive]
 status: published
 verified_at: 2026-11-09
@@ -26,3 +24,4 @@ sources:
   - https://www.kobo.com/writinglife
   - https://kobowritinglife.zendesk.com/hc/en-us/articles/360058976032-What-will-my-earnings-be
   - https://kdp.amazon.com/en_US/help/topic/GD9PMU58BV24QFZ7
+features_checked_at: 2026-11-10

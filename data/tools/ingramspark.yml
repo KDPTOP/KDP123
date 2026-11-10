@@ -3,10 +3,7 @@ url: https://www.ingramspark.com
 categories: [print-distribution]
 tagline: IngramSpark is a print-on-demand and distribution service that reaches bookstores and libraries beyond Amazon.
 summary: >-
-  IngramSpark prints and distributes print books and ebooks to bookstores, libraries and online retailers. Creating an
-  account and setting up a title cost nothing; you pay print costs per copy, and ebooks earn 85% of net revenue. It is
-  not exclusive, so many KDP publishers use it alongside KDP for wider print reach; IngramSpark advises not selecting
-  KDP Expanded Distribution for the same print book. It does not offer editing or design services.
+  IngramSpark prints and distributes print books and ebooks to bookstores, libraries and online retailers. Creating an account and setting up a title cost nothing; you pay print costs per copy, and ebooks earn 85% of net revenue. It is not exclusive, so many KDP publishers use it alongside KDP for wider print reach; IngramSpark advises not selecting KDP Expanded Distribution for the same print book. It does not offer editing or design services.
 pricing: { model: free, currency: USD, note: "No cost to create an account or set up a book. Print and shipping costs per copy via its calculators. Optional: ISBN $85 (US) or a free non-transferable IngramSpark ISBN; ebook conversion $0.60/page." }
 price_history:
   - date: 2026-11-09
@@ -22,3 +19,6 @@ verified_at: 2026-11-09
 sources:
   - https://www.ingramspark.com/pricing
   - https://www.ingramspark.com/faqs
+best_for:
+  - Authors printing and distributing paperbacks, hardcovers, and ebooks through Ingram
+features_checked_at: 2026-11-10

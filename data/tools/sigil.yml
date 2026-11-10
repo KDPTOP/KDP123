@@ -3,9 +3,7 @@ url: https://sigil-ebook.com
 categories: [writing-formatting]
 tagline: Sigil is a free, open-source EPUB editor for Windows, Mac and Linux that lets you edit an ebook's HTML, CSS and structure directly.
 summary: >-
-  Sigil opens and edits EPUB 2 and EPUB 3 files at the code level, with a companion WYSIWYG editor called PageEdit, so it
-  suits publishers who want to hand-tune or repair an ebook before uploading the EPUB to KDP. It works only with EPUB:
-  it does not lay out print interiors and is not a beginner formatter. It is built and supported by volunteers.
+  Sigil opens and edits EPUB 2 and EPUB 3 files at the code level, with a companion WYSIWYG editor called PageEdit, so it suits publishers who want to hand-tune or repair an ebook before uploading the EPUB to KDP. It works only with EPUB: it does not lay out print interiors and is not a beginner formatter. It is built and supported by volunteers.
 pricing: { model: free, currency: USD, note: "Free and open source (GPLv3)." }
 platforms: [windows, mac, linux]
 kdp:
@@ -18,10 +16,21 @@ pros:
 cons:
   - Ebook only; nothing for paperbacks
   - Assumes comfort with HTML and CSS
-best_for: [Hand-editing or repairing EPUB files]
+best_for:
+  - Editors creating or repairing EPUB 2 and EPUB 3 files
 alternatives: [calibre, jutoh, pandoc]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://sigil-ebook.com/
   - https://sigil-ebook.com/sigil/
+kdp_fit:
+  ebook: manual
+  cover: unverified
+  interior: unverified
+  print: unverified
+  manual_steps: []
+  sources:
+    - https://sigil-ebook.com/sigil/
+  checked_at: 2026-11-10
+features_checked_at: 2026-11-10

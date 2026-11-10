@@ -3,10 +3,7 @@ url: https://damonza.com
 categories: [cover-design]
 tagline: Damonza is a New Zealand book design studio for self-publishers that sells custom covers, interior formatting and full launch packages.
 summary: >-
-  Damonza designs print, ebook and audiobook covers and also formats interiors and makes promotional graphics, either
-  built to order or as an all-in-one package. It says it has completed over 14,000 projects since 2012, delivers first
-  drafts within 14 days and offers a deposit-back guarantee if it cannot get the design right. It is a premium-priced
-  service; prices start at what its site lists, and results still depend on your brief and the designer.
+  Damonza designs print, ebook and audiobook covers and also formats interiors and makes promotional graphics, either built to order or as an all-in-one package. It says it has completed over 14,000 projects since 2012, delivers first drafts within 14 days and offers a deposit-back guarantee if it cannot get the design right. It is a premium-priced service; prices start at what its site lists, and results still depend on your brief and the designer.
 pricing: { model: paid, from: 495, currency: USD, period: one-time, note: "Custom ebook/front cover from $495, interior formatting from $275, Everything Package $1,995 fiction or $2,595 nonfiction. Multi-cover subscriptions are paid over 12 monthly installments." }
 platforms: [web]
 kdp:
@@ -18,9 +15,25 @@ pros:
 cons:
   - Far more expensive than budget cover services
   - First drafts take up to 14 days
-best_for: [Authors with a budget who want cover and interior done by one team]
+best_for:
+  - Authors ordering custom covers and KDP or IngramSpark interiors
 alternatives: [miblart, 99designs, reedsy-marketplace]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://damonza.com/
+kdp_fit:
+  cover: native
+  interior: native
+  ebook: native
+  print: native
+  manual_steps:
+    - Supply a final, edited, proofread manuscript plus trim size, paper color, and printer
+    - Upload the finished files to KDP yourself; Damonza does not upload them for you
+  sources:
+    - https://damonza.com/faq/
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Authors who need the studio to upload files to KDP
+  - Manuscripts that are still in draft or unproofed
+features_checked_at: 2026-11-10

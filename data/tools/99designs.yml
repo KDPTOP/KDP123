@@ -3,11 +3,8 @@ url: https://99designs.com
 categories: [cover-design]
 tagline: 99designs is a design marketplace owned by Vista where authors run a book cover contest or hire one designer directly.
 summary: >-
-  In a contest you post a brief, designers from around the world submit concepts (about 30 at the lowest package), and
-  you pick and refine a winner, receiving the copyright and production files. You can also request quotes from a single
-  designer. It is a general design marketplace, not book-specific, so quality varies between designers and you need to
-  give them KDP's trim, bleed and spine specs yourself.
-pricing: { model: paid, from: 299, currency: USD, period: one-time, note: "Book cover contest packages: Bronze $299, Silver $499, Gold $799, Platinum $1,199, excluding sales tax. 1-to-1 projects are estimated at $279 to $999." }
+  In a contest you post a brief, designers from around the world submit concepts (about 30 at the lowest package), and you pick and refine a winner, receiving the copyright and production files. You can also request quotes from a single designer. It is a general design marketplace, not book-specific, so quality varies between designers and you need to give them KDP's trim, bleed and spine specs yourself.
+pricing: { model: paid, from: 299, currency: USD, period: one-time, note: "Book cover contest packages: Bronze $299, Silver $499, Gold $799, Platinum $1,199, excluding sales tax. 1-to-1 projects are estimated at $279 to $999.", region_note: Contest package prices exclude sales tax. }
 platforms: [web]
 kdp:
   touches_kdp_account: false
@@ -18,7 +15,9 @@ pros:
 cons:
   - Designers are not KDP specialists; you supply the print specs
   - Contest pricing is high for a single ebook cover
-best_for: [Seeing many different cover directions before committing]
+best_for:
+  - Authors running a custom book cover design contest
+  - Authors hiring a freelancer for typesetting and interiors
 alternatives: [fiverr, reedsy-marketplace, damonza]
 status: published
 verified_at: 2026-11-09
@@ -26,3 +25,19 @@ sources:
   - https://99designs.com/pricing/book-cover-design
   - https://99designs.com/legal/terms-and-conditions
   - https://99designs.com.au/book-cover-design
+kdp_fit:
+  cover: manual
+  interior: manual
+  ebook: unverified
+  print: unverified
+  manual_steps:
+    - Enter book cover dimensions and printing requirements in the contest brief
+    - Use your publisher's spine width calculator, then give that measurement to the designer
+  sources:
+    - https://99designs.com/book-cover-design
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Authors who want a self-serve template or design app
+  - Covers that need an in-app spine width calculator
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

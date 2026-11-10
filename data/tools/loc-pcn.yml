@@ -3,11 +3,7 @@ url: https://www.loc.gov/programs/preassigned-control-number/
 categories: [legal-isbn]
 tagline: The Library of Congress PCN Program is a free U.S. service for authors and self-publishers that assigns a Library of Congress Control Number before a print book is published.
 summary: >-
-  Through the PCN Program, U.S. authors and self-publishers request a Library of Congress Control Number (LCCN) in
-  PrePub Book Link before publication and print it on the copyright page, which helps libraries catalog the book. It is
-  free, but you must send the Library a copy of the book as soon as it is published. Only forthcoming print books with a
-  U.S. place of publication qualify; eBook-only titles and already published books do not. An LCCN is not copyright
-  registration and does not guarantee the book enters the Library's collection.
+  Through the PCN Program, U.S. authors and self-publishers request a Library of Congress Control Number (LCCN) in PrePub Book Link before publication and print it on the copyright page, which helps libraries catalog the book. It is free, but you must send the Library a copy of the book as soon as it is published. Only forthcoming print books with a U.S. place of publication qualify; eBook-only titles and already published books do not. An LCCN is not copyright registration and does not guarantee the book enters the Library's collection.
 official: true
 pricing: { model: free, currency: USD, note: "No fee, but a copy of each published book must be sent to the Library of Congress." }
 platforms: [web]
@@ -17,7 +13,8 @@ pros:
 cons:
   - Must be requested before publication; published books are ineligible
   - U.S. publishers only, print books only, and many categories such as items under 50 pages are excluded
-best_for: [U.S. self-publishers who want their print book to be library-ready]
+best_for:
+  - U.S. authors and publishers requesting an LCCN before a book is published
 alternatives: [copyright-office]
 status: published
 verified_at: 2026-11-09
@@ -25,3 +22,6 @@ sources:
   - https://www.loc.gov/programs/preassigned-control-number/frequently-asked-questions/
   - https://www.loc.gov/programs/preassigned-control-number/about-this-program/scope/
   - https://www.loc.gov/programs/preassigned-control-number/about-this-program/eligibility/
+not_ideal_for:
+  - Authors or publishers outside the United States, who are not eligible for PCN
+features_checked_at: 2026-11-10

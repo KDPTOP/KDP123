@@ -3,10 +3,7 @@ url: https://press.barnesandnoble.com
 categories: [print-distribution]
 tagline: Barnes & Noble Press is a free self-publishing service for authors that sells ebooks and print-on-demand books directly on bn.com.
 summary: >-
-  B&N Press publishes ebooks and paperback or hardcover print books for sale on Barnes & Noble's site, with no fee and no
-  exclusivity. Ebooks earn 70% of list price; print books earn 55% of list price minus the printing cost, and since April
-  2026 print books must list at $14.99 or more. Ebook list prices may not be higher than elsewhere. Selling the same ebook
-  here conflicts with KDP Select; a print edition does not.
+  B&N Press publishes ebooks and paperback or hardcover print books for sale on Barnes & Noble's site, with no fee and no exclusivity. Ebooks earn 70% of list price; print books earn 55% of list price minus the printing cost, and since April 2026 print books must list at $14.99 or more. Ebook list prices may not be higher than elsewhere. Selling the same ebook here conflicts with KDP Select; a print edition does not.
 pricing: { model: free, currency: USD, note: "Free to publish. Ebooks 70% of list price. Print 55% of list price minus print cost, minimum list price $14.99. Paid once $25 is accrued." }
 platforms: [web]
 kdp:
@@ -18,7 +15,8 @@ pros:
 cons:
   - Print books must list at $14.99 or more
   - Ebook price must not exceed its price at any other retailer
-best_for: [Reaching Barnes & Noble shoppers directly with ebook and print]
+best_for:
+  - Authors publishing print books or ebooks for sale to Barnes & Noble readers
 alternatives: [kobo-writing-life, ingramspark, draft2digital]
 status: published
 verified_at: 2026-11-09
@@ -26,3 +24,4 @@ sources:
   - https://press.barnesandnoble.com/
   - https://press.barnesandnoble.com/legal/royalty-payment-terms
   - https://kdp.amazon.com/en_US/help/topic/GD9PMU58BV24QFZ7
+features_checked_at: 2026-11-10

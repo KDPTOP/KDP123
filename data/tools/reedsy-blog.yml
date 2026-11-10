@@ -3,10 +3,7 @@ url: https://reedsy.com/blog
 categories: [courses-blogs]
 tagline: The Reedsy Blog is a free writing, publishing and book marketing blog run by Reedsy, the freelance marketplace for editors, designers and marketers.
 summary: >-
-  The Reedsy Blog publishes free guides on craft, publishing and marketing, including Amazon keywords, categories and
-  getting reviews, with new posts most weeks. It is run by Reedsy, a London-founded company that earns money from its
-  marketplace of freelance editors, designers and marketers and from paid courses, so posts often point to Reedsy
-  services and its free Reedsy Studio writing app. It is general author education rather than a KDP-specific guide.
+  The Reedsy Blog publishes free guides on craft, publishing and marketing, including Amazon keywords, categories and getting reviews, with new posts most weeks. It is run by Reedsy, a London-founded company that earns money from its marketplace of freelance editors, designers and marketers and from paid courses, so posts often point to Reedsy services and its free Reedsy Studio writing app. It is general author education rather than a KDP-specific guide.
 pricing: { model: free, currency: USD }
 platforms: [web]
 pros:
@@ -15,10 +12,14 @@ pros:
 cons:
   - Posts often lead to Reedsy's own paid services
   - Broad author audience; little on low-content or volume KDP publishing
-best_for: [Authors learning craft, editing and book marketing basics]
+best_for:
+  - Writers reading Reedsy’s daily writing, publishing, and marketing advice
 alternatives: [kindlepreneur, jane-friedman, the-creative-penn]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://reedsy.com/blog
   - https://reedsy.com/about
+not_ideal_for:
+  - People looking for Reedsy Studio, Marketplace hiring, or Reedsy Learning courses
+features_checked_at: 2026-11-10

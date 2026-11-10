@@ -3,11 +3,7 @@ url: https://indieauthormagazine.com
 categories: [courses-blogs]
 tagline: Indie Author Magazine is a trade publication for independent authors covering publishing news, marketing, tools and author business profiles.
 summary: >-
-  Indie Author Magazine is published by Chelle Honiker and covers weekly publishing news, KDP and Kindle+ (formerly Kindle Unlimited)
-  changes, marketing and author business profiles, with a free tier and paid subscriptions for full access and print.
-  The same publisher runs Indie Author Training, a paid course marketplace, and the site carries advertorial and
-  partner content, so some coverage is commercial. It reports and profiles rather than teaching step-by-step KDP
-  setup.
+  Indie Author Magazine is published by Chelle Honiker and covers weekly publishing news, KDP and Kindle+ (formerly Kindle Unlimited) changes, marketing and author business profiles, with a free tier and paid subscriptions for full access and print. The same publisher runs Indie Author Training, a paid course marketplace, and the site carries advertorial and partner content, so some coverage is commercial. It reports and profiles rather than teaching step-by-step KDP setup.
 pricing: { model: freemium, currency: USD, free_tier: true, note: "Free signup with limited access; paid digital and print tiers are priced at checkout." }
 platforms: [web, ios, android]
 pros:
@@ -16,10 +12,12 @@ pros:
 cons:
   - Full access requires a paid subscription
   - Runs advertorials and promotes its sister course platform
-best_for: [Keeping up with indie publishing news each week]
+best_for:
+  - Indie authors reading articles on craft, marketing, and the business of books
 alternatives: [jane-friedman, the-creative-penn, alli]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://indieauthormagazine.com/
   - https://indieauthormagazine.com/signup/
+features_checked_at: 2026-11-10

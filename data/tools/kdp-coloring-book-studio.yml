@@ -3,9 +3,7 @@ url: https://kdpcoloringbook.com
 categories: [low-content, ai-tools]
 tagline: KDP Coloring Book Studio is an AI tool that turns a theme into line art, a print interior and a full-wrap cover for KDP coloring books.
 summary: >-
-  KDP Coloring Book Studio generates single-sided interior pages, a full-wrap cover with spine, and listing details such
-  as title, subtitle, description and keywords. It documents an MCP server so AI agents can create a book. Its own
-  comparison page, which ranks it cheapest, is published by the same vendor, so verify its claims independently.
+  KDP Coloring Book Studio generates single-sided interior pages, a full-wrap cover with spine, and listing details such as title, subtitle, description and keywords. It documents an MCP server so AI agents can create a book. Its own comparison page, which ranks it cheapest, is published by the same vendor, so verify its claims independently.
 pricing: { model: subscription, from: 7, currency: USD, period: week, note: "Also $29/mo (200 credits), $49/mo (400), or one book for $15 with no subscription. From the vendor's own page." }
 platforms: [web]
 kdp:
@@ -18,3 +16,17 @@ status: published
 verified_at: 2026-11-09
 sources:
   - https://kdpcoloringbook.com/en/best/ai-coloring-book-generators
+kdp_fit:
+  cover: native
+  interior: native
+  print: native
+  ebook: unverified
+  manual_steps: []
+  sources:
+    - https://kdpcoloringbook.com/
+  checked_at: 2026-11-10
+best_for:
+  - Authors making 8.5×8.5 inch KDP paperback coloring books
+not_ideal_for:
+  - Books that need a trim size other than 8.5×8.5 inches
+features_checked_at: 2026-11-10

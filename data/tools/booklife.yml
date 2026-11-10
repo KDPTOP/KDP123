@@ -3,10 +3,7 @@ url: https://booklife.com
 categories: [courses-blogs]
 tagline: BookLife is Publishers Weekly's site for self-published authors, with free guides plus paid reviews, a contest and promotion options.
 summary: >-
-  BookLife is run by Publishers Weekly. A free account lets self-published authors list books and submit them for
-  Publishers Weekly review consideration, which now costs $25 and is not guaranteed; the site also has Self-Pub 101
-  articles. Its main business is paid services: guaranteed BookLife Reviews, the BookLife Prize and paid listings, so
-  much of its content leads to those products.
+  BookLife is run by Publishers Weekly. A free account lets self-published authors list books and submit them for Publishers Weekly review consideration, which now costs $25 and is not guaranteed; the site also has Self-Pub 101 articles. Its main business is paid services: guaranteed BookLife Reviews, the BookLife Prize and paid listings, so much of its content leads to those products.
 pricing: { model: freemium, currency: USD, free_tier: true, note: "BookLife Review $399 ($499 over 100,000 words), expedite $150; PW review consideration $25; BookLife Prize entry $119." }
 platforms: [web]
 pros:
@@ -15,7 +12,8 @@ pros:
 cons:
   - The paid review is guaranteed, but a PW review is not
   - Paid reviews are a cost with no sales guarantee
-best_for: [Self-published authors seeking a trade review]
+best_for:
+  - Self-published authors reading BookLife reviews and self-publishing articles
 alternatives: [bookbub-insights, alli, reedsy-blog]
 status: published
 verified_at: 2026-11-09
@@ -23,3 +21,4 @@ sources:
   - https://booklife.com/
   - https://booklife.com/about-us/publishers-weekly-reviews-and-booklife-reviews.html
   - https://booklife.com/about-us/the-booklife-prize.html
+features_checked_at: 2026-11-10

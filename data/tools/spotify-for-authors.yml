@@ -3,11 +3,7 @@ url: https://authors.spotify.com
 categories: [audio]
 tagline: Spotify for Authors is Spotify's free, non-exclusive audiobook publishing portal for self-published authors that puts audiobooks on Spotify and can pass them to Voices by INaudio.
 summary: >-
-  Spotify for Authors lets self-published authors upload audiobooks directly to Spotify, non-exclusively; Findaway Voices'
-  wide distribution is now Voices by INaudio (findawayvoices.com redirects there), which you can opt into from the same
-  dashboard. Royalties are 50% of your suggested retail price on a la carte sales plus a pro-rata share of a Premium
-  listening pool. It accepts AI-narrated audiobooks for Spotify only, including from its free ElevenLabs-based creation
-  tools. An ACX audiobook enrolled in KDP Select needs exclusive Audible rights, so it cannot also be distributed here.
+  Spotify for Authors lets self-published authors upload audiobooks directly to Spotify, non-exclusively; Findaway Voices' wide distribution is now Voices by INaudio (findawayvoices.com redirects there), which you can opt into from the same dashboard. Royalties are 50% of your suggested retail price on a la carte sales plus a pro-rata share of a Premium listening pool. It accepts AI-narrated audiobooks for Spotify only, including from its free ElevenLabs-based creation tools. An ACX audiobook enrolled in KDP Select needs exclusive Audible rights, so it cannot also be distributed here.
 pricing: { model: free, currency: USD, note: "Free to upload. 50% of suggested retail price on a la carte sales; Premium listening paid from a shared pool with no published rate." }
 platforms: [web]
 kdp:
@@ -19,7 +15,8 @@ pros:
 cons:
   - Premium pool rate is not published
   - Reaches Spotify only unless you also send the book to Voices by INaudio
-best_for: [Getting an existing or AI-narrated audiobook onto Spotify]
+best_for:
+  - Self-published authors and publishers distributing audiobooks to Spotify listeners
 alternatives: [authors-republic, elevenlabs, kobo-writing-life]
 status: published
 verified_at: 2026-11-09
@@ -27,3 +24,4 @@ sources:
   - https://authors.spotify.com/self-published-authors
   - https://www.spotify.com/us/legal/spotify-for-authors-opt-in-distribution-terms/
   - https://kdp.amazon.com/en_US/help/topic/GD9PMU58BV24QFZ7
+features_checked_at: 2026-11-10

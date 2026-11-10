@@ -3,12 +3,7 @@ url: https://manuscriptreport.com
 categories: [keywords-categories, book-research]
 tagline: ManuscriptReport is a pay-per-book service that turns an uploaded manuscript into category, keyword, comp-title and marketing-copy reports for authors.
 summary: >-
-  You upload a manuscript (PDF, DOCX or EPUB) and receive by email a Book Marketing Report with Amazon category
-  suggestions and the estimated sales needed to rank, seven backend keyword fields with search estimates, comparable
-  titles with sales estimates, Amazon Ads targets, a blurb and a marketing plan. Sales figures are estimates from public
-  sales ranks, keyword volumes come from third-party estimates, and much of the copy is AI-generated, so treat it as a
-  draft to edit. It does not format, upload or publish the book; it says manuscripts are not used for AI training and
-  are deleted within 30 days.
+  You upload a manuscript (PDF, DOCX or EPUB) and receive by email a Book Marketing Report with Amazon category suggestions and the estimated sales needed to rank, seven backend keyword fields with search estimates, comparable titles with sales estimates, Amazon Ads targets, a blurb and a marketing plan. Sales figures are estimates from public sales ranks, keyword volumes come from third-party estimates, and much of the copy is AI-generated, so treat it as a draft to edit. It does not format, upload or publish the book; it says manuscripts are not used for AI training and are deleted within 30 days.
 pricing: { model: one-time, from: 69, currency: USD, period: one-time, free_tier: true, note: "Book Marketing Report $69 per book; Complete Author Toolkit (four reports) $149. Free tools such as a category finder and keyword generator. Satisfaction guarantee: contact within 7 days of delivery for a fix or refund." }
 platforms: [web]
 kdp:
@@ -21,9 +16,11 @@ pros:
 cons:
   - Sales and search figures are estimates, and generated copy needs editing
   - Requires uploading the full manuscript to a third party
-best_for: [Choosing categories, keywords and comps for a finished manuscript]
+best_for:
+  - Authors buying one-off book marketing, keyword, and category research reports
 alternatives: [publisher-rocket, kdspy, bookbeam]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://manuscriptreport.com/
+features_checked_at: 2026-11-10

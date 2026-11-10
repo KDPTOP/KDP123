@@ -3,11 +3,7 @@ url: https://www.thecreativepenn.com
 categories: [courses-blogs]
 tagline: The Creative Penn is Joanna Penn's free blog and weekly podcast for authors who want to run writing as a business, including self-publishing and AI.
 summary: >-
-  The Creative Penn is run by Joanna Penn, a bestselling indie author of nonfiction for writers and of thrillers as
-  J.F. Penn. It offers a long-running weekly podcast, articles, tool tutorials and her books for authors, with a
-  Patreon for extra content. The site states that many links are affiliate links, and she sells her own books,
-  webinars and bundles, so tool recommendations are not neutral. It is broad author-business advice rather than
-  KDP-specific instructions.
+  The Creative Penn is run by Joanna Penn, a bestselling indie author of nonfiction for writers and of thrillers as J.F. Penn. It offers a long-running weekly podcast, articles, tool tutorials and her books for authors, with a Patreon for extra content. The site states that many links are affiliate links, and she sells her own books, webinars and bundles, so tool recommendations are not neutral. It is broad author-business advice rather than KDP-specific instructions.
 pricing: { model: free, currency: USD, note: "Blog and podcast are free; books, webinars and a Patreon are paid extras." }
 platforms: [web]
 pros:
@@ -16,10 +12,12 @@ pros:
 cons:
   - Many tool links are affiliate links
   - Little step-by-step KDP setup detail
-best_for: [Authors building a long-term author business across formats]
+best_for:
+  - Writers learning writing, self-publishing, and book marketing from Joanna Penn
 alternatives: [the-self-publishing-show, jane-friedman, alli]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.thecreativepenn.com/
   - https://www.thecreativepenn.com/the-creative-penn-podcast-for-authors/
+features_checked_at: 2026-11-10

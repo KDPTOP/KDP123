@@ -3,12 +3,7 @@ url: https://www.creativefabrica.com
 categories: [cover-design, low-content]
 tagline: Creative Fabrica is a font, graphics and template marketplace for crafters and designers that KDP publishers use for cover and interior assets.
 summary: >-
-  Creative Fabrica sells fonts, graphics, crafts and KDP-style interior templates, by subscription or per item. Its KDP
-  help article allows graphics as-is in or on a book only if the book also contains content you created yourself (your
-  own text, illustrations, or lines and layouts you built); for no-content books you must modify the designs, and
-  Needlework items cannot be used for KDP at all. You may not resell, share or redistribute the files themselves. On a
-  subscription, you can keep selling books created while subscribed, but you cannot start new designs after it ends
-  (Crafts files excepted), and unmodified Full POD designs must be taken down.
+  Creative Fabrica sells fonts, graphics, crafts and KDP-style interior templates, by subscription or per item. Its KDP help article allows graphics as-is in or on a book only if the book also contains content you created yourself (your own text, illustrations, or lines and layouts you built); for no-content books you must modify the designs, and Needlework items cannot be used for KDP at all. You may not resell, share or redistribute the files themselves. On a subscription, you can keep selling books created while subscribed, but you cannot start new designs after it ends (Crafts files excepted), and unmodified Full POD designs must be taken down.
 pricing: { model: subscription, from: 47, currency: USD, period: year, note: "All Access is shown as $3.99/month billed at $47/year; single items are priced individually. The free trial turns into the paid year automatically." }
 platforms: [web]
 kdp:
@@ -20,7 +15,8 @@ pros:
 cons:
   - No-content books need modified designs, not as-is assets
   - Subscription rights to start new designs end when you cancel
-best_for: [Fonts and decorative graphics for covers and journal interiors]
+best_for:
+  - Designers downloading fonts and graphics for commercial and POD use
 alternatives: [canva, adobe-express, plr-planners]
 status: published
 verified_at: 2026-11-09
@@ -28,3 +24,6 @@ sources:
   - https://help.creativefabrica.com/hc/en-us/articles/4403951083282-Can-I-use-Creative-Fabrica-Crafts-and-Graphics-for-Amazon-KDP
   - https://www.creativefabrica.com/subscription-license/
   - https://www.creativefabrica.com/subscription/
+not_ideal_for:
+  - Sellers who need to keep listing All Access files after canceling
+features_checked_at: 2026-11-10

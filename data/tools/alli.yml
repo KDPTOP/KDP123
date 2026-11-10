@@ -3,12 +3,8 @@ url: https://www.allianceindependentauthors.org
 categories: [communities, courses-blogs]
 tagline: ALLi is a nonprofit membership association for self-publishing authors that offers a member forum, contract advice and public watchdog ratings of author services.
 summary: >-
-  The Alliance of Independent Authors, founded by Orna Ross in 2012 and based in London, offers a private member
-  forum, contract vetting, discounts and the free Self-Publishing Advice blog and podcast. Its Watchdog Desk, led by
-  John Doppler, publishes free ratings of self-publishing services, which is useful for checking a vendor before you
-  pay. Partner members are paying service companies that are vetted and appear as "Excellent (Partner)" in those
-  ratings, so ratings and partner listings are not fully independent of ALLi's income.
-pricing: { model: subscription, from: 119, currency: USD, period: year, refund_days: 28, note: "Associate USD 119, Author USD 149, Authorpreneur USD 169 per year on the join page; also priced in GBP (Associate GBP 89)." }
+  The Alliance of Independent Authors, founded by Orna Ross in 2012 and based in London, offers a private member forum, contract vetting, discounts and the free Self-Publishing Advice blog and podcast. Its Watchdog Desk, led by John Doppler, publishes free ratings of self-publishing services, which is useful for checking a vendor before you pay. Partner members are paying service companies that are vetted and appear as "Excellent (Partner)" in those ratings, so ratings and partner listings are not fully independent of ALLi's income.
+pricing: { model: subscription, from: 119, currency: USD, period: year, refund_days: 28, note: "Associate USD 119, Author USD 149, Authorpreneur USD 169 per year on the join page; also priced in GBP (Associate GBP 89).", annual_from: 9.92, region_note: Author memberships are listed in USD on the join page; ALLi’s listed address is in the United Kingdom. }
 platforms: [web]
 pros:
   - Free public ratings of hundreds of author services, including scam warnings
@@ -16,7 +12,8 @@ pros:
 cons:
   - Partner members pay ALLi and carry its top rating
   - Annual fee for the forum and advice services
-best_for: [Checking whether a publishing service is trustworthy before you pay]
+best_for:
+  - Self-publishing authors joining a nonprofit for advice, rights help, and watchdog alerts
 alternatives: [writer-beware, absolute-write, jane-friedman]
 status: published
 verified_at: 2026-11-09
@@ -24,3 +21,11 @@ sources:
   - https://www.allianceindependentauthors.org/
   - https://www.allianceindependentauthors.org/members/join
   - https://selfpublishingadvice.org/best-self-publishing-services/
+not_ideal_for:
+  - Applicants who want Authorpreneur access without meeting the assessed upgrade criteria
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10
+price_history:
+  - date: 2026-11-10
+    kind: plan
+    note: "Yearly billing read on the vendor's pricing page: from $9.92/mo billed yearly."
