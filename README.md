@@ -52,6 +52,14 @@ npm run build      # static site in dist/
 npm run links      # check that every listing URL still answers (add -- --sources for sources)
 ```
 
+Monthly jobs:
+
+- `node scripts/monthly-report.mjs [YYYY-MM]` writes `data/reports/YYYY-MM.json`. The `monthly-report` workflow runs it on the 1st and opens a draft PR.
+- `RESEND_API_KEY=... node scripts/newsletter-draft.mjs [YYYY-MM]` turns a merged report into a Resend broadcast draft. It never sends; review and send from the Resend dashboard. Without the key it writes the HTML and text locally.
+- The `geo-check` workflow opens a checklist issue on the 2nd from `data/geo/prompts.yml`; record the answers in `data/geo/log.csv`.
+
+The forms behind `/api/suggest` and `/api/subscribe` are Cloudflare Workers in `workers/`. Their secrets live only in Cloudflare.
+
 ## Affiliate links
 
 This repository never contains affiliate URLs, and affiliate status never affects text or order. If the maintainers use
