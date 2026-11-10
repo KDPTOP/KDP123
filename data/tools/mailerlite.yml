@@ -3,10 +3,7 @@ url: https://www.mailerlite.com
 categories: [email-tools]
 tagline: MailerLite is an email marketing service for small businesses and creators that includes signup forms, landing pages, automations and a free plan.
 summary: >-
-  MailerLite is a general email service provider, not a book-specific tool: authors use it to run a newsletter, deliver a
-  reader-magnet welcome sequence and announce launches. The Free plan covers up to 250 subscribers and 2,500 emails a month
-  with automations, a landing page and signup forms. It sends email but is not an ebook delivery or ARC tool. MailerLite now
-  names its paid plans Comfort and Power.
+  MailerLite is a general email service provider, not a book-specific tool: authors use it to run a newsletter, deliver a reader-magnet welcome sequence and announce launches. The Free plan covers up to 250 subscribers and 2,500 emails a month with automations, a landing page and signup forms. It sends email but is not an ebook delivery or ARC tool. MailerLite now names its paid plans Comfort and Power.
 pricing:
   model: freemium
   from: 12
@@ -14,6 +11,8 @@ pricing:
   period: month
   free_tier: true
   note: "Comfort starts at $12/month and Power at $25/month; price rises with subscriber count, and yearly billing saves 10%. Free: 250 subscribers, 2,500 emails/month."
+  trial_days: 14
+  region_note: All prices may be subject to applicable taxes.
 platforms: [web]
 kdp:
   outputs_kdp_files: false
@@ -25,9 +24,12 @@ pros:
 cons:
   - Free plan is capped at 250 subscribers
   - Comfort limits monthly sends to 10x your subscriber tier
-best_for: [A first author newsletter with a reader-magnet welcome sequence]
+best_for:
+  - Authors and creators sending email campaigns, automations, and landing pages
 alternatives: [kit, mailchimp, storyorigin]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.mailerlite.com/pricing
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

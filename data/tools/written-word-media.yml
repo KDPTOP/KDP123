@@ -3,11 +3,7 @@ url: https://www.writtenwordmedia.com
 categories: [ads-promotion]
 tagline: Written Word Media is a book promotion company for authors that runs the Freebooksy, Bargain Booksy, Red Feather Romance and NewInBooks reader newsletters.
 summary: >-
-  Written Word Media sells one-day placements in its own genre newsletters: Freebooksy for free ebooks, Bargain Booksy for
-  ebooks priced $0.99 to $5, Red Feather Romance for romance, and NewInBooks for recent full-price releases. It also sells
-  multi-site Promo Stacks, managed Facebook and Amazon ad campaigns, and an annual Gold or Platinum membership that takes
-  10% off promos. It does not guarantee sales or rank, and since October 2025 it also books Robin Reads placements, so
-  several "different" promo sites in a stack may share one seller.
+  Written Word Media sells one-day placements in its own genre newsletters: Freebooksy for free ebooks, Bargain Booksy for ebooks priced $0.99 to $5, Red Feather Romance for romance, and NewInBooks for recent full-price releases. It also sells multi-site Promo Stacks, managed Facebook and Amazon ad campaigns, and an annual Gold or Platinum membership that takes 10% off promos. It does not guarantee sales or rank, and since October 2025 it also books Robin Reads placements, so several "different" promo sites in a stack may share one seller.
 pricing:
   model: paid
   from: 20
@@ -25,7 +21,8 @@ pros:
 cons:
   - List sizes are self-reported and results vary widely by genre
   - NewInBooks costs far more than its discount newsletters
-best_for: [Stacking low-cost newsletter promos around a KDP Select free or Countdown deal]
+best_for:
+  - Self-published authors booking email, Amazon, and Facebook book promotions
 alternatives: [bookbub, robin-reads, ereader-news-today, the-fussy-librarian]
 status: published
 verified_at: 2026-11-09
@@ -33,3 +30,4 @@ sources:
   - https://www.bargainbooksy.com/sell-more-books/
   - https://www.freebooksy.com/freebooksy-feature-pricing/
   - https://secure.writtenwordmedia.com/membership
+features_checked_at: 2026-11-10

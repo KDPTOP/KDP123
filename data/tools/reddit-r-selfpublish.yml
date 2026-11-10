@@ -3,11 +3,7 @@ url: https://www.reddit.com/r/selfpublish/
 categories: [communities]
 tagline: r/selfpublish is a Reddit community for self-published authors to discuss publishing, distribution and marketing beyond any single platform.
 summary: >-
-  r/selfpublish, created in 2011, is a public subreddit where authors discuss KDP, IngramSpark, Draft2Digital,
-  marketing and in-person sales. Its rules ban self-promotion in posts, including links, titles or other identifiers
-  for your book, service or group; promotion goes only in a weekly self-promo thread, which bans AI content and AI
-  services. Vague "how do I self-publish" or "how do I sell" posts are removed as low effort. Answers are peer opinion,
-  not Amazon policy.
+  r/selfpublish, created in 2011, is a public subreddit where authors discuss KDP, IngramSpark, Draft2Digital, marketing and in-person sales. Its rules ban self-promotion in posts, including links, titles or other identifiers for your book, service or group; promotion goes only in a weekly self-promo thread, which bans AI content and AI services. Vague "how do I self-publish" or "how do I sell" posts are removed as low effort. Answers are peer opinion, not Amazon policy.
 pricing: { model: free, currency: USD }
 platforms: [web, ios, android]
 pros:
@@ -16,9 +12,13 @@ pros:
 cons:
   - Basic questions are removed; read the wiki first
   - Advice quality varies by poster
-best_for: [Specific questions about publishing and distribution choices]
+best_for:
+  - Authors asking specific self-publishing questions rather than posting casual promo
 alternatives: [reddit-r-kdp, kdp-community, kboards-writers-cafe]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.reddit.com/r/selfpublish/
+not_ideal_for:
+  - Authors wanting to promote a book outside the weekly self-promo thread
+features_checked_at: 2026-11-10

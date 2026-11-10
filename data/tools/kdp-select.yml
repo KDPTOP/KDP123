@@ -3,11 +3,7 @@ url: https://kdp.amazon.com/en_US/help/topic/G200798990
 categories: [official]
 tagline: KDP Select is Amazon's free 90-day opt-in program for Kindle eBooks and audiobooks that puts them in Kindle+, formerly Kindle Unlimited, in exchange for eBook exclusivity.
 summary: >-
-  Enrolling an eBook in KDP Select adds it to Kindle+ (the subscription Amazon renamed from Kindle Unlimited), where reads
-  are paid from the KDP Select Global Fund, and unlocks Free Book Promotions and Kindle Countdown Deals. The catch is
-  exclusivity: for each 90-day term the eBook can only be distributed through KDP and public libraries, though print and
-  other formats can be sold elsewhere. Enrollment renews automatically unless you turn renewal off, and you can only
-  cancel within three days of the start of a term.
+  Enrolling an eBook in KDP Select adds it to Kindle+ (the subscription Amazon renamed from Kindle Unlimited), where reads are paid from the KDP Select Global Fund, and unlocks Free Book Promotions and Kindle Countdown Deals. The catch is exclusivity: for each 90-day term the eBook can only be distributed through KDP and public libraries, though print and other formats can be sold elsewhere. Enrollment renews automatically unless you turn renewal off, and you can only cancel within three days of the start of a term.
 official: true
 pricing: { model: free, currency: USD, note: "Free to enroll; the cost is eBook exclusivity to Amazon for each 90-day term." }
 platforms: [web]
@@ -21,7 +17,8 @@ cons:
   - The eBook cannot be sold on other stores while enrolled
   - Auto-renews every 90 days unless you switch renewal off
   - Kindle Countdown Deals run only on Amazon.com and Amazon.co.uk
-best_for: [Authors who sell eBooks only on Amazon and want Kindle+ reads]
+best_for:
+  - Authors enrolling Kindle ebooks in a free 90-day KDP Select term for Kindle+
 alternatives: [draft2digital]
 status: published
 verified_at: 2026-11-09
@@ -29,3 +26,6 @@ sources:
   - https://kdp.amazon.com/en_US/help/topic/G200798990
   - https://kdp.amazon.com/en_US/help/topic/GD9PMU58BV24QFZ7
   - https://kdp.amazon.com/en_US/help
+not_ideal_for:
+  - Audiobooks, which are not eligible for Free Book Promotions or Countdown Deals
+features_checked_at: 2026-11-10

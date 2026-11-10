@@ -3,12 +3,13 @@ url: https://www.copyright.gov
 categories: [legal-isbn]
 tagline: The U.S. Copyright Office is the government registry where authors register copyrights and look up existing registrations.
 summary: >-
-  The U.S. Copyright Office handles copyright registration in the United States and publishes guidance on what can be
-  registered, including questions about AI-generated material. Registration is optional for copyright to exist but can
-  matter if you ever need to enforce your rights. Fees are set by the Office; check its current fee schedule.
+  The U.S. Copyright Office handles copyright registration in the United States and publishes guidance on what can be registered, including questions about AI-generated material. Registration is optional for copyright to exist but can matter if you ever need to enforce your rights. Fees are set by the Office; check its current fee schedule.
 pricing: { model: paid, from: 45, currency: USD, period: one-time, note: "Electronic registration: $45 for one work by a single author who is also the claimant (not made for hire), $65 standard application, $125 on paper." }
 platforms: [web]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.copyright.gov/about/fees.html
+best_for:
+  - Authors registering copyright in literary works with the U.S. Copyright Office
+features_checked_at: 2026-11-10

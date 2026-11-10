@@ -3,9 +3,7 @@ url: https://www.reddit.com/r/KDP/
 categories: [communities]
 tagline: r/KDP is the main Reddit community for Amazon KDP publishers to ask practical questions and share results.
 summary: >-
-  r/KDP is a public subreddit where publishers ask about KDP errors, marketing, ads and tools. It is useful for
-  peer-checked, recent experience, but many posts are opinions or course promotion. Do not treat anything there as Amazon
-  policy; check the KDP help pages for rules.
+  r/KDP is a public subreddit where publishers ask about KDP errors, marketing, ads and tools. It is useful for peer-checked, recent experience, but many posts are opinions or course promotion. Do not treat anything there as Amazon policy; check the KDP help pages for rules.
 pricing: { model: free, currency: USD }
 platforms: [web]
 alternatives: [kdp-community]
@@ -13,3 +11,6 @@ status: published
 verified_at: 2026-11-09
 sources:
   - https://www.reddit.com/r/KDP/comments/1vqvzgl/kdp_marketing_newbie_who_should_i_learn_from/
+best_for:
+  - Authors discussing Kindle Direct Publishing questions and experiences in r/KDP
+features_checked_at: 2026-11-10
