@@ -150,4 +150,54 @@ const glossary = defineCollection({
   }),
 });
 
-export const collections = { tools, facts, best, compare, glossary };
+// Monthly reports (/reports/YYYY-MM/), frozen by scripts/monthly-report.mjs so a published month never changes.
+const reports = defineCollection({
+  loader: glob({ pattern: '*.json', base: './data/reports' }),
+  schema: z.object({
+    month: z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/),
+    period_end: z.coerce.date(),
+    generated_at: z.coerce.date(),
+    kdptop: z.object({
+      source: z.string(),
+      license: z.string(),
+      url: z.url(),
+      snapshot_at: z.coerce.date(),
+      data_date: z.coerce.date(),
+      tracked_since: z.coerce.date(),
+      marketplace: z.string(),
+      coverage: z.object({ list_nodes: z.number(), books: z.number(), on_list_24h: z.number(), authors: z.number() }),
+      definitions: z.record(z.string(), z.string()),
+      top_categories: z.array(
+        z.object({
+          node_id: z.number(),
+          category: z.string(),
+          url: z.url().nullable(),
+          store: z.enum(['books', 'kindle']),
+          opportunity_score: z.number(),
+          median_price_usd: z.number().nullable(),
+          median_reviews: z.number().nullable(),
+          new_release_share: z.number().nullable(),
+        }),
+      ),
+      excluded: z.array(z.object({ category: z.string(), opportunity_score: z.number(), reason: z.string() })).default([]),
+    }),
+    kdp123: z.object({
+      listings: z.number(),
+      new_listings: z.array(z.object({ id: z.string(), name: z.string(), categories: z.array(z.string()), added: z.coerce.date() })),
+      price_changes: z.array(
+        z.object({
+          id: z.string(),
+          name: z.string(),
+          date: z.coerce.date(),
+          kind: z.enum(['price', 'plan', 'correction', 'status']),
+          price_now: z.number().nullable(),
+          currency: z.string(),
+          note: z.string(),
+        }),
+      ),
+      facts_checked: z.array(z.object({ id: z.string(), title: z.string(), verified_at: z.coerce.date() })),
+    }),
+  }),
+});
+
+export const collections = { tools, facts, best, compare, glossary, reports };

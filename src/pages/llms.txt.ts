@@ -6,6 +6,7 @@ import research from '../../data/research/reports.json';
 import { FREE_TOOLS } from '../lib/freeTools';
 import { getBest } from '../lib/best';
 import { getTerms } from '../lib/glossary';
+import { getReports, monthName } from '../lib/reports';
 import { getCompares, compareTitle } from '../lib/compare';
 
 export const GET: APIRoute = async () => {
@@ -45,6 +46,11 @@ export const GET: APIRoute = async () => {
   if (compares.length) {
     out.push('', '## Comparisons', '');
     for (const { cmp, a, b } of compares) out.push(`- [${compareTitle(a, b)}](${SITE.url}/compare/${cmp.id}/): ${cmp.data.question}`);
+  }
+  const monthly = await getReports();
+  if (monthly.length) {
+    out.push('', '## Monthly reports', '', 'Top Amazon categories for new books (KDPTop data), KDP tool price changes and new listings, with CSV:', '');
+    for (const r of monthly) out.push(`- [KDP market report, ${monthName(r.data.month)}](${SITE.url}/reports/${r.data.month}/): CSV ${SITE.url}/reports/${r.data.month}/categories.csv`);
   }
   out.push('', '## Free tools', '', `Browser calculators and checkers built on the KDP facts above: ${SITE.url}/free-tools/`, '');
   for (const t of FREE_TOOLS) out.push(`- [${t.name}](${SITE.url}/free-tools/${t.slug}/): ${t.blurb}`);

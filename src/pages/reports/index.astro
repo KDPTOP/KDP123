@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getReports, monthName, isPartial } from '../../lib/reports';
+import { isoDate, SITE } from '../../lib/site';
+
+const reports = await getReports();
+const url = `${SITE.url}/reports/`;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Monthly KDP market reports',
+    url,
+    hasPart: reports.map((r) => ({ '@type': 'Dataset', name: `KDP market report, ${monthName(r.data.month)}`, url: `${url}${r.data.month}/` })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Monthly reports', item: url },
+    ],
+  },
+];
+---
+
+<Base title="Monthly KDP market reports" description="Each month: the Amazon categories with the most room for new books, KDP tool price changes, and new listings, with CSV downloads under CC BY 4.0." jsonLd={jsonLd} noindex={reports.length === 0}>
+  <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / Monthly reports</nav>
+  <section class="mt-2 max-w-3xl">
+    <h1 class="text-4xl font-bold">Monthly KDP market reports</h1>
+    <p class="mt-4 text-lg text-muted">
+      Once a month: the Amazon categories with the most room for new books (from KDPTop's daily list data), the KDP tool prices that changed, and what we added.
+      Every table has a CSV download under CC BY 4.0.
+    </p>
+  </section>
+  <ul class="mt-8 max-w-3xl divide-y divide-line rounded-lg border border-line bg-white">
+    {
+      reports.map((r) => (
+        <li class="px-4 py-3">
+          <a href={`/reports/${r.data.month}/`} class="font-medium">{monthName(r.data.month)}{isPartial(r) && ' (month to date)'}</a>
+          <p class="mt-1 text-sm text-muted">
+            {r.data.kdp123.new_listings.length} new listings, {r.data.kdp123.price_changes.length} price changes, {r.data.kdptop.top_categories.length} categories scored. Data to {isoDate(r.data.period_end)}.
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="mt-6 max-w-3xl text-sm text-muted">Longer one-off studies are on the <a href="/research/">market data</a> page.</p>
+</Base>

@@ -2,8 +2,10 @@
 import Base from '../layouts/Base.astro';
 import research from '../../data/research/reports.json';
 import { SITE } from '../lib/site';
+import { getReports } from '../lib/reports';
 
 const { reports, fetched_at, source } = research;
+const [latest] = await getReports();
 const url = `${SITE.url}/research/`;
 
 const jsonLd = [
@@ -50,6 +52,7 @@ const jsonLd = [
       New Releases and search data it collects. They are listed here because they are open data (CC BY 4.0) that KDP publishers can check
       and reuse; the methodology is public. Summaries synced from <a href={source}>the public repository</a> on {fetched_at}.
     </p>
+    {latest && <p class="mt-4 text-sm">Every month we also publish a short <a href={`/reports/${latest.data.month}/`}>KDP market report</a>: top categories for new books, tool price changes and new listings. <a href="/reports/">All monthly reports</a>.</p>}
   </section>
 
   <div class="mt-8 grid gap-6">

@@ -1,0 +1,177 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { getReports, monthName, isPartial, type Report } from '../../../lib/reports';
+import { isoDate, SITE } from '../../../lib/site';
+
+export async function getStaticPaths() {
+  return (await getReports()).map((r) => ({ params: { month: r.data.month }, props: { report: r } }));
+}
+const { report } = Astro.props as { report: Report };
+const { month, kdptop: k, kdp123: o } = report.data;
+const name = monthName(month);
+const partial = isPartial(report);
+const through = isoDate(report.data.period_end);
+const url = `${SITE.url}/reports/${month}/`;
+const files = {
+  categories: `/reports/${month}/categories.csv`,
+  changes: `/reports/${month}/price-changes.csv`,
+  json: `/reports/${month}/report.json`,
+};
+const n = (v: number) => v.toLocaleString('en-US');
+const pct = (v: number | null) => (v === null ? '-' : `${Math.round(v * 100)}%`);
+const usd = (v: number | null) => (v === null ? '-' : `$${v.toFixed(2)}`);
+const storeLabel = { books: 'Print books', kindle: 'Kindle eBooks' } as const;
+const kindLabel = { price: 'Price change', plan: 'Plans recorded', correction: 'Our correction', status: 'Status change' } as const;
+const top = k.top_categories[0];
+const title = `KDP market report, ${name}${partial ? ' (month to date)' : ''}`;
+const summary =
+  `${partial ? `So far in ${name}` : `In ${name}`} kdp123 added ${o.new_listings.length} tool listings and recorded ${o.price_changes.length} price or plan changes. ` +
+  `KDPTop tracked ${n(k.coverage.list_nodes)} Amazon.com category lists and has catalogued ${n(k.coverage.books)} books` +
+  (top ? `, and its highest-scoring category for new books was ${top.category.split(' > ').pop()} (${top.opportunity_score}/100).` : '.');
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: title,
+    description: summary,
+    url,
+    temporalCoverage: `${month}-01/${through}`,
+    datePublished: isoDate(report.data.generated_at),
+    license: 'https://creativecommons.org/licenses/by/4.0/',
+    isAccessibleForFree: true,
+    creator: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    isBasedOn: { '@type': 'Dataset', name: 'KDPTop public market data', url: k.url },
+    spatialCoverage: k.marketplace,
+    variableMeasured: ['opportunity score', 'median list price (USD)', 'median reviews', 'new-release share', 'tool price and plan changes'],
+    distribution: [
+      { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: SITE.url + files.categories, name: 'Top categories' },
+      { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: SITE.url + files.changes, name: 'Tool price and plan changes' },
+      { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: SITE.url + files.json, name: 'Full report' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Monthly reports', item: `${SITE.url}/reports/` },
+      { '@type': 'ListItem', position: 3, name, item: url },
+    ],
+  },
+];
+---
+
+<Base title={title} description={summary.length > 158 ? summary.slice(0, 155).replace(/\s+\S*$/, '') + '…' : summary} jsonLd={jsonLd} searchable>
+  <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/reports/">Monthly reports</a> / {name}</nav>
+  <article class="mt-2 max-w-4xl" data-pagefind-filter="type:Report">
+    <h1 class="text-4xl font-bold">{title}</h1>
+    <p class="mt-2 text-sm text-muted">
+      {partial ? `Covers ${month}-01 to ${through}; the full month replaces this page once it ends. ` : `Covers ${month}-01 to ${through}. `}
+      Market figures are a KDPTop snapshot from {isoDate(k.data_date)}.
+    </p>
+    <section class="mt-6 rounded-lg border border-accent/30 bg-accent-soft/50 p-4" aria-label="Summary">
+      <p class="leading-7">{summary}</p>
+    </section>
+
+    <dl class="mt-6 grid gap-3 sm:grid-cols-3">
+      <div class="stat"><dt>Amazon category lists tracked</dt><dd>{n(k.coverage.list_nodes)}</dd></div>
+      <div class="stat"><dt>Books catalogued by KDPTop</dt><dd>{n(k.coverage.books)}</dd></div>
+      <div class="stat"><dt>Books on a list in the last 24 hours</dt><dd>{n(k.coverage.on_list_24h)}</dd></div>
+      <div class="stat"><dt>Tools listed on kdp123</dt><dd>{n(o.listings)}</dd></div>
+      <div class="stat"><dt>New listings this month</dt><dd>{n(o.new_listings.length)}</dd></div>
+      <div class="stat"><dt>Price and plan changes</dt><dd>{n(o.price_changes.length)}</dd></div>
+    </dl>
+
+    <h2 class="mt-10 text-2xl font-semibold">Categories with the most room for new books</h2>
+    <p class="mt-2 text-sm text-muted">
+      KDPTop's 0-100 opportunity score: higher means a lower review barrier, faster list turnover, more new releases and more price room, scaled down where few copies sell.
+      Prices and reviews are medians across the category's Best Sellers list.
+      Adult categories are left out. <a href={files.categories}>Download CSV</a>.
+    </p>
+    {
+      k.excluded.length > 0 && (
+        <p class="mt-2 text-sm text-muted">
+          Also left out: {k.excluded.map((e) => e.category.split(' > ').pop()).join(', ')}. KDPTop reported a median of 0 reviews for these Best Sellers lists,
+          which points to missing review counts rather than books without reviews, so their scores are not reliable this month.
+        </p>
+      )
+    }
+    <div class="mt-3 overflow-x-auto rounded-lg border border-line bg-white">
+      <table class="w-full min-w-[640px] border-collapse text-sm">
+        <thead class="border-b border-line text-left text-muted">
+          <tr><th class="px-3 py-2 font-normal">#</th><th class="px-3 py-2 font-normal">Category</th><th class="px-3 py-2 font-normal">Store</th><th class="px-3 py-2 text-right font-normal">Score</th><th class="px-3 py-2 text-right font-normal">Median price</th><th class="px-3 py-2 text-right font-normal">Median reviews</th><th class="px-3 py-2 text-right font-normal">New releases</th></tr>
+        </thead>
+        <tbody>
+          {k.top_categories.map((c, i) => (
+            <tr class="border-b border-line last:border-0 align-top">
+              <td class="px-3 py-2 text-muted">{i + 1}</td>
+              <td class="px-3 py-2">
+                {c.url ? <a href={c.url} class="font-medium">{c.category.split(' > ').pop()}</a> : <span class="font-medium">{c.category.split(' > ').pop()}</span>}
+                <span class="block text-xs text-muted">{c.category.split(' > ').slice(0, -1).join(' > ')}</span>
+              </td>
+              <td class="px-3 py-2">{storeLabel[c.store]}</td>
+              <td class="px-3 py-2 text-right tabular-nums">{c.opportunity_score}</td>
+              <td class="px-3 py-2 text-right tabular-nums">{usd(c.median_price_usd)}</td>
+              <td class="px-3 py-2 text-right tabular-nums">{c.median_reviews ?? '-'}</td>
+              <td class="px-3 py-2 text-right tabular-nums">{pct(c.new_release_share)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-2 text-sm text-muted">Find a category for your own book with the <a href="/free-tools/category-finder/">free KDP category finder</a>.</p>
+
+    <h2 class="mt-10 text-2xl font-semibold">Tool price and plan changes</h2>
+    {
+      o.price_changes.length === 0 ? (
+        <p class="mt-2 text-muted">No price or plan changes recorded this month.</p>
+      ) : (
+        <>
+          <p class="mt-2 text-sm text-muted">Each row is something we read on the vendor's own page, or a correction to our listing. <a href={files.changes}>Download CSV</a>. All months: <a href="/changes/">price and plan changes</a>.</p>
+          <ul class="mt-3 divide-y divide-line rounded-lg border border-line bg-white">
+            {o.price_changes.map((c) => (
+              <li class="px-4 py-3 text-sm">
+                <span class="text-muted">{isoDate(c.date)} · {kindLabel[c.kind]}</span>
+                <span class="block"><a href={`/t/${c.id}/`} class="font-medium">{c.name}</a>: {c.note}</span>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+
+    <h2 class="mt-10 text-2xl font-semibold">New on kdp123</h2>
+    {
+      o.new_listings.length === 0 ? (
+        <p class="mt-2 text-muted">No new listings this month.</p>
+      ) : (
+        <details class="mt-3 rounded-lg border border-line bg-white px-4 py-3" open={o.new_listings.length <= 20}>
+          <summary class="cursor-pointer font-medium">{o.new_listings.length} tools added</summary>
+          <ul class="mt-3 columns-1 gap-6 text-sm leading-7 sm:columns-2 lg:columns-3">
+            {o.new_listings.map((t) => <li><a href={`/t/${t.id}/`}>{t.name}</a></li>)}
+          </ul>
+        </details>
+      )
+    }
+
+    {
+      o.facts_checked.length > 0 && (
+        <>
+          <h2 class="mt-10 text-2xl font-semibold">KDP rules checked against Amazon</h2>
+          <ul class="mt-3 columns-1 gap-6 text-sm leading-7 sm:columns-2">
+            {o.facts_checked.map((f) => <li><a href={`/facts/${f.id}/`}>{f.title}</a></li>)}
+          </ul>
+        </>
+      )
+    }
+
+    <h2 class="mt-10 text-2xl font-semibold">Sources and license</h2>
+    <ul class="mt-2 list-disc pl-6 text-sm leading-7">
+      <li>Market figures: {k.source}, tracked since {isoDate(k.tracked_since)}. Snapshot taken {isoDate(k.snapshot_at)} from KDPTop's public API. {k.license}.</li>
+      <li>KDPTop is run by the same team as kdp123. Its numbers are reported as published; we do not adjust or rank them.</li>
+      <li>Listings, price changes and rule checks: this site's <a href={SITE.github}>public repository</a> for the month.</li>
+      <li>This report: CC BY 4.0. Downloads: <a href={files.categories}>categories CSV</a>, <a href={files.changes}>price changes CSV</a>, <a href={files.json}>full JSON</a>.</li>
+    </ul>
+  </article>
+</Base>

@@ -9,9 +9,11 @@ import research from '../../data/research/reports.json';
 import { addedDates } from '../lib/added';
 import { FREE_TOOLS } from '../lib/freeTools';
 import { getBest } from '../lib/best';
+import { getReports, monthName } from '../lib/reports';
 import { getCompares, compareTitle } from '../lib/compare';
 
 const lists = await getBest();
+const [monthly] = await getReports();
 const compares = await getCompares();
 
 const tools = await getTools();
@@ -157,6 +159,7 @@ const jsonLd = [
     </div>
     <p class="mt-1 text-sm text-muted">Open data on book prices, reviews and niche competition, with CSV downloads.</p>
     <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+      {monthly && <li><a href={`/reports/${monthly.data.month}/`}>KDP market report, {monthName(monthly.data.month)}</a></li>}
       {reports.map((r) => <li><a href={`/research/#${r.slug}`}>{r.title}</a></li>)}
     </ul>
     <div class="mt-6 max-w-3xl"><TeamPick /></div>
