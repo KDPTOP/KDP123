@@ -1,11 +1,11 @@
 ---
 title: "KDP paperback cover size and spine width by page count"
+seo_title: "KDP Cover Size & Spine Width by Page Count"
 question: "How do I calculate the full cover size and spine width for a KDP paperback?"
 answer: >-
-  Full cover width is 0.125 in bleed + back cover + spine + front cover + 0.125 in bleed, and
-  height is trim height + 0.25 in. Spine width is page count times 0.002252 in for white paper,
-  0.0025 in for cream, 0.00235 in for groundwood and 0.002347 in for premium color. Spine text
-  needs at least 79 pages, and KDP's cover calculator generates an exact template.
+  Full cover width is 0.125 in bleed + back + spine + front + 0.125 in bleed, and height is trim height + 0.25 in.
+  Spine width is page count times 0.002252 in for white paper or 0.0025 in for cream. Spine text needs at least 79
+  pages, and KDP's cover calculator generates an exact template.
 topic: print
 key_facts:
   - { label: "Cover width", value: "Bleed + back + spine + front + bleed" }

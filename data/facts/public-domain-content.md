@@ -1,5 +1,6 @@
 ---
 title: "Publishing public domain books on KDP: differentiation and royalties"
+seo_title: "Public Domain Books on KDP: Rules & Royalties"
 question: "Can I publish public domain books on Amazon KDP, and what rules apply?"
 answer: >-
   Yes, but if a free version is already in the Kindle Store, KDP only accepts a differentiated

@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { getCompares, compareTitle } from '../../lib/compare';
 import { priceLabel, platformsLabel, isoDate, outbound, SITE, type Tool } from '../../lib/site';
+import { publisherRef } from '../../lib/seo';
 
 export async function getStaticPaths() {
   return (await getCompares()).map((x) => ({ params: { slug: x.cmp.id }, props: x }));
@@ -31,8 +32,8 @@ const jsonLd = [
     description: d.answer,
     url,
     dateModified: reviewed,
-    author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
-    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    author: publisherRef,
+    publisher: publisherRef,
     about: [a, b].map((t) => ({ '@type': 'SoftwareApplication', name: t.data.name, url: t.data.url })),
     citation: [...new Set([...a.data.sources, ...b.data.sources])],
   },
@@ -53,14 +54,14 @@ const jsonLd = [
 ];
 ---
 
-<Base title={`${title} for KDP: price, features and which to pick`} description={d.answer.length > 158 ? d.answer.slice(0, 155).replace(/\s+\S*$/, '') + '…' : d.answer} jsonLd={jsonLd} searchable>
+<Base title={title} titleVariants={[`${title} for KDP: Pricing & Features`, `${title}: Pricing & Features`, `${title} for KDP`, title]} description={d.answer} type="article" modified={d.verified_at.toISOString().slice(0, 10)} jsonLd={jsonLd} searchable>
   <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/compare/">Comparisons</a> / {title}</nav>
 
-  <article class="mt-2 max-w-4xl" data-pagefind-filter="type:Comparison">
+  <article class="mt-2 max-w-4xl" data-pagefind-filter="type:Comparison" data-pagefind-meta="type:Comparison">
     <h1 class="text-4xl font-bold">{title} for KDP publishers</h1>
     <p class="mt-2 text-sm text-muted">Reviewed {reviewed} from both vendors' own pages. Neither vendor paid to be compared.</p>
 
-    <section class="mt-6 rounded-lg border border-accent/30 bg-accent-soft/50 p-4" aria-label="Short answer">
+    <section class="answer mt-6" aria-label="Short answer">
       <p class="font-medium">{d.question}</p>
       <p class="mt-2 leading-7">{d.answer}</p>
     </section>

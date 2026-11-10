@@ -1,5 +1,6 @@
 ---
 title: "KDP hardcover royalties: 60% or 50% minus printing cost"
+seo_title: "KDP Hardcover Royalties: 60% Minus Printing Cost"
 question: "What royalty does Amazon KDP pay on hardcover books?"
 answer: >-
   KDP pays 60% of a hardcover's list price minus printing cost when the Amazon.com list price is

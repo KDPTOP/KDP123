@@ -1,11 +1,12 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { CATEGORY_SLUGS, FACT_TOPIC_SLUGS } from './lib/taxonomy';
+import { CATEGORY_SLUGS, FACT_TOPIC_SLUGS, FIT_LEVELS, FIT_SCOPES } from './lib/taxonomy';
 
 const pricingModels = ['free', 'freemium', 'one-time', 'subscription', 'paid', 'unknown'] as const;
 const platforms = ['web', 'windows', 'mac', 'linux', 'chrome-extension', 'firefox-extension', 'ios', 'android'] as const;
 const contentTypes = ['low-content', 'puzzle', 'coloring', 'fiction', 'nonfiction', 'children', 'any'] as const;
+const fitLevel = z.enum(FIT_LEVELS).default('unverified');
 
 const tools = defineCollection({
   loader: glob({ pattern: '*.yml', base: './data/tools' }),
@@ -18,7 +19,7 @@ const tools = defineCollection({
       tagline: z.string().min(20).max(180),
       summary: z.string().min(60),
       official: z.boolean().default(false),
-      // Same team as kdp123 (kdptop.com). Shown on the page and held to the same fields and sourcing rules as everything else.
+      // Same team as KDP123 (kdptop.com). Shown on the page and held to the same fields and sourcing rules as everything else.
       related_to_directory: z.boolean().default(false),
       pricing: z
         .object({
@@ -27,10 +28,19 @@ const tools = defineCollection({
           currency: z.string().length(3).default('USD'),
           period: z.enum(['one-time', 'week', 'month', 'year']).optional(),
           free_tier: z.boolean().optional(),
+          // Lowest price per month when billed yearly, for subscriptions that offer it.
+          annual_from: z.number().nonnegative().optional(),
+          per: z.enum(['user', 'team', 'book']).optional(),
+          trial_days: z.number().int().positive().optional(),
           refund_days: z.number().int().nonnegative().optional(),
+          // Prices that differ by country, VAT or currency.
+          region_note: z.string().optional(),
           note: z.string().optional(),
         })
         .default({ model: 'unknown', currency: 'USD' }),
+      // Dates the price and the feature claims were last read on the vendor's own pages. Both fall back to verified_at.
+      price_checked_at: z.coerce.date().optional(),
+      features_checked_at: z.coerce.date().optional(),
       // Newest first. Each row is something we saw on the vendor's own page on that date.
       price_history: z
         .array(
@@ -51,9 +61,23 @@ const tools = defineCollection({
           content_types: z.array(z.enum(contentTypes)).optional(),
         })
         .default({}),
+      // Per KDP output. Every level other than unverified needs a vendor page in sources.
+      kdp_fit: z
+        .object({
+          cover: fitLevel,
+          interior: fitLevel,
+          ebook: fitLevel,
+          print: fitLevel,
+          // What you still set up yourself, e.g. "Enter trim size, bleed and spine width from KDP's calculator".
+          manual_steps: z.array(z.string()).default([]),
+          sources: z.array(z.url()).default([]),
+          checked_at: z.coerce.date().optional(),
+        })
+        .default({ cover: 'unverified', interior: 'unverified', ebook: 'unverified', print: 'unverified', manual_steps: [], sources: [] }),
       pros: z.array(z.string()).default([]),
       cons: z.array(z.string()).default([]),
       best_for: z.array(z.string()).default([]),
+      not_ideal_for: z.array(z.string()).default([]),
       alternatives: z.array(z.string()).default([]),
       // Disclosure only. The affiliate URL itself lives in the private overlay, never in this repository.
       affiliate: z.boolean().default(false),
@@ -68,6 +92,9 @@ const tools = defineCollection({
         if (!t.verified_at) ctx.addIssue({ code: 'custom', path: ['verified_at'], message: 'published entries need verified_at' });
         if (t.sources.length === 0) ctx.addIssue({ code: 'custom', path: ['sources'], message: 'published entries need at least one source' });
       }
+      const checked = FIT_SCOPES.some((k) => t.kdp_fit[k] !== 'unverified');
+      if (checked && (t.kdp_fit.sources.length === 0 || !t.kdp_fit.checked_at))
+        ctx.addIssue({ code: 'custom', path: ['kdp_fit'], message: 'kdp_fit levels other than unverified need sources and checked_at' });
     }),
 });
 
@@ -77,6 +104,8 @@ const facts = defineCollection({
   schema: z
     .object({
       title: z.string().min(10).max(90),
+      // Search title when the page title runs past 51 characters (60 with " | KDP123").
+      seo_title: z.string().min(10).max(51).optional(),
       // The question people actually ask, phrased as they would type it.
       question: z.string().min(10).max(160),
       // Two or three sentences that answer the question on their own, with the numbers.
@@ -103,6 +132,7 @@ const best = defineCollection({
   loader: glob({ pattern: '*.yml', base: './data/best' }),
   schema: z.object({
     title: z.string().min(10).max(90),
+    seo_title: z.string().min(10).max(51).optional(),
     question: z.string().min(10).max(160),
     // Answer-first summary naming the picks, quotable on its own.
     answer: z.string().min(40).max(600),

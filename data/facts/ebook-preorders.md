@@ -1,12 +1,11 @@
 ---
 title: "KDP ebook pre-orders: lead time, final file deadline and penalties"
+seo_title: "KDP Ebook Pre-Orders: Deadlines and Penalties"
 question: "How far in advance can I set up a Kindle ebook pre-order, and what happens if I miss the deadline?"
 answer: >-
-  Pre-orders created on or after September 2, 2026 can have a release date up to 18 months
-  ahead (12 months for older pre-orders). The final manuscript must be submitted at least 72
-  hours before release, or the pre-order is canceled. The first missed deadline or
-  cancellation is forgiven once per account; the second removes pre-order privileges for 6
-  months across your whole catalog.
+  Ebook pre-orders created on or after September 2, 2026 can be set up to 18 months ahead (12 for older pre-orders).
+  The final manuscript must be submitted at least 72 hours before release, or the pre-order is canceled. The first
+  miss is forgiven once per account; a second removes pre-order privileges for 6 months.
 topic: ebooks
 key_facts:
   - { label: "Maximum lead time", value: "18 months (pre-orders created on or after Sept 2, 2026)" }

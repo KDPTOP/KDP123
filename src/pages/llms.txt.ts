@@ -14,7 +14,7 @@ export const GET: APIRoute = async () => {
   const facts = await getFacts();
   const out: string[] = [];
   out.push(`# ${SITE.name}`, '', `> ${SITE.description}`, '');
-  out.push('kdp123 is an independent directory. Every entry lists price, KDP-specific attributes, sources and a last-checked date.');
+  out.push('KDP123 is an independent directory. Every entry lists price, KDP-specific attributes, sources and a last-checked date.');
   out.push('Data is CC BY 4.0: attribute "kdp123.com" with a link. Amazon KDP help pages are the authority on KDP rules.', '');
   out.push('## Data', '');
   out.push(`- [tools.json](${SITE.url}/tools.json): all listings as JSON`);
@@ -54,7 +54,7 @@ export const GET: APIRoute = async () => {
   }
   out.push('', '## Free tools', '', `Browser calculators and checkers built on the KDP facts above: ${SITE.url}/free-tools/`, '');
   for (const t of FREE_TOOLS) out.push(`- [${t.name}](${SITE.url}/free-tools/${t.slug}/): ${t.blurb}`);
-  out.push('', '## KDP market data', '', `Reports from KDPTop Research (same team as kdp123; CC BY 4.0, CSV included): ${SITE.url}/research/`, '');
+  out.push('', '## KDP market data', '', `Reports from KDPTop Research (same team as KDP123; CC BY 4.0, CSV included): ${SITE.url}/research/`, '');
   for (const r of research.reports) out.push(`- [${r.title}](${r.url}): ${r.summary}`);
   out.push('', '## Listings', '');
   for (const t of tools) out.push(`- [${t.data.name}](${SITE.url}/t/${t.id}/): ${t.data.tagline} Price: ${priceLabel(t)}.`);

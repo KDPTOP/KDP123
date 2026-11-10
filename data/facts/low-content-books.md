@@ -1,12 +1,11 @@
 ---
 title: "KDP low-content books: definition, ISBN option and limits"
+seo_title: "KDP Low-Content Books: Rules, ISBN and Limits"
 question: "What counts as a low-content book on KDP, and do I need an ISBN for one?"
 answer: >-
-  KDP defines a low-content book as one with minimal or no interior content, usually repetitive
-  pages meant to be filled in, such as notebooks, planners, journals and log books; puzzle and
-  coloring books are generally not low-content. Low-content print books do not need an ISBN: you
-  can publish without one or use your own, but the free KDP ISBN is not available. They cannot
-  use Expanded Distribution or series pages.
+  KDP defines a low-content book as one with minimal interior content, usually repetitive fill-in pages such as
+  notebooks, planners, journals and log books; puzzle and coloring books generally are not. Low-content print books do
+  not need an ISBN, but the free KDP ISBN is not available, and they cannot use Expanded Distribution or series pages.
 topic: content
 key_facts:
   - { label: "Typical examples", value: "Notebooks, planners, journals, log books, coupon books" }

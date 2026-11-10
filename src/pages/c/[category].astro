@@ -4,7 +4,9 @@ import ToolTable from '../../components/ToolTable.astro';
 import ToolFilters from '../../components/ToolFilters.astro';
 import TeamPick from '../../components/TeamPick.astro';
 import { getTools, SITE } from '../../lib/site';
-import { nonEmpty, stageBySlug } from '../../lib/taxonomy';
+import { nonEmpty, stageBySlug, CATEGORY_FACTS } from '../../lib/taxonomy';
+import { getFacts } from '../../lib/facts';
+import { FREE_TOOLS } from '../../lib/freeTools';
 import { getBest } from '../../lib/best';
 import { getCompares, compareTitle } from '../../lib/compare';
 
@@ -23,6 +25,13 @@ const TEAM_TASKS: Record<string, string> = {
   analytics: 'follow bestseller lists and catch new books breaking into the categories you track',
 };
 const teamTask = TEAM_TASKS[category.slug];
+const allFacts = await getFacts();
+const facts = (CATEGORY_FACTS[category.slug] ?? []).map((id) => {
+  const f = allFacts.find((x) => x.id === id);
+  if (!f) throw new Error(`CATEGORY_FACTS.${category.slug}: no published fact ${id}`);
+  return f;
+});
+const calculators = FREE_TOOLS.filter((t) => t.category === category.slug || t.facts.some((id) => facts.some((f) => f.id === id)));
 const ids = new Set(tools.map((t) => t.id));
 const guides = [
   ...(await getBest()).filter(({ list }) => list.data.category === category.slug).map(({ list }) => ({ href: `/best/${list.id}/`, title: list.data.title })),
@@ -57,7 +66,7 @@ const jsonLd = [
 ];
 ---
 
-<Base title={`${category.name} for KDP`} description={`${category.blurb} ${tools.length} listed, with prices and last-checked dates.`} jsonLd={jsonLd}>
+<Base title={`${category.name} for KDP`} titleVariants={[`${category.seoTitle}: ${tools.length} Compared`, category.seoTitle]} description={`${category.blurb} ${tools.length} listed and compared by price, platforms and KDP fit, each with the date we last checked it.`} jsonLd={jsonLd}>
   <nav class="text-sm text-muted" aria-label="Breadcrumb">
     <a href="/">Home</a> / <a href={`/stages/${category.stage}/`}>{stage?.name}</a> / {category.name}
   </nav>
@@ -74,4 +83,24 @@ const jsonLd = [
   {teamTask && <div class="mt-6 max-w-3xl"><TeamPick task={teamTask} /></div>}
   {tools.length >= 6 && <div class="mt-6"><ToolFilters showSearch={false} showOfficial={tools.some((t) => t.data.official)} /></div>}
   <div class="mt-4"><ToolTable tools={tools} filterable={tools.length >= 6} /></div>
+  {
+    (facts.length > 0 || calculators.length > 0) && (
+      <section class="mt-10 grid gap-6 md:grid-cols-2" aria-label="KDP rules and calculators">
+        {facts.length > 0 && (
+          <div>
+            <h2 class="text-xl font-semibold">KDP rules to check first</h2>
+            <p class="mt-1 text-sm text-muted">What Amazon requires, whichever tool you pick.</p>
+            <ul class="mt-2 list-disc pl-6 leading-7">{facts.map((f) => <li><a href={`/facts/${f.id}/`}>{f.data.title}</a></li>)}</ul>
+          </div>
+        )}
+        {calculators.length > 0 && (
+          <div>
+            <h2 class="text-xl font-semibold">Free calculators</h2>
+            <p class="mt-1 text-sm text-muted">No sign-up, built on the same rules.</p>
+            <ul class="mt-2 list-disc pl-6 leading-7">{calculators.map((t) => <li><a href={`/free-tools/${t.slug}/`}>{t.name}</a></li>)}</ul>
+          </div>
+        )}
+      </section>
+    )
+  }
 </Base>

@@ -3,7 +3,9 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { getFacts, topicName } from '../../lib/facts';
 import { getTools, isoDate, SITE } from '../../lib/site';
+import { publisherRef } from '../../lib/seo';
 import { freeToolsForFact } from '../../lib/freeTools';
+import { CATEGORIES, CATEGORY_FACTS } from '../../lib/taxonomy';
 import { termsForFact, termUrl } from '../../lib/glossary';
 
 export async function getStaticPaths() {
@@ -23,6 +25,7 @@ const tools = d.related_tools.map((s) => toolById.get(s)).filter((t) => t !== un
 const checked = isoDate(d.verified_at);
 const calculators = freeToolsForFact(fact.id);
 const terms = await termsForFact(fact.id);
+const toolCategories = CATEGORIES.filter((c) => CATEGORY_FACTS[c.slug]?.includes(fact.id));
 
 const jsonLd: object[] = [
   {
@@ -32,8 +35,8 @@ const jsonLd: object[] = [
     description: d.answer,
     url,
     dateModified: checked,
-    author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
-    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    author: publisherRef,
+    publisher: publisherRef,
     citation: d.sources,
     isAccessibleForFree: true,
   },
@@ -55,16 +58,16 @@ jsonLd.push({
 });
 ---
 
-<Base title={d.title} description={d.answer.length > 158 ? d.answer.slice(0, 155).replace(/\s+\S*$/, '') + '…' : d.answer} jsonLd={jsonLd} markdownAlt={`/facts/${fact.id}.md`} searchable>
+<Base title={d.title} titleVariants={[d.seo_title ?? d.title]} description={d.answer} type="article" modified={checked} jsonLd={jsonLd} markdownAlt={`/facts/${fact.id}.md`} searchable>
   <nav class="text-sm text-muted" aria-label="Breadcrumb">
     <a href="/">Home</a> / <a href="/facts/">KDP facts</a> / {topicName(d.topic)}
   </nav>
 
-  <article class="mt-2 max-w-3xl" data-pagefind-filter="type:KDP fact">
+  <article class="mt-2 max-w-3xl" data-pagefind-filter="type:KDP fact" data-pagefind-meta="type:KDP fact">
     <h1 class="text-4xl font-bold">{d.title}</h1>
-    <p class="mt-2 text-sm text-muted">Checked against Amazon’s pages on {checked}. Not affiliated with Amazon.</p>
+    <p class="mt-2 text-sm text-muted">Checked against Amazon’s pages on <span data-pagefind-meta="checked">{checked}</span>. Not affiliated with Amazon.</p>
 
-    <section class="mt-6 rounded-lg border border-accent/30 bg-accent-soft/50 p-4" aria-label="Short answer">
+    <section class="answer mt-6" aria-label="Short answer">
       <p class="font-medium">{d.question}</p>
       <p class="mt-2 leading-7">{d.answer}</p>
     </section>
@@ -89,6 +92,13 @@ jsonLd.push({
       calculators.length > 0 && (
         <p class="mt-4 text-sm">
           Free calculator: {calculators.map((t, i) => <>{i > 0 && ' · '}<a href={`/free-tools/${t.slug}/`}>{t.name}</a></>)}
+        </p>
+      )
+    }
+    {
+      toolCategories.length > 0 && (
+        <p class="mt-2 text-sm">
+          Tools for this: {toolCategories.map((c, i) => <>{i > 0 && ' · '}<a href={`/c/${c.slug}/`}>{c.name}</a></>)}
         </p>
       )
     }

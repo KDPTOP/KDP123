@@ -1,11 +1,11 @@
 ---
 title: "KDP ISBN rules: free KDP ISBN vs your own, and ebooks"
+seo_title: "KDP ISBN Rules: Free KDP ISBN vs Your Own"
 question: "Do I need an ISBN to publish on KDP, and should I use the free KDP ISBN or buy my own?"
 answer: >-
-  Kindle ebooks do not need an ISBN on KDP. Paperbacks and hardcovers each need their own ISBN,
-  either a free one from KDP or one you buy. A free KDP ISBN can only be used on KDP and lists the
-  imprint as "Independently published"; your own ISBN can be used with other publishers and shows
-  the imprint you registered, which must match KDP exactly.
+  Kindle ebooks do not need an ISBN on KDP. Paperbacks and hardcovers each need their own ISBN, either free from KDP
+  or one you buy. A free KDP ISBN works only on KDP and lists the imprint as "Independently published"; your own ISBN
+  works anywhere and shows your registered imprint.
 topic: metadata
 key_facts:
   - { label: "Ebooks", value: "ISBN optional" }

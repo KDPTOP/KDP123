@@ -17,8 +17,9 @@ const { showOfficial = true, showSearch = true } = Astro.props;
   )}
   <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Price type">
     <span class="text-sm text-muted">Price:</span>
-    {PRICE_FILTERS.map((f) => <button type="button" class="chip" data-price-filter={f.value} aria-pressed="false">{f.label}</button>)}
+    {PRICE_FILTERS.map((f) => <button type="button" class="chip" data-price-filter={f.value} aria-pressed="false" title={f.hint}>{f.label}</button>)}
   </div>
+  <p class="text-xs text-muted"><strong class="font-medium">Free</strong> means free to use in full, with no paid plan. <strong class="font-medium">Free tier</strong> means a limited free plan sold next to paid plans.</p>
   <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Attributes">
     <span class="text-sm text-muted">Only:</span>
     {showOfficial && <button type="button" class="chip" data-flag="official" aria-pressed="false">Official Amazon</button>}

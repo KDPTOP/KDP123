@@ -1,6 +1,7 @@
 ---
 import { priceLabel, isoDate, outbound, type Tool } from '../lib/site';
 import { categoryBySlug } from '../lib/taxonomy';
+import ToolLogo from './ToolLogo.astro';
 
 interface Props {
   tools: Tool[];
@@ -35,10 +36,16 @@ const { tools, showCategory = false, filterable = false } = Astro.props;
               data-name={t.data.name.toLowerCase()}
             >
               <td class="block md:table-cell md:px-3 md:py-3">
-                <a href={`/t/${t.id}/`} class="text-base font-medium md:text-sm">{t.data.name}</a>
-                <div class="mt-1 flex flex-wrap gap-1">
+                <a href={`/t/${t.id}/`} class="inline-flex items-center gap-2 text-base font-medium md:text-sm">
+                  <ToolLogo tool={t} size={24} />
+                  {t.data.name}
+                </a>
+                <div class="mt-1 flex flex-wrap items-center gap-1">
+                  <label class="inline-flex cursor-pointer items-center gap-1 text-xs text-muted" data-pagefind-ignore>
+                    <input type="checkbox" data-compare={t.id} data-compare-name={t.data.name} class="size-3.5 accent-[var(--color-brand)]" /> Compare
+                  </label>
                   {t.data.official && <span class="badge badge-ok">Official</span>}
-                  {t.data.related_to_directory && <span class="badge badge-warn">Same team as kdp123</span>}
+                  {t.data.related_to_directory && <span class="badge badge-warn">Same team as KDP123</span>}
                   {showCategory && t.data.categories.slice(0, 2).map((c) => <span class="badge">{categoryBySlug(c)?.name}</span>)}
                 </div>
               </td>

@@ -31,12 +31,12 @@ EOF
   exit 0
 fi
 
-npm run check
 npm run build
+npm run check
 
 REL=$(date -u +%Y%m%dT%H%M%SZ)
 ssh "$HOST" "mkdir -p /opt/kdp123/releases/$REL /opt/kdp123/acme"
-rsync -az --delete dist/ "$HOST:/opt/kdp123/releases/$REL/"
+rsync -rlpcz --delete --link-dest=/opt/kdp123/current/ dist/ "$HOST:/opt/kdp123/releases/$REL/"
 
 ssh "$HOST" "REL=$REL KEEP=$KEEP bash -s" <<'EOF'
 set -euo pipefail
@@ -47,12 +47,15 @@ ln -sfn "releases/$REL" current.tmp && mv -T current.tmp current
 ls -1 releases | sort | head -n "-$KEEP" | while read -r old; do rm -rf "releases/$old"; done
 echo "current -> $REL"
 
-# IndexNow: tell Bing, Yandex and others which pages changed (new or different index.html) in this release.
+# IndexNow: tell Bing, Yandex and others which pages are new or have a newer <lastmod> in the sitemap than the
+# previous release. Template-only changes do not count as content changes.
 key=$(cd "releases/$REL" && ls -1 | grep -E '^[0-9a-f]{32}\.txt$' | head -n 1 | sed 's/\.txt$//')
 [ -n "$key" ] || exit 0
-changed=$(cd "releases/$REL" && find . -name index.html | sed 's#^\./##' | while read -r f; do
-  if [ -z "$prev" ] || ! cmp -s "$f" "$prev/$f"; then echo "https://kdp123.com/${f%index.html}"; fi
-done | grep -v -E '/(go|search)/' | head -n 10000)
+entries() { [ -n "$1" ] && find "$1"/ -maxdepth 1 -name 'sitemap-*.xml' ! -name 'sitemap-index.xml' -exec cat {} + | grep -o '<url><loc>[^<]*</loc>\(<lastmod>[^<]*</lastmod>\)\{0,1\}' | sed -e 's#<url><loc>##' -e 's#</loc><lastmod># #' -e 's#</lastmod>##' -e 's#</loc>##' | sort -u; }
+entries "releases/$REL" > /tmp/kdp123-new.txt
+entries "$prev" > /tmp/kdp123-old.txt || true
+changed=$(comm -23 /tmp/kdp123-new.txt /tmp/kdp123-old.txt | cut -d' ' -f1 | sort -u | head -n 10000)
+rm -f /tmp/kdp123-new.txt /tmp/kdp123-old.txt
 [ -n "$changed" ] || { echo "IndexNow: no changed pages"; exit 0; }
 urls=$(printf '%s\n' "$changed" | sed 's/.*/"&"/' | paste -sd, -)
 body="{\"host\":\"kdp123.com\",\"key\":\"$key\",\"keyLocation\":\"https://kdp123.com/$key.txt\",\"urlList\":[$urls]}"

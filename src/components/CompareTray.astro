@@ -1,0 +1,77 @@
+---
+// Shared by every page: keeps "Add to compare" checkboxes ([data-compare="slug"]) in sync with localStorage and shows a
+// tray linking to /compare/pick/ once something is picked. Up to three tools.
+---
+
+<div id="compare-tray" hidden class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 shadow-[0_-4px_16px_rgba(17,26,46,0.08)] backdrop-blur">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3 text-sm">
+    <span class="font-medium">Compare:</span>
+    <span id="compare-names" class="text-muted"></span>
+    <span class="ml-auto flex items-center gap-3">
+      <button type="button" id="compare-clear" class="text-muted underline">Clear</button>
+      <a id="compare-go" href="/compare/pick/" class="btn-primary py-1.5">Compare now</a>
+    </span>
+  </div>
+</div>
+
+<script>
+  const KEY = 'kdp123.compare';
+  const NAMES = 'kdp123.compareNames';
+  const MAX = 3;
+  const tray = document.getElementById('compare-tray')!;
+  const names = document.getElementById('compare-names')!;
+  const go = document.getElementById('compare-go') as HTMLAnchorElement;
+
+  const read = (): string[] => {
+    try {
+      const v = JSON.parse(localStorage.getItem(KEY) || '[]');
+      return Array.isArray(v) ? v.filter((x) => typeof x === 'string').slice(0, MAX) : [];
+    } catch {
+      return [];
+    }
+  };
+  const write = (ids: string[]) => {
+    localStorage.setItem(KEY, JSON.stringify(ids));
+    window.dispatchEvent(new CustomEvent('compare-change', { detail: ids }));
+  };
+  const names_ = (): Record<string, string> => {
+    try {
+      return JSON.parse(localStorage.getItem(NAMES) || '{}');
+    } catch {
+      return {};
+    }
+  };
+  const label = (id: string) =>
+    document.querySelector<HTMLElement>(`[data-compare="${CSS.escape(id)}"]`)?.dataset.compareName ?? names_()[id] ?? id.replace(/-/g, ' ');
+
+  function render() {
+    const ids = read();
+    document.querySelectorAll<HTMLInputElement>('input[data-compare]').forEach((box) => {
+      box.checked = ids.includes(box.dataset.compare!);
+      box.disabled = !box.checked && ids.length >= MAX;
+      box.closest('label')?.setAttribute('title', box.disabled ? `Up to ${MAX} tools; remove one first` : '');
+    });
+    const onPickPage = location.pathname === '/compare/pick/';
+    tray.hidden = ids.length === 0 || onPickPage;
+    names.textContent = `${ids.map(label).join(', ')} (${ids.length} of ${MAX})`;
+    go.href = `/compare/pick/?t=${ids.join(',')}`;
+    go.classList.toggle('pointer-events-none', ids.length < 2);
+    go.classList.toggle('opacity-50', ids.length < 2);
+    go.setAttribute('aria-disabled', String(ids.length < 2));
+    document.body.style.paddingBottom = tray.hidden ? '' : `${tray.offsetHeight}px`;
+  }
+
+  document.addEventListener('change', (e) => {
+    const box = e.target as HTMLInputElement;
+    if (!box.matches?.('input[data-compare]')) return;
+    const id = box.dataset.compare!;
+    const ids = read().filter((x) => x !== id);
+    if (box.checked) ids.push(id);
+    if (box.dataset.compareName) localStorage.setItem(NAMES, JSON.stringify({ ...names_(), [id]: box.dataset.compareName }));
+    write(ids.slice(0, MAX));
+  });
+  document.getElementById('compare-clear')!.addEventListener('click', () => write([]));
+  window.addEventListener('compare-change', render);
+  window.addEventListener('storage', (e) => e.key === KEY && render());
+  render();
+</script>

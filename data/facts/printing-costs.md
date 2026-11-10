@@ -1,11 +1,11 @@
 ---
 title: "How KDP calculates paperback and hardcover printing costs"
+seo_title: "KDP Printing Cost: Paperback & Hardcover Formula"
 question: "How much does Amazon KDP charge to print a paperback or hardcover?"
 answer: >-
-  KDP charges a fixed cost per book plus a per-page cost, set by format, ink, paper, regular or
-  large trim and the marketplace of the order, and subtracts it from your royalty. On Amazon.com a
-  black ink regular trim paperback of 110 to 828 pages costs $1.00 plus $0.012 per page, so 300
-  pages cost $4.60; the same hardcover costs $5.65 plus $0.012 per page, or $9.25.
+  KDP charges a fixed cost per book plus a per-page cost, set by format, ink, paper, trim and marketplace, and
+  subtracts it from your royalty. On Amazon.com a black ink regular trim paperback of 110 to 828 pages costs $1.00
+  plus $0.012 per page, so 300 pages cost $4.60; the same hardcover costs $9.25.
 topic: print
 key_facts:
   - { label: "Formula", value: "Fixed cost + (page count x per-page cost)" }

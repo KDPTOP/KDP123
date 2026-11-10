@@ -6,7 +6,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAF5sKyu1iD-AaBc9';
 const input = 'mt-1 w-full rounded-lg border border-line bg-white px-3 py-2 text-base';
 ---
 
-<Base title="Suggest or correct a listing" description="Suggest a KDP tool for kdp123 or correct an existing listing. Free, never paid, and every change needs a source.">
+<Base title="Suggest or correct a listing" description="Suggest a KDP tool for KDP123 or correct a price or feature on an existing listing. Listing is free and never paid, and every change needs a source.">
   <div class="max-w-3xl">
     <h1 class="text-4xl font-bold">Suggest or correct a listing</h1>
     <p class="mt-4 text-lg text-muted">Listing is free and cannot be bought. Every change needs a source, ideally the vendor's own pricing or feature page.</p>
@@ -51,7 +51,7 @@ const input = 'mt-1 w-full rounded-lg border border-line bg-white px-3 py-2 text
       </div>
       <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY} data-action="suggest"></div>
       <div class="flex flex-wrap items-center gap-3">
-        <button type="submit" class="rounded-lg bg-accent px-5 py-2.5 font-medium text-white disabled:opacity-60">Send to the editors</button>
+        <button type="submit" class="btn-primary">Send to the editors</button>
         <span class="text-xs text-muted">We use your email only to reply. It is not added to any list.</span>
       </div>
     </form>

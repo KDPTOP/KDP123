@@ -11,6 +11,9 @@ export const GET: APIRoute = () =>
       '',
       `Sitemap: ${SITE.url}/sitemap-index.xml`,
       '',
+      `# Feeds: ${SITE.url}/rss.xml (all updates), ${SITE.url}/changes/rss.xml (price changes),`,
+      `# ${SITE.url}/reports/rss.xml (monthly reports), ${SITE.url}/feed.json (JSON Feed). Data: ${SITE.url}/tools.json`,
+      '',
     ].join('\n'),
     { headers: { 'Content-Type': 'text/plain; charset=utf-8' } },
   );

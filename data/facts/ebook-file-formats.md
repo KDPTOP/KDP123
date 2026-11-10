@@ -1,11 +1,11 @@
 ---
 title: "KDP ebook file formats: manuscript and cover requirements"
+seo_title: "KDP Ebook File Formats and Cover Requirements"
 question: "What file formats does Amazon KDP accept for Kindle ebook manuscripts and covers?"
 answer: >-
-  KDP recommends DOC/DOCX, KPF (made with Kindle Create) or EPUB (2.0 or 3.0) for ebook
-  manuscripts, and also accepts HTML, RTF, TXT and PDF. MOBI is no longer accepted for new
-  uploads: reflowable MOBI ended on August 1, 2021 and fixed-layout MOBI on March 18, 2025. The
-  ideal cover is 2,560 pixels high by 1,600 pixels wide, in RGB, under 50 MB.
+  KDP recommends DOC/DOCX, KPF (made with Kindle Create) or EPUB for ebook manuscripts, and also accepts HTML, RTF,
+  TXT and PDF. MOBI is no longer accepted for new uploads; fixed-layout MOBI ended on March 18, 2025. The ideal cover
+  is 2,560 pixels high by 1,600 pixels wide, in RGB, under 50 MB.
 topic: ebooks
 key_facts:
   - { label: "Recommended manuscript formats", value: "DOC/DOCX, KPF, EPUB" }

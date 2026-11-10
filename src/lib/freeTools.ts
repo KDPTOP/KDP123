@@ -1,51 +1,78 @@
 export interface FreeTool {
   slug: string;
   name: string;
+  /** Two or three words for the home page strip. */
+  short: string;
+  /** Search title, at most 51 characters so " | KDP123" fits. */
+  seoTitle: string;
   /** One line for lists and meta descriptions. */
   blurb: string;
   /** Fact pages the tool is built on; those pages link back. */
   facts: string[];
+  /** Directory category for people who outgrow the free tool. */
+  category?: string;
 }
 
 export const FREE_TOOLS: FreeTool[] = [
   {
     slug: 'royalty-calculator',
+    category: 'analytics',
+    short: 'Royalty calculator',
+    seoTitle: 'KDP Royalty Calculator for Paperback & Kindle',
     name: 'KDP royalty and printing cost calculator',
     blurb: 'Royalty per sale for paperback, hardcover and Kindle ebooks on Amazon.com, with printing cost, minimum list price and the $9.99 cliff.',
     facts: ['paperback-royalties', 'hardcover-royalties', 'printing-costs', 'ebook-royalties', 'expanded-distribution'],
   },
   {
     slug: 'cover-size-calculator',
+    category: 'cover-design',
+    short: 'Cover and spine size',
+    seoTitle: 'KDP Cover Size & Spine Width Calculator',
     name: 'KDP paperback cover size and spine width calculator',
     blurb: 'Full-wrap cover size in inches, millimetres and 300 DPI pixels, spine width by paper type, and whether spine text is allowed.',
     facts: ['cover-dimensions', 'trim-sizes', 'bleed-and-margins', 'page-count-limits'],
   },
   {
     slug: 'ebook-price-checker',
+    category: 'writing-formatting',
+    short: 'Ebook price checker',
+    seoTitle: 'KDP Ebook Price Calculator: 35% vs 70% Royalty',
     name: 'Kindle ebook price checker',
     blurb: 'Checks a US list price against the 35% and 70% royalty bands, the file-size minimums and the 20%-below-print rule.',
     facts: ['ebook-pricing-rules', 'ebook-royalties'],
   },
   {
     slug: 'description-checker',
+    category: 'writing-formatting',
+    short: 'Description formatter',
+    seoTitle: 'KDP Description HTML Generator & Checker',
     name: 'KDP book description formatter and checker',
     blurb: 'Turns plain text into KDP-safe HTML and flags length, unsupported tags, unclosed tags, links, prices, reviews and emojis.',
     facts: ['book-description-rules', 'title-and-metadata-guidelines'],
   },
   {
     slug: 'keyword-checker',
+    category: 'keywords-categories',
+    short: 'Keyword checker',
+    seoTitle: 'Free KDP Keyword Checker for All 7 Slots',
     name: 'KDP keyword slot checker',
     blurb: 'Checks your seven keyword slots against Amazon\'s list of keywords to avoid and finds words wasted on repeats.',
     facts: ['keywords-and-categories', 'title-and-metadata-guidelines'],
   },
   {
     slug: 'category-finder',
+    category: 'keywords-categories',
+    short: 'Category finder',
+    seoTitle: 'Free KDP Category Finder by Keyword or ASIN',
     name: 'KDP category finder',
     blurb: 'Describe your book or paste an ASIN and get matching Amazon categories with the KDP path, list size and median price. Data from KDPTop.',
     facts: ['keywords-and-categories'],
   },
   {
     slug: 'bsr-sales-estimator',
+    category: 'book-research',
+    short: 'BSR to sales',
+    seoTitle: 'Amazon BSR to Sales Calculator for Books',
     name: 'Amazon BSR to sales estimator',
     blurb: 'Rough daily and monthly sales for an Amazon.com Best Sellers Rank, for books and Kindle ebooks. An order-of-magnitude estimate.',
     facts: ['paperback-royalties', 'ebook-royalties', 'kenp-royalties'],

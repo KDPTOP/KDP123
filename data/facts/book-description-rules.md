@@ -1,11 +1,11 @@
 ---
 title: "KDP book description rules: 4,000 characters and supported HTML"
+seo_title: "KDP Book Description Rules: Length and HTML"
 question: "How long can a KDP book description be, and what HTML and content are allowed?"
 answer: >-
-  A KDP book description can be up to 4,000 characters, and HTML tags count toward that limit.
-  Supported tags are br, p, b, em, i, u, h4 to h6, ol, ul and li; h1 to h3 are not supported.
-  Descriptions cannot include contact details or URLs, reviews or testimonials, review requests,
-  pricing or promotions, time-sensitive information, spoilers, keyword lists or Unicode emojis.
+  A KDP book description can be up to 4,000 characters, and HTML tags count toward the limit. Supported tags include
+  br, p, b, em, i, u, h4 to h6 and lists; h1 to h3 are not. Descriptions cannot include contact details, URLs,
+  reviews, review requests, pricing, promotions, time-sensitive information, keyword lists or emojis.
 topic: metadata
 key_facts:
   - { label: "Length limit", value: "4,000 characters, HTML tags included" }

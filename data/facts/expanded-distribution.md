@@ -1,12 +1,11 @@
 ---
 title: "KDP Expanded Distribution: eligibility, royalty and restrictions"
+seo_title: "KDP Expanded Distribution: Eligibility & Royalty"
 question: "What is KDP Expanded Distribution, who can use it, and what royalty does it pay?"
 answer: >-
-  Expanded Distribution is a free KDP option that offers your paperback to US and UK distributors
-  so bookstores, online retailers, libraries and academic institutions can order it. It pays 40%
-  of the list price minus printing cost, is not available for hardcovers, and excludes certain
-  trim sizes, languages and content types, including journals, coloring books, puzzle books and
-  public domain works.
+  Expanded Distribution is a free KDP option that offers your paperback to US and UK distributors, so bookstores,
+  online retailers and libraries can order it. It pays 40% of the list price minus printing cost, is not available for
+  hardcovers, and excludes some trim sizes, journals, coloring books, puzzle books and public domain works.
 topic: print
 key_facts:
   - { label: "Cost to enroll", value: "Free" }

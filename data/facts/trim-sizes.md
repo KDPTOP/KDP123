@@ -1,11 +1,11 @@
 ---
 title: "KDP trim sizes for paperback and hardcover books"
+seo_title: "KDP Trim Sizes Chart: Paperback & Hardcover"
 question: "What trim sizes does Amazon KDP support for paperbacks and hardcovers?"
 answer: >-
-  On kdp.amazon.com, paperbacks come in 16 listed trim sizes from 5 x 8 in to 8.5 x 11 in, plus
-  custom sizes 4 to 8.5 in wide and 6 to 11.69 in tall. Hardcovers have five sizes: 5.5 x 8.5,
-  6 x 9, 6.14 x 9.21, 7 x 10 and 8.25 x 11 in. The default and most common US size is 6 x 9 in,
-  and any size wider than 6.12 in or taller than 9 in is a large trim with higher printing costs.
+  KDP paperbacks come in 16 listed trim sizes from 5 x 8 to 8.5 x 11 in, plus custom sizes, and hardcovers in five,
+  from 5.5 x 8.5 to 8.25 x 11 in. The most common US size is 6 x 9 in; anything wider than 6.12 in or taller than 9 in
+  is large trim, with higher printing costs.
 topic: print
 key_facts:
   - { label: "Default and most common US size", value: "6 x 9 in (152.4 x 228.6 mm)" }

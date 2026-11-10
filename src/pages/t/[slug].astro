@@ -1,32 +1,52 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { getTools, priceLabel, platformsLabel, isoDate, outbound, SITE } from '../../lib/site';
-import { categoryBySlug } from '../../lib/taxonomy';
+import { getTools, priceLabel, priceTerms, checkDates, linkCheck, platformsLabel, isoDate, outbound, toolDescription, SITE } from '../../lib/site';
+import { categoryBySlug, FIT_SCOPES, FIT_SCOPE_INFO, FIT_LEVEL_INFO } from '../../lib/taxonomy';
+import { citationCounts } from '../../lib/cited';
+import ToolLogo from '../../components/ToolLogo.astro';
 import { getBest } from '../../lib/best';
 import { getCompares, compareTitle } from '../../lib/compare';
+import { publisherRef, SITE_ID } from '../../lib/seo';
 
 export async function getStaticPaths() {
   const tools = await getTools();
   const byId = new Map(tools.map((t) => [t.id, t]));
   const lists = (await getBest()).map((b) => b.list);
   const compares = await getCompares();
+  const cited = await citationCounts();
   return tools.map((t) => ({
     params: { slug: t.id },
     props: {
       tool: t,
       byId,
+      sameCategory: tools
+        .filter((o) => o.id !== t.id && o.data.categories[0] === t.data.categories[0] && !t.data.alternatives.includes(o.id))
+        .sort((a, b) => (cited.get(b.id) ?? 0) - (cited.get(a.id) ?? 0) || a.data.name.localeCompare(b.data.name))
+        .slice(0, 3),
       inLists: lists.filter((l) => l.data.picks.some((p) => p.tool === t.id)),
       inCompares: compares.filter((c) => c.a.id === t.id || c.b.id === t.id),
     },
   }));
 }
-const { tool, byId, inLists, inCompares } = Astro.props;
+const { tool, byId, sameCategory, inLists, inCompares } = Astro.props;
 const d = tool.data;
 const link = outbound(tool);
 const alts = d.alternatives.map((a) => byId.get(a)).filter((t) => t !== undefined);
 const url = `${SITE.url}/t/${tool.id}/`;
 const yn = (v?: boolean) => (v === undefined ? 'Not stated' : v ? 'Yes' : 'No');
 const softwarePlatforms = d.platforms.length > 0;
+const terms = priceTerms(tool);
+const dates = checkDates(tool);
+const linkStatus = linkCheck(tool.id);
+const category = categoryBySlug(d.categories[0]);
+// The KDP fit table matters for tools that make book files; elsewhere it shows only once someone has checked it.
+const MAKES_FILES = ['cover-design', 'writing-formatting', 'low-content', 'ai-tools'];
+const fitChecked = FIT_SCOPES.some((k) => d.kdp_fit[k] !== 'unverified');
+const showFit = fitChecked || d.categories.some((c) => MAKES_FILES.includes(c));
+const baseHost = (u: string) => new URL(u).hostname.replace(/^www\./, '').split('.').slice(-2).join('.');
+const vendorSources = d.sources.filter((u) => baseHost(u) === baseHost(d.url) || (d.official && /amazon\.|audible\.|acx\.com/.test(u))).length;
+const otherSources = d.sources.length - vendorSources;
+const watchOut = d.not_ideal_for.length > 0 ? d.not_ideal_for : d.cons.slice(0, 2);
 
 const entity: Record<string, unknown> = softwarePlatforms
   ? {
@@ -36,6 +56,7 @@ const entity: Record<string, unknown> = softwarePlatforms
       description: d.tagline,
       applicationCategory: 'BusinessApplication',
       operatingSystem: d.platforms.join(', '),
+      dateModified: isoDate(d.verified_at),
     }
   : { '@type': 'WebSite', name: d.name, url: d.url, description: d.tagline };
 if (softwarePlatforms && d.pricing.model !== 'unknown') {
@@ -49,6 +70,9 @@ const jsonLd = [
     '@type': 'WebPage',
     name: `${d.name} for KDP`,
     url,
+    inLanguage: 'en',
+    isPartOf: { '@id': SITE_ID },
+    publisher: publisherRef,
     dateModified: isoDate(d.verified_at),
     about: entity,
   },
@@ -65,34 +89,56 @@ const jsonLd = [
 ---
 
 <Base
-  title={`${d.name}: price, features and KDP fit`}
-  description={`${d.tagline} Price: ${priceLabel(tool)}. Last checked ${isoDate(d.verified_at)}.`}
+  title={d.name}
+  titleVariants={[`${d.name}: Pricing, Features & Alternatives`, `${d.name}: Pricing & Alternatives`, `${d.name} Pricing & Features`, `${d.name} Pricing`, d.name]}
+  description={toolDescription(tool)}
+  type="article"
+  modified={isoDate(d.verified_at)}
   jsonLd={jsonLd}
   markdownAlt={`/t/${tool.id}.md`}
   searchable
 >
   <nav class="text-sm text-muted" aria-label="Breadcrumb">
-    <a href="/">Home</a> / <a href={`/c/${d.categories[0]}/`}>{categoryBySlug(d.categories[0])?.name}</a> / {d.name}
+    <a href="/">Home</a> / <a href={`/c/${d.categories[0]}/`}>{category?.name}</a> / {d.name}
   </nav>
 
-  <article class="mt-2 max-w-3xl" data-pagefind-filter="type:Tool">
-    <h1 class="text-4xl font-bold">{d.name}</h1>
-    <div class="mt-2 flex flex-wrap gap-1">
-      {d.official && <span class="badge badge-ok">Official Amazon</span>}
-      {d.related_to_directory && <span class="badge badge-warn">Same team as kdp123</span>}
-      {d.affiliate && <span class="badge">Affiliate link</span>}
-      {d.vendor_verified && <span class="badge badge-ok">Verified by vendor</span>}
+  <article class="mt-2 max-w-3xl" data-pagefind-filter="type:Tool" data-pagefind-meta={`type:${d.official ? 'Official source' : 'Tool'}`}>
+    <div class="flex items-center gap-4">
+      <ToolLogo tool={tool} size={56} class="border border-line" />
+      <div>
+        <h1 class="text-4xl font-bold">{d.name}</h1>
+        <div class="mt-1 flex flex-wrap gap-1">
+          {d.official && <span class="badge badge-ok">Official Amazon</span>}
+          {d.related_to_directory && <span class="badge badge-warn">Same team as KDP123</span>}
+          {d.affiliate && <span class="badge">Affiliate link</span>}
+          {d.vendor_verified && <span class="badge badge-ok">Verified by vendor</span>}
+        </div>
+      </div>
     </div>
 
     <p class="mt-4 text-lg leading-7">{d.tagline}</p>
-    <p class="mt-4">
-      <a href={link.href} rel={link.rel} class="inline-block rounded-lg bg-accent px-4 py-2 font-medium text-white no-underline hover:no-underline">Visit {d.name}</a>
-      {d.affiliate && <span class="ml-2 text-xs text-muted">We may earn a commission. It does not change rankings or text.</span>}
+    <p class="mt-4 flex flex-wrap items-center gap-3">
+      <a href={link.href} rel={link.rel} class="btn-primary">Visit {d.name}</a>
+      <label class="inline-flex cursor-pointer items-center gap-2 text-sm text-muted" data-pagefind-ignore>
+        <input type="checkbox" data-compare={tool.id} data-compare-name={d.name} class="size-4 accent-[var(--color-brand)]" /> Add to compare
+      </label>
+      {d.affiliate && <span class="text-xs text-muted">We may earn a commission. It does not change rankings or text.</span>}
     </p>
+
+    <section class="mt-6 rounded-xl border border-line bg-white" aria-labelledby="summary-h">
+      <h2 id="summary-h" class="sr-only">Is it right for you</h2>
+      <dl class="divide-y divide-line text-sm">
+        <div class="grid gap-1 px-4 py-3 sm:grid-cols-4"><dt class="font-medium">What it does</dt><dd class="sm:col-span-3">{category?.name}{d.categories.length > 1 ? `, plus ${d.categories.slice(1).map((c) => categoryBySlug(c)?.name).join(', ')}` : ''}. {d.kdp.outputs_kdp_files ? 'Outputs files you can upload to KDP.' : ''}</dd></div>
+        <div class="grid gap-1 px-4 py-3 sm:grid-cols-4"><dt class="font-medium">Best for</dt><dd class="sm:col-span-3">{d.best_for.length ? d.best_for.join('; ') : <span class="text-muted">Not stated yet</span>}</dd></div>
+        <div class="grid gap-1 px-4 py-3 sm:grid-cols-4"><dt class="font-medium">{d.not_ideal_for.length ? 'Not ideal for' : 'Watch out for'}</dt><dd class="sm:col-span-3">{watchOut.length ? watchOut.join('; ') : <span class="text-muted">Not stated yet</span>}</dd></div>
+        <div class="grid gap-1 px-4 py-3 sm:grid-cols-4"><dt class="font-medium">What it costs</dt><dd class="sm:col-span-3"><span data-pagefind-meta="price">{priceLabel(tool)}</span>{terms.length ? `. ${terms.join('. ')}` : ''}. <span class="text-muted">Price checked <span data-pagefind-meta="checked">{dates.price}</span>.</span></dd></div>
+        <div class="grid gap-1 px-4 py-3 sm:grid-cols-4"><dt class="font-medium">Why trust this</dt><dd class="sm:col-span-3">{vendorSources > 0 ? `Read on ${d.official ? "Amazon's" : `${d.name}'s`} own pages (${vendorSources})${otherSources ? ` and ${otherSources} other ${otherSources === 1 ? 'source' : 'sources'}` : ''}` : `Based on ${otherSources} ${otherSources === 1 ? 'source' : 'sources'} outside ${d.name}`}, listed below. No vendor pays to be listed or ranked.{d.related_to_directory ? ' Made by the same team as KDP123, held to the same rules.' : ''}</dd></div>
+      </dl>
+    </section>
 
     {d.related_to_directory && (
       <p class="mt-4 rounded-lg border border-warn/30 bg-warn/5 p-3 text-sm">
-        Disclosure: {d.name} is made by the same team as kdp123. It is described with the same fields and held to the same sourcing rules as every other entry; see the <a href="/methodology/">methodology page</a>.
+        Disclosure: {d.name} is made by the same team as KDP123. It is described with the same fields and held to the same sourcing rules as every other entry; see the <a href="/methodology/">methodology page</a>.
       </p>
     )}
 
@@ -102,22 +148,60 @@ const jsonLd = [
       </p>
     )}
 
-    <h2 class="mt-8 text-2xl font-semibold">At a glance</h2>
+    {showFit && (
+      <>
+        <h2 class="mt-8 text-2xl font-semibold">KDP fit</h2>
+        <p class="mt-1 text-sm text-muted">Whether {d.name} makes each kind of KDP file with KDP's specs built in, or only if you enter them yourself.</p>
+        <div class="mt-3 overflow-x-auto rounded-lg border border-line bg-white">
+          <table class="w-full text-left text-sm">
+            <thead class="border-b border-line bg-paper text-xs uppercase tracking-wide text-muted">
+              <tr><th class="px-4 py-2 font-medium">Output</th><th class="px-4 py-2 font-medium">What that means</th><th class="px-4 py-2 font-medium">{d.name}</th></tr>
+            </thead>
+            <tbody class="divide-y divide-line">
+              {FIT_SCOPES.map((k) => (
+                <tr>
+                  <td class="px-4 py-2 font-medium">{FIT_SCOPE_INFO[k].name}</td>
+                  <td class="px-4 py-2 text-muted">{FIT_SCOPE_INFO[k].means}</td>
+                  <td class="px-4 py-2"><span class={`badge whitespace-nowrap ${FIT_LEVEL_INFO[d.kdp_fit[k]].badge}`}>{FIT_LEVEL_INFO[d.kdp_fit[k]].label}</span></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {d.kdp_fit.manual_steps.length > 0 && (
+          <>
+            <h3 class="mt-4 font-semibold">What you set up yourself</h3>
+            <ul class="mt-1 list-disc pl-6 text-sm leading-6">{d.kdp_fit.manual_steps.map((m) => <li>{m}</li>)}</ul>
+          </>
+        )}
+        <p class="mt-2 text-xs text-muted">
+          {fitChecked
+            ? <>Checked {isoDate(d.kdp_fit.checked_at)} against {d.kdp_fit.sources.map((u, i) => <>{i > 0 && ', '}<a href={u} rel="noopener">{new URL(u).hostname.replace(/^www\./, '')}</a></>)}.</>
+            : <>Not checked yet: nobody has confirmed these against {d.name}'s own pages. Know the answer? <a href="/submit/">Send it with a link</a>.</>}
+          {' '}Specs to enter by hand: <a href="/free-tools/cover-size-calculator/">cover and spine size</a>, <a href="/facts/trim-sizes/">trim sizes</a>, <a href="/facts/bleed-and-margins/">bleed and margins</a>.
+        </p>
+      </>
+    )}
+
+    <h2 class="mt-8 text-2xl font-semibold">Price and check dates</h2>
     <dl class="mt-3 divide-y divide-line rounded-lg border border-line bg-white text-sm">
       <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Price</dt><dd class="col-span-2">{priceLabel(tool)}{d.pricing.note ? ` (${d.pricing.note})` : ''}</dd></div>
-      {d.pricing.refund_days !== undefined && <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Refund window</dt><dd class="col-span-2">{d.pricing.refund_days} days</dd></div>}
+      {terms.map((x) => <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Terms</dt><dd class="col-span-2">{x}</dd></div>)}
       {d.platforms.length > 0 && <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Platforms</dt><dd class="col-span-2">{platformsLabel(tool)}</dd></div>}
       <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Outputs KDP-ready files</dt><dd class="col-span-2">{yn(d.kdp.outputs_kdp_files)}</dd></div>
       <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Touches your KDP account</dt><dd class="col-span-2">{yn(d.kdp.touches_kdp_account)}</dd></div>
       {d.kdp.marketplaces && <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Amazon marketplaces</dt><dd class="col-span-2">{d.kdp.marketplaces.join(', ')}</dd></div>}
       <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Categories</dt><dd class="col-span-2">{d.categories.map((c, i) => (<><a href={`/c/${c}/`}>{categoryBySlug(c)?.name}</a>{i < d.categories.length - 1 ? ', ' : ''}</>))}</dd></div>
-      <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Last checked</dt><dd class="col-span-2">{isoDate(d.verified_at)}</dd></div>
+      <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Price checked</dt><dd class="col-span-2">{dates.price}</dd></div>
+      <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Features checked</dt><dd class="col-span-2">{dates.features}</dd></div>
+      <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Link checked</dt><dd class="col-span-2">{linkStatus?.ok ? `${linkStatus.checked_at}, site answered` : linkStatus?.failed_at ? `Did not answer on ${linkStatus.failed_at}${linkStatus.checked_at ? `; last answered ${linkStatus.checked_at}` : ''}` : 'Not yet'}</dd></div>
     </dl>
+    <p class="mt-1 text-xs text-muted">A working link is not the same as a checked price: each date above is tracked on its own.</p>
 
     {d.price_history.length > 0 && (
       <>
         <h2 class="mt-8 text-2xl font-semibold">Price history</h2>
-        <ul class="mt-2 list-disc pl-6 text-sm leading-6">{d.price_history.map((h) => <li><span class="text-muted">{isoDate(h.date)}</span>: {h.note}</li>)}</ul>
+        <ul class="mt-2 list-disc pl-6 text-sm leading-6">{d.price_history.map((h) => <li id={`price-${isoDate(h.date)}`}><span class="text-muted">{isoDate(h.date)}</span>: {h.note}</li>)}</ul>
         <p class="mt-1 text-xs text-muted">All changes across the directory: <a href="/changes/">price and plan changes</a>.</p>
       </>
     )}
@@ -125,7 +209,6 @@ const jsonLd = [
     <h2 class="mt-8 text-2xl font-semibold">Summary</h2>
     <p class="mt-2 leading-7">{d.summary}</p>
 
-    {d.best_for.length > 0 && (<><h2 class="mt-8 text-2xl font-semibold">Best for</h2><ul class="mt-2 list-disc pl-6 leading-7">{d.best_for.map((x) => <li>{x}</li>)}</ul></>)}
     {d.pros.length > 0 && (<><h2 class="mt-8 text-2xl font-semibold">Pros</h2><ul class="mt-2 list-disc pl-6 leading-7">{d.pros.map((x) => <li>{x}</li>)}</ul></>)}
     {d.cons.length > 0 && (<><h2 class="mt-8 text-2xl font-semibold">Cons</h2><ul class="mt-2 list-disc pl-6 leading-7">{d.cons.map((x) => <li>{x}</li>)}</ul></>)}
 
@@ -139,10 +222,21 @@ const jsonLd = [
       </>
     )}
 
-    {alts.length > 0 && (
+    {(alts.length > 0 || sameCategory.length > 0) && (
       <>
-        <h2 class="mt-8 text-2xl font-semibold">Alternatives</h2>
-        <ul class="mt-2 list-disc pl-6 leading-7">{alts.map((a) => <li><a href={`/t/${a!.id}/`}>{a!.data.name}</a>: <span class="text-muted">{a!.data.tagline}</span></li>)}</ul>
+        <h2 class="mt-8 text-2xl font-semibold">{d.name} alternatives</h2>
+        <ul class="mt-3 grid gap-3 sm:grid-cols-2">
+          {[...alts, ...sameCategory].map((a) => (
+            <li class="flex gap-3 rounded-lg border border-line bg-white p-3">
+              <ToolLogo tool={a!} size={32} />
+              <div class="text-sm">
+                <a href={`/t/${a!.id}/`} class="font-medium">{a!.data.name}</a> <span class="text-muted">· {priceLabel(a!)}</span>
+                <p class="mt-0.5 text-muted">{a!.data.tagline}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        {sameCategory.length > 0 && <p class="mt-2 text-sm"><a href={`/c/${d.categories[0]}/`}>All {category?.name.toLowerCase()} tools</a> · <a href={`/compare/pick/?t=${[tool.id, ...[...alts, ...sameCategory].slice(0, 2).map((a) => a!.id)].join(',')}`}>Compare {d.name} with the first two</a></p>}
       </>
     )}
 

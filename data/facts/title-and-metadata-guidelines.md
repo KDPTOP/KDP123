@@ -1,12 +1,11 @@
 ---
 title: "KDP title, subtitle, series and contributor rules, plus title limits"
+seo_title: "KDP Title, Subtitle and Series Rules"
 question: "What are KDP's rules for book titles, subtitles, series and contributors, and how many titles can I create?"
 answer: >-
-  The title must match the cover exactly, and title plus subtitle must stay under 200 characters,
-  with no keyword stuffing, sales-rank or promotional words, unauthorized names or trademarks, or
-  HTML. KDP now limits each account to creating 2 new titles and submitting 2 new titles per
-  format each week, resetting Sunday at 12:00 AM UTC. Title, edition and primary author cannot
-  be changed after publishing.
+  The title must match the cover exactly, and title plus subtitle must stay under 200 characters, with no keyword
+  stuffing, promotional words, unauthorized trademarks or HTML. KDP limits each account to creating 2 new titles and
+  submitting 2 new titles per format each week. Title, edition and primary author cannot change after publishing.
 topic: metadata
 key_facts:
   - { label: "Title + subtitle length", value: "Under 200 characters" }

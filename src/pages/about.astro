@@ -7,11 +7,11 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
-    name: 'About kdp123',
+    name: 'About KDP123',
     url: `${SITE.url}/about/`,
     mainEntity: {
       '@type': 'Organization',
-      name: 'kdp123',
+      name: 'KDP123',
       url: SITE.url,
       email,
       sameAs: [SITE.github],
@@ -22,13 +22,13 @@ const jsonLd = [
 ];
 ---
 
-<Base title="About kdp123: who maintains it and how" description="Who runs kdp123, how listings are checked and kept current, what we will not do, and how to contact the editorial team." jsonLd={jsonLd}>
+<Base title="About KDP123: who maintains it and how" description="Who runs KDP123, the Amazon KDP tools directory: how listings are checked and kept current, what we will not do, and how to contact the editorial team." jsonLd={jsonLd}>
   <article class="prose-kdp max-w-3xl">
-    <h1 class="text-4xl font-bold">About kdp123</h1>
-    <p>kdp123 is a directory of tools, official rules and communities for people who publish on Amazon KDP. It is built for one job: let a publisher find the right resource for what they are doing now, and see what it costs and when it was last checked.</p>
+    <h1 class="text-4xl font-bold">About KDP123</h1>
+    <p>KDP123 is a directory of tools, official rules and communities for people who publish on Amazon KDP. It is built for one job: let a publisher find the right resource for what they are doing now, and see what it costs and when it was last checked.</p>
 
     <h2>Who runs it</h2>
-    <p>kdp123 is maintained by the kdp123 editorial team, the same team that builds <a href={SITE.related.url}>KDPTop</a>, a KDP research service. That relationship is disclosed on the KDPTop listing, on every page where KDPTop is recommended, and in the <a href="/methodology/">methodology</a>. KDPTop is held to the same fields and sourcing rules as every other entry, and category tables stay sorted by name.</p>
+    <p>KDP123 is maintained by the KDP123 editorial team, the same team that builds <a href={SITE.related.url}>KDPTop</a>, a KDP research service. That relationship is disclosed on the KDPTop listing, on every page where KDPTop is recommended, and in the <a href="/methodology/">methodology</a>. KDPTop is held to the same fields and sourcing rules as every other entry, and category tables stay sorted by name.</p>
 
     <h2>How listings are checked</h2>
     <ol>
@@ -53,6 +53,6 @@ const jsonLd = [
     <p>The data (CC BY 4.0) and the site code (MIT) are on <a href={SITE.github}>GitHub</a>. You can download the whole directory as <a href="/tools.json">JSON</a> or <a href="/tools.csv">CSV</a>, and every page has a plain-text version for AI tools.</p>
 
     <h2>Not affiliated with Amazon</h2>
-    <p>kdp123 is not affiliated with, endorsed by or sponsored by Amazon. "Amazon", "Kindle" and "KDP" are trademarks of Amazon.com, Inc.</p>
+    <p>KDP123 is not affiliated with, endorsed by or sponsored by Amazon. "Amazon", "Kindle" and "KDP" are trademarks of Amazon.com, Inc.</p>
   </article>
 </Base>

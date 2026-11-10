@@ -1,12 +1,11 @@
 ---
 title: "KENP royalties: how KDP pays for Kindle+ pages read"
+seo_title: "KENP Rate: How KDP Pays for Kindle+ Pages Read"
 question: "How does Amazon calculate KENP page-read royalties from the KDP Select Global Fund?"
 answer: >-
-  KDP Select books in Kindle+ (formerly Kindle Unlimited) are paid per Kindle Edition Normalized
-  Page (KENP) read or listened to, the first time a subscriber reaches each page, up to 3,000
-  KENP per title per customer. The per-page rate is not fixed: Amazon divides each marketplace's
-  share of the monthly KDP Select Global Fund by the total KENP read there that month, and
-  announces the fund around the 15th of the following month.
+  KDP Select books in Kindle+ (formerly Kindle Unlimited) are paid per Kindle Edition Normalized Page (KENP) read, the
+  first time a subscriber reaches each page, up to 3,000 KENP per title per customer. The rate is not fixed: Amazon
+  divides the monthly KDP Select Global Fund by total KENP read and announces it around the 15th.
 topic: programs
 key_facts:
   - { label: "Unit", value: "Kindle Edition Normalized Page (KENP)" }

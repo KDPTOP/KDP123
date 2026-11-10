@@ -1,11 +1,11 @@
 ---
 title: "KDP bleed size and minimum margins by page count"
+seo_title: "KDP Bleed and Margins by Page Count"
 question: "What bleed and margin sizes does Amazon KDP require for a print book interior?"
 answer: >-
-  KDP bleed is 0.125 in (3.2 mm) on the top, bottom and outside edges, so a 6 x 9 in book with
-  bleed uses a 6.125 x 9.25 in page. Outside margins must be at least 0.25 in without bleed or
-  0.375 in with bleed, and the inside (gutter) margin grows with page count from 0.375 in at 24 to
-  150 pages to 0.875 in at 701 to 828 pages.
+  KDP bleed is 0.125 in (3.2 mm) on the top, bottom and outside edges, so a 6 x 9 in book with bleed uses a 6.125 x
+  9.25 in page. Outside margins must be at least 0.25 in without bleed or 0.375 in with bleed, and the gutter grows
+  with page count from 0.375 in to 0.875 in.
 topic: print
 key_facts:
   - { label: "Bleed", value: "0.125 in (3.2 mm) top, bottom and outside" }

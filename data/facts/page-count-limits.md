@@ -1,11 +1,11 @@
 ---
 title: "KDP minimum and maximum page counts by format, paper and ink"
+seo_title: "KDP Page Count Limits: Minimum and Maximum"
 question: "What are the minimum and maximum page counts for KDP paperbacks and hardcovers?"
 answer: >-
-  KDP paperbacks need at least 24 pages (72 for standard color) and can reach 828 pages on white
-  paper or premium color, 812 on groundwood, 776 on cream and 600 in standard color on most trim
-  sizes. Large formats such as 8.5 x 11 in have lower caps. Hardcovers must have 75 to 550 pages
-  in every trim size and ink option.
+  KDP paperbacks need at least 24 pages (72 for standard color) and can reach 828 pages on white paper or premium
+  color, 776 on cream and 600 in standard color on most trim sizes. Large formats such as 8.5 x 11 in have lower caps.
+  Hardcovers must have 75 to 550 pages.
 topic: print
 key_facts:
   - { label: "Paperback minimum", value: "24 pages (standard color 72)" }

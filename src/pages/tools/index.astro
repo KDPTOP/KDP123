@@ -7,7 +7,7 @@ import { getTools } from '../../lib/site';
 const tools = await getTools();
 ---
 
-<Base title="All KDP tools and resources" description={`All ${tools.length} tools, official sources and communities for Amazon KDP publishers. Filter by price type, official source and KDP-ready output.`}>
+<Base title="All KDP tools and resources" titleVariants={[`All ${tools.length} Amazon KDP Tools & Resources`, "All KDP Tools & Resources"]} description={`All ${tools.length} Amazon KDP tools, official sources and communities, each with its price and check date. Filter by free, free tier, one-time or subscription.`} breadcrumbs={[{ name: "Home", url: "/" }, { name: "All tools", url: "/tools/" }]}>
   <h1 class="text-4xl font-bold">All KDP tools and resources</h1>
   <p class="mt-3 max-w-2xl text-muted">{tools.length} listings, sorted by name. Filters are saved in the address bar, so you can share a view.</p>
   <div class="mt-6"><ToolFilters /></div>

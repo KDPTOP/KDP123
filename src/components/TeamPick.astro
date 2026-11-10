@@ -11,8 +11,8 @@ const [kdptop] = await getCollection('tools', (t) => t.id === 'kdptop' && t.data
 ---
 
 {kdptop && (
-  <aside class="rounded-lg border border-warn/40 bg-warn/5 p-4" aria-label="From the team behind kdp123">
-    <p class="text-xs font-semibold uppercase tracking-wide text-warn">From the team behind kdp123</p>
+  <aside class="rounded-lg border border-warn/40 bg-warn/5 p-4" aria-label="From the team behind KDP123">
+    <p class="text-xs font-semibold uppercase tracking-wide text-warn">From the team behind KDP123</p>
     <p class="mt-2">
       <a href={`/t/${kdptop.id}/`} class="font-serif text-lg font-semibold">KDPTop</a>
       <span class="text-muted"> helps you {task}. It crawls Amazon bestseller lists daily for about 11,000 categories and gives each one a Go, Crowded, Watch or Skip verdict with the numbers behind it.</span>
@@ -23,7 +23,7 @@ const [kdptop] = await getCollection('tools', (t) => t.id === 'kdptop' && t.data
       <span class="text-muted">{priceLabel(kdptop)}</span>
     </p>
     <p class="mt-2 text-xs text-muted">
-      Disclosure: KDPTop is made by the same team as kdp123. This box is separate from the listings, which stay sorted by name and are
+      Disclosure: KDPTop is made by the same team as KDP123. This box is separate from the listings, which stay sorted by name and are
       held to the same <a href="/methodology/">rules</a>.
     </p>
   </aside>

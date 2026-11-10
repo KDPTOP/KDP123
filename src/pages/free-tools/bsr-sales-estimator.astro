@@ -26,7 +26,7 @@ const faq = [
   answer={`Amazon does not publish how Best Sellers Rank maps to sales, so every converter is an estimate. This one uses KDPTop's curve for Amazon.com: daily units = ${BSR_CURVE.A.books.toLocaleString('en-US')} x BSR^-${BSR_CURVE.exp} for print books and ${BSR_CURVE.A.kindle.toLocaleString('en-US')} x BSR^-${BSR_CURVE.exp} for Kindle ebooks. Use it for orders of magnitude, not forecasts.`}
   faq={faq}
   sources={sources}
-  poweredBy="Curve from KDPTop's sales model, by the team behind kdp123. Calculated in your browser."
+  poweredBy="Curve from KDPTop's sales model, by the team behind KDP123. Calculated in your browser."
 >
   <form id="bsr" class="grid gap-4 sm:grid-cols-3" onsubmit="return false">
     <label class="field">Best Sellers Rank<input class="input" name="rank" type="number" min="1" step="1" value="50000" inputmode="numeric" /></label>

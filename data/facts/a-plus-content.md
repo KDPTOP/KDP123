@@ -1,12 +1,11 @@
 ---
 title: "A+ Content for KDP books: where to create it and what's allowed"
+seo_title: "KDP A+ Content: Where to Create It and the Rules"
 question: "How do I add A+ Content to my KDP book's Amazon page, and what are the rules?"
 answer: >-
-  KDP authors create A+ Content from the KDP Marketing page in the A+ Content Manager, adding
-  image, text and comparison modules to live books and pre-orders. Content must be created per
-  marketplace and appears within eight business days once approved. Images must be JPG or PNG in
-  RGB and under 2 MB each, and A+ Content cannot include customer reviews, pricing or promotions,
-  links, or more than four quotes.
+  KDP authors add A+ Content in the A+ Content Manager on the KDP Marketing page, using image, text and comparison
+  modules on live books and pre-orders. It is created per marketplace and appears within eight business days of
+  approval. Images must be RGB JPG or PNG under 2 MB, with no reviews, pricing, promotions or links.
 topic: metadata
 key_facts:
   - { label: "Where to create it", value: "KDP Marketing page, A+ Content Manager" }

@@ -7,13 +7,15 @@
   "license": "MIT",
   "scripts": {
     "dev": "astro dev",
-    "build": "rm -rf dist && astro build && pagefind --site dist",
+    "build": "rm -rf dist && astro build && node scripts/og.mjs && pagefind --site dist",
     "preview": "astro preview",
-    "check": "astro check",
-    "links": "node scripts/check-links.mjs"
+    "check": "astro check && node scripts/seo-lint.mjs",
+    "links": "node scripts/check-links.mjs",
+    "logos": "node scripts/fetch-logos.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.12",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.5",
     "astro": "^7.4.7",
@@ -30,6 +32,10 @@
   },
   "homepage": "https://kdp123.com",
   "devDependencies": {
-    "pagefind": "^1.6.0"
+    "@fontsource/inter": "^5.3.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "pagefind": "^1.6.0",
+    "satori": "^0.63.2",
+    "sharp": "^0.35.5"
   }
 }

@@ -17,7 +17,7 @@ export const GET: APIRoute = async () => {
     out.push(`- categories: ${d.categories.map((c) => categoryBySlug(c)?.name).join('; ')}`);
     out.push(`- price: ${priceLabel(t)}${d.pricing.note ? ` (${d.pricing.note})` : ''}`);
     out.push(`- kdp-ready files: ${yn(d.kdp.outputs_kdp_files)}; touches kdp account: ${yn(d.kdp.touches_kdp_account)}`);
-    if (d.related_to_directory) out.push('- disclosure: same team as kdp123');
+    if (d.related_to_directory) out.push('- disclosure: same team as KDP123');
     out.push(`- checked: ${isoDate(d.verified_at)}`, '');
   }
   const facts = await getFacts();

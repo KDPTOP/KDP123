@@ -1,11 +1,11 @@
 ---
 title: "KDP keywords and categories: 7 keywords, 3 categories"
+seo_title: "KDP Keywords & Categories: 7 Keywords, 3 Categories"
 question: "How many keywords and categories can I choose on KDP, and which keywords are prohibited?"
 answer: >-
-  KDP lets you enter up to seven keywords or short phrases and choose 3 categories per book. Keywords
-  must not reference other authors or their books, sales rank, promotions such as "free", brands
-  you are not authorized to use, Amazon program names like Kindle+ or KDP Select, or anything
-  unrelated to the book. New categories can take up to 72 hours to show.
+  KDP lets you enter up to seven keywords or short phrases and choose 3 categories per book. Keywords must not
+  reference other authors or books, sales rank, promotions such as "free", unauthorized brands, Amazon program names
+  or anything unrelated to the book. New categories can take up to 72 hours to show.
 topic: metadata
 key_facts:
   - { label: "Keyword slots", value: "Up to 7 keywords or short phrases" }

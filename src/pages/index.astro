@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import ToolTable from '../components/ToolTable.astro';
-import { getTools, SITE, isoDate } from '../lib/site';
+import ToolLogo from '../components/ToolLogo.astro';
+import { getTools, SITE, isoDate, priceLabel } from '../lib/site';
 import { STAGES, CATEGORIES, nonEmpty } from '../lib/taxonomy';
 import TeamPick from '../components/TeamPick.astro';
 import { getFacts } from '../lib/facts';
@@ -11,59 +12,67 @@ import { FREE_TOOLS } from '../lib/freeTools';
 import { getBest } from '../lib/best';
 import { getReports, monthName } from '../lib/reports';
 import { getCompares, compareTitle } from '../lib/compare';
+import { citationCounts } from '../lib/cited';
+import { websiteLd, organizationLd } from '../lib/seo';
 
 const lists = await getBest();
 const [monthly] = await getReports();
 const compares = await getCompares();
+const cited = await citationCounts();
 
 const tools = await getTools();
 const facts = await getFacts();
 const liveCategories = nonEmpty(tools.flatMap((t) => t.data.categories));
 const countOf = (cat: string) => tools.filter((t) => t.data.categories.includes(cat as never)).length;
-const stageCount = (stage: string) =>
-  new Set(tools.filter((t) => t.data.categories.some((c) => CATEGORIES.find((x) => x.slug === c)?.stage === stage)).map((t) => t.id)).size;
+const stageOf = (cat: string) => CATEGORIES.find((x) => x.slug === cat)?.stage;
+const stageCount = (stage: string) => tools.filter((t) => t.data.categories.some((c) => stageOf(c) === stage)).length;
 const official = tools.filter((t) => t.data.official);
 const byChecked = [...tools].sort((a, b) => +(b.data.verified_at ?? 0) - +(a.data.verified_at ?? 0));
 const lastChecked = isoDate(byChecked[0]?.data.verified_at);
-// Official entries already have their own section; this one shows the rest of the directory moving.
+
+// Each tool sits in the stage of its first category, so it appears once in the grid.
+const GRID_SIZE = 8;
+const grid = STAGES.map((s) => {
+  const inStage = tools
+    .filter((t) => stageOf(t.data.categories[0]) === s.slug && !t.data.related_to_directory)
+    .sort((a, b) => (cited.get(b.id) ?? 0) - (cited.get(a.id) ?? 0) || a.data.name.localeCompare(b.data.name));
+  const picks = inStage.slice(0, GRID_SIZE);
+  if (s.slug === 'research') {
+    const sameTeam = tools.find((t) => t.data.related_to_directory);
+    if (sameTeam) picks.splice(GRID_SIZE - 1, 1, sameTeam);
+  }
+  return { stage: s, picks, total: stageCount(s.slug) };
+});
+
+const entries = [
+  { title: 'Research a book', href: '/stages/research/', stages: ['research'], text: 'Niches, keywords, categories and sales estimates, before you write or design anything.' },
+  { title: 'Make a book', href: '/stages/create/', stages: ['create'], text: 'Writing, formatting, covers, low-content and AI tools that export files KDP accepts.' },
+  { title: 'Publish and promote', href: '/stages/publish/', stages: ['publish', 'market', 'track'], text: 'KDP itself, ISBNs and distribution, then ads, reviews, email and sales tracking.' },
+].map((e) => ({ ...e, count: tools.filter((t) => t.data.categories.some((c) => e.stages.includes(stageOf(c) ?? ''))).length }));
+
 const added = addedDates();
 const addedAt = (id: string) => added.get(id)?.getTime() ?? Date.now();
 const latest = byChecked
   .filter((t) => !t.data.official && !t.data.related_to_directory)
   .sort((a, b) => addedAt(b.id) - addedAt(a.id) || +(b.data.verified_at ?? 0) - +(a.data.verified_at ?? 0))
-  .slice(0, 8);
+  .slice(0, 6);
 const changes = tools
   .flatMap((t) => t.data.price_history.map((h) => ({ tool: t, ...h })))
   .sort((a, b) => b.date.getTime() - a.date.getTime())
   .slice(0, 5);
 const reports = research.reports.slice(0, 3);
 
-const jsonLd = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: SITE.name,
-    url: SITE.url,
-    description: SITE.description,
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: SITE.name,
-    url: SITE.url,
-    sameAs: [SITE.github, SITE.related.url],
-  },
-];
+const jsonLd = [websiteLd, organizationLd];
+const homeTitle = `KDP Tools and Resources: ${Math.floor(tools.length / 10) * 10}+ Amazon KDP Tools | ${SITE.name}`;
 ---
 
-<Base title={SITE.name} jsonLd={jsonLd}>
+<Base title={homeTitle} exactTitle jsonLd={jsonLd}>
   <section class="max-w-3xl">
-    <h1 class="text-4xl font-bold leading-tight md:text-5xl">The reference directory for Amazon KDP publishers</h1>
+    <h1 class="text-4xl font-bold leading-tight md:text-5xl">Find the right KDP tools for your next book</h1>
     <p class="mt-4 text-lg text-muted">
-      {tools.length} tools, official sources and communities, each with its price, what it does for KDP, and the date we last checked it.
-      Open data, no pay-to-rank.
+      An Amazon KDP tools directory: {tools.length} tools, official rules and free calculators, each with its price, what it does for KDP and the
+      date we last checked it. No pay-to-rank.
     </p>
-    <p class="mt-2 text-sm text-muted">Last checked {lastChecked}. Not affiliated with Amazon.</p>
     <form action="/search/" method="get" class="mt-6 flex gap-2" role="search">
       <label for="q" class="sr-only">Search tools and KDP facts</label>
       <input
@@ -71,28 +80,96 @@ const jsonLd = [
         name="q"
         type="search"
         placeholder="Search, e.g. keyword research, coloring book, 70% royalty, ISBN"
-        class="w-full rounded-lg border border-line bg-white px-4 py-2.5 text-base"
+        class="w-full rounded-lg border border-line bg-white px-4 py-3 text-base shadow-sm"
       />
-      <button class="rounded-lg bg-accent px-5 py-2.5 font-medium text-white">Search</button>
+      <button class="btn-primary">Search</button>
     </form>
+    <p class="mt-2 text-sm text-muted">Last checked {lastChecked}. Not affiliated with Amazon.</p>
   </section>
 
-  <section class="mt-12" aria-labelledby="start">
-    <h2 id="start" class="text-2xl font-semibold">Start with what you are doing</h2>
-    <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  <section class="mt-8 grid gap-4 md:grid-cols-3" aria-label="Start with what you are doing">
+    {
+      entries.map((e) => (
+        <a href={e.href} class="group block rounded-xl border border-line bg-white p-5 text-ink no-underline shadow-sm hover:border-brand hover:no-underline">
+          <div class="flex items-baseline justify-between gap-2">
+            <h2 class="text-xl font-semibold group-hover:text-brand-deep">{e.title}</h2>
+            <span class="text-sm text-muted">{e.count} tools</span>
+          </div>
+          <p class="mt-1 text-sm text-muted">{e.text}</p>
+        </a>
+      ))
+    }
+  </section>
+
+  <section class="mt-10 rounded-xl bg-ink p-5 text-white md:p-6" aria-labelledby="free">
+    <div class="flex flex-wrap items-baseline justify-between gap-2">
+      <h2 id="free" class="text-xl font-semibold">Free KDP calculators</h2>
+      <a href="/free-tools/" class="text-sm text-white/80 hover:text-white">All free tools</a>
+    </div>
+    <p class="mt-1 text-sm text-white/70">Built on Amazon’s own numbers. No sign-up.</p>
+    <ul class="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
       {
-        STAGES.map((s) => (
-          <a href={`/stages/${s.slug}/`} class="block rounded-lg border border-line bg-white p-4 text-ink no-underline hover:border-accent hover:no-underline">
-            <div class="flex items-baseline justify-between">
-              <h3 class="font-serif text-xl font-semibold">{s.name}</h3>
-              <span class="text-sm text-muted">{stageCount(s.slug)} listed</span>
+        FREE_TOOLS.map((t) => (
+          <li>
+            <a href={`/free-tools/${t.slug}/`} title={t.name} class="flex h-full items-center rounded-lg bg-white/10 px-3 py-2.5 text-sm font-medium text-white no-underline hover:bg-brand hover:no-underline">
+              {t.short}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mt-12" aria-labelledby="grid">
+    <div class="flex flex-wrap items-baseline justify-between gap-2">
+      <h2 id="grid" class="text-2xl font-semibold">KDP tools by stage</h2>
+      <a href="/tools/" class="text-sm">All {tools.length} tools</a>
+    </div>
+    <p class="mt-1 text-sm text-muted">
+      In each stage, tools are ordered by how often our shortlists, comparisons and other listings name them, then by name. KDPTop is made by the
+      same team as KDP123 and is always shown under Research, labelled.
+    </p>
+    <div class="mt-6 grid gap-6 lg:grid-cols-2">
+      {
+        grid.map(({ stage, picks, total }) => (
+          <div class="rounded-xl border border-line bg-white p-4">
+            <div class="flex items-baseline justify-between gap-2">
+              <h3 class="text-lg font-semibold">
+                <a href={`/stages/${stage.slug}/`} class="text-ink">{stage.name}</a>
+              </h3>
+              <a href={`/stages/${stage.slug}/`} class="text-sm">All {total}</a>
             </div>
-            <p class="mt-1 text-sm text-muted">{s.blurb}</p>
-          </a>
+            <p class="text-sm text-muted">{stage.blurb}</p>
+            <ul class="mt-3 grid grid-cols-4 gap-1 sm:gap-2">
+              {picks.map((t) => (
+                <li>
+                  <a href={`/t/${t.id}/`} class="flex h-full flex-col items-center gap-1.5 rounded-lg border border-transparent p-1 text-center text-ink no-underline hover:border-line hover:bg-paper hover:no-underline sm:p-2">
+                    <ToolLogo tool={t} size={40} />
+                    <span class="text-xs font-medium leading-tight sm:text-sm">{t.data.name}</span>
+                    <span class={`text-xs text-muted ${t.data.related_to_directory ? '' : 'max-sm:hidden'}`}>{t.data.related_to_directory ? 'Same team' : priceLabel(t)}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         ))
       }
     </div>
-    <p class="mt-3 text-sm text-muted">Many tools help at more than one stage, so they appear in each; the counts overlap.</p>
+  </section>
+
+  <section class="mt-12" aria-labelledby="cats">
+    <h2 id="cats" class="text-2xl font-semibold">Browse by category</h2>
+    <ul class="mt-4 flex flex-wrap gap-2">
+      {
+        liveCategories.map((c) => (
+          <li>
+            <a href={`/c/${c.slug}/`} class="inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-3 py-1.5 text-sm text-ink no-underline hover:border-brand hover:no-underline">
+              {c.name} <span class="text-muted">{countOf(c.slug)}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </section>
 
   {
@@ -110,46 +187,34 @@ const jsonLd = [
     )
   }
 
-  <section class="mt-12" aria-labelledby="free">
-    <div class="flex items-baseline justify-between gap-4">
-      <h2 id="free" class="text-2xl font-semibold">Free KDP calculators</h2>
-      <a href="/free-tools/" class="text-sm">All free tools</a>
-    </div>
-    <p class="mt-1 text-sm text-muted">Royalties, cover size, pricing and listing checks, built on the same rules as the facts above. No sign-up.</p>
-    <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
-      {FREE_TOOLS.map((t) => <li><a href={`/free-tools/${t.slug}/`}>{t.name}</a></li>)}
-    </ul>
-  </section>
-
   <section class="mt-12" aria-labelledby="guides">
     <div class="flex items-baseline justify-between gap-4">
       <h2 id="guides" class="text-2xl font-semibold">Shortlists and comparisons</h2>
       <a href="/best/" class="text-sm">All guides</a>
     </div>
-    <p class="mt-1 text-sm text-muted">Criteria first, then picks and the reason for each. No vendor paid to be listed.</p>
+    <p class="mt-1 text-sm text-muted">Criteria first, then picks and the reason for each. No vendor paid to be listed. Or <a href="/compare/pick/">pick any two or three tools</a> to compare.</p>
     <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
       {lists.map(({ list }) => <li><a href={`/best/${list.id}/`}>{list.data.title}</a></li>)}
       {compares.map(({ cmp, a, b }) => <li><a href={`/compare/${cmp.id}/`}>{compareTitle(a, b)}</a></li>)}
     </ul>
   </section>
 
-  <section class="mt-12" aria-labelledby="official">
-    <h2 id="official" class="text-2xl font-semibold">Official sources first</h2>
-    <p class="mt-1 text-sm text-muted">When another site disagrees with Amazon's own pages, Amazon's pages win.</p>
-    <div class="mt-4"><ToolTable tools={official} /></div>
-  </section>
-
-  <section class="mt-12" aria-labelledby="cats">
-    <h2 id="cats" class="text-2xl font-semibold">Browse by category</h2>
-    <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        liveCategories.map((c) => (
-          <li>
-            <a href={`/c/${c.slug}/`}>{c.name}</a> <span class="text-sm text-muted">({countOf(c.slug)})</span>
-          </li>
-        ))
-      }
-    </ul>
+  <section class="mt-12" aria-labelledby="recent">
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 id="recent" class="text-2xl font-semibold">Recently added</h2>
+      <a href="/rss.xml" class="text-sm">RSS</a>
+    </div>
+    <p class="mt-1 text-sm text-muted">The newest listings, each checked on the vendor's own site.</p>
+    <div class="mt-4"><ToolTable tools={latest} showCategory /></div>
+    {changes.length > 0 && (
+      <>
+        <h3 class="mt-8 text-lg font-semibold">Price and plan changes</h3>
+        <ul class="mt-2 space-y-1 text-sm">
+          {changes.map((c) => <li><span class="text-muted">{isoDate(c.date)}</span> <a href={`/t/${c.tool.id}/`}>{c.tool.data.name}</a>: {c.note}</li>)}
+        </ul>
+        <p class="mt-2 text-sm"><a href="/changes/">All changes</a> · <a href="/changes/rss.xml">Changes RSS</a></p>
+      </>
+    )}
   </section>
 
   <section class="mt-12" aria-labelledby="market">
@@ -165,18 +230,9 @@ const jsonLd = [
     <div class="mt-6 max-w-3xl"><TeamPick /></div>
   </section>
 
-  <section class="mt-12" aria-labelledby="recent">
-    <h2 id="recent" class="text-2xl font-semibold">Recently added</h2>
-    <p class="mt-1 text-sm text-muted">The newest listings, each checked on the vendor's own site.</p>
-    <div class="mt-4"><ToolTable tools={latest} showCategory /></div>
-    {changes.length > 0 && (
-      <>
-        <h3 class="mt-8 text-lg font-semibold">Price and plan changes</h3>
-        <ul class="mt-2 space-y-1 text-sm">
-          {changes.map((c) => <li><span class="text-muted">{isoDate(c.date)}</span> <a href={`/t/${c.tool.id}/`}>{c.tool.data.name}</a>: {c.note}</li>)}
-        </ul>
-        <p class="mt-2 text-sm"><a href="/changes/">All changes</a></p>
-      </>
-    )}
+  <section class="mt-12" aria-labelledby="official">
+    <h2 id="official" class="text-2xl font-semibold">Official sources first</h2>
+    <p class="mt-1 text-sm text-muted">When another site disagrees with Amazon's own pages, Amazon's pages win.</p>
+    <div class="mt-4"><ToolTable tools={official} /></div>
   </section>
 </Base>

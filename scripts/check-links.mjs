@@ -2,7 +2,8 @@
 // Usage: npm run links            (checks listing urls)
 //        npm run links -- --sources   (also checks every source url)
 // Exit code 1 when something is unreachable, so CI can open an issue instead of silently shipping dead links.
-import { readdirSync, readFileSync } from 'node:fs';
+// Writes data/link-check.json: per listing, the last date its URL answered. Tool pages show it as "Link checked".
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { join } from 'node:path';
@@ -63,5 +64,14 @@ for (const r of results.sort((a, b) => a.id.localeCompare(b.id))) {
   if (!r.ok) bad++;
   if (!r.ok || moved || r.note) console.log(`${r.ok ? (r.note ? 'BOT  ' : 'MOVED') : 'DEAD '} ${r.status} ${r.id} [${r.kind}] ${r.url}${moved ? ' -> ' + r.final : ''}${r.note ? ' (' + r.note + ')' : ''}`);
 }
+const ledgerPath = new URL('../data/link-check.json', import.meta.url).pathname;
+const ledger = existsSync(ledgerPath) ? JSON.parse(readFileSync(ledgerPath, 'utf8')) : {};
+const today = new Date().toISOString().slice(0, 10);
+for (const r of results.filter((r) => r.kind === 'url')) {
+  ledger[r.id] = r.ok ? { ok: true, checked_at: today } : { ...ledger[r.id], ok: false, failed_at: today };
+}
+const sorted = Object.fromEntries(Object.entries(ledger).sort(([a], [b]) => a.localeCompare(b)));
+writeFileSync(ledgerPath, JSON.stringify(sorted, null, 2) + '\n');
+
 console.log(`${results.length} checked, ${bad} unreachable`);
 process.exit(bad ? 1 : 0);

@@ -1,5 +1,6 @@
 ---
 title: "KDP AI content disclosure: AI-generated vs AI-assisted"
+seo_title: "KDP AI Disclosure: AI-Generated vs AI-Assisted"
 question: "Do I have to tell Amazon KDP if I used AI to write or illustrate my book?"
 answer: >-
   You must disclose AI-generated content (text, images or translations) when you publish a new

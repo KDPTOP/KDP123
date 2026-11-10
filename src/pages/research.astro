@@ -39,7 +39,7 @@ const jsonLd = [
 ];
 ---
 
-<Base title="KDP market data: prices, reviews and niche reports" description="Amazon KDP market data from Best Sellers and New Releases lists: median book prices, reviews needed to rank, niche size and competition, with CSV downloads (CC BY 4.0)." jsonLd={jsonLd} searchable>
+<Base title="KDP market data" titleVariants={["KDP Market Data: Prices, Reviews & Niche Reports"]} description="Amazon KDP market data from Best Sellers and New Releases lists: median book prices, reviews needed to rank, niche size and competition, with CSV downloads (CC BY 4.0)." jsonLd={jsonLd} searchable>
   <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / KDP market data</nav>
   <section class="mt-2 max-w-3xl">
     <h1 class="text-4xl font-bold">KDP market data</h1>
@@ -48,7 +48,7 @@ const jsonLd = [
       Each report states its sample and data window and ships its tables as CSV.
     </p>
     <p class="mt-4 rounded-lg border border-warn/30 bg-warn/5 p-3 text-sm">
-      Disclosure: these reports are published by <a href={SITE.related.url}>KDPTop</a>, made by the same team as kdp123, from the Best Sellers,
+      Disclosure: these reports are published by <a href={SITE.related.url}>KDPTop</a>, made by the same team as KDP123, from the Best Sellers,
       New Releases and search data it collects. They are listed here because they are open data (CC BY 4.0) that KDP publishers can check
       and reuse; the methodology is public. Summaries synced from <a href={source}>the public repository</a> on {fetched_at}.
     </p>

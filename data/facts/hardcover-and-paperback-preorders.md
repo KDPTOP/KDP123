@@ -1,5 +1,6 @@
 ---
 title: "Can you put a KDP paperback or hardcover on pre-order?"
+seo_title: "KDP Paperback and Hardcover Pre-Orders"
 question: "Does Amazon KDP offer pre-orders for paperback and hardcover books?"
 answer: >-
   No. KDP does not offer pre-orders for print books; pre-orders are for Kindle eBooks only. For a

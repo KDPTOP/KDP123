@@ -1,11 +1,11 @@
 ---
 title: "KDP proof copies and author copies: cost, limits and how to order"
+seo_title: "KDP Proof and Author Copies: Cost and Limits"
 question: "How do I order proof copies and author copies on KDP, and what do they cost?"
 answer: >-
-  Proof and author copies cost the book's printing cost in the chosen marketplace times the number
-  of copies, plus shipping, which never qualifies for free or Prime shipping. You can order up to 5
-  proofs per order, even for a draft once it is approved in the Print Previewer, and up to 999
-  author copies per order once the book is live. Neither earns royalties.
+  Proof and author copies cost the book's printing cost times the number of copies, plus shipping, which never
+  qualifies for free or Prime shipping. You can order up to 5 proofs per order once the draft is approved, and up to
+  999 author copies per order once the book is live. Neither earns royalties.
 topic: print
 key_facts:
   - { label: "Price per copy", value: "Printing cost in the selected marketplace" }

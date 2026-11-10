@@ -1,12 +1,11 @@
 ---
 title: "KDP tax interview (tax profile): W-8, withholding and treaties"
+seo_title: "KDP Tax Interview: W-8BEN, Withholding & Treaties"
 question: "What is the KDP tax interview, and how much tax does Amazon withhold from my royalties?"
 answer: >-
-  KDP's tax interview, now called the Tax Profile, establishes your tax identity, and you cannot
-  publish or update books until it is validated. US persons have no US withholding once they give
-  valid information. Non-US persons complete a Form W-8 and have 30% withheld from Amazon.com
-  ebook sales and some print sales, including KDP Select Global Fund payments, unless a US tax
-  treaty and a tax ID number allow a lower rate.
+  KDP's tax interview, now called the Tax Profile, establishes your tax identity, and you cannot publish or update
+  books until it is validated. US persons have no US withholding. Non-US persons complete a Form W-8 and have 30%
+  withheld from Amazon.com ebook and some print sales unless a tax treaty and tax ID allow less.
 topic: account
 key_facts:
   - { label: "Required before publishing", value: "Yes, validated Tax Profile" }

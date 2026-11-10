@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { getBest } from '../../lib/best';
 import { priceLabel, isoDate, outbound, SITE } from '../../lib/site';
+import { publisherRef } from '../../lib/seo';
 import { categoryBySlug } from '../../lib/taxonomy';
 
 export async function getStaticPaths() {
@@ -22,8 +23,8 @@ const jsonLd = [
     description: d.answer,
     url,
     dateModified: reviewed,
-    author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
-    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    author: publisherRef,
+    publisher: publisherRef,
   },
   {
     '@context': 'https://schema.org',
@@ -45,14 +46,14 @@ const jsonLd = [
 ];
 ---
 
-<Base title={d.title} description={d.answer.length > 158 ? d.answer.slice(0, 155).replace(/\s+\S*$/, '') + '…' : d.answer} jsonLd={jsonLd} markdownAlt={`/best/${list.id}.md`} searchable>
+<Base title={d.title} titleVariants={[d.seo_title ?? d.title]} description={d.answer} type="article" modified={d.verified_at.toISOString().slice(0, 10)} jsonLd={jsonLd} markdownAlt={`/best/${list.id}.md`} searchable>
   <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/best/">Best-of lists</a> / {d.title}</nav>
 
-  <article class="mt-2 max-w-3xl" data-pagefind-filter="type:Best-of list">
+  <article class="mt-2 max-w-3xl" data-pagefind-filter="type:Best-of list" data-pagefind-meta="type:Guide">
     <h1 class="text-4xl font-bold">{d.title}</h1>
     <p class="mt-2 text-sm text-muted">Reviewed {reviewed}. No vendor paid to be listed or ranked. Affiliate links, where they exist, are marked.</p>
 
-    <section class="mt-6 rounded-lg border border-accent/30 bg-accent-soft/50 p-4" aria-label="Short answer">
+    <section class="answer mt-6" aria-label="Short answer">
       <p class="font-medium">{d.question}</p>
       <p class="mt-2 leading-7">{d.answer}</p>
     </section>
@@ -72,7 +73,7 @@ const jsonLd = [
               <p class="text-xs uppercase tracking-wide text-muted">{i + 1}. {p.label}</p>
               <h3 class="mt-1 text-xl font-semibold">
                 <a href={`/t/${t.id}/`}>{t.data.name}</a>
-                {t.data.related_to_directory && <span class="badge badge-warn ml-2 align-middle">Same team as kdp123</span>}
+                {t.data.related_to_directory && <span class="badge badge-warn ml-2 align-middle">Same team as KDP123</span>}
                 {t.data.official && <span class="badge badge-ok ml-2 align-middle">Official Amazon</span>}
               </h3>
               <p class="mt-2 leading-7">{p.why}</p>

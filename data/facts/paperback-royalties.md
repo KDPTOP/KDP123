@@ -1,11 +1,11 @@
 ---
 title: "KDP paperback royalties: 60% or 50% minus printing cost"
+seo_title: "KDP Paperback Royalties: 60% Minus Printing Cost"
 question: "How much royalty does Amazon KDP pay on a paperback?"
 answer: >-
-  KDP pays 60% of the paperback's list price minus the printing cost when the list price is $9.99
-  or more on Amazon.com, and 50% minus printing cost at $9.98 or less. Sales through Expanded
-  Distribution earn 40% of the list price minus printing cost. For a $15, 333-page black ink book
-  the US royalty is (0.60 x $15) - $5.00 = $4.00.
+  KDP pays 60% of the paperback's list price minus printing cost when the list price is $9.99 or more on Amazon.com,
+  and 50% minus printing cost at $9.98 or less. Expanded Distribution sales earn 40%. For a $15, 333-page black ink
+  book the US royalty is (0.60 x $15) - $5.00 = $4.00.
 topic: royalties
 key_facts:
   - { label: "Royalty rate, Amazon.com list price $9.99+", value: "60% minus printing cost" }

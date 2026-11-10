@@ -1,5 +1,6 @@
 ---
 title: "KDP ebook royalties: the 35% and 70% options"
+seo_title: "KDP Ebook Royalties: 35% vs 70% Explained"
 question: "What royalty does Amazon KDP pay on Kindle ebooks?"
 answer: >-
   KDP pays either 35% or 70% of the ebook's list price excluding VAT. The 70% option requires a

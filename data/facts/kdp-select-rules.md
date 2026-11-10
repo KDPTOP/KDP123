@@ -1,12 +1,11 @@
 ---
 title: "KDP Select rules: exclusivity, renewal, Kindle+ and promotions"
+seo_title: "KDP Select Rules: Exclusivity, Kindle+ & Promos"
 question: "What are the rules of KDP Select, and what do I get for enrolling?"
 answer: >-
-  KDP Select is a free 90-day program that requires your ebook to be sold in digital form only
-  through Amazon, and it renews automatically for another 90 days unless you turn renewal off.
-  Enrolled books go into Kindle+ (formerly Kindle Unlimited) and earn from the KDP Select Global
-  Fund. Each term you can run one type of promotion: up to 5 free days, or one Kindle Countdown
-  Deal on Amazon.com or Amazon.co.uk.
+  KDP Select is a free 90-day program that requires your ebook to be sold digitally only through Amazon, and it renews
+  automatically unless you turn renewal off. Enrolled books join Kindle+ (formerly Kindle Unlimited) and earn from the
+  KDP Select Global Fund. Each term allows up to 5 free days or one Kindle Countdown Deal.
 topic: programs
 key_facts:
   - { label: "Term length", value: "90 days, auto-renewing" }

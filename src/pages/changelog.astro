@@ -1,12 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
+import changelog from '../../data/changelog.json';
 ---
 
-<Base title="Changelog and corrections" description="Dated record of changes and corrections to the kdp123 directory.">
+<Base
+  title="Changelog and corrections"
+  description="Dated record of changes and corrections to the KDP123 directory of Amazon KDP tools and rules: new listings, price fixes, removed tools and page updates."
+  modified={changelog[0]?.date}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Changelog', url: '/changelog/' }]}
+>
   <article class="prose-kdp max-w-3xl">
     <h1 class="text-4xl font-bold">Changelog and corrections</h1>
+    <p>Price and plan changes for individual tools are listed on <a href="/changes/">price and plan changes</a>. Follow both with <a href="/rss.xml">RSS</a>.</p>
     <ul>
-      <li><strong>2026-11-09</strong> First set of listings published, each with sources and a check date.</li>
+      {changelog.map((c) => <li id={c.date}><strong>{c.date}</strong> {c.note}</li>)}
     </ul>
   </article>
 </Base>

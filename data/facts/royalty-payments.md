@@ -1,5 +1,6 @@
 ---
 title: "When and how KDP pays royalties: schedule, thresholds, methods"
+seo_title: "When Does KDP Pay Royalties? Schedule & Minimums"
 question: "When does Amazon KDP pay royalties, and is there a minimum payment?"
 answer: >-
   KDP pays royalties monthly, about 60 days after the end of the month of sale (about 90 days for

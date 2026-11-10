@@ -1,1 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#1f4fd6"/><text x="32" y="43" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700" text-anchor="middle" fill="#fff">123</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 112" role="img" aria-label="KDP123">
+  <defs>
+    <linearGradient id="kp" x1="0.85" y1="0" x2="0.1" y2="1">
+      <stop offset="0" stop-color="#FFC93E"/>
+      <stop offset="0.45" stop-color="#FF9A1F"/>
+      <stop offset="1" stop-color="#F26200"/>
+    </linearGradient>
+    <linearGradient id="ku" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFB52E"/>
+      <stop offset="1" stop-color="#FF7A0A"/>
+    </linearGradient>
+    <linearGradient id="kl" x1="0.2" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#E85A00"/>
+      <stop offset="0.5" stop-color="#FF8A12"/>
+      <stop offset="1" stop-color="#FFA830"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#kp)" d="M4 37C4 31.5 6.5 28.4 11.6 26L50.5 8.4C55.4 6.2 59 8 59 13.2V29.6C59 33.2 57.4 35.4 54 37L35.6 45.4C29.8 48.1 27 51.6 27 57.6V92.5C27 95 25.4 96.1 23.4 95.2L7.6 88.3C5.1 87.2 4 85.4 4 82.6Z"/>
+  <path fill="url(#kl)" d="M30.4 86.6C42 81.2 50.6 75.4 58.4 67.2C68.8 79.6 78.6 92.6 88.6 108.8C76 102.4 62.8 99.6 47.6 99.8C40.6 99.9 35.4 101.4 30.4 104.4Z"/>
+  <path fill="url(#ku)" d="M31 59.4C31 55 33.4 52 38 49.6L83.2 26.8C87.4 24.7 90.4 26.1 89.6 30.2C86.4 46.2 76.6 60.2 61.4 69.8C51.8 75.9 41.8 80.2 31 86.8L25.8 90C28.8 86.6 31 83.4 31 79.6Z"/>
+</svg>

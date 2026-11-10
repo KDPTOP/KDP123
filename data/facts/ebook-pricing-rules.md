@@ -1,12 +1,11 @@
 ---
 title: "KDP ebook pricing rules: minimum, maximum and price matching"
+seo_title: "KDP Ebook Price Rules: Minimum and Maximum"
 question: "What are the minimum and maximum list prices for a Kindle ebook on KDP?"
 answer: >-
-  On Amazon.com the 35% royalty option allows $0.99 to $200, with the minimum rising to $1.99
-  for files of 3 MB or more and $2.99 for 10 MB or more. The 70% option allows $2.99 to $12.99
-  (the cap rose from $9.99 on July 7, 2026), and the ebook must be priced at least 20% below the
-  Amazon list price of any print edition. Amazon can also sell your ebook below list price to
-  match a lower price elsewhere.
+  On Amazon.com the 35% royalty option allows $0.99 to $200, with higher minimums for files of 3 MB or more. The 70%
+  option allows $2.99 to $12.99 (raised from $9.99 on July 7, 2026), and the ebook must be priced at least 20% below
+  the list price of any print edition.
 topic: ebooks
 key_facts:
   - { label: "35% option, under 3 MB (US)", value: "$0.99 to $200" }

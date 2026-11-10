@@ -6,15 +6,16 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAF5sKyu1iD-AaBc9';
 const [latest] = await getReports();
 ---
 
-<Base title="The kdp123 monthly email" description="One email a month: KDP rule changes, KDP tool price changes and the monthly market report. Double opt-in, no ads, unsubscribe from any issue.">
+<Base title="The KDP123 monthly email" description="One email a month: KDP rule changes, KDP tool price changes and the monthly market report. Double opt-in, no ads, unsubscribe from any issue.">
   <div class="max-w-2xl">
-    <h1 class="text-4xl font-bold">The kdp123 monthly email</h1>
-    <p class="mt-4 text-lg text-muted">One email at the start of each month, written by the kdp123 editorial team. No ads, no sponsored tools, and every item links to its source.</p>
+    <h1 class="text-4xl font-bold">The KDP123 monthly email</h1>
+    <p class="mt-4 text-lg text-muted">One email at the start of each month, written by the KDP123 editorial team. No ads, no sponsored tools, and every item links to its source.</p>
     <ul class="mt-4 list-disc pl-6 leading-7">
       <li>KDP rules that Amazon changed, and the fact pages we updated.</li>
       <li>KDP tool prices and plans that changed, from the <a href="/changes/">changes log</a>.</li>
       <li>The <a href={latest ? `/reports/${latest.data.month}/` : '/reports/'}>monthly market report</a>{latest && <>, most recently {monthName(latest.data.month)}</>}: categories with room for new books, and new listings.</li>
     </ul>
+    <p class="mt-4 text-sm text-muted">Prefer a feed reader? <a href="/rss.xml">Everything</a>, <a href="/changes/rss.xml">price changes only</a>, <a href="/reports/rss.xml">monthly reports only</a>, or <a href="/feed.json">JSON Feed</a>.</p>
 
     <div id="subscribe" class="mt-8 scroll-mt-24">
       <p id="sent" class="hidden rounded-lg border border-ok/30 bg-ok/5 p-4" role="status">Check your inbox: we sent a link to confirm your subscription. Nothing is sent until you click it.</p>

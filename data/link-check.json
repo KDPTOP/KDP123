@@ -1,0 +1,606 @@
+{
+  "99designs": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "absolute-write": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "acx": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "adobe-express": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "adobe-firefly": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "adobe-indesign": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "affinity": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "alli": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "amazon-ads": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "amazon-best-sellers": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "amazon-kdp": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "apple-books-for-authors": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "atticus": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "author-central": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "authors-republic": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "authorscout": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "barnes-noble-press": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "blurb": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "book-bolt": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "book-brush": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "book-design-templates": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "book2color": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "bookbeam": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "bookbub": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "bookbub-insights": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "bookfunnel": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "booklife": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "bookreport": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "booksirens": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "booksprout": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "bookvault": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "bowker-myidentifiers": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "calibre": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "canva": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "chatgpt": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "claude": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "colorcraft": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "copyright-office": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "creative-fabrica": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "creativindie": {
+    "ok": false,
+    "failed_at": "2026-11-10"
+  },
+  "dabble": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "damonza": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "data-dive": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "diy-book-covers": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "diy-book-formats": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "draft2digital": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "ds-amazon-quick-view": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "editorial-freelancers-association": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "elevenlabs": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "ereader-news-today": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "euipo-tmview": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "fiverr": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "getcovers": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "gimp": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "goodreads": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "google-docs": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "google-gemini": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "google-play-books-partner": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "google-trends": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "grammarly": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "gumroad": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "helium-10": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "hemingway-editor": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "hidden-gems-books": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "ideogram": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "indie-author-magazine": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "ingramspark": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "inkscape": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "isbn-international": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "jane-friedman": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "jungle-scout": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "jutoh": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kboards-writers-cafe": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kdp-coloring-book-studio": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kdp-community": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kdp-cover-calculator": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kdp-help-center": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kdp-select": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kdp-tools-io": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kdpeasy": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kdptop": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kdspy": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "keepa": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kindle-create": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kindle-previewer": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kindlepreneur": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kit": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "kobo-writing-life": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "krita": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "laura-jane-illustrations": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "leonardo-ai": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "loc-pcn": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "low-content-profits": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "lulu": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "mailchimp": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "mailerlite": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "manuscript-report": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "merchantwords": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "meta-ads-manager": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "miblart": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "microsoft-word": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "midjourney": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "netgalley": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "nicholas-erik": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "nielsen-isbn-uk": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "novelcrafter": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "pandoc": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "payhip": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "photopea": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "pinterest-business": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "pinterest-trends": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "placeit": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "plottr": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "plr-planners": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "procreate": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "prowritingaid": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "publishdrive": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "publisher-rocket": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "puzzle-maker-pro": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "readers-favorite": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "recraft": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "reddit-r-kdp": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "reddit-r-printondemand": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "reddit-r-selfpublish": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "reedsy-blog": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "reedsy-marketplace": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "reedsy-studio": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "robin-reads": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "scrivener": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "self-publishing-formula": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "self-publishing-school": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "self-publishing-titans": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "sellersprite": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "shopify": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "sigil": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "spotify-for-authors": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "storyorigin": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "streetlib": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "sudowrite": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "tangent-templates": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "the-book-designer": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "the-creative-penn": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "the-fussy-librarian": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "the-home-boss": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "the-self-publishing-show": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "uspto-trademark-search": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "vellum": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "voracious-readers-only": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "wipo-global-brand-database": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "writer-beware": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  },
+  "written-word-media": {
+    "ok": true,
+    "checked_at": "2026-11-10"
+  }
+}

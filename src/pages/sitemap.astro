@@ -1,0 +1,109 @@
+---
+import Base from '../layouts/Base.astro';
+import { getTools } from '../lib/site';
+import { STAGES, FACT_TOPICS, nonEmpty } from '../lib/taxonomy';
+import { getFacts } from '../lib/facts';
+import { FREE_TOOLS } from '../lib/freeTools';
+import { getBest } from '../lib/best';
+import { getCompares, compareTitle } from '../lib/compare';
+import { getReports, monthName } from '../lib/reports';
+
+const tools = await getTools();
+const live = nonEmpty(tools.flatMap((t) => t.data.categories));
+const facts = await getFacts();
+const lists = await getBest();
+const compares = await getCompares();
+const reports = await getReports();
+const inCategory = (slug: string) => tools.filter((t) => t.data.categories[0] === slug);
+
+const pages = [
+  ['/tools/', 'All tools'],
+  ['/free-tools/', 'Free KDP calculators'],
+  ['/facts/', 'KDP facts'],
+  ['/glossary/', 'KDP glossary'],
+  ['/best/', 'Shortlists'],
+  ['/compare/', 'Comparisons'],
+  ['/compare/pick/', 'Compare any tools side by side'],
+  ['/reports/', 'Monthly market reports'],
+  ['/research/', 'KDP market data'],
+  ['/changes/', 'Price and plan changes'],
+  ['/changelog/', 'Changelog and corrections'],
+  ['/data/', 'Open data'],
+  ['/methodology/', 'Methodology'],
+  ['/newsletter/', 'Monthly email'],
+  ['/submit/', 'Suggest or correct a listing'],
+  ['/about/', 'About KDP123'],
+];
+const feeds = [
+  ['/sitemap-index.xml', 'XML sitemap'],
+  ['/rss.xml', 'RSS: all updates'],
+  ['/changes/rss.xml', 'RSS: price changes'],
+  ['/reports/rss.xml', 'RSS: monthly reports'],
+  ['/feed.json', 'JSON Feed'],
+  ['/tools.json', 'Tools as JSON'],
+  ['/tools.csv', 'Tools as CSV'],
+  ['/llms.txt', 'llms.txt'],
+];
+---
+
+<Base
+  title="Site map"
+  titleVariants={['KDP123 Site Map: Every Tool, Fact and Guide']}
+  description={`Every page on KDP123 in one place: ${tools.length} Amazon KDP tools by stage and category, ${facts.length} KDP facts, free calculators, shortlists, comparisons and reports.`}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Site map', url: '/sitemap/' }]}
+>
+  <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / Site map</nav>
+  <h1 class="mt-2 text-4xl font-bold">Site map</h1>
+  <p class="mt-3 max-w-2xl text-muted">Every page on KDP123. Tools are listed under the category they belong to first; many also appear in other categories.</p>
+
+  <div class="mt-8 grid gap-8 md:grid-cols-3">
+    <section>
+      <h2 class="text-xl font-semibold">Main pages</h2>
+      <ul class="mt-2 space-y-1 text-sm">{pages.map(([href, name]) => <li><a href={href}>{name}</a></li>)}</ul>
+      <h2 class="mt-6 text-xl font-semibold">Feeds and data</h2>
+      <ul class="mt-2 space-y-1 text-sm">{feeds.map(([href, name]) => <li><a href={href}>{name}</a></li>)}</ul>
+    </section>
+    <section>
+      <h2 class="text-xl font-semibold">Free calculators</h2>
+      <ul class="mt-2 space-y-1 text-sm">{FREE_TOOLS.map((t) => <li><a href={`/free-tools/${t.slug}/`}>{t.name}</a></li>)}</ul>
+      <h2 class="mt-6 text-xl font-semibold">Shortlists and comparisons</h2>
+      <ul class="mt-2 space-y-1 text-sm">
+        {lists.map(({ list }) => <li><a href={`/best/${list.id}/`}>{list.data.title}</a></li>)}
+        {compares.map(({ cmp, a, b }) => <li><a href={`/compare/${cmp.id}/`}>{compareTitle(a, b)}</a></li>)}
+      </ul>
+      <h2 class="mt-6 text-xl font-semibold">Reports</h2>
+      <ul class="mt-2 space-y-1 text-sm">{reports.map((r) => <li><a href={`/reports/${r.data.month}/`}>KDP market report, {monthName(r.data.month)}</a></li>)}</ul>
+    </section>
+    <section>
+      <h2 class="text-xl font-semibold">KDP facts</h2>
+      {
+        FACT_TOPICS.map((topic) => {
+          const items = facts.filter((f) => f.data.topic === topic.slug);
+          return items.length > 0 && (
+            <>
+              <h3 class="mt-3 text-sm font-semibold text-muted">{topic.name}</h3>
+              <ul class="mt-1 space-y-1 text-sm">{items.map((f) => <li><a href={`/facts/${f.id}/`}>{f.data.title}</a></li>)}</ul>
+            </>
+          );
+        })
+      }
+    </section>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-semibold">Tools by stage and category</h2>
+  <div class="mt-4 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    {
+      STAGES.map((s) => (
+        <section>
+          <h3 class="text-lg font-semibold"><a href={`/stages/${s.slug}/`}>{s.name}</a></h3>
+          {live.filter((c) => c.stage === s.slug).map((c) => (
+            <>
+              <h4 class="mt-3 text-sm font-semibold"><a href={`/c/${c.slug}/`}>{c.name}</a></h4>
+              <ul class="mt-1 space-y-0.5 text-sm">{inCategory(c.slug).map((t) => <li><a href={`/t/${t.id}/`}>{t.data.name}</a></li>)}</ul>
+            </>
+          ))}
+        </section>
+      ))
+    }
+  </div>
+</Base>

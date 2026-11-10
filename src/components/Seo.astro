@@ -1,0 +1,54 @@
+---
+import { SITE } from '../lib/site';
+import { ogImagePath, breadcrumbLd, type Crumb } from '../lib/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  noindex?: boolean;
+  canonical?: boolean;
+  type?: 'website' | 'article';
+  modified?: string;
+  imageAlt?: string;
+  markdownAlt?: string;
+  breadcrumbs?: Crumb[];
+  jsonLd?: object[];
+}
+const { title, description, path, noindex = false, canonical = true, type = 'website', modified, imageAlt, markdownAlt, breadcrumbs, jsonLd = [] } = Astro.props;
+const url = new URL(path, SITE.url).toString();
+const image = new URL(ogImagePath(path), SITE.url).toString();
+const ld = breadcrumbs && breadcrumbs.length > 1 ? [...jsonLd, breadcrumbLd(breadcrumbs)] : jsonLd;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{canonical && <link rel="canonical" href={url} />}
+{noindex && <meta name="robots" content="noindex, follow" />}
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#111a2e" />
+{markdownAlt && <link rel="alternate" type="text/markdown" href={markdownAlt} />}
+<link rel="alternate" type="application/rss+xml" title="KDP123: all updates" href="/rss.xml" />
+<link rel="alternate" type="application/rss+xml" title="KDP123: tool price changes" href="/changes/rss.xml" />
+<link rel="alternate" type="application/rss+xml" title="KDP123: monthly market reports" href="/reports/rss.xml" />
+<link rel="alternate" type="application/feed+json" title="KDP123: all updates (JSON Feed)" href="/feed.json" />
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={image} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={imageAlt ?? title} />
+{modified && <meta property="article:modified_time" content={modified} />}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+{ld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}

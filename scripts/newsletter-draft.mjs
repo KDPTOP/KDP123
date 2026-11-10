@@ -6,7 +6,7 @@ import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 const SITE = 'https://kdp123.com';
 const SEGMENT_ID = 'c27be705-538f-49d8-9f78-6f6b8ad69133';
-const FROM = 'kdp123 <news@kdp123.com>';
+const FROM = 'KDP123 <news@kdp123.com>';
 
 const month = process.argv[2] ?? readdirSync('data/reports').filter((f) => f.endsWith('.json')).sort().pop().slice(0, 7);
 const r = JSON.parse(readFileSync(`data/reports/${month}.json`, 'utf8'));
@@ -17,7 +17,7 @@ const leaf = (path) => path.split(' > ').pop();
 const { kdptop: k, kdp123: o } = r;
 const top = k.top_categories.slice(0, 5);
 const sameTeam = (id) => /^related_to_directory:\s*true/m.test(readFileSync(`data/tools/${id}.yml`, 'utf8'));
-for (const c of o.price_changes) if (sameTeam(c.id)) c.name += ' (run by the same team as kdp123)';
+for (const c of o.price_changes) if (sameTeam(c.id)) c.name += ' (run by the same team as KDP123)';
 const changes = o.price_changes.filter((c) => c.kind !== 'correction');
 const corrections = o.price_changes.filter((c) => c.kind === 'correction');
 
@@ -48,12 +48,12 @@ const sections = [
   },
 ].filter(Boolean);
 
-const subject = `kdp123 · ${name}: ${top[0] ? `${leaf(top[0].category)} leads, ` : ''}${o.price_changes.length} price changes`;
-const footer = 'Market figures: KDPTop (kdptop.com), run by the same team as kdp123, CC BY 4.0. No vendor pays to appear in this email.';
+const subject = `KDP123 · ${name}: ${top[0] ? `${leaf(top[0].category)} leads, ` : ''}${o.price_changes.length} price changes`;
+const footer = 'Market figures: KDPTop (kdptop.com), run by the same team as KDP123, CC BY 4.0. No vendor pays to appear in this email.';
 
 const html = `<!doctype html><html><body style="margin:0;background:#fbfbfa">
 <div style="max-width:600px;margin:0 auto;padding:24px;font:16px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#14171f">
-<p style="font-weight:700;font-size:18px;margin:0 0 4px">kdp123</p>
+<p style="font-weight:700;font-size:18px;margin:0 0 4px">KDP123</p>
 <h1 style="font-size:24px;margin:0 0 16px">The KDP month: ${esc(name)}</h1>
 <p style="margin:0 0 24px">The full report with every table and CSV: <a href="${reportUrl}" style="color:#1f4fd6">${reportUrl}</a></p>
 ${sections
@@ -70,7 +70,7 @@ ${s.more ? `<p style="margin:8px 0 0;font-size:14px"><a href="${s.more.url}" sty
 </div></body></html>`;
 
 const text = [
-  `kdp123 · The KDP month: ${name}`,
+  `KDP123 · The KDP month: ${name}`,
   `Full report: ${reportUrl}`,
   ...sections.flatMap((s) => ['', s.title.toUpperCase(), ...(s.intro ? [s.intro] : []), ...s.items.map((i) => `- ${i.text}${i.url ? ` ${i.url}` : ''}`), ...(s.more ? [`${s.more.text}: ${s.more.url}`] : [])]),
   '',
@@ -86,7 +86,7 @@ if (!process.env.RESEND_API_KEY) {
   const res = await fetch('https://api.resend.com/broadcasts', {
     method: 'POST',
     headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ segment_id: SEGMENT_ID, from: FROM, reply_to: 'hello@kdp123.com', subject, html, text, name: `kdp123 ${month}` }),
+    body: JSON.stringify({ segment_id: SEGMENT_ID, from: FROM, reply_to: 'hello@kdp123.com', subject, html, text, name: `KDP123 ${month}` }),
   });
   const body = await res.json();
   if (!res.ok) throw new Error(`Resend ${res.status}: ${JSON.stringify(body)}`);

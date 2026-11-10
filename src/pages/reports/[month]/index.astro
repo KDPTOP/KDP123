@@ -2,6 +2,7 @@
 import Base from '../../../layouts/Base.astro';
 import { getReports, monthName, isPartial, type Report } from '../../../lib/reports';
 import { isoDate, SITE } from '../../../lib/site';
+import { publisherRef } from '../../../lib/seo';
 
 export async function getStaticPaths() {
   return (await getReports()).map((r) => ({ params: { month: r.data.month }, props: { report: r } }));
@@ -25,7 +26,7 @@ const kindLabel = { price: 'Price change', plan: 'Plans recorded', correction: '
 const top = k.top_categories[0];
 const title = `KDP market report, ${name}${partial ? ' (month to date)' : ''}`;
 const summary =
-  `${partial ? `So far in ${name}` : `In ${name}`} kdp123 added ${o.new_listings.length} tool listings and recorded ${o.price_changes.length} price or plan changes. ` +
+  `${partial ? `So far in ${name}` : `In ${name}`} KDP123 added ${o.new_listings.length} tool listings and recorded ${o.price_changes.length} price or plan changes. ` +
   `KDPTop tracked ${n(k.coverage.list_nodes)} Amazon.com category lists and has catalogued ${n(k.coverage.books)} books` +
   (top ? `, and its highest-scoring category for new books was ${top.category.split(' > ').pop()} (${top.opportunity_score}/100).` : '.');
 
@@ -40,7 +41,7 @@ const jsonLd = [
     datePublished: isoDate(report.data.generated_at),
     license: 'https://creativecommons.org/licenses/by/4.0/',
     isAccessibleForFree: true,
-    creator: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    creator: publisherRef,
     isBasedOn: { '@type': 'Dataset', name: 'KDPTop public market data', url: k.url },
     spatialCoverage: k.marketplace,
     variableMeasured: ['opportunity score', 'median list price (USD)', 'median reviews', 'new-release share', 'tool price and plan changes'],
@@ -62,15 +63,15 @@ const jsonLd = [
 ];
 ---
 
-<Base title={title} description={summary.length > 158 ? summary.slice(0, 155).replace(/\s+\S*$/, '') + '…' : summary} jsonLd={jsonLd} searchable>
+<Base title={title} titleVariants={[`KDP Market Report: ${name}${partial ? ' (Month to Date)' : ''}`, `KDP Market Report: ${name}`]} description={summary} type="article" modified={report.data.generated_at.toISOString().slice(0, 10)} jsonLd={jsonLd} searchable>
   <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/reports/">Monthly reports</a> / {name}</nav>
-  <article class="mt-2 max-w-4xl" data-pagefind-filter="type:Report">
+  <article class="mt-2 max-w-4xl" data-pagefind-filter="type:Report" data-pagefind-meta="type:Report">
     <h1 class="text-4xl font-bold">{title}</h1>
     <p class="mt-2 text-sm text-muted">
       {partial ? `Covers ${month}-01 to ${through}; the full month replaces this page once it ends. ` : `Covers ${month}-01 to ${through}. `}
       Market figures are a KDPTop snapshot from {isoDate(k.data_date)}.
     </p>
-    <section class="mt-6 rounded-lg border border-accent/30 bg-accent-soft/50 p-4" aria-label="Summary">
+    <section class="answer mt-6" aria-label="Summary">
       <p class="leading-7">{summary}</p>
     </section>
 
@@ -78,7 +79,7 @@ const jsonLd = [
       <div class="stat"><dt>Amazon category lists tracked</dt><dd>{n(k.coverage.list_nodes)}</dd></div>
       <div class="stat"><dt>Books catalogued by KDPTop</dt><dd>{n(k.coverage.books)}</dd></div>
       <div class="stat"><dt>Books on a list in the last 24 hours</dt><dd>{n(k.coverage.on_list_24h)}</dd></div>
-      <div class="stat"><dt>Tools listed on kdp123</dt><dd>{n(o.listings)}</dd></div>
+      <div class="stat"><dt>Tools listed on KDP123</dt><dd>{n(o.listings)}</dd></div>
       <div class="stat"><dt>New listings this month</dt><dd>{n(o.new_listings.length)}</dd></div>
       <div class="stat"><dt>Price and plan changes</dt><dd>{n(o.price_changes.length)}</dd></div>
     </dl>
@@ -141,7 +142,7 @@ const jsonLd = [
       )
     }
 
-    <h2 class="mt-10 text-2xl font-semibold">New on kdp123</h2>
+    <h2 class="mt-10 text-2xl font-semibold">New on KDP123</h2>
     {
       o.new_listings.length === 0 ? (
         <p class="mt-2 text-muted">No new listings this month.</p>
@@ -169,10 +170,10 @@ const jsonLd = [
     <h2 class="mt-10 text-2xl font-semibold">Sources and license</h2>
     <ul class="mt-2 list-disc pl-6 text-sm leading-7">
       <li>Market figures: {k.source}, tracked since {isoDate(k.tracked_since)}. Snapshot taken {isoDate(k.snapshot_at)} from KDPTop's public API. {k.license}.</li>
-      <li>KDPTop is run by the same team as kdp123. Its numbers are reported as published; we do not adjust or rank them.</li>
+      <li>KDPTop is run by the same team as KDP123. Its numbers are reported as published; we do not adjust or rank them.</li>
       <li>Listings, price changes and rule checks: this site's <a href={SITE.github}>public repository</a> for the month.</li>
       <li>This report: CC BY 4.0. Downloads: <a href={files.categories}>categories CSV</a>, <a href={files.changes}>price changes CSV</a>, <a href={files.json}>full JSON</a>.</li>
     </ul>
-    <p class="mt-8 rounded-lg border border-line bg-white p-4 text-sm">Get each month's report by email: <a href="/newsletter/">subscribe to the kdp123 monthly email</a>.</p>
+    <p class="mt-8 rounded-lg border border-line bg-white p-4 text-sm">Get each month's report by email: <a href="/newsletter/">subscribe to the KDP123 monthly email</a>.</p>
   </article>
 </Base>
