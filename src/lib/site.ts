@@ -25,7 +25,7 @@ export function logoSrc(id: string): string | undefined {
 
 export const isoDate = (d?: Date) => (d ? d.toISOString().slice(0, 10) : undefined);
 
-const PLATFORM_LABELS: Record<string, string> = {
+export const PLATFORM_LABELS: Record<string, string> = {
   web: 'Web',
   windows: 'Windows',
   mac: 'Mac',
@@ -100,6 +100,7 @@ export const PRICE_FILTERS = [
   { value: 'freemium', label: 'Free tier', models: ['freemium'], hint: 'A limited free plan next to paid plans' },
   { value: 'one-time', label: 'One-time', models: ['one-time'], hint: 'Pay once, keep using it' },
   { value: 'subscription', label: 'Subscription', models: ['subscription'], hint: 'Billed weekly, monthly or yearly' },
+  { value: 'paid', label: 'Paid service', models: ['paid'], hint: 'Paid per order, such as a cover design or an ISBN' },
 ] as const;
 
 // Affiliate overlay. The repository never contains affiliate URLs: they live in an untracked

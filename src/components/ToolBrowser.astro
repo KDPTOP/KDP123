@@ -1,0 +1,232 @@
+---
+import ToolCard from './ToolCard.astro';
+import Icon from './Icon.astro';
+import { PRICE_FILTERS, PLATFORM_LABELS, type Tool } from '../lib/site';
+import { STAGES, categoriesOfStage, FIT_SCOPES, FIT_SCOPE_INFO } from '../lib/taxonomy';
+import { citationCounts } from '../lib/cited';
+
+interface Props {
+  tools: Tool[];
+  /** Show the stage and category facet (off on a category page, where every tool shares the category). */
+  categories?: boolean;
+}
+const { tools, categories = true } = Astro.props;
+const cited = await citationCounts();
+const has = (key: (t: Tool) => boolean) => tools.some(key);
+const stages = STAGES.map((s) => ({
+  stage: s,
+  cats: categoriesOfStage(s.slug).filter((c) => has((t) => t.data.categories.includes(c.slug))),
+})).filter((s) => s.cats.length);
+const prices = PRICE_FILTERS.filter((f) => has((t) => t.data.pricing.model === f.value));
+const fits = FIT_SCOPES.filter((s) => has((t) => t.data.kdp_fit?.[s] === 'native'));
+const platforms = Object.entries(PLATFORM_LABELS).filter(([p]) => has((t) => t.data.platforms.includes(p as never)));
+const ONLY = [
+  { value: 'trial', label: 'Has a free trial' },
+  { value: 'noAccount', label: 'Never asks for your KDP login' },
+  { value: 'kdpFiles', label: 'Outputs KDP-ready files' },
+  { value: 'official', label: 'Official Amazon' },
+].filter((o) => tools.some((t) => (o.value === 'official' ? t.data.official : o.value === 'kdpFiles' ? t.data.kdp.outputs_kdp_files : o.value === 'trial' ? t.data.pricing.trial_days : !t.data.kdp.touches_kdp_account)));
+---
+
+<div class="lg:grid lg:grid-cols-[14.5rem_minmax(0,1fr)] lg:gap-8" data-browser>
+  <aside id="facets" class="max-lg:fixed max-lg:inset-0 max-lg:z-50 max-lg:hidden max-lg:overflow-y-auto max-lg:bg-white max-lg:px-4" aria-label="Filters" data-pagefind-ignore>
+    <div class="sticky top-0 z-10 -mx-4 flex items-center justify-between border-b border-line bg-white px-4 py-3 lg:hidden">
+      <p class="font-semibold">Filters</p>
+      <button type="button" class="btn-icon" data-facets-close aria-label="Close filters"><Icon name="x" class="size-5" /></button>
+    </div>
+    <div class="space-y-5 max-lg:py-4 lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:pr-1 lg:pb-4">
+      <div>
+        <label for="facet-q" class="sr-only">Search these tools</label>
+        <div class="flex items-center gap-2 rounded-xl border border-line bg-white px-3 focus-within:border-brand focus-within:ring-4 focus-within:ring-brand/15">
+          <Icon name="search" class="size-4 shrink-0 text-muted" />
+          <input id="facet-q" type="search" placeholder="Name or what it does" class="h-10 min-w-0 flex-1 bg-transparent text-sm outline-none" autocomplete="off" />
+        </div>
+      </div>
+      {categories && (
+        <fieldset data-facet="cat" data-mode="or">
+          <legend class="facet-h">Stage and category</legend>
+          {stages.map(({ stage, cats }) => (
+            <div class="mt-2">
+              <p class="text-xs font-medium text-ink">{stage.name}</p>
+              {cats.map((c) => (
+                <label class="facet"><input type="checkbox" value={c.slug} /><span class="min-w-0 flex-1">{c.name}</span><span class="facet-n" data-n></span></label>
+              ))}
+            </div>
+          ))}
+        </fieldset>
+      )}
+      <fieldset data-facet="price" data-mode="or">
+        <legend class="facet-h">Price</legend>
+        {prices.map((f) => <label class="facet" title={f.hint}><input type="checkbox" value={f.value} /><span class="min-w-0 flex-1">{f.label}</span><span class="facet-n" data-n></span></label>)}
+      </fieldset>
+      {fits.length > 0 && (
+        <fieldset data-facet="fit" data-mode="and">
+          <legend class="facet-h">Built-in KDP preset for</legend>
+          {fits.map((s) => <label class="facet" title={FIT_SCOPE_INFO[s].means}><input type="checkbox" value={s} /><span class="min-w-0 flex-1">{FIT_SCOPE_INFO[s].name}</span><span class="facet-n" data-n></span></label>)}
+        </fieldset>
+      )}
+      {platforms.length > 1 && (
+        <fieldset data-facet="os" data-mode="or">
+          <legend class="facet-h">Runs on</legend>
+          {platforms.map(([p, label]) => <label class="facet"><input type="checkbox" value={p} /><span class="min-w-0 flex-1">{label}</span><span class="facet-n" data-n></span></label>)}
+        </fieldset>
+      )}
+      <fieldset data-facet="only" data-mode="and">
+        <legend class="facet-h">Only show</legend>
+        {ONLY.map((o) => <label class="facet"><input type="checkbox" value={o.value} /><span class="min-w-0 flex-1">{o.label}</span><span class="facet-n" data-n></span></label>)}
+      </fieldset>
+      <p class="text-xs leading-relaxed text-muted">
+        <strong class="font-medium">Free tier</strong> is a limited free plan next to paid plans. <strong class="font-medium">KDP preset</strong> means the tool has KDP sizes or exports built in; see <a href="/methodology/">how we check</a>.
+      </p>
+    </div>
+    <div class="sticky bottom-0 -mx-4 border-t border-line bg-white p-3 lg:hidden">
+      <button type="button" class="btn-primary w-full" data-facets-close data-done></button>
+    </div>
+  </aside>
+
+  <div class="min-w-0">
+    <div class="flex flex-wrap items-center gap-2" data-pagefind-ignore>
+      <button type="button" class="btn-ghost lg:hidden" data-facets-toggle aria-controls="facets" aria-expanded="false">
+        <Icon name="sliders" class="size-4" />Filters<span class="badge badge-brand hidden" data-active-n></span>
+      </button>
+      <p class="text-sm text-muted" aria-live="polite" data-count></p>
+      <label class="ml-auto flex items-center gap-2 text-sm text-muted">
+        Sort
+        <select class="input w-auto py-1.5 text-sm" data-sort>
+          <option value="cited">Most cited in our guides</option>
+          <option value="name">Name, A to Z</option>
+          <option value="checked">Recently checked</option>
+        </select>
+      </label>
+    </div>
+    <p class="mt-2 flex flex-wrap items-center gap-1.5" data-chips hidden></p>
+    <ul class="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-3" data-grid>
+      {tools.map((t) => <ToolCard tool={t} cited={cited.get(t.id) ?? 0} />)}
+    </ul>
+    <p class="mt-4 rounded-xl border border-line bg-white p-4 text-sm text-muted" data-empty hidden>
+      No tools match these filters. <button type="button" class="text-ink underline" data-clear>Clear all filters</button>
+    </p>
+  </div>
+</div>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-browser]');
+  if (root) {
+    const grid = root.querySelector<HTMLElement>('[data-grid]')!;
+    const items = [...grid.querySelectorAll<HTMLElement>('[data-tool]')];
+    const q = root.querySelector<HTMLInputElement>('#facet-q')!;
+    const sort = root.querySelector<HTMLSelectElement>('[data-sort]')!;
+    const chips = root.querySelector<HTMLElement>('[data-chips]')!;
+    const facets = [...root.querySelectorAll<HTMLFieldSetElement>('[data-facet]')].map((fs) => ({
+      key: fs.dataset.facet!,
+      and: fs.dataset.mode === 'and',
+      boxes: [...fs.querySelectorAll<HTMLInputElement>('input[type=checkbox]')],
+    }));
+    const values = new Map(items.map((el) => [el, Object.fromEntries(facets.map((f) => [f.key, new Set((el.dataset[f.key] ?? '').split(' ').filter(Boolean))]))]));
+    const picked = (f: (typeof facets)[number]) => f.boxes.filter((b) => b.checked).map((b) => b.value);
+    const passes = (el: HTMLElement, f: (typeof facets)[number], sel: string[]) => {
+      if (!sel.length) return true;
+      const v = values.get(el)![f.key];
+      return f.and ? sel.every((s) => v.has(s)) : sel.some((s) => v.has(s));
+    };
+    const textOk = (el: HTMLElement, needle: string) => !needle || el.dataset.text!.includes(needle);
+
+    // Old /tools/ links used ?price= and ?only=official,kdpFiles; both still work.
+    const params = new URLSearchParams(location.search);
+    q.value = params.get('q') ?? '';
+    for (const f of facets) {
+      const want = new Set((params.get(f.key) ?? '').split(',').filter(Boolean));
+      f.boxes.forEach((b) => (b.checked = want.has(b.value)));
+    }
+    if ([...sort.options].some((o) => o.value === params.get('sort'))) sort.value = params.get('sort')!;
+
+    const order = () => {
+      const by = sort.value;
+      const sorted = [...items].sort((a, b) =>
+        by === 'name'
+          ? a.dataset.name!.localeCompare(b.dataset.name!)
+          : by === 'checked'
+            ? +b.dataset.checked! - +a.dataset.checked! || a.dataset.name!.localeCompare(b.dataset.name!)
+            : +b.dataset.cited! - +a.dataset.cited! || a.dataset.name!.localeCompare(b.dataset.name!),
+      );
+      grid.append(...sorted);
+    };
+
+    const apply = () => {
+      const needle = q.value.trim().toLowerCase();
+      const sel = facets.map(picked);
+      let shown = 0;
+      for (const el of items) {
+        const ok = textOk(el, needle) && facets.every((f, i) => passes(el, f, sel[i]));
+        el.hidden = !ok;
+        if (ok) shown++;
+      }
+      // Counts: for an "any of" group, what you would get by adding that value; for an "all of" group, by narrowing further.
+      facets.forEach((f, i) => {
+        const base = items.filter((el) => textOk(el, needle) && facets.every((g, j) => j === i || passes(el, g, sel[j])));
+        for (const b of f.boxes) {
+          const n = base.filter((el) => values.get(el)![f.key].has(b.value) && (!f.and || passes(el, f, sel[i]))).length;
+          b.closest('label')!.querySelector('[data-n]')!.textContent = String(n);
+          b.closest('label')!.toggleAttribute('data-zero', n === 0 && !b.checked);
+        }
+      });
+      const active = sel.flat().length + (needle ? 1 : 0);
+      root.querySelector('[data-count]')!.textContent = `${shown} of ${items.length} tools`;
+      root.querySelector('[data-done]')!.textContent = `Show ${shown} ${shown === 1 ? 'tool' : 'tools'}`;
+      root.querySelector('[data-empty]')!.toggleAttribute('hidden', shown > 0);
+      const n = root.querySelector<HTMLElement>('[data-active-n]')!;
+      n.textContent = String(active);
+      n.classList.toggle('hidden', !active);
+
+      chips.replaceChildren();
+      facets.forEach((f) =>
+        f.boxes.filter((b) => b.checked).forEach((b) => {
+          const c = Object.assign(document.createElement('button'), { type: 'button', className: 'chip gap-1 px-2.5 py-0.5 text-xs' });
+          c.append(b.closest('label')!.querySelector('span')!.textContent!, ' ×');
+          c.setAttribute('aria-label', `Remove filter ${c.textContent}`);
+          c.addEventListener('click', () => { b.checked = false; apply(); });
+          chips.append(c);
+        }),
+      );
+      if (active) {
+        const clear = Object.assign(document.createElement('button'), { type: 'button', className: 'text-xs text-muted underline', textContent: 'Clear all' });
+        clear.addEventListener('click', clearAll);
+        chips.append(clear);
+      }
+      chips.hidden = !active;
+
+      const p = new URLSearchParams();
+      if (needle) p.set('q', q.value.trim());
+      facets.forEach((f, i) => sel[i].length && p.set(f.key, sel[i].join(',')));
+      if (sort.value !== 'cited') p.set('sort', sort.value);
+      const qs = p.toString();
+      history.replaceState(history.state, '', (qs ? `?${qs}` : location.pathname) + location.hash);
+    };
+    const clearAll = () => {
+      q.value = '';
+      facets.forEach((f) => f.boxes.forEach((b) => (b.checked = false)));
+      apply();
+    };
+
+    root.addEventListener('change', (e) => {
+      if ((e.target as Element).matches('[data-sort]')) order();
+      apply();
+    });
+    q.addEventListener('input', apply);
+    root.querySelector('[data-clear]')!.addEventListener('click', clearAll);
+    // Below lg the filters are a full-screen panel.
+    const toggle = root.querySelector<HTMLButtonElement>('[data-facets-toggle]')!;
+    const panel = root.querySelector<HTMLElement>('#facets')!;
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      panel.classList.toggle('max-lg:hidden', !open);
+      document.documentElement.classList.toggle('max-lg:overflow-hidden', open);
+      if (!open) toggle.focus({ preventScroll: true });
+    };
+    toggle.addEventListener('click', () => setOpen(true));
+    root.querySelectorAll('[data-facets-close]').forEach((b) => b.addEventListener('click', () => setOpen(false)));
+    panel.addEventListener('keydown', (e) => e.key === 'Escape' && setOpen(false));
+    order();
+    apply();
+  }
+</script>

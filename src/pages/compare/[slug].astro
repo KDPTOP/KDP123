@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import { getCompares, compareTitle } from '../../lib/compare';
 import { priceLabel, platformsLabel, isoDate, outbound, SITE, type Tool } from '../../lib/site';
 import { publisherRef } from '../../lib/seo';
+import ToolLogo from '../../components/ToolLogo.astro';
 
 export async function getStaticPaths() {
   return (await getCompares()).map((x) => ({ params: { slug: x.cmp.id }, props: x }));
@@ -54,10 +55,10 @@ const jsonLd = [
 ];
 ---
 
-<Base title={title} titleVariants={[`${title} for KDP: Pricing & Features`, `${title}: Pricing & Features`, `${title} for KDP`, title]} description={d.answer} type="article" modified={d.verified_at.toISOString().slice(0, 10)} jsonLd={jsonLd} searchable>
+<Base title={title} titleVariants={[`${title} for KDP: Pricing & Features`, `${title}: Pricing & Features`, `${title} for KDP`, title]} description={d.answer} type="article" modified={d.verified_at.toISOString().slice(0, 10)} jsonLd={jsonLd} searchable aside>
   <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/compare/">Comparisons</a> / {title}</nav>
 
-  <article class="mt-2 max-w-4xl" data-pagefind-filter="type:Comparison" data-pagefind-meta="type:Comparison">
+  <article class="mt-2" data-pagefind-filter="type:Comparison" data-pagefind-meta="type:Comparison">
     <h1 class="text-4xl font-bold">{title} for KDP publishers</h1>
     <p class="mt-2 text-sm text-muted">Reviewed {reviewed} from both vendors' own pages. Neither vendor paid to be compared.</p>
 
@@ -114,4 +115,25 @@ const jsonLd = [
 
     <p class="mt-8 text-sm text-muted">Prices change. Each side's figures come from its listing, which links the vendor page we checked. <a href="/submit/">Report a change</a>.</p>
   </article>
+
+  <Fragment slot="aside">
+    {[a, b].map((t) => {
+      const link = outbound(t);
+      return (
+        <section class="aside-box text-sm" aria-label={t.data.name}>
+          <p class="flex items-center gap-2 font-semibold"><ToolLogo tool={t} size={24} />{t.data.name}</p>
+          <p class="mt-2">{priceLabel(t)}</p>
+          <p class="mt-1 text-xs text-muted">Checked {isoDate(t.data.verified_at)}</p>
+          <p class="mt-3 flex gap-2">
+            <a href={link.href} rel={link.rel} target="_blank" class="btn-ghost py-1 text-xs">Visit site</a>
+            <a href={`/t/${t.id}/`} class="btn-ghost py-1 text-xs">Details</a>
+          </p>
+        </section>
+      );
+    })}
+    <section class="aside-box text-sm" aria-labelledby="aside-more">
+      <h2 id="aside-more" class="aside-h">Compare other tools</h2>
+      <p class="mt-1.5">Pick any two or three listings: <a href={`/compare/pick/?t=${a.id},${b.id}`}>open the picker</a>.</p>
+    </section>
+  </Fragment>
 </Base>

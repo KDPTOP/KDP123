@@ -3,11 +3,13 @@ import Base from '../../../layouts/Base.astro';
 import { getReports, monthName, isPartial, type Report } from '../../../lib/reports';
 import { isoDate, SITE } from '../../../lib/site';
 import { publisherRef } from '../../../lib/seo';
+import Icon from '../../../components/Icon.astro';
 
 export async function getStaticPaths() {
   return (await getReports()).map((r) => ({ params: { month: r.data.month }, props: { report: r } }));
 }
 const { report } = Astro.props as { report: Report };
+const months = (await getReports()).map((r) => r.data.month);
 const { month, kdptop: k, kdp123: o } = report.data;
 const name = monthName(month);
 const partial = isPartial(report);
@@ -63,9 +65,9 @@ const jsonLd = [
 ];
 ---
 
-<Base title={title} titleVariants={[`KDP Market Report: ${name}${partial ? ' (Month to Date)' : ''}`, `KDP Market Report: ${name}`]} description={summary} type="article" modified={report.data.generated_at.toISOString().slice(0, 10)} jsonLd={jsonLd} searchable>
+<Base title={title} titleVariants={[`KDP Market Report: ${name}${partial ? ' (Month to Date)' : ''}`, `KDP Market Report: ${name}`]} description={summary} type="article" modified={report.data.generated_at.toISOString().slice(0, 10)} jsonLd={jsonLd} searchable aside asideCalcs={['category-finder', 'bsr-sales-estimator', 'royalty-calculator']}>
   <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/reports/">Monthly reports</a> / {name}</nav>
-  <article class="mt-2 max-w-4xl" data-pagefind-filter="type:Report" data-pagefind-meta="type:Report">
+  <article class="mt-2" data-pagefind-filter="type:Report" data-pagefind-meta="type:Report">
     <h1 class="text-4xl font-bold">{title}</h1>
     <p class="mt-2 text-sm text-muted">
       {partial ? `Covers ${month}-01 to ${through}; the full month replaces this page once it ends. ` : `Covers ${month}-01 to ${through}. `}
@@ -111,7 +113,7 @@ const jsonLd = [
                 {c.url ? <a href={c.url} class="font-medium">{c.category.split(' > ').pop()}</a> : <span class="font-medium">{c.category.split(' > ').pop()}</span>}
                 <span class="block text-xs text-muted">{c.category.split(' > ').slice(0, -1).join(' > ')}</span>
               </td>
-              <td class="px-3 py-2">{storeLabel[c.store]}</td>
+              <td class="px-3 py-2 whitespace-nowrap">{storeLabel[c.store]}</td>
               <td class="px-3 py-2 text-right tabular-nums">{c.opportunity_score}</td>
               <td class="px-3 py-2 text-right tabular-nums">{usd(c.median_price_usd)}</td>
               <td class="px-3 py-2 text-right tabular-nums">{c.median_reviews ?? '-'}</td>
@@ -176,4 +178,29 @@ const jsonLd = [
     </ul>
     <p class="mt-8 rounded-lg border border-line bg-white p-4 text-sm">Get each month's report by email: <a href="/newsletter/">subscribe to the KDP123 monthly email</a>.</p>
   </article>
+
+  <Fragment slot="aside">
+    <section class="aside-box" aria-labelledby="aside-dl">
+      <h2 id="aside-dl" class="aside-h">Download this report</h2>
+      <ul class="mt-1.5 -mx-1.5">
+        <li><a href={files.categories} class="aside-link"><Icon name="download" class="size-4 shrink-0 text-muted" />Top categories (CSV)</a></li>
+        <li><a href={files.changes} class="aside-link"><Icon name="download" class="size-4 shrink-0 text-muted" />Price changes (CSV)</a></li>
+        <li><a href={files.json} class="aside-link"><Icon name="download" class="size-4 shrink-0 text-muted" />Full report (JSON)</a></li>
+      </ul>
+      <p class="mt-1 text-xs text-muted">CC BY 4.0. Credit KDP123 and link back.</p>
+    </section>
+    {months.length > 1 && (
+      <section class="aside-box" aria-labelledby="aside-months">
+        <h2 id="aside-months" class="aside-h">Other months</h2>
+        <ul class="mt-1.5 -mx-1.5">
+          {months.filter((m) => m !== month).map((m) => <li><a href={`/reports/${m}/`} class="aside-link">{monthName(m)}</a></li>)}
+        </ul>
+      </section>
+    )}
+    <section class="aside-box text-sm" aria-labelledby="aside-src">
+      <h2 id="aside-src" class="aside-h">Where the numbers come from</h2>
+      <p class="mt-1.5 leading-6">Market figures: <a href={k.url}>KDPTop</a>, snapshot {isoDate(k.data_date)}. KDPTop is run by the same team as KDP123.</p>
+      <p class="mt-2"><a href="/newsletter/">Get it by email each month</a></p>
+    </section>
+  </Fragment>
 </Base>

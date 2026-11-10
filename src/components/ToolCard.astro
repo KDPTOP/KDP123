@@ -1,0 +1,61 @@
+---
+import ToolLogo from './ToolLogo.astro';
+import Icon from './Icon.astro';
+import PinButton from './PinButton.astro';
+import { outbound, priceShort, isoDate, type Tool } from '../lib/site';
+import { categoryBySlug, FIT_SCOPES, FIT_SCOPE_INFO } from '../lib/taxonomy';
+
+interface Props {
+  tool: Tool;
+  /** How often our guides cite it, for the "Most cited" sort. */
+  cited?: number;
+}
+const { tool: t, cited = 0 } = Astro.props;
+const d = t.data;
+const link = outbound(t);
+const details = `/t/${t.id}/`;
+const native = FIT_SCOPES.filter((s) => d.kdp_fit?.[s] === 'native');
+const category = categoryBySlug(d.categories[0])?.name;
+---
+
+<li
+  class="min-w-0"
+  data-tool
+  data-name={d.name.toLowerCase()}
+  data-text={`${d.name} ${d.tagline}`.toLowerCase()}
+  data-cat={d.categories.join(' ')}
+  data-price={d.pricing.model}
+  data-fit={native.join(' ')}
+  data-os={d.platforms.join(' ')}
+  data-only={[d.official && 'official', d.kdp.outputs_kdp_files && 'kdpFiles', d.pricing.trial_days && 'trial', !d.kdp.touches_kdp_account && 'noAccount'].filter(Boolean).join(' ')}
+  data-cited={cited}
+  data-checked={d.verified_at ? +d.verified_at : 0}
+>
+  <article class="tool-tile">
+    <div class="flex items-start gap-3">
+      <ToolLogo tool={t} size={40} />
+      <div class="min-w-0 flex-1">
+        <h3 class="text-base leading-snug font-semibold">
+          <a href={link.href} rel={link.rel} target="_blank" data-site={link.href} data-details={details} class="text-ink" title={`${d.name}: open the website`}>{d.name}</a>
+        </h3>
+        <p class="truncate text-xs text-muted">{category}</p>
+      </div>
+      <PinButton kind="tool" id={t.id} name={d.name} href={details} class="btn-icon -mt-1 -mr-1 size-8 shrink-0" />
+    </div>
+    <p class="mt-2 line-clamp-2 text-sm leading-relaxed text-muted">{d.tagline}</p>
+    <p class="mt-2.5 flex flex-wrap gap-1">
+      {d.related_to_directory && <span class="badge badge-brand">Same team as KDP123</span>}
+      {d.official && <span class="badge badge-ok">Official Amazon</span>}
+      {native.length > 0 && <span class="badge badge-ok" title="Built-in KDP preset or export">KDP-ready: {native.map((s) => FIT_SCOPE_INFO[s].name.toLowerCase()).join(', ')}</span>}
+      {d.pricing.trial_days && <span class="badge">{d.pricing.trial_days}-day trial</span>}
+      {d.kdp.touches_kdp_account && <span class="badge badge-warn">Uses your KDP account</span>}
+    </p>
+    <div class="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-line pt-3 text-sm">
+      <span class="mr-auto font-medium text-ink" title={`Price checked ${isoDate(d.price_checked_at ?? d.verified_at)}`}>{priceShort(t)}</span>
+      <label class="inline-flex shrink-0 cursor-pointer items-center gap-1 text-xs text-muted" data-pagefind-ignore>
+        <input type="checkbox" data-compare={t.id} data-compare-name={d.name} class="size-3.5 accent-[var(--color-brand)]" /> Compare
+      </label>
+      <a href={details} class="inline-flex shrink-0 items-center gap-0.5 text-xs font-medium" aria-label={`${d.name} details`}>Details<Icon name="arrowRight" class="size-3" /></a>
+    </div>
+  </article>
+</li>

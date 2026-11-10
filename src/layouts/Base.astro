@@ -4,11 +4,13 @@ import Seo from '../components/Seo.astro';
 import CompareTray from '../components/CompareTray.astro';
 import CommandPalette from '../components/CommandPalette.astro';
 import ToolDrawer from '../components/ToolDrawer.astro';
+import PageAside from '../components/PageAside.astro';
 import Icon from '../components/Icon.astro';
 import { SITE } from '../lib/site';
 import { spriteSvg } from '../lib/icons';
 import { STAGES } from '../lib/taxonomy';
 import { fitTitle, clampDescription, type Crumb } from '../lib/seo';
+import { outline } from '../lib/toc';
 import mark from '../../public/logo-mark.svg?raw';
 
 interface Props {
@@ -32,6 +34,10 @@ interface Props {
   searchable?: boolean;
   /** Full-bleed pages (the home page) lay out their own width. */
   wide?: boolean;
+  /** Content pages: a right-hand column with an outline of the page's h2s, the "aside" slot and calculators. */
+  aside?: boolean;
+  /** Calculator slugs to list first in that column. */
+  asideCalcs?: string[];
 }
 const {
   title,
@@ -48,7 +54,11 @@ const {
   markdownAlt,
   searchable = false,
   wide = false,
+  aside = false,
+  asideCalcs,
 } = Astro.props;
+const body = aside ? outline(await Astro.slots.render('default')) : undefined;
+const asideHtml = aside && Astro.slots.has('aside') ? await Astro.slots.render('aside') : '';
 const path = canonicalPath ?? Astro.url.pathname;
 const fullTitle = exactTitle ? title : fitTitle(titleVariants ?? [title]);
 const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
@@ -129,7 +139,14 @@ const footerLink = 'text-slate-300 hover:text-slate-50';
       </nav>
     </header>
     <main id="main" class={wide ? '' : 'mx-auto max-w-6xl px-4 py-8'} {...(searchable && !noindex ? { 'data-pagefind-body': '' } : {})}>
-      <slot />
+      {body ? (
+        <div class="with-aside lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-12">
+          <div class="min-w-0"><Fragment set:html={body.html} /></div>
+          <PageAside toc={body.toc} calcs={asideCalcs}><Fragment set:html={asideHtml} /></PageAside>
+        </div>
+      ) : (
+        <slot />
+      )}
     </main>
     <footer class="mt-20 bg-[#0b0f19] text-sm text-slate-400">
       <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-4">

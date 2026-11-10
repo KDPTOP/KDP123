@@ -261,7 +261,7 @@ const description = `Free KDP calculators for royalties, cover size, KENP, ad AC
           <span class="text-sm"><a href="/tools/" class="text-muted">All tools</a> <span class="text-line">|</span> <a href="/rss.xml" class="text-muted">RSS</a></span>
         </div>
         <p class="mt-1 text-sm text-muted">Newest listings, each checked on the vendor's own site.</p>
-        <div class="mt-3"><ToolTable tools={latest} compact /></div>
+        <div class="mt-3"><ToolTable tools={latest} /></div>
         {changes.length > 0 && (
           <>
             <h3 class="mt-5 text-sm font-semibold">Price and plan changes</h3>
@@ -278,7 +278,7 @@ const description = `Free KDP calculators for royalties, cover size, KENP, ad AC
           <a href="/c/official/" class="text-sm text-muted">All {official.length}</a>
         </div>
         <p class="mt-1 text-sm text-muted">When another site disagrees with Amazon's own pages, Amazon wins.</p>
-        <div class="mt-3"><ToolTable tools={official.slice(0, 6)} compact /></div>
+        <div class="mt-3"><ToolTable tools={official.slice(0, 6)} /></div>
       </section>
     </div>
   </div>

@@ -4,7 +4,7 @@ import { getTools, SITE } from '../lib/site';
 const tools = await getTools();
 ---
 
-<Base title="Open data" titleVariants={["Open KDP Tools Data: JSON & CSV (CC BY 4.0)"]} description="Download the whole KDP123 directory of Amazon KDP tools as JSON or CSV under CC BY 4.0: prices, platforms, KDP fit, sources and check dates for every listing.">
+<Base aside title="Open data" titleVariants={["Open KDP Tools Data: JSON & CSV (CC BY 4.0)"]} description="Download the whole KDP123 directory of Amazon KDP tools as JSON or CSV under CC BY 4.0: prices, platforms, KDP fit, sources and check dates for every listing.">
   <article class="prose-kdp max-w-3xl">
     <h1 class="text-4xl font-bold">Open data</h1>
     <p>The whole directory ({tools.length} listings) is published as machine-readable data.</p>

@@ -1,0 +1,61 @@
+---
+import Icon from './Icon.astro';
+import { FREE_TOOLS, freeTool } from '../lib/freeTools';
+import type { TocItem } from '../lib/toc';
+
+interface Props {
+  toc: TocItem[];
+  /** Calculator slugs for the "Free calculators" box, most relevant first. */
+  calcs?: string[];
+}
+const DEFAULT_CALCS = ['royalty-calculator', 'cover-size-calculator', 'kenp-calculator', 'keyword-checker', 'bsr-sales-estimator'];
+const { toc, calcs } = Astro.props;
+const picks = [...new Set([...(calcs ?? []), ...DEFAULT_CALCS])].slice(0, 5).map(freeTool);
+---
+
+<aside class="mt-14 lg:mt-0" aria-label="On this page and related links" data-pagefind-ignore>
+  <div class="space-y-5 lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:pb-4">
+    {toc.length >= 3 && (
+      <nav class="max-lg:hidden" aria-label="On this page" data-toc>
+        <p class="aside-h">On this page</p>
+        <ol class="mt-2 space-y-0.5 border-l border-line text-sm">
+          {toc.map((t) => <li><a href={`#${t.id}`} class="toc-link" set:html={t.label} /></li>)}
+        </ol>
+      </nav>
+    )}
+    <slot />
+    <section class="aside-box" aria-labelledby="aside-calcs">
+      <h2 id="aside-calcs" class="aside-h">Free calculators</h2>
+      <ul class="mt-1.5 -mx-1.5">
+        {picks.map((t) => (
+          <li>
+            <a href={`/free-tools/${t.slug}/`} data-drawer-open={t.slug} class="aside-link" title={t.name}>
+              <Icon name={t.icon} class="size-4 shrink-0 text-brand-deep" />
+              <span class="min-w-0 truncate">{t.short}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a href="/free-tools/" class="mt-1 inline-block text-xs text-muted">All {FREE_TOOLS.length} calculators</a>
+    </section>
+  </div>
+</aside>
+
+<script>
+  // Mark the outline entry for the section being read.
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-toc] a')];
+  const heads = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1)))).filter((h): h is HTMLElement => !!h);
+  if (heads.length && 'IntersectionObserver' in window) {
+    const mark = (id: string) => links.forEach((a) => (a.hash === `#${id}` ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
+    const seen = new Set<string>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) e.isIntersecting ? seen.add(e.target.id) : seen.delete(e.target.id);
+        const first = heads.find((h) => seen.has(h.id));
+        if (first) mark(first.id);
+      },
+      { rootMargin: '-72px 0px -60% 0px' },
+    );
+    heads.forEach((h) => io.observe(h));
+  }
+</script>

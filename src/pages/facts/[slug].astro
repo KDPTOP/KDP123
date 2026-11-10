@@ -58,12 +58,12 @@ jsonLd.push({
 });
 ---
 
-<Base title={d.title} titleVariants={[d.seo_title ?? d.title]} description={d.answer} type="article" modified={checked} jsonLd={jsonLd} markdownAlt={`/facts/${fact.id}.md`} searchable>
+<Base title={d.title} titleVariants={[d.seo_title ?? d.title]} description={d.answer} type="article" modified={checked} jsonLd={jsonLd} markdownAlt={`/facts/${fact.id}.md`} searchable aside asideCalcs={calculators.map((t) => t.slug)}>
   <nav class="text-sm text-muted" aria-label="Breadcrumb">
     <a href="/">Home</a> / <a href="/facts/">KDP facts</a> / {topicName(d.topic)}
   </nav>
 
-  <article class="mt-2 max-w-3xl" data-pagefind-filter="type:KDP fact" data-pagefind-meta="type:KDP fact">
+  <article class="mt-2" data-pagefind-filter="type:KDP fact" data-pagefind-meta="type:KDP fact">
     <h1 class="text-4xl font-bold">{d.title}</h1>
     <p class="mt-2 text-sm text-muted">Checked against Amazon’s pages on <span data-pagefind-meta="checked">{checked}</span>. Not affiliated with Amazon.</p>
 
@@ -85,28 +85,6 @@ jsonLd.push({
             ))}
           </tbody>
         </table>
-      )
-    }
-
-    {
-      calculators.length > 0 && (
-        <p class="mt-4 text-sm">
-          Free calculator: {calculators.map((t, i) => <>{i > 0 && ' · '}<a href={`/free-tools/${t.slug}/`}>{t.name}</a></>)}
-        </p>
-      )
-    }
-    {
-      toolCategories.length > 0 && (
-        <p class="mt-2 text-sm">
-          Tools for this: {toolCategories.map((c, i) => <>{i > 0 && ' · '}<a href={`/c/${c.slug}/`}>{c.name}</a></>)}
-        </p>
-      )
-    }
-    {
-      terms.length > 0 && (
-        <p class="mt-2 text-sm">
-          Terms on this page: {terms.map((t, i) => <>{i > 0 && ' · '}<a href={termUrl(t.id)}>{t.data.term}</a></>)}
-        </p>
       )
     }
 
@@ -144,15 +122,27 @@ jsonLd.push({
     <h2 class="mt-10 text-2xl font-semibold">Sources</h2>
     <ul class="mt-2 list-disc pl-6 text-sm">{d.sources.map((s) => <li><a href={s} rel="noopener">{s}</a></li>)}</ul>
 
-    {
-      related.length > 0 && (
-        <>
-          <h2 class="mt-10 text-2xl font-semibold">More on {topicName(d.topic).toLowerCase()}</h2>
-          <ul class="mt-2 list-disc pl-6 leading-7">{related.map((r) => <li><a href={`/facts/${r.id}/`}>{r.data.title}</a></li>)}</ul>
-        </>
-      )
-    }
-
     <p class="mt-8 text-sm text-muted">Spotted a change on Amazon’s side? <a href="/submit/">Send a correction</a>. <a href={`/facts/${fact.id}.md`}>Plain-text version</a>.</p>
   </article>
+
+  <Fragment slot="aside">
+    {toolCategories.length > 0 && (
+      <section class="aside-box" aria-labelledby="aside-cats">
+        <h2 id="aside-cats" class="aside-h">Tools for this</h2>
+        <ul class="mt-1.5 -mx-1.5">{toolCategories.map((c) => <li><a href={`/c/${c.slug}/`} class="aside-link">{c.name}</a></li>)}</ul>
+      </section>
+    )}
+    {related.length > 0 && (
+      <section class="aside-box" aria-labelledby="aside-more">
+        <h2 id="aside-more" class="aside-h">More on {topicName(d.topic).toLowerCase()}</h2>
+        <ul class="mt-1.5 -mx-1.5">{related.map((r) => <li><a href={`/facts/${r.id}/`} class="aside-link"><span class="line-clamp-2">{r.data.title}</span></a></li>)}</ul>
+      </section>
+    )}
+    {terms.length > 0 && (
+      <section class="aside-box" aria-labelledby="aside-terms">
+        <h2 id="aside-terms" class="aside-h">Terms on this page</h2>
+        <p class="mt-2 flex flex-wrap gap-1.5">{terms.map((t) => <a href={termUrl(t.id)} class="chip px-2 py-0.5 text-xs no-underline hover:no-underline">{t.data.term}</a>)}</p>
+      </section>
+    )}
+  </Fragment>
 </Base>
