@@ -3,12 +3,12 @@ url: https://ideogram.ai
 categories: [ai-tools, cover-design]
 tagline: Ideogram is an AI image generator with typography tools, including editable text layers, useful for typographic book cover concepts.
 summary: >-
-  Ideogram generates images and offers editing apps such as Layerize Text, which turns lettering in an image into
-  editable text layers so you can change wording and fonts. It outputs images, not KDP-ready cover wraps, so you still
-  need a layout step for spine, bleed and safe zones. Ideogram says it does not claim ownership of generated images and
-  allows commercial use.
-pricing: { model: freemium, from: 20, currency: USD, period: month, free_tier: true, note: "Plus $20/mo or $180/yr ($15/mo), 2,400 priority credits/mo; Pro $60/mo or $504/yr ($42/mo), 7,500 priority credits/mo; Team $30/user/mo or $240/user/yr ($20/user/mo); Enterprise postpaid. Pay as you go at 1 cent per credit. Eligible free accounts get weekly credits (amount varies). No free trials or discounts on plans. Prices exclude tax." }
+  Ideogram generates images and offers editing apps such as Layerize Text, which turns lettering in an image into editable text layers so you can change wording and fonts. It outputs images, not KDP-ready cover wraps, so you still need a layout step for spine, bleed and safe zones. Ideogram says it does not claim ownership of generated images and allows commercial use.
+pricing: { model: freemium, from: 20, currency: USD, period: month, free_tier: true, note: "Plus $20/mo or $180/yr ($15/mo), 2,400 priority credits/mo; Pro $60/mo or $504/yr ($42/mo), 7,500 priority credits/mo; Team $30/user/mo or $240/user/yr ($20/user/mo); Enterprise postpaid. Pay as you go at 1 cent per credit. Eligible free accounts get weekly credits (amount varies). No free trials or discounts on plans. Prices exclude tax.", annual_from: 15, region_note: Prices exclude tax; tax is added at checkout based on billing address when applicable. }
 price_history:
+  - date: 2026-11-10
+    kind: plan
+    note: "Yearly billing read on the vendor's pricing page: from $15/mo billed yearly."
   - date: 2026-11-09
     from: 20
     kind: correction
@@ -24,3 +24,9 @@ sources:
   - https://ideogram.ai/
   - https://ideogram.ai/pricing/
   - https://ideogram.ai/features/text-layers/
+best_for:
+  - Designers generating commercial images with readable typography
+not_ideal_for:
+  - Users looking for a free trial of a paid subscription plan
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

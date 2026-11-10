@@ -3,12 +3,8 @@ url: https://www.kdpeasy.com
 categories: [cover-design, low-content, keywords-categories]
 tagline: KDPEasy is a credit-based web studio for KDP publishers that makes AI covers, puzzle, coloring and planner interiors, and listing drafts.
 summary: >-
-  KDPEasy generates full-wrap AI covers sized to KDP trim, spine and bleed specs, builds coloring, puzzle and planner
-  interiors as print-ready PDFs, drafts descriptions and keywords, and offers keyword research on eight Amazon stores.
-  With a membership its Chrome extension fills in KDP forms and saves the book as a draft in your KDP account; it says it
-  never publishes, but any tool that automates your KDP account carries a terms-of-service risk. AI art and text must be
-  disclosed to KDP, and it notes AI images may not be protected by US copyright.
-pricing: { model: freemium, from: 19, currency: USD, period: month, free_tier: true, note: "10 free credits for watermarked previews. Credit packs from $7.50 one-time; Starter $19/month (35 credits), Pro $49, Power User $79. Bought credits never expire." }
+  KDPEasy generates full-wrap AI covers sized to KDP trim, spine and bleed specs, builds coloring, puzzle and planner interiors as print-ready PDFs, drafts descriptions and keywords, and offers keyword research on eight Amazon stores. With a membership its Chrome extension fills in KDP forms and saves the book as a draft in your KDP account; it says it never publishes, but any tool that automates your KDP account carries a terms-of-service risk. AI art and text must be disclosed to KDP, and it notes AI images may not be protected by US copyright.
+pricing: { model: freemium, from: 19, currency: USD, period: month, free_tier: true, note: "10 free credits for watermarked previews. Credit packs from $7.50 one-time; Starter $19/month (35 credits), Pro $49, Power User $79. Bought credits never expire.", annual_from: 15.83, region_note: "Prices in US dollars, from the November 2026 price list." }
 platforms: [web, chrome-extension]
 kdp:
   outputs_kdp_files: true
@@ -20,9 +16,28 @@ pros:
 cons:
   - The draft-saving Chrome extension automates your KDP account
   - Free credits only make watermarked previews
-best_for: [Making low-content and coloring books plus covers in one place]
+best_for:
+  - Authors building KDP full-wrap covers, coloring books, or puzzle interiors
 alternatives: [book-bolt, kdp-coloring-book-studio, canva, kdp-tools-io]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.kdpeasy.com/
+kdp_fit:
+  cover: native
+  interior: native
+  print: native
+  ebook: unverified
+  manual_steps: []
+  sources:
+    - https://www.kdpeasy.com/plans
+    - https://www.kdpeasy.com/
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Uploading free-credit preview files that still carry the watermark
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10
+price_history:
+  - date: 2026-11-10
+    kind: plan
+    note: "Yearly billing read on the vendor's pricing page: from $15.83/mo billed yearly."

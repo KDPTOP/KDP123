@@ -3,10 +3,7 @@ url: https://play.google.com/books/publish
 categories: [print-distribution]
 tagline: Google Play Books Partner Center is Google's free portal for publishers and authors that sells EPUB or PDF ebooks on Google Play in 75+ countries.
 summary: >-
-  Partner Center lets you upload ebooks (EPUB or PDF) to Google Play Books, choose countries and set list prices. Selling
-  costs nothing; Google pays 70% of list price in 60+ countries once you accept its current terms, and 52% by default
-  elsewhere. Google may set its own retail price, but pays on your list price. Selling the same ebook here conflicts with
-  KDP Select ebook exclusivity.
+  Partner Center lets you upload ebooks (EPUB or PDF) to Google Play Books, choose countries and set list prices. Selling costs nothing; Google pays 70% of list price in 60+ countries once you accept its current terms, and 52% by default elsewhere. Google may set its own retail price, but pays on your list price. Selling the same ebook here conflicts with KDP Select ebook exclusivity.
 pricing: { model: free, currency: USD, note: "No cost to sell. 70% of list price in 60+ countries after accepting the current terms; 52% default elsewhere, including several Asian markets." }
 platforms: [web]
 kdp:
@@ -18,7 +15,8 @@ pros:
 cons:
   - Google can discount your book below your list price
   - Audiobook sales are limited to select partners
-best_for: [Wide authors adding Google Play direct]
+best_for:
+  - Authors selling ebooks on Google Play Books without exclusivity
 alternatives: [apple-books-for-authors, kobo-writing-life, draft2digital]
 status: published
 verified_at: 2026-11-09
@@ -26,3 +24,4 @@ sources:
   - https://play.google.com/books/publish/
   - https://support.google.com/books/partner/answer/9331459
   - https://support.google.com/books/partner/answer/1079107?hl=en
+features_checked_at: 2026-11-10

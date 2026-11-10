@@ -3,12 +3,8 @@ url: https://claude.com
 categories: [ai-tools]
 tagline: Claude is Anthropic's general-purpose AI assistant that publishers use for brainstorming, outlining, drafting, editing feedback and book descriptions.
 summary: >-
-  Claude is a chat assistant on web, desktop and mobile that can discuss and revise long manuscripts, draft blurbs and
-  ad copy, and create files. It is not built for books: it has no KDP formatting, trim or cover tools, so final files
-  need a formatter. KDP requires you to disclose AI-generated text, images or translations when publishing, even if you
-  edited them heavily; using Claude only to edit, error-check or brainstorm your own writing counts as AI-assisted and
-  does not need disclosure.
-pricing: { model: freemium, from: 20, currency: USD, period: month, free_tier: true, note: "Pro is $20 billed monthly or $200/year ($17/month); Max $100/month and Ultra $200/month. Free plan has tighter usage limits. Payments are generally non-refundable." }
+  Claude is a chat assistant on web, desktop and mobile that can discuss and revise long manuscripts, draft blurbs and ad copy, and create files. It is not built for books: it has no KDP formatting, trim or cover tools, so final files need a formatter. KDP requires you to disclose AI-generated text, images or translations when publishing, even if you edited them heavily; using Claude only to edit, error-check or brainstorm your own writing counts as AI-assisted and does not need disclosure.
+pricing: { model: freemium, from: 20, currency: USD, period: month, free_tier: true, note: "Pro is $20 billed monthly or $200/year ($17/month); Max $100/month and Ultra $200/month. Free plan has tighter usage limits. Payments are generally non-refundable.", annual_from: 17, per: user, region_note: "US Pro is $20/month; local currency and tax treatment vary by region, and listed prices exclude applicable tax." }
 platforms: [web, windows, mac, ios, android]
 kdp:
   touches_kdp_account: false
@@ -19,10 +15,20 @@ pros:
 cons:
   - Usage limits reset every 5 hours and weekly, even on paid plans
   - AI-generated text must be disclosed to KDP
-best_for: [Brainstorming, developmental feedback and marketing copy]
+best_for:
+  - Individuals writing, creating files, and running code in Claude
+  - Pro users who want annual billing at the discounted monthly rate
 alternatives: [sudowrite, novelcrafter, grammarly]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://claude.com/pricing
   - https://kdp.amazon.com/en_US/help/topic/G200672390
+not_ideal_for:
+  - People in locations where the Pro plan is not supported
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10
+price_history:
+  - date: 2026-11-10
+    kind: plan
+    note: "Yearly billing read on the vendor's pricing page: from $17/mo billed yearly."

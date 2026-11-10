@@ -3,10 +3,7 @@ url: https://kdp.amazon.com/en_US/help/topic/GUGQ4WDZ92F733GC
 categories: [official, writing-formatting]
 tagline: Kindle Create is Amazon's free desktop app for KDP publishers that turns a finished Word or PDF manuscript into a Kindle eBook or print interior file.
 summary: >-
-  Kindle Create imports a DOC, DOCX or PDF manuscript and builds a reflowable eBook, a Print Replica eBook or a comic with
-  Guided View panels, with themes, an automatic table of contents and a built-in previewer. It exports a KPF file for KDP
-  (EPUB only for reflowable books), and a reflowable project can also be published as a KDP print book. It does not
-  format covers, cannot edit tables, lists or footnotes, and its KPF output is meant for publishing on Kindle only.
+  Kindle Create imports a DOC, DOCX or PDF manuscript and builds a reflowable eBook, a Print Replica eBook or a comic with Guided View panels, with themes, an automatic table of contents and a built-in previewer. It exports a KPF file for KDP (EPUB only for reflowable books), and a reflowable project can also be published as a KDP print book. It does not format covers, cannot edit tables, lists or footnotes, and its KPF output is meant for publishing on Kindle only.
 official: true
 pricing: { model: free, currency: USD }
 platforms: [windows, mac]
@@ -20,10 +17,24 @@ pros:
 cons:
   - Tables, lists and footnotes cannot be edited inside the app
   - KPF files are for Kindle only; EPUB export is limited to reflowable books and drops some features
-best_for: [Formatting a text-heavy novel or memoir for KDP at no cost]
+best_for:
+  - Authors preparing KPF or EPUB files for KDP on Windows or Mac
 alternatives: [atticus, vellum, reedsy-studio]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://kdp.amazon.com/en_US/help/topic/GUGQ4WDZ92F733GC
   - https://kdp.amazon.com/en_US/help/topic/G8UZKZD45RTQNNVT
+kdp_fit:
+  ebook: native
+  cover: unverified
+  interior: unverified
+  print: unverified
+  manual_steps:
+    - Export a KPF file and submit it to KDP; for paperbacks, select the trim size on KDP
+  sources:
+    - https://kdp.amazon.com/en_US/help/topic/GUGQ4WDZ92F733GC
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Linux users, or print books in Gujarati, Hindi, Malayalam, Marathi, or Tamil
+features_checked_at: 2026-11-10

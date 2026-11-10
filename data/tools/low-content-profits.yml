@@ -3,12 +3,11 @@ url: https://lowcontentprofits.com
 categories: [courses-blogs, low-content]
 tagline: Low Content Profits is a blog and course site for low-content and medium-content KDP publishers, with free interior templates.
 summary: >-
-  Low Content Profits publishes guides, tool roundups and course comparisons for journal, planner, coloring and activity
-  book publishers, and offers a set of free KDP interior templates. It also sells its own academy, and its course
-  roundups include affiliate recommendations, so read them with that in mind.
+  Low Content Profits publishes guides, tool roundups and course comparisons for journal, planner, coloring and activity book publishers, and offers a set of free KDP interior templates. It also sells its own academy, and its course roundups include affiliate recommendations, so read them with that in mind.
 pricing: { model: freemium, currency: USD, free_tier: true, note: "Blog, free keyword and description generators, and 15 free interior templates (email signup). Other templates sold through its Gumroad store; course priced on its own page." }
 platforms: [web]
-best_for: [Low-content publishers looking for tool and course comparisons]
+best_for:
+  - Beginners reading KDP guides and downloading free interior templates
 alternatives: [self-publishing-titans]
 status: published
 verified_at: 2026-11-09
@@ -16,3 +15,4 @@ sources:
   - https://lowcontentprofits.com/
   - https://lowcontentprofits.com/best-amazon-kdp-tools-and-resources/
   - https://lowcontentprofits.com/best-amazon-kdp-courses/
+features_checked_at: 2026-11-10

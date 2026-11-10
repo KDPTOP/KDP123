@@ -3,12 +3,8 @@ url: https://www.helium10.com
 categories: [keywords-categories, book-research]
 tagline: Helium 10 is a subscription software suite for Amazon product sellers that includes reverse-ASIN keyword research usable on book listings.
 summary: >-
-  Helium 10 is built for sellers of physical products: most of the plan covers FBA product research, inventory, refunds,
-  ad automation and TikTok Shop. For a KDP publisher the useful parts are Cerebro (reverse-ASIN keyword lookup, which now
-  includes the former Magnet keyword tool) and the Xray Chrome extension for sizing up competing books, and Helium 10
-  publishes its own KDP guides for these. Independent testing reports that Cerebro returns far fewer keywords for Kindle
-  ebook ASINs than for paperbacks, so it is weaker for ebook-only publishers.
-pricing: { model: freemium, from: 129, currency: USD, period: month, free_tier: true, note: "Platinum is $129/month billed monthly or $99/month billed yearly. A limited free plan exists. Most paid features target product sellers." }
+  Helium 10 is built for sellers of physical products: most of the plan covers FBA product research, inventory, refunds, ad automation and TikTok Shop. For a KDP publisher the useful parts are Cerebro (reverse-ASIN keyword lookup, which now includes the former Magnet keyword tool) and the Xray Chrome extension for sizing up competing books, and Helium 10 publishes its own KDP guides for these. Independent testing reports that Cerebro returns far fewer keywords for Kindle ebook ASINs than for paperbacks, so it is weaker for ebook-only publishers.
+pricing: { model: freemium, from: 129, currency: USD, period: month, free_tier: true, note: "Platinum is $129/month billed monthly or $99/month billed yearly. A limited free plan exists. Most paid features target product sellers.", region_note: All prices are in USD and charged with applicable taxes added at checkout. }
 platforms: [web, chrome-extension]
 kdp:
   outputs_kdp_files: false
@@ -20,7 +16,8 @@ cons:
   - Most of the price pays for inventory, refund, ad and TikTok Shop tools a publisher will not use
   - Platinum caps keyword searches at 100 a month
   - Reported to return little keyword data for Kindle ebook ASINs
-best_for: [Publishers who also sell physical products on Amazon]
+best_for:
+  - Amazon, Walmart, or TikTok Shop sellers doing product and keyword research
 alternatives: [publisher-rocket, bookbeam, kdspy, data-dive]
 status: published
 verified_at: 2026-11-09
@@ -28,3 +25,5 @@ sources:
   - https://www.helium10.com/pricing/
   - https://kb.helium10.com/hc/en-us/articles/44289687010715-Where-Did-the-Magnet-Articles-Go
   - https://book-business-kdp-amazon.com/en/blog/helium-10-for-kdp/
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

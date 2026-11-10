@@ -3,11 +3,7 @@ url: https://www.bookdesigntemplates.com
 categories: [writing-formatting]
 tagline: Book Design Templates sells pre-designed book interior templates for Word, Pages, InDesign and Affinity Publisher, sized to standard print-on-demand trims.
 summary: >-
-  Each template is a styled file at a standard trim size with chapter openers, running heads and front matter set up; you
-  paste in your text, apply styles, and export the print PDF and EPUB from your own software. The store says the sizes
-  are compliant with KDP and other POD printers, but the output is only as good as your export: Word users need Calibre
-  or KDP's own DOCX conversion for the ebook. Licenses are per book, and the same team runs a separate AI-based
-  done-for-you service, BookDesigner.ai.
+  Each template is a styled file at a standard trim size with chapter openers, running heads and front matter set up; you paste in your text, apply styles, and export the print PDF and EPUB from your own software. The store says the sizes are compliant with KDP and other POD printers, but the output is only as good as your export: Word users need Calibre or KDP's own DOCX conversion for the ebook. Licenses are per book, and the same team runs a separate AI-based done-for-you service, BookDesigner.ai.
 pricing: { model: paid, from: 39.99, currency: USD, period: one-time, refund_days: 60, note: "From $39.99 per template for a single-book license; multi-book and commercial licenses cost more." }
 platforms: [windows, mac]
 kdp:
@@ -20,7 +16,9 @@ pros:
 cons:
   - Single-book license; reuse needs an upgrade
   - Word and Pages output is less refined than InDesign or a dedicated formatter
-best_for: [Formatting a paperback in Word without buying formatting software]
+best_for:
+  - Authors formatting print and eBook interiors in Word or InDesign
+  - Authors publishing interiors to Amazon KDP and other POD vendors
 alternatives: [diy-book-formats, atticus, vellum, microsoft-word]
 status: published
 verified_at: 2026-11-09
@@ -28,3 +26,18 @@ sources:
   - https://www.bookdesigntemplates.com/
   - https://www.bookdesigntemplates.com/pages/frequently-asked-questions
   - https://www.bookdesigntemplates.com/pages/pdf-and-epub-creation-for-publication
+kdp_fit:
+  ebook: manual
+  print: manual
+  cover: unverified
+  interior: unverified
+  manual_steps:
+    - For Word templates sent to vendors that do not accept DOCX, convert to EPUB with a tool such as Calibre
+    - Follow the official PDF and EPUB creation guide to produce a print-ready PDF
+  sources:
+    - https://www.bookdesigntemplates.com/pages/frequently-asked-questions
+    - https://www.bookdesigntemplates.com/pages/pdf-and-epub-creation-for-publication
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Books in right-to-left or CJK languages
+features_checked_at: 2026-11-10

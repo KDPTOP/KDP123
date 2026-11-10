@@ -3,10 +3,7 @@ url: https://kdp.amazon.com/en_US/cover-calculator
 categories: [official, cover-design]
 tagline: The KDP Cover Calculator is Amazon's free web tool for paperback and hardcover publishers that gives exact full-cover dimensions and a downloadable template.
 summary: >-
-  The KDP Cover Calculator works out the full wrap dimensions of a print cover, including the spine, from your trim size,
-  page count and print options, and lets you download a PDF and PNG template to use as a guide layer in your design
-  software. It covers paperback and hardcover only; eBook covers do not need it. It does not design the cover for you,
-  and the template is a guide, not a finished file.
+  The KDP Cover Calculator works out the full wrap dimensions of a print cover, including the spine, from your trim size, page count and print options, and lets you download a PDF and PNG template to use as a guide layer in your design software. It covers paperback and hardcover only; eBook covers do not need it. It does not design the cover for you, and the template is a guide, not a finished file.
 official: true
 pricing: { model: free, currency: USD }
 platforms: [web]
@@ -20,10 +17,24 @@ pros:
 cons:
   - Spine width changes with page count, so the template must be regenerated if the interior changes
   - Gives dimensions only; the artwork is up to you
-best_for: [Getting exact spine and full-wrap dimensions before designing a print cover]
+best_for:
+  - Authors calculating official KDP paperback or hardcover wrap dimensions
 alternatives: [canva]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://kdp.amazon.com/en_US/cover-calculator
   - https://kdp.amazon.com/en_US/help/topic/G201953020
+kdp_fit:
+  cover: native
+  interior: unverified
+  ebook: unverified
+  print: unverified
+  manual_steps:
+    - Enter trim size, page count, and paper type, then use the PDF or PNG template as a guide layer
+  sources:
+    - https://kdp.amazon.com/en_US/cover-calculator
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Authors who need a finished cover design rather than a size template
+features_checked_at: 2026-11-10

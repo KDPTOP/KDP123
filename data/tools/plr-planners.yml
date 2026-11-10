@@ -3,11 +3,7 @@ url: https://www.plrplanners.com
 categories: [low-content]
 tagline: PLR Planners is a template shop for low-content publishers that sells editable planner and journal files with private label rights for KDP and Etsy.
 summary: >-
-  PLR Planners sells planner, journal and activity templates (mostly PowerPoint or Affinity Publisher source files,
-  some editable PDFs) sized for KDP, with matching covers, papers and stickers. Its product pages allow you to rebrand
-  and sell the finished planners on KDP, Etsy and other platforms, but you may not resell them to other authors with PLR
-  or MLR rights, and on bundles you may not sell the PowerPoint source files at all. Because many buyers get the same
-  files, interiors published as-is can look like other listings, so changing them is advisable. All sales are final.
+  PLR Planners sells planner, journal and activity templates (mostly PowerPoint or Affinity Publisher source files, some editable PDFs) sized for KDP, with matching covers, papers and stickers. Its product pages allow you to rebrand and sell the finished planners on KDP, Etsy and other platforms, but you may not resell them to other authors with PLR or MLR rights, and on bundles you may not sell the PowerPoint source files at all. Because many buyers get the same files, interiors published as-is can look like other listings, so changing them is advisable. All sales are final.
 pricing: { model: one-time, from: 3, currency: USD, period: one-time, note: "Priced per product, from $3 to about $39 for bundles. No refunds on PLR products. A membership is also offered." }
 platforms: [web]
 kdp:
@@ -19,7 +15,8 @@ pros:
 cons:
   - No refunds
   - Same files are sold to every buyer, so as-is interiors are not unique
-best_for: [Starting a planner or journal line from ready-made source files]
+best_for:
+  - Publishers buying PowerPoint planner and journal templates to resell
 alternatives: [creative-fabrica, tangent-templates, canva]
 status: published
 verified_at: 2026-11-09
@@ -27,3 +24,4 @@ sources:
   - https://www.plrplanners.com/
   - https://www.plrplanners.com/kdp_ready_print_2026_weeklyplanner/
   - https://www.plrplanners.com/real-estate-planner-bundle/
+features_checked_at: 2026-11-10

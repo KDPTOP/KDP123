@@ -3,10 +3,7 @@ url: https://www.atticus.io
 categories: [writing-formatting]
 tagline: Atticus is a cross-platform book writing and formatting app that exports print-ready PDF and EPUB, sold for a one-time price.
 summary: >-
-  Atticus is an all-in-one writing and formatting app with 17 templates and a custom theme builder. It is a progressive
-  web app that runs on Windows, Mac, Linux and Chromebook, online or offline, and exports EPUB, PDF and DOCX for ebook and
-  print. It is made by the founder of Kindlepreneur and Publisher Rocket, so reviews on that site are not independent of
-  the vendor.
+  Atticus is an all-in-one writing and formatting app with 17 templates and a custom theme builder. It is a progressive web app that runs on Windows, Mac, Linux and Chromebook, online or offline, and exports EPUB, PDF and DOCX for ebook and print. It is made by the founder of Kindlepreneur and Publisher Rocket, so reviews on that site are not independent of the vendor.
 pricing: { model: one-time, from: 147, currency: USD, period: one-time, refund_days: 30, note: "$147 one-time for unlimited ebooks and print books, with ongoing updates. 30-day money-back guarantee." }
 platforms: [web, windows, mac, linux]
 kdp:
@@ -21,3 +18,23 @@ status: published
 verified_at: 2026-11-09
 sources:
   - https://www.atticus.io/
+kdp_fit:
+  cover: na
+  interior: native
+  ebook: native
+  print: native
+  manual_steps:
+    - Create the print wrap cover in a separate tool; Atticus does not create that PDF
+    - Proof the ePub in Kindle Previewer and the print PDF in Adobe Acrobat Reader before publishing
+  sources:
+    - https://www.atticus.io/calculate-image-size-for-print-and-ebooks/
+    - https://www.atticus.io/book-formatting-basics/
+    - https://www.atticus.io/quick-start-guide/
+    - https://www.atticus.io/
+  checked_at: 2026-11-10
+best_for:
+  - Authors writing and formatting print books and eBooks in one app
+  - Windows, Mac, Linux, and Chromebook users who need EPUB and PDF export
+not_ideal_for:
+  - Authors who need to design a print wrap cover in the app
+features_checked_at: 2026-11-10

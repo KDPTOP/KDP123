@@ -3,11 +3,8 @@ url: https://hemingwayapp.com
 categories: [editing]
 tagline: Hemingway Editor is a readability checker that highlights long sentences, passive voice and weak words, with a free web version and paid AI rewrites.
 summary: >-
-  Hemingway color-codes hard-to-read sentences, adverbs and passive voice and shows a reading grade level, which helps
-  tighten nonfiction and children's books. The free web editor and the one-time desktop app do not include AI; the
-  Hemingway Editor Plus subscription adds AI rewrites and grammar fixes. It is a style checker, not a full proofreader or
-  formatter. AI rewrites of your own text count as AI-assisted under KDP rules and need no disclosure.
-pricing: { model: freemium, from: 19.99, currency: USD, period: one-time, free_tier: true, note: "Free web editor; Hemingway Editor 3 desktop app $19.99 one-time; Editor Plus with AI from $100/year. Plus has a 2-week free trial." }
+  Hemingway color-codes hard-to-read sentences, adverbs and passive voice and shows a reading grade level, which helps tighten nonfiction and children's books. The free web editor and the one-time desktop app do not include AI; the Hemingway Editor Plus subscription adds AI rewrites and grammar fixes. It is a style checker, not a full proofreader or formatter. AI rewrites of your own text count as AI-assisted under KDP rules and need no disclosure.
+pricing: { model: freemium, from: 19.99, currency: USD, period: one-time, free_tier: true, note: "Free web editor; Hemingway Editor 3 desktop app $19.99 one-time; Editor Plus with AI from $100/year. Plus has a 2-week free trial.", trial_days: 14 }
 platforms: [web, windows, mac]
 kdp:
   outputs_kdp_files: false
@@ -19,7 +16,8 @@ pros:
 cons:
   - Readability rules can flatten fiction voice
   - AI features need a separate subscription
-best_for: [Making nonfiction prose plainer and easier to read]
+best_for:
+  - Writers checking readability, grammar, and tone in Hemingway Editor Plus
 alternatives: [prowritingaid, grammarly]
 status: published
 verified_at: 2026-11-09
@@ -27,3 +25,5 @@ sources:
   - https://hemingwayapp.com/desktop
   - https://hemingwayapp.com/hemingway-editor-plus
   - https://hemingwayapp.com/help/support-articles/billing-faqs
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

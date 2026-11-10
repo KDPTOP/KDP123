@@ -3,10 +3,7 @@ url: https://reedsy.com
 categories: [editing, cover-design]
 tagline: Reedsy Marketplace is a curated freelance marketplace for authors that connects them with vetted editors, cover designers, marketers and translators.
 summary: >-
-  On the Reedsy Marketplace you browse profiles, send a brief to up to five professionals, and compare custom quotes for
-  editing, cover and interior design, marketing, ghostwriting or translation; payments and files go through Reedsy.
-  Reedsy says it accepts about 1% of freelancer applications, but quality and price still vary by professional. It is
-  run by the same company as the free Reedsy Studio writing app and the Reedsy blog.
+  On the Reedsy Marketplace you browse profiles, send a brief to up to five professionals, and compare custom quotes for editing, cover and interior design, marketing, ghostwriting or translation; payments and files go through Reedsy. Reedsy says it accepts about 1% of freelancer applications, but quality and price still vary by professional. It is run by the same company as the free Reedsy Studio writing app and the Reedsy blog.
 pricing: { model: paid, currency: USD, note: "No list prices; professionals quote per project. Reedsy adds a 10% client fee (and takes 10% from the professional)." }
 platforms: [web]
 kdp:
@@ -18,7 +15,8 @@ pros:
 cons:
   - Quote-based, typically pricier than open marketplaces
   - Only five quote requests per brief at a time
-best_for: [Hiring an experienced editor or cover designer for a serious release]
+best_for:
+  - Authors hiring handpicked editors, book designers, or marketers
 alternatives: [fiverr, 99designs, damonza]
 status: published
 verified_at: 2026-11-09
@@ -26,3 +24,4 @@ sources:
   - https://reedsy.com/
   - https://reedsy.com/faq/common-questions/fees/reedsy-cost
   - https://reedsy.com/faq/authors/sending-requests/send-request
+features_checked_at: 2026-11-10

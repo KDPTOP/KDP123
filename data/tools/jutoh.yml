@@ -3,11 +3,8 @@ url: https://www.jutoh.com
 categories: [writing-formatting]
 tagline: Jutoh is a desktop ebook editor for Windows, Mac and Linux that imports Word files and compiles EPUB and Kindle-ready books, sold for a one-time price.
 summary: >-
-  Jutoh imports Word, ODT, EPUB or text files, splits them into chapters, and compiles reflowable or fixed-layout EPUB
-  that you check in Kindle Previewer before uploading to KDP. For paperbacks it exports ODT that you convert to PDF in
-  LibreOffice or OpenOffice, with a print-on-demand wizard for page styles, so print needs a second program. It is made
-  by Anthemion Software, a small UK company.
-pricing: { model: one-time, from: 45, currency: USD, period: one-time, refund_days: 30, note: "Standard Edition $45 excl. VAT; Plus Edition $90. A free demo is available. 25% discount for ALLi and IAPP members." }
+  Jutoh imports Word, ODT, EPUB or text files, splits them into chapters, and compiles reflowable or fixed-layout EPUB that you check in Kindle Previewer before uploading to KDP. For paperbacks it exports ODT that you convert to PDF in LibreOffice or OpenOffice, with a print-on-demand wizard for page styles, so print needs a second program. It is made by Anthemion Software, a small UK company.
+pricing: { model: one-time, from: 45, currency: USD, period: one-time, refund_days: 30, note: "Standard Edition $45 excl. VAT; Plus Edition $90. A free demo is available. 25% discount for ALLi and IAPP members.", region_note: Jutoh 3 Standard is $45.00 U.S. excluding VAT; VAT is added at the rate for your country. }
 platforms: [windows, mac, linux]
 kdp:
   outputs_kdp_files: true
@@ -19,7 +16,8 @@ pros:
 cons:
   - Print PDF goes through ODT and LibreOffice/OpenOffice, not a direct export
   - Interface is dated next to Vellum or Atticus
-best_for: [Producing EPUB ebooks from Word manuscripts on any desktop OS]
+best_for:
+  - Authors creating Kindle and EPUB books on Windows, Mac, or Linux
 alternatives: [atticus, vellum, sigil, calibre]
 status: published
 verified_at: 2026-11-09
@@ -27,3 +25,19 @@ sources:
   - https://www.jutoh.com/
   - https://www.jutoh.com/buy.html
   - https://www.jutoh.com/features.html
+kdp_fit:
+  cover: manual
+  interior: manual
+  ebook: native
+  print: manual
+  manual_steps:
+    - Use the Print on Demand wizard to set page styles, then convert the ODT to PDF in LibreOffice or OpenOffice
+    - Check the compiled book in Kindle Previewer 3 or another listed viewer before upload
+  sources:
+    - https://www.jutoh.com/features.htm
+    - https://www.jutoh.com/
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Authors who want a cloud-based formatter rather than local software
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

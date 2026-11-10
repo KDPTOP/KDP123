@@ -3,9 +3,7 @@ url: https://krita.org
 categories: [cover-design]
 tagline: Krita is a free, open-source digital painting app for illustrators that publishers use to paint cover art and children's book illustrations.
 summary: >-
-  Krita is built for drawing and painting, with brushes, layers and animation tools, and it can work in a CMYK color
-  model natively. It cannot export PDF, which KDP requires for print covers and interiors, so you export TIFF or PNG and
-  assemble the final PDF in another program. It has no book templates or spine calculation.
+  Krita is built for drawing and painting, with brushes, layers and animation tools, and it can work in a CMYK color model natively. It cannot export PDF, which KDP requires for print covers and interiors, so you export TIFF or PNG and assemble the final PDF in another program. It has no book templates or spine calculation.
 pricing: { model: free, currency: USD }
 platforms: [windows, mac, linux]
 kdp:
@@ -17,7 +15,8 @@ pros:
 cons:
   - No PDF export
   - Painting-focused; weak for typography and cover layout
-best_for: [Painting original cover art and picture book illustrations]
+best_for:
+  - Artists doing digital painting, layers, and animation in a free editor
 alternatives: [gimp, photopea, inkscape]
 status: published
 verified_at: 2026-11-09
@@ -25,3 +24,4 @@ sources:
   - https://krita.org/en/
   - https://docs.krita.org/en/_sources/general_concepts/file_formats/file_pdf.rst.txt
   - https://docs.krita.org/en/_sources/general_concepts/colors/color_models.rst.txt
+features_checked_at: 2026-11-10

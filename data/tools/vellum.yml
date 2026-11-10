@@ -3,10 +3,8 @@ url: https://vellum.pub
 categories: [writing-formatting]
 tagline: Vellum is a Mac-only book formatter known for polished ebook and print output, sold for a one-time price.
 summary: >-
-  Vellum formats manuscripts into ebook and print-ready files and is widely treated as the benchmark for fiction
-  formatting. It only runs on Mac. Two one-time licenses are sold: Vellum Ebooks for unlimited ebooks and Vellum Press
-  for unlimited ebooks plus paperbacks and hardcovers, with 24 trim sizes and PDF/X-1a print output.
-pricing: { model: one-time, from: 199.99, currency: USD, period: one-time, note: "Vellum Ebooks $199.99 (unlimited ebooks); Vellum Press $249.99 (unlimited ebooks and paperbacks). Price excludes tax." }
+  Vellum formats manuscripts into ebook and print-ready files and is widely treated as the benchmark for fiction formatting. It only runs on Mac. Two one-time licenses are sold: Vellum Ebooks for unlimited ebooks and Vellum Press for unlimited ebooks plus paperbacks and hardcovers, with 24 trim sizes and PDF/X-1a print output.
+pricing: { model: one-time, from: 199.99, currency: USD, period: one-time, note: "Vellum Ebooks $199.99 (unlimited ebooks); Vellum Press $249.99 (unlimited ebooks and paperbacks). Price excludes tax.", region_note: Price does not include tax. }
 price_history:
   - date: 2026-11-09
     from: 199.99
@@ -29,3 +27,19 @@ verified_at: 2026-11-09
 sources:
   - https://vellum.pub/
   - https://store.vellum.pub/product/vellum-press
+kdp_fit:
+  interior: native
+  ebook: native
+  print: native
+  cover: unverified
+  manual_steps: []
+  sources:
+    - https://vellum.pub/
+    - https://help.vellum.pub/uploading/kdp/
+  checked_at: 2026-11-10
+best_for:
+  - Mac authors generating Kindle EPUB and print PDF/X-1a interiors
+not_ideal_for:
+  - Windows or iPad users needing a native Vellum app
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

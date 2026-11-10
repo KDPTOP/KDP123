@@ -3,11 +3,8 @@ url: https://www.adobe.com/products/indesign.html
 categories: [writing-formatting]
 tagline: Adobe InDesign is a professional page layout app for Windows and Mac that exports print PDF with bleed and EPUB, sold only by subscription.
 summary: >-
-  InDesign is the industry-standard tool for book typesetting: you set the page size to a KDP trim size (plus bleed when
-  needed), then export a PDF/X print interior and a reflowable or fixed-layout EPUB. It gives full typographic control
-  but has a steep learning curve and is not a writing app. It is available only as a Creative Cloud membership; there is
-  no one-time license.
-pricing: { model: subscription, from: 22.99, currency: USD, period: month, note: "US price for the single-app annual plan billed monthly; month-to-month costs more. Annual plans carry a 14-day full refund window and a 50% fee for cancelling later." }
+  InDesign is the industry-standard tool for book typesetting: you set the page size to a KDP trim size (plus bleed when needed), then export a PDF/X print interior and a reflowable or fixed-layout EPUB. It gives full typographic control but has a steep learning curve and is not a writing app. It is available only as a Creative Cloud membership; there is no one-time license.
+pricing: { model: subscription, from: 22.99, currency: USD, period: month, note: "US price for the single-app annual plan billed monthly; month-to-month costs more. Annual plans carry a 14-day full refund window and a 50% fee for cancelling later.", region_note: Annual prepaid plans are charged the stated annual rate plus applicable taxes. }
 platforms: [windows, mac]
 kdp:
   outputs_kdp_files: true
@@ -19,7 +16,9 @@ pros:
 cons:
   - Subscription only, with an early-cancellation fee on annual plans
   - Steep learning curve for a single book
-best_for: [Illustrated, image-heavy or design-led interiors]
+best_for:
+  - Designers laying out books with custom page size and bleed
+  - Publishers exporting reflowable or fixed-layout EPUB files
 alternatives: [vellum, atticus, book-design-templates, canva]
 status: published
 verified_at: 2026-11-09
@@ -27,3 +26,20 @@ sources:
   - https://www.adobe.com/products/indesign.html
   - https://www.adobe.com/products/indesign/pricing-info.html
   - https://www.adobe.com/creativecloud/plans.html
+kdp_fit:
+  cover: manual
+  interior: manual
+  ebook: manual
+  print: manual
+  manual_steps:
+    - Set trim size, margins, and bleed in Document Setup for your printer's specifications
+    - Choose File > Export, select Adobe PDF (Print), and pick a print preset such as Press Quality
+  sources:
+    - https://helpx.adobe.com/indesign/desktop/print/page-set-up-and-printer-marks/print-bleed-and-slug-areas.html
+    - https://helpx.adobe.com/indesign/desktop/save-export-and-publish/export-to-epub/epub-export-options.html
+    - https://helpx.adobe.com/indesign/desktop/print/print-production-and-file-creation/produce-print-ready-pdf-files.html
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Users who want InDesign without a Creative Cloud membership
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10
