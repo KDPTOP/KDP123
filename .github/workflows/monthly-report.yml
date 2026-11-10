@@ -56,6 +56,8 @@ jobs:
           } > body.md
           if gh pr view "$branch" --json state --jq .state 2>/dev/null | grep -q OPEN; then
             gh pr edit "$branch" --body-file body.md
-          else
-            gh pr create --draft --base main --head "$branch" --title "Monthly report: $MONTH" --body-file body.md
+          elif ! gh pr create --draft --base main --head "$branch" --title "Monthly report: $MONTH" --body-file body.md; then
+            # Repos that do not allow Actions to create PRs get an issue with the compare link instead.
+            echo "Open the PR: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/main...$branch?expand=1" >> body.md
+            gh issue create --title "Monthly report: $MONTH ready for review" --body-file body.md
           fi
