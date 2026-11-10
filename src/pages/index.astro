@@ -1,25 +1,34 @@
 ---
 import Base from '../layouts/Base.astro';
 import ToolTable from '../components/ToolTable.astro';
-import ToolLogo from '../components/ToolLogo.astro';
-import { getTools, SITE, isoDate, priceLabel } from '../lib/site';
-import { STAGES, CATEGORIES, nonEmpty } from '../lib/taxonomy';
+import ToolCard from '../components/ToolCard.astro';
+import Icon from '../components/Icon.astro';
+import PinButton from '../components/PinButton.astro';
+import MyTools from '../components/MyTools.astro';
 import TeamPick from '../components/TeamPick.astro';
+import { getTools, SITE, isoDate } from '../lib/site';
+import { STAGES, CATEGORIES, nonEmpty } from '../lib/taxonomy';
 import { getFacts } from '../lib/facts';
 import research from '../../data/research/reports.json';
 import { addedDates } from '../lib/added';
-import { FREE_TOOLS } from '../lib/freeTools';
+import { TOOL_GROUPS, freeToolsInGroup, type FreeTool } from '../lib/freeTools';
 import { getBest } from '../lib/best';
 import { getReports, monthName } from '../lib/reports';
 import { getCompares, compareTitle } from '../lib/compare';
 import { citationCounts } from '../lib/cited';
 import { websiteLd, organizationLd } from '../lib/seo';
 
+type WidgetModule = { default: (props: { variant?: 'compact' | 'full' }) => unknown };
+const widgets = import.meta.glob<WidgetModule>('../tools/*/Widget.astro', { eager: true });
+const widgetOf = (slug: string) => widgets[`../tools/${slug}/Widget.astro`]?.default;
+const groups = TOOL_GROUPS.map((g) => ({ ...g, tools: freeToolsInGroup(g.id).filter((t) => widgetOf(t.slug)) })).filter((g) => g.tools.length);
+const benchTools: FreeTool[] = groups.flatMap((g) => g.tools);
+const first = benchTools[0];
+
 const lists = await getBest();
 const [monthly] = await getReports();
 const compares = await getCompares();
 const cited = await citationCounts();
-
 const tools = await getTools();
 const facts = await getFacts();
 const liveCategories = nonEmpty(tools.flatMap((t) => t.data.categories));
@@ -44,12 +53,6 @@ const grid = STAGES.map((s) => {
   return { stage: s, picks, total: stageCount(s.slug) };
 });
 
-const entries = [
-  { title: 'Research a book', href: '/stages/research/', stages: ['research'], text: 'Niches, keywords, categories and sales estimates, before you write or design anything.' },
-  { title: 'Make a book', href: '/stages/create/', stages: ['create'], text: 'Writing, formatting, covers, low-content and AI tools that export files KDP accepts.' },
-  { title: 'Publish and promote', href: '/stages/publish/', stages: ['publish', 'market', 'track'], text: 'KDP itself, ISBNs and distribution, then ads, reviews, email and sales tracking.' },
-].map((e) => ({ ...e, count: tools.filter((t) => t.data.categories.some((c) => e.stages.includes(stageOf(c) ?? ''))).length }));
-
 const added = addedDates();
 const addedAt = (id: string) => added.get(id)?.getTime() ?? Date.now();
 const latest = byChecked
@@ -62,177 +65,357 @@ const changes = tools
   .slice(0, 5);
 const reports = research.reports.slice(0, 3);
 
-const jsonLd = [websiteLd, organizationLd];
-const homeTitle = `KDP Tools and Resources: ${Math.floor(tools.length / 10) * 10}+ Amazon KDP Tools | ${SITE.name}`;
+const MY_KDP = [
+  { name: 'KDP Bookshelf', href: 'https://kdp.amazon.com/en_US/bookshelf', note: 'Your titles' },
+  { name: 'KDP Reports', href: 'https://kdpreports.amazon.com/', note: 'Sales and KENP' },
+  { name: 'Amazon Ads', href: 'https://advertising.amazon.com/', note: 'Campaigns' },
+  { name: 'Author Central', href: 'https://author.amazon.com/', note: 'Author page' },
+  { name: 'Best Sellers in Books', href: 'https://www.amazon.com/gp/bestsellers/books', note: 'Amazon.com' },
+  { name: 'Hot New Releases', href: 'https://www.amazon.com/gp/new-releases/books', note: 'Amazon.com' },
+  { name: 'KDP Help', href: 'https://kdp.amazon.com/en_US/help', note: 'Official rules' },
+  { name: 'KDP Community', href: 'https://www.kdpcommunity.com/', note: 'Forum' },
+  { name: 'KDPTop', href: SITE.related.url, note: 'Same team: daily lists' },
+];
+const TRY = ['$12.99 200 pages', 'BSR 25000', '80k words', 'kindle $4.99', 'cover 300 pages'];
+
+const itemListLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Free KDP calculators',
+  itemListElement: benchTools.map((t, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: { '@type': 'WebApplication', name: t.name, url: `${SITE.url}/free-tools/${t.slug}/`, applicationCategory: 'BusinessApplication', operatingSystem: 'Any', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
+  })),
+};
+const jsonLd = [websiteLd, organizationLd, itemListLd];
+const description = `Free KDP calculators for royalties, cover size, KENP, ad ACoS, ISBN and keywords, plus a checked directory of ${tools.length} Amazon KDP tools. No sign-up.`;
 ---
 
-<Base title={homeTitle} exactTitle jsonLd={jsonLd}>
-  <section class="max-w-3xl">
-    <h1 class="text-4xl font-bold leading-tight md:text-5xl">Find the right KDP tools for your next book</h1>
-    <p class="mt-4 text-lg text-muted">
-      An Amazon KDP tools directory: {tools.length} tools, official rules and free calculators, each with its price, what it does for KDP and the
-      date we last checked it. No pay-to-rank.
-    </p>
-    <form action="/search/" method="get" class="mt-6 flex gap-2" role="search">
-      <label for="q" class="sr-only">Search tools and KDP facts</label>
-      <input
-        id="q"
-        name="q"
-        type="search"
-        placeholder="Search, e.g. keyword research, coloring book, 70% royalty, ISBN"
-        class="w-full rounded-lg border border-line bg-white px-4 py-3 text-base shadow-sm"
-      />
-      <button class="btn-primary">Search</button>
-    </form>
-    <p class="mt-2 text-sm text-muted">Last checked {lastChecked}. Not affiliated with Amazon.</p>
-  </section>
+<Base title="KDP Tools & Free Calculators for Amazon Authors | KDP123" exactTitle {description} jsonLd={jsonLd} wide>
+  <section class="hero-bg relative overflow-hidden border-b border-line">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-6xl px-4 pt-8 pb-8 md:pt-12 md:pb-10">
+      <div data-today hidden class="mb-5 flex flex-wrap items-center gap-x-4 gap-y-1.5 rounded-xl border border-line bg-surface/70 px-3 py-2 text-xs text-muted backdrop-blur" aria-label="Today on Amazon KDP">
+        <span class="inline-flex items-center gap-1.5 font-medium text-ink"><span class="size-1.5 rounded-full bg-ok"></span>Today on Amazon</span>
+        <span data-k="lists"></span>
+        <span data-k="pick" class="min-w-0"></span>
+        <span data-k="niche"></span>
+        <a href="/developers/#kdptop" class="ml-auto text-muted hover:text-ink">Data: KDPTop (same team)</a>
+      </div>
 
-  <section class="mt-8 grid gap-4 md:grid-cols-3" aria-label="Start with what you are doing">
-    {
-      entries.map((e) => (
-        <a href={e.href} class="group block rounded-xl border border-line bg-white p-5 text-ink no-underline shadow-sm hover:border-brand hover:no-underline">
-          <div class="flex items-baseline justify-between gap-2">
-            <h2 class="text-xl font-semibold group-hover:text-brand-deep">{e.title}</h2>
-            <span class="text-sm text-muted">{e.count} tools</span>
-          </div>
-          <p class="mt-1 text-sm text-muted">{e.text}</p>
-        </a>
-      ))
-    }
-  </section>
+      <h1 class="max-w-3xl text-4xl leading-[1.1] font-bold tracking-tight md:text-5xl">Free KDP tools and calculators, all in one place</h1>
+      <p class="mt-3 max-w-2xl text-base text-muted md:text-lg">
+        Work out royalties, cover sizes, KENP payouts and keyword slots right here, then jump to any of {tools.length} checked KDP tools. No sign-up, no ads, no paid rankings.
+      </p>
 
-  <section class="mt-10 rounded-xl bg-ink p-5 text-white md:p-6" aria-labelledby="free">
-    <div class="flex flex-wrap items-baseline justify-between gap-2">
-      <h2 id="free" class="text-xl font-semibold">Free KDP calculators</h2>
-      <a href="/free-tools/" class="text-sm text-white/80 hover:text-white">All free tools</a>
+      <div class="relative mt-6 max-w-2xl" data-home-cmdk>
+        <div class="glass flex items-center gap-3 rounded-2xl border border-line px-4 shadow-lg focus-within:border-brand/60">
+          <Icon name="sparkles" class="size-5 shrink-0 text-brand" />
+          <label for="home-q" class="sr-only">Search tools or type numbers to calculate</label>
+          <input
+            id="home-q"
+            type="text"
+            role="combobox"
+            aria-controls="home-q-list"
+            aria-expanded="false"
+            aria-autocomplete="list"
+            autocomplete="off"
+            spellcheck="false"
+            enterkeyhint="go"
+            placeholder="What do you need? “$12.99 200 pages”, “BSR 25000”, a tool name…"
+            class="h-14 min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-muted"
+          />
+          <kbd class="kbd max-sm:hidden">/</kbd>
+        </div>
+        <ul id="home-q-list" role="listbox" class="card absolute inset-x-0 z-40 mt-2 max-h-[60vh] overflow-y-auto p-2" hidden></ul>
+      </div>
+      <p class="mt-3 flex flex-wrap items-center gap-2 text-sm text-muted">
+        Try
+        {TRY.map((t) => <button type="button" class="chip px-2.5 py-0.5 text-xs" data-try={t}>{t}</button>)}
+      </p>
     </div>
-    <p class="mt-1 text-sm text-white/70">Built on Amazon’s own numbers. No sign-up.</p>
-    <ul class="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
-      {
-        FREE_TOOLS.map((t) => (
+  </section>
+
+  <section id="workbench" data-workbench class="mx-auto max-w-6xl scroll-mt-16 px-4 pt-8" aria-labelledby="bench-h">
+    <h2 id="bench-h" class="sr-only">Free KDP calculators</h2>
+    <div class="grid gap-4 lg:grid-cols-[232px_minmax(0,1fr)] lg:gap-6">
+      <nav aria-label="Calculators" class="min-w-0 lg:sticky lg:top-20 lg:self-start">
+        <ul class="scroll-x -mx-4 flex gap-2 px-4 pb-1 lg:hidden">
+          {benchTools.map((t) => (
+            <li class="shrink-0">
+              <a href={`/free-tools/${t.slug}/`} data-open={t.slug} class="bench-chip"><Icon name={t.icon} class="size-3.5" />{t.short}</a>
+            </li>
+          ))}
+        </ul>
+        <div class="hidden space-y-5 lg:block">
+          {groups.map((g) => (
+            <div>
+              <p class="eyebrow px-2">{g.name}</p>
+              <ul class="mt-1.5 space-y-0.5">
+                {g.tools.map((t) => (
+                  <li>
+                    <a href={`/free-tools/${t.slug}/`} data-open={t.slug} class="bench-link"><span class="bench-ico"><Icon name={t.icon} class="size-4" /></span>{t.short}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          <a href="/free-tools/" class="flex items-center gap-1 px-2 text-sm">All free tools <Icon name="arrowRight" class="size-3.5" /></a>
+        </div>
+      </nav>
+
+      <div class="card min-w-0 p-4 md:p-6">
+        {benchTools.map((t) => {
+          const Widget = widgetOf(t.slug)! as any;
+          return (
+            <div data-panel={t.slug} hidden={t.slug !== first.slug} aria-labelledby={`p-${t.slug}`}>
+              <div class="mb-5 flex items-start gap-3">
+                <span class="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-soft text-brand-deep"><Icon name={t.icon} class="size-5" /></span>
+                <div class="min-w-0 flex-1">
+                  <h3 id={`p-${t.slug}`} class="text-lg leading-tight font-semibold"><a href={`/free-tools/${t.slug}/`} class="text-ink">{t.name}</a></h3>
+                  <p class="mt-0.5 text-sm text-muted">{t.blurb}</p>
+                  {t.provider === 'kdptop' && <p class="mt-1 text-xs text-muted">Uses live data from <a href="/developers/#kdptop">KDPTop</a>, made by the same team.</p>}
+                </div>
+                <PinButton kind="calc" id={t.slug} name={t.short} href={`/free-tools/${t.slug}/`} />
+              </div>
+              <Widget variant="compact" />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto mt-8 grid max-w-6xl gap-4 px-4 lg:grid-cols-2 lg:gap-6">
+    <MyTools suggest={benchTools.slice(0, 4).map((t) => ({ id: t.slug, name: t.short, href: `/free-tools/${t.slug}/` }))} />
+    <section class="card p-4 md:p-5" aria-labelledby="my-kdp-h">
+      <h2 id="my-kdp-h" class="flex items-center gap-2 text-base font-semibold"><Icon name="bookOpen" class="size-4 text-brand" />My KDP</h2>
+      <ul class="mt-3 grid grid-cols-2 gap-1.5 sm:grid-cols-3">
+        {MY_KDP.map((l) => (
           <li>
-            <a href={`/free-tools/${t.slug}/`} title={t.name} class="flex h-full items-center rounded-lg bg-white/10 px-3 py-2.5 text-sm font-medium text-white no-underline hover:bg-brand hover:no-underline">
-              {t.short}
+            <a href={l.href} rel="noopener" target="_blank" class="flex h-full flex-col rounded-lg border border-line bg-paper px-2.5 py-1.5 text-ink no-underline transition hover:border-ink/25 hover:no-underline">
+              <span class="flex items-center gap-1 text-sm font-medium">{l.name}<Icon name="arrowUpRight" class="size-3 shrink-0 text-muted" /></span>
+              <span class="text-xs text-muted">{l.note}</span>
             </a>
           </li>
-        ))
-      }
-    </ul>
+        ))}
+      </ul>
+    </section>
   </section>
 
-  <section class="mt-12" aria-labelledby="grid">
-    <div class="flex flex-wrap items-baseline justify-between gap-2">
-      <h2 id="grid" class="text-2xl font-semibold">KDP tools by stage</h2>
-      <a href="/tools/" class="text-sm">All {tools.length} tools</a>
-    </div>
-    <p class="mt-1 text-sm text-muted">
-      In each stage, tools are ordered by how often our shortlists, comparisons and other listings name them, then by name. KDPTop is made by the
-      same team as KDP123 and is always shown under Research, labelled.
-    </p>
-    <div class="mt-6 grid gap-6 lg:grid-cols-2">
-      {
-        grid.map(({ stage, picks, total }) => (
-          <div class="rounded-xl border border-line bg-white p-4">
+  <div class="mx-auto max-w-6xl px-4 pb-4">
+    <section class="mt-14" aria-labelledby="grid">
+      <div class="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 id="grid" class="text-2xl font-semibold tracking-tight">KDP tools directory</h2>
+          <p class="mt-1 max-w-3xl text-sm text-muted">
+            {tools.length} tools, each with its price, KDP fit and the date we last checked it (latest {lastChecked}). Click a tool to open its website;
+            <Icon name="info" class="inline size-3.5 align-[-2px]" /> shows price, KDP fit and alternatives. KDPTop is made by the same team and labelled.
+          </p>
+        </div>
+        <label class="flex items-center gap-2 text-sm text-muted" data-pagefind-ignore>
+          Clicking a tool opens
+          <select class="input w-auto py-1 text-sm" data-open-pref>
+            <option value="site">its website</option>
+            <option value="details">our details page</option>
+          </select>
+        </label>
+      </div>
+      <div class="mt-5 grid gap-4 lg:grid-cols-2">
+        {grid.map(({ stage, picks, total }) => (
+          <div class="card p-4">
             <div class="flex items-baseline justify-between gap-2">
-              <h3 class="text-lg font-semibold">
-                <a href={`/stages/${stage.slug}/`} class="text-ink">{stage.name}</a>
-              </h3>
+              <h3 class="text-base font-semibold"><a href={`/stages/${stage.slug}/`} class="text-ink">{stage.name}</a></h3>
               <a href={`/stages/${stage.slug}/`} class="text-sm">All {total}</a>
             </div>
             <p class="text-sm text-muted">{stage.blurb}</p>
-            <ul class="mt-3 grid grid-cols-4 gap-1 sm:gap-2">
-              {picks.map((t) => (
-                <li>
-                  <a href={`/t/${t.id}/`} class="flex h-full flex-col items-center gap-1.5 rounded-lg border border-transparent p-1 text-center text-ink no-underline hover:border-line hover:bg-paper hover:no-underline sm:p-2">
-                    <ToolLogo tool={t} size={40} />
-                    <span class="text-xs font-medium leading-tight sm:text-sm">{t.data.name}</span>
-                    <span class={`text-xs text-muted ${t.data.related_to_directory ? '' : 'max-sm:hidden'}`}>{t.data.related_to_directory ? 'Same team' : priceLabel(t)}</span>
-                  </a>
-                </li>
-              ))}
+            <ul class="mt-3 grid grid-cols-4 gap-1">
+              {picks.map((t) => <li><ToolCard tool={t} /></li>)}
             </ul>
           </div>
-        ))
-      }
-    </div>
-  </section>
+        ))}
+      </div>
+    </section>
 
-  <section class="mt-12" aria-labelledby="cats">
-    <h2 id="cats" class="text-2xl font-semibold">Browse by category</h2>
-    <ul class="mt-4 flex flex-wrap gap-2">
-      {
-        liveCategories.map((c) => (
+    <section class="mt-12" aria-labelledby="cats">
+      <h2 id="cats" class="text-xl font-semibold">Browse by category</h2>
+      <ul class="mt-3 flex flex-wrap gap-2">
+        {liveCategories.map((c) => (
           <li>
-            <a href={`/c/${c.slug}/`} class="inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-3 py-1.5 text-sm text-ink no-underline hover:border-brand hover:no-underline">
-              {c.name} <span class="text-muted">{countOf(c.slug)}</span>
-            </a>
+            <a href={`/c/${c.slug}/`} class="chip gap-1.5 no-underline hover:no-underline">{c.name} <span class="text-muted">{countOf(c.slug)}</span></a>
           </li>
-        ))
-      }
-    </ul>
-  </section>
+        ))}
+      </ul>
+    </section>
 
-  {
-    facts.length > 0 && (
-      <section class="mt-12" aria-labelledby="facts">
+    <div class="mt-12 grid gap-10 lg:grid-cols-2">
+      {facts.length > 0 && (
+        <section aria-labelledby="facts">
+          <div class="flex items-baseline justify-between gap-4">
+            <h2 id="facts" class="text-xl font-semibold">KDP facts</h2>
+            <a href="/facts/" class="text-sm">All {facts.length} facts</a>
+          </div>
+          <p class="mt-1 text-sm text-muted">Royalties, print specs and program rules, sourced to Amazon’s help pages.</p>
+          <ul class="mt-3 space-y-1.5 text-sm">{facts.slice(0, 10).map((f) => <li><a href={`/facts/${f.id}/`}>{f.data.title}</a></li>)}</ul>
+        </section>
+      )}
+      <section aria-labelledby="guides">
         <div class="flex items-baseline justify-between gap-4">
-          <h2 id="facts" class="text-2xl font-semibold">KDP facts</h2>
-          <a href="/facts/" class="text-sm">All {facts.length} facts</a>
+          <h2 id="guides" class="text-xl font-semibold">Shortlists and comparisons</h2>
+          <a href="/best/" class="text-sm">All guides</a>
         </div>
-        <p class="mt-1 text-sm text-muted">Royalties, print specs and program rules, sourced to Amazon’s help pages.</p>
-        <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
-          {facts.slice(0, 12).map((f) => <li><a href={`/facts/${f.id}/`}>{f.data.title}</a></li>)}
+        <p class="mt-1 text-sm text-muted">Criteria first, then picks and the reason for each. Or <a href="/compare/pick/">pick any two or three tools</a> to compare.</p>
+        <ul class="mt-3 space-y-1.5 text-sm">
+          {lists.map(({ list }) => <li><a href={`/best/${list.id}/`}>{list.data.title}</a></li>)}
+          {compares.map(({ cmp, a, b }) => <li><a href={`/compare/${cmp.id}/`}>{compareTitle(a, b)}</a></li>)}
         </ul>
       </section>
-    )
+    </div>
+
+    <section class="mt-12" aria-labelledby="recent">
+      <div class="flex items-baseline justify-between gap-4">
+        <h2 id="recent" class="text-xl font-semibold">Recently added</h2>
+        <a href="/rss.xml" class="text-sm">RSS</a>
+      </div>
+      <p class="mt-1 text-sm text-muted">The newest listings, each checked on the vendor's own site.</p>
+      <div class="mt-3"><ToolTable tools={latest} showCategory /></div>
+      {changes.length > 0 && (
+        <>
+          <h3 class="mt-6 font-semibold">Price and plan changes</h3>
+          <ul class="mt-2 space-y-1 text-sm">
+            {changes.map((c) => <li><span class="text-muted">{isoDate(c.date)}</span> <a href={`/t/${c.tool.id}/`}>{c.tool.data.name}</a>: {c.note}</li>)}
+          </ul>
+          <p class="mt-2 text-sm"><a href="/changes/">All changes</a> · <a href="/changes/rss.xml">Changes RSS</a></p>
+        </>
+      )}
+    </section>
+
+    <section class="mt-12" aria-labelledby="market">
+      <div class="flex items-baseline justify-between gap-4">
+        <h2 id="market" class="text-xl font-semibold">KDP market data</h2>
+        <a href="/research/" class="text-sm">All reports</a>
+      </div>
+      <p class="mt-1 text-sm text-muted">Open data on book prices, reviews and niche competition, with CSV downloads.</p>
+      <ul class="mt-3 grid gap-x-8 gap-y-1.5 text-sm sm:grid-cols-2 lg:grid-cols-3">
+        {monthly && <li><a href={`/reports/${monthly.data.month}/`}>KDP market report, {monthName(monthly.data.month)}</a></li>}
+        {reports.map((r) => <li><a href={`/research/#${r.slug}`}>{r.title}</a></li>)}
+      </ul>
+      <div class="mt-6 max-w-3xl"><TeamPick /></div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="official">
+      <h2 id="official" class="text-xl font-semibold">Official sources first</h2>
+      <p class="mt-1 text-sm text-muted">When another site disagrees with Amazon's own pages, Amazon's pages win.</p>
+      <div class="mt-3"><ToolTable tools={official} /></div>
+    </section>
+  </div>
+</Base>
+
+<script>
+  import { boot, prefill } from '../tools/boot';
+  import { mount } from '../lib/cmdk';
+  import { openPref, setOpenPref } from '../lib/pins';
+
+  const LAST = 'kdp123.lastTool';
+  const bench = document.querySelector<HTMLElement>('[data-workbench]')!;
+  const panels = [...bench.querySelectorAll<HTMLElement>('[data-panel]')];
+  const links = [...bench.querySelectorAll<HTMLAnchorElement>('[data-open]')];
+
+  function open(slug: string, params?: URLSearchParams, opts: { scroll?: boolean; url?: boolean } = {}) {
+    const panel = panels.find((p) => p.dataset.panel === slug);
+    if (!panel) return false;
+    for (const p of panels) {
+      p.hidden = p !== panel;
+      p.toggleAttribute('data-active', p === panel);
+    }
+    for (const a of links) {
+      if (a.dataset.open === slug) {
+        a.setAttribute('aria-current', 'true');
+        if (a.closest('.scroll-x')) a.parentElement!.scrollIntoView({ inline: 'center', block: 'nearest' });
+      } else a.removeAttribute('aria-current');
+    }
+    const root = panel.querySelector<HTMLElement>('[data-tool]')!;
+    const p = params ?? new URLSearchParams();
+    if (p.size) prefill(root, p);
+    else boot(root, p);
+    try {
+      localStorage.setItem(LAST, slug);
+    } catch {}
+    if (opts.url !== false) history.replaceState(null, '', `${location.pathname}?${new URLSearchParams([['tool', slug], ...p])}`);
+    if (opts.scroll) bench.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    return true;
   }
 
-  <section class="mt-12" aria-labelledby="guides">
-    <div class="flex items-baseline justify-between gap-4">
-      <h2 id="guides" class="text-2xl font-semibold">Shortlists and comparisons</h2>
-      <a href="/best/" class="text-sm">All guides</a>
-    </div>
-    <p class="mt-1 text-sm text-muted">Criteria first, then picks and the reason for each. No vendor paid to be listed. Or <a href="/compare/pick/">pick any two or three tools</a> to compare.</p>
-    <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
-      {lists.map(({ list }) => <li><a href={`/best/${list.id}/`}>{list.data.title}</a></li>)}
-      {compares.map(({ cmp, a, b }) => <li><a href={`/compare/${cmp.id}/`}>{compareTitle(a, b)}</a></li>)}
-    </ul>
-  </section>
+  const sp = new URLSearchParams(location.search);
+  const want = sp.get('tool');
+  sp.delete('tool');
+  let last: string | null = null;
+  try {
+    last = localStorage.getItem(LAST);
+  } catch {}
+  if (!(want && open(want, sp, { url: false, scroll: true }))) {
+    if (!(last && open(last, undefined, { url: false }))) open(panels[0].dataset.panel!, undefined, { url: false });
+  }
 
-  <section class="mt-12" aria-labelledby="recent">
-    <div class="flex items-baseline justify-between gap-4">
-      <h2 id="recent" class="text-2xl font-semibold">Recently added</h2>
-      <a href="/rss.xml" class="text-sm">RSS</a>
-    </div>
-    <p class="mt-1 text-sm text-muted">The newest listings, each checked on the vendor's own site.</p>
-    <div class="mt-4"><ToolTable tools={latest} showCategory /></div>
-    {changes.length > 0 && (
-      <>
-        <h3 class="mt-8 text-lg font-semibold">Price and plan changes</h3>
-        <ul class="mt-2 space-y-1 text-sm">
-          {changes.map((c) => <li><span class="text-muted">{isoDate(c.date)}</span> <a href={`/t/${c.tool.id}/`}>{c.tool.data.name}</a>: {c.note}</li>)}
-        </ul>
-        <p class="mt-2 text-sm"><a href="/changes/">All changes</a> · <a href="/changes/rss.xml">Changes RSS</a></p>
-      </>
-    )}
-  </section>
+  for (const a of links) {
+    a.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      open(a.dataset.open!, undefined, { scroll: innerWidth < 1024 });
+    });
+  }
+  addEventListener('workbench-open', (e) => {
+    const { slug, params } = (e as CustomEvent<{ slug: string; params: Record<string, string> }>).detail;
+    open(slug, new URLSearchParams(params), { scroll: true });
+  });
 
-  <section class="mt-12" aria-labelledby="market">
-    <div class="flex items-baseline justify-between gap-4">
-      <h2 id="market" class="text-2xl font-semibold">KDP market data</h2>
-      <a href="/research/" class="text-sm">All reports</a>
-    </div>
-    <p class="mt-1 text-sm text-muted">Open data on book prices, reviews and niche competition, with CSV downloads.</p>
-    <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
-      {monthly && <li><a href={`/reports/${monthly.data.month}/`}>KDP market report, {monthName(monthly.data.month)}</a></li>}
-      {reports.map((r) => <li><a href={`/research/#${r.slug}`}>{r.title}</a></li>)}
-    </ul>
-    <div class="mt-6 max-w-3xl"><TeamPick /></div>
-  </section>
+  // Command box in the hero.
+  const input = document.getElementById('home-q') as HTMLInputElement;
+  const list = document.getElementById('home-q-list') as HTMLElement;
+  const run = mount(input, list, {
+    onDone: () => {
+      list.hidden = true;
+      input.blur();
+    },
+  });
+  document.addEventListener('click', (e) => {
+    if (!(e.target as Element).closest('[data-home-cmdk]')) list.hidden = true;
+  });
+  input.addEventListener('focus', () => input.value.trim() && run());
+  for (const b of document.querySelectorAll<HTMLButtonElement>('[data-try]')) {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
+      input.value = b.dataset.try!;
+      input.focus();
+      run();
+    });
+  }
 
-  <section class="mt-12" aria-labelledby="official">
-    <h2 id="official" class="text-2xl font-semibold">Official sources first</h2>
-    <p class="mt-1 text-sm text-muted">When another site disagrees with Amazon's own pages, Amazon's pages win.</p>
-    <div class="mt-4"><ToolTable tools={official} /></div>
-  </section>
-</Base>
+  // Directory click preference.
+  const pref = document.querySelector<HTMLSelectElement>('[data-open-pref]');
+  if (pref) {
+    pref.value = openPref();
+    pref.addEventListener('change', () => setOpenPref(pref.value as 'site' | 'details'));
+  }
+
+  // "Today on Amazon" strip from KDPTop; stays hidden if the call fails.
+  const bar = document.querySelector<HTMLElement>('[data-today]')!;
+  fetch('/api/kdptop/today')
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => {
+      if (!d || !d.data_date) return;
+      const set = (k: string, ...kids: (Node | string)[]) => bar.querySelector(`[data-k="${k}"]`)!.replaceChildren(...kids);
+      if (d.lists_updated_24h) set('lists', `${Number(d.lists_updated_24h).toLocaleString('en-US')} bestseller lists refreshed · ${d.data_date}`);
+      const p = d.pick;
+      if (p?.title && /^https:\/\/www\.amazon\.com\//.test(p.amazon_url ?? '')) {
+        const a = Object.assign(document.createElement('a'), { href: p.amazon_url, rel: 'noopener nofollow', target: '_blank', className: 'font-medium text-ink' });
+        a.textContent = p.title.length > 60 ? `${p.title.slice(0, 57)}…` : p.title;
+        set('pick', 'Breakout: ', a, ` hit #${p.best_rank} in ${p.name}${p.days_to_best != null ? `, ${p.days_to_best} days after release` : ''}`);
+      }
+      const n = d.top_categories?.[0];
+      if (n?.name) set('niche', `Top niche score: ${n.name}${n.median_price ? ` (median $${Number(n.median_price).toFixed(2)})` : ''}`);
+      bar.hidden = false;
+    })
+    .catch(() => {});
+</script>

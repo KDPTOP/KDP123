@@ -1,6 +1,6 @@
 ---
 import FreeToolPage from '../../components/FreeToolPage.astro';
-import { SITE } from '../../lib/site';
+import Widget from '../../tools/keyword-checker/Widget.astro';
 
 const sources = ['https://kdp.amazon.com/en_US/help/topic/G201298500', 'https://kdp.amazon.com/en_US/help/topic/G200652170'];
 const faq = [
@@ -17,7 +17,6 @@ const faq = [
     a: 'No. KDP does not allow references to other authors or their books, or brands you are not authorized to use, and can remove the book if you do.',
   },
 ];
-const defaults = ['cozy mystery small town', 'amateur sleuth librarian', 'bakery mystery', 'best cozy mystery books', 'kindle unlimited mystery', '', ''];
 ---
 
 <FreeToolPage
@@ -26,27 +25,7 @@ const defaults = ['cozy mystery small town', 'amateur sleuth librarian', 'bakery
   faq={faq}
   sources={sources}
 >
-  <form id="kw" class="grid gap-4" onsubmit="return false">
-    <div class="grid gap-4 sm:grid-cols-2">
-      <label class="field">Title<input class="input" name="title" value="The Baker Who Wasn't There" /></label>
-      <label class="field">Subtitle (optional)<input class="input" name="subtitle" value="A Maple Street Cozy Mystery" /></label>
-      <label class="field">Category names (optional)<input class="input" name="categories" placeholder="e.g. Cozy Culinary Mysteries" /></label>
-      <label class="field">Authors to avoid (optional, comma-separated)<input class="input" name="authors" placeholder="Names of other authors you write like" /></label>
-    </div>
-    <fieldset>
-      <legend class="text-sm font-medium">Your seven keyword slots</legend>
-      <ol class="mt-2 grid gap-2">
-        {defaults.map((v, i) => (
-          <li class="flex items-center gap-2">
-            <span class="w-5 text-right text-sm text-muted">{i + 1}</span>
-            <input class="input" name="slot" value={v} aria-label={`Keyword slot ${i + 1}`} />
-          </li>
-        ))}
-      </ol>
-    </fieldset>
-  </form>
-  <div id="kw-out" class="mt-6 space-y-3" aria-live="polite"></div>
-  <p class="mt-6 text-sm text-muted">Need ideas for what to put in the slots? <a href={`${SITE.related.url}/tools/kdp-category`} rel="noopener">KDPTop</a> (from the team behind KDP123) shows which categories and phrases are winnable, or see <a href="/c/keywords-categories/">every keyword research tool we list</a>.</p>
+  <Widget />
 
   <Fragment slot="how">
     <h2>What it checks</h2>
@@ -56,44 +35,7 @@ const defaults = ['cozy mystery small town', 'amateur sleuth librarian', 'bakery
       <li>Words from Amazon's avoid list: quality claims, sales rank, time-sensitive and promotional terms, Amazon program and brand names, quotation marks, HTML.</li>
       <li>Single words, since Amazon recommends 2-3 word phrases.</li>
     </ul>
+    <p>Example: for "The Baker Who Knew Too Much: A Cozy Cornish Village Mystery", the slot "best cozy mystery books" is flagged three ways: "best" is a quality claim, "books" adds nothing, and "cozy" and "mystery" are already in the subtitle. "kindle unlimited mystery" is flagged for an Amazon program name.</p>
     <p>KDP's help page does not publish a character count per slot, so the checker shows the length without a fixed limit; KDP's form enforces its own.</p>
   </Fragment>
 </FreeToolPage>
-
-<script>
-  import { checkKeywords, KEYWORD_SLOTS } from '../../lib/calc/listing';
-
-  const form = document.getElementById('kw') as HTMLFormElement;
-  const out = document.getElementById('kw-out')!;
-
-  function run() {
-    const f = new FormData(form);
-    const slots = f.getAll('slot').map(String);
-    const reports = checkKeywords(slots, String(f.get('title')), String(f.get('subtitle')), String(f.get('categories')), String(f.get('authors')));
-    const clean = reports.filter((r) => r.issues.length === 0).length;
-    const empty = KEYWORD_SLOTS - reports.length;
-    const summary = document.createElement('p');
-    summary.className = 'text-sm font-medium';
-    summary.textContent = `${clean} of ${reports.length} filled slots look clean${empty ? `, ${empty} slot${empty > 1 ? 's' : ''} empty` : ''}.`;
-    const nodes: Node[] = [summary];
-    for (const r of reports) {
-      const box = document.createElement('div');
-      box.className = r.issues.length ? 'issue-warn' : 'issue-ok';
-      const head = document.createElement('p');
-      head.className = 'font-medium';
-      head.textContent = `${r.slot}. ${r.phrase} (${r.chars} characters)`;
-      box.append(head);
-      if (r.issues.length) {
-        const ul = document.createElement('ul');
-        ul.className = 'mt-1 list-disc pl-5';
-        r.issues.forEach((t) => ul.append(Object.assign(document.createElement('li'), { textContent: t })));
-        box.append(ul);
-      }
-      nodes.push(box);
-    }
-    out.replaceChildren(...nodes);
-  }
-
-  form.addEventListener('input', run);
-  run();
-</script>

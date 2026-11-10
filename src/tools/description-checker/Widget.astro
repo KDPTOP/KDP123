@@ -1,0 +1,43 @@
+---
+import WidgetFrame from '../WidgetFrame.astro';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+const sample = `**A small town. A missing baker. One very nosy librarian.**
+
+When the owner of Maple Street's only bakery disappears the night before the harvest fair, Nora Bell is sure the police have it wrong.
+
+- A cozy mystery with no gore or swearing
+- Book one of the Maple Street series
+- Includes the bakery's famous cinnamon roll recipe`;
+---
+
+<WidgetFrame slug="description-checker" variant={variant}>
+  <form class="grid gap-3">
+    <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Input type">
+      <label class="chip"><input type="radio" name="mode" value="text" checked />Plain text to HTML</label>
+      <label class="chip"><input type="radio" name="mode" value="html" />Check my HTML</label>
+    </div>
+    <label class="field">Your description
+      <textarea data-el="in" name="text" data-nostate class="input min-h-56 font-mono text-sm" spellcheck="true">{sample}</textarea>
+    </label>
+    <p class="text-xs text-muted" data-mode="text">Blank line = new paragraph. "- " = bullet, "1. " = numbered list, "# " = heading. **bold** and *italic*.</p>
+  </form>
+
+  <Fragment slot="out">
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <p class="text-sm"><span data-el="count" class="text-2xl font-semibold tabular-nums">0</span> / 4,000 characters, tags included</p>
+      <button type="button" data-el="copy" class="btn-ghost">Copy HTML</button>
+    </div>
+    <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-line"><div data-el="bar" class="h-full bg-brand transition-all"></div></div>
+    <ul data-el="issues" class="mt-4 space-y-2"></ul>
+    <details class="mt-4">
+      <summary class="cursor-pointer text-sm font-medium">HTML to paste into KDP</summary>
+      <textarea data-el="html" class="input mt-2 min-h-32 font-mono text-xs" readonly></textarea>
+    </details>
+    <h3 class="mt-4 text-sm font-medium">Preview</h3>
+    <div data-el="preview" class="prose-kdp mt-1 rounded-xl border border-line bg-paper p-4 text-sm"></div>
+  </Fragment>
+</WidgetFrame>

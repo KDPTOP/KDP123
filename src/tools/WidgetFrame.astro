@@ -1,0 +1,30 @@
+---
+import Icon from '../components/Icon.astro';
+
+interface Props {
+  slug: string;
+  /** compact: the home-page workbench; full: the tool's own page. */
+  variant?: 'compact' | 'full';
+  /** Results under the inputs instead of beside them, for tools with wide output. */
+  stack?: boolean;
+}
+const { slug, variant = 'full', stack = false } = Astro.props;
+---
+
+<div data-tool={slug} data-variant={variant} class="tool">
+  <div class:list={['tool-grid', { 'tool-stack': stack }]}>
+    <div class="tool-in"><slot /></div>
+    <div class="tool-out" aria-live="polite"><slot name="out" /></div>
+  </div>
+  <slot name="foot" />
+  {
+    variant === 'compact' && (
+      <p class="mt-5 flex flex-wrap items-center justify-between gap-2 border-t border-line pt-4 text-sm text-muted">
+        <span>Runs in your browser. Formulas, sources and FAQ on the full page.</span>
+        <a data-full href={`/free-tools/${slug}/`} class="inline-flex items-center gap-1 font-medium">
+          Open full page <Icon name="arrowRight" class="size-3.5" />
+        </a>
+      </p>
+    )
+  }
+</div>

@@ -5,6 +5,9 @@ import { categoryBySlug } from '../lib/taxonomy';
 import { publisherRef } from '../lib/seo';
 import { freeTool, FREE_TOOLS } from '../lib/freeTools';
 import { getFacts } from '../lib/facts';
+import Icon from './Icon.astro';
+import PinButton from './PinButton.astro';
+import DataSource from './DataSource.astro';
 
 interface Props {
   slug: string;
@@ -61,59 +64,82 @@ if (faq.length)
 
 <Base title={title} titleVariants={[tool.seoTitle, title]} description={`${tool.blurb} Free, no sign-up.`} jsonLd={jsonLd} searchable>
   <nav class="text-sm text-muted" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/free-tools/">Free tools</a></nav>
-  <article class="mt-2 max-w-3xl" data-pagefind-filter="type:Free tool" data-pagefind-meta="type:Free tool">
-    <h1 class="text-4xl font-bold">{title}</h1>
-    <p class="mt-2 text-sm text-muted">
-      Free, no sign-up.{remote ? '' : ' Runs in your browser and sends nothing to us.'}{checked && <> Numbers checked against Amazon’s pages on <span data-pagefind-meta="checked">{checked}</span>.</>} Not affiliated with Amazon.
-    </p>
-    <p class="answer mt-4 leading-7">{answer}</p>
+  <article class="mt-3" data-pagefind-filter="type:Free tool" data-pagefind-meta="type:Free tool">
+    <header class="flex items-start gap-4">
+      <span class="hidden size-12 shrink-0 items-center justify-center rounded-2xl bg-brand-soft text-brand-deep sm:flex"><Icon name={tool.icon} class="size-6" /></span>
+      <div class="min-w-0 flex-1">
+        <h1 class="text-3xl font-bold sm:text-4xl">{title}</h1>
+        <p class="mt-2 text-sm text-muted">
+          Free, no sign-up.{remote ? '' : ' Runs in your browser and sends nothing to us.'}{checked && <> Numbers checked against Amazon’s pages on <span data-pagefind-meta="checked">{checked}</span>.</>} Not affiliated with Amazon.
+        </p>
+      </div>
+      <PinButton kind="calc" id={slug} name={tool.short} href={`/free-tools/${slug}/`} />
+    </header>
+    <p class="answer mt-5 max-w-3xl">{answer}</p>
 
-    <section class="mt-6 rounded-lg border border-line bg-white p-4 md:p-6" aria-label="Calculator">
+    <section class="card mt-6 p-4 md:p-6" aria-label="Calculator">
       <slot />
     </section>
 
-    {poweredBy && <p class="mt-3 text-sm text-muted">{poweredBy}</p>}
+    {tool.provider ? <DataSource provider={tool.provider} tool={slug} class="mt-3" /> : poweredBy && <p class="mt-3 text-sm text-muted">{poweredBy}</p>}
+    {tool.provider && poweredBy && <p class="mt-2 text-sm text-muted">{poweredBy}</p>}
 
-    <div class="prose-kdp mt-6"><slot name="how" /></div>
+    <div class="max-w-3xl">
+      <div class="prose-kdp mt-6" data-how><slot name="how" /></div>
 
-    {
-      faq.length > 0 && (
+      {
+        faq.length > 0 && (
+          <>
+            <h2 class="mt-10 text-2xl font-semibold">Questions</h2>
+            <dl class="mt-3 divide-y divide-line rounded-2xl border border-line bg-white">
+              {faq.map((x) => (
+                <div class="p-4">
+                  <dt class="font-medium">{x.q}</dt>
+                  <dd class="mt-1 leading-7 text-muted">{x.a}</dd>
+                </div>
+              ))}
+            </dl>
+          </>
+        )
+      }
+
+      {
+        facts.length > 0 && (
+          <>
+            <h2 class="mt-10 text-2xl font-semibold">The rules behind it</h2>
+            <ul class="mt-2 list-disc pl-6 leading-7">{facts.map((f) => <li><a href={`/facts/${f.id}/`}>{f.data.title}</a></li>)}</ul>
+          </>
+        )
+      }
+
+      <h2 class="mt-10 text-2xl font-semibold">Sources</h2>
+      <ul class="mt-2 list-disc pl-6 text-sm">{sources.map((s) => <li><a href={s} rel="noopener" class="break-all">{s}</a></li>)}</ul>
+
+      {category && (
         <>
-          <h2 class="mt-10 text-2xl font-semibold">Questions</h2>
-          <dl class="mt-3 space-y-4">
-            {faq.map((x) => (
-              <div>
-                <dt class="font-medium">{x.q}</dt>
-                <dd class="mt-1 leading-7">{x.a}</dd>
-              </div>
-            ))}
-          </dl>
+          <h2 class="mt-10 text-2xl font-semibold">Need more than a calculator?</h2>
+          <p class="mt-2 leading-7">Compare paid and free <a href={`/c/${category.slug}/`}>{category.name.toLowerCase()} tools</a>, each with its price, KDP fit and check date.</p>
         </>
-      )
-    }
-
-    {
-      facts.length > 0 && (
-        <>
-          <h2 class="mt-10 text-2xl font-semibold">The rules behind it</h2>
-          <ul class="mt-2 list-disc pl-6 leading-7">{facts.map((f) => <li><a href={`/facts/${f.id}/`}>{f.data.title}</a></li>)}</ul>
-        </>
-      )
-    }
-
-    <h2 class="mt-10 text-2xl font-semibold">Sources</h2>
-    <ul class="mt-2 list-disc pl-6 text-sm">{sources.map((s) => <li><a href={s} rel="noopener">{s}</a></li>)}</ul>
-
-    {category && (
-      <>
-        <h2 class="mt-10 text-2xl font-semibold">Need more than a calculator?</h2>
-        <p class="mt-2 leading-7">Compare paid and free <a href={`/c/${category.slug}/`}>{category.name.toLowerCase()} tools</a>, each with its price, KDP fit and check date.</p>
-      </>
-    )}
+      )}
+    </div>
 
     <h2 class="mt-10 text-2xl font-semibold">Other free tools</h2>
-    <ul class="mt-2 list-disc pl-6 leading-7">{others.map((t) => <li><a href={`/free-tools/${t.slug}/`}>{t.name}</a></li>)}</ul>
+    <ul class="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      {others.map((t) => (
+        <li>
+          <a href={`/free-tools/${t.slug}/`} class="card-link flex items-center gap-3 p-3 text-sm">
+            <span class="flex size-8 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-muted"><Icon name={t.icon} /></span>
+            <span class="font-medium">{t.name}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
 
     <p class="mt-8 text-sm text-muted">Found a wrong number? <a href="/submit/">Tell us</a>. The code is open on <a href={SITE.github}>GitHub</a>.</p>
   </article>
 </Base>
+
+<script>
+  import { boot } from '../tools/boot';
+  document.querySelectorAll<HTMLElement>('[data-tool]').forEach((r) => boot(r));
+</script>

@@ -1,0 +1,77 @@
+---
+import Icon from './Icon.astro';
+---
+
+<dialog id="cmdk" class="glass m-auto mt-[12vh] w-[min(640px,calc(100vw-1.5rem))] overflow-hidden rounded-2xl border border-line p-0 text-ink shadow-2xl backdrop:bg-black/40 backdrop:backdrop-blur-sm" aria-label="Search or calculate" data-pagefind-ignore>
+  <div class="flex items-center gap-3 border-b border-line px-4">
+    <Icon name="search" class="size-5 shrink-0 text-muted" />
+    <input
+      id="cmdk-input"
+      type="text"
+      role="combobox"
+      aria-controls="cmdk-list"
+      aria-expanded="false"
+      aria-autocomplete="list"
+      autocomplete="off"
+      spellcheck="false"
+      enterkeyhint="go"
+      placeholder="Try “$12.99 200 pages”, “BSR 25000”, an ASIN or a tool name"
+      class="h-14 min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-muted"
+    />
+    <kbd class="kbd">Esc</kbd>
+  </div>
+  <ul id="cmdk-list" role="listbox" class="max-h-[60vh] overflow-y-auto p-2" hidden></ul>
+  <div class="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-line px-4 py-2 text-xs text-muted">
+    <span><kbd class="kbd">↑</kbd> <kbd class="kbd">↓</kbd> move</span>
+    <span><kbd class="kbd">↵</kbd> open</span>
+    <span><kbd class="kbd">Tab</kbd> tool details</span>
+    <label class="ml-auto inline-flex items-center gap-1.5">
+      Tools open
+      <select id="cmdk-pref" class="rounded-md border border-line bg-paper px-1 py-0.5 text-xs text-ink">
+        <option value="site">website first</option>
+        <option value="details">details first</option>
+      </select>
+    </label>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('cmdk') as HTMLDialogElement;
+  const input = document.getElementById('cmdk-input') as HTMLInputElement;
+  const list = document.getElementById('cmdk-list') as HTMLElement;
+  const pref = document.getElementById('cmdk-pref') as HTMLSelectElement;
+  let run: (() => Promise<void>) | undefined;
+
+  async function open(q = '') {
+    if (!dialog.open) dialog.showModal();
+    input.value = q;
+    input.focus();
+    if (!run) {
+      const [{ mount }, { openPref, setOpenPref }] = await Promise.all([import('../lib/cmdk'), import('../lib/pins')]);
+      pref.value = openPref();
+      pref.addEventListener('change', () => {
+        setOpenPref(pref.value as 'site' | 'details');
+        run?.();
+      });
+      run = mount(input, list, { emptyShows: true, onDone: () => dialog.close() });
+    }
+    run();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    const t = e.target as HTMLElement;
+    const typing = t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName);
+    if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !typing)) {
+      e.preventDefault();
+      if (dialog.open) dialog.close();
+      else open();
+    }
+  });
+  document.addEventListener('click', (e) => {
+    if ((e.target as Element).closest('[data-cmdk-open]')) open();
+  });
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+  addEventListener('cmdk-open', (e) => open((e as CustomEvent<string>).detail ?? ''));
+</script>

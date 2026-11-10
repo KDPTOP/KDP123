@@ -1,0 +1,42 @@
+---
+import WidgetFrame from '../WidgetFrame.astro';
+import Icon from '../../components/Icon.astro';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+const sample = 'cozy mystery books\ncozy mysteries\namateur sleuth baker\ncornwall small town\nbakery mystery\nkindle unlimited mystery\nvillage murder mystery\nfemale detective';
+---
+
+<WidgetFrame slug="keyword-builder" variant={variant}>
+  <form class="grid gap-4">
+    <label class="field">Keyword ideas, one per line or comma-separated
+      <textarea class="input min-h-40 font-mono text-sm" name="ideas" rows="7" spellcheck="false">{sample}</textarea>
+    </label>
+    <div class="flex flex-wrap items-end gap-2 rounded-xl border border-dashed border-line p-3">
+      <label class="field min-w-0 flex-1">Get related phrases from KDPTop
+        <input class="input py-2 text-sm" name="seed" type="text" placeholder="e.g. cozy mystery" maxlength="60" data-nostate />
+      </label>
+      <button type="button" class="btn-ghost" data-el="suggest"><Icon name="sparkles" class="size-4" />Suggest</button>
+      <p class="w-full text-xs text-muted" data-el="suggest-status">Phrases from KDPTop's keyword library (same team). 30 lookups a day.</p>
+      <div class="flex w-full flex-wrap gap-1.5" data-el="suggestions"></div>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2" data-full-only>
+      <label class="field">Title (to spot repeated words)<input class="input" name="title" type="text" placeholder="Your book title" /></label>
+      <label class="field">Subtitle<input class="input" name="subtitle" type="text" /></label>
+    </div>
+    <label class="field">Pack phrases up to this many characters per slot (optional)
+      <input class="input" name="limit" type="number" min="10" max="200" step="1" placeholder="Leave empty for one phrase per slot" inputmode="numeric" />
+      <span class="text-xs font-normal text-muted">KDP shows the limit under each keyword box. Enter it here to combine short phrases.</span>
+    </label>
+  </form>
+  <Fragment slot="out">
+    <div class="flex items-center justify-between gap-2">
+      <p class="text-sm font-medium">Your 7 keyword slots</p>
+      <button type="button" class="btn-ghost px-2 py-1 text-xs" data-el="copy-all"><Icon name="copy" class="size-3.5" />Copy all</button>
+    </div>
+    <ol data-el="slots" class="mt-2 space-y-1.5"></ol>
+    <ul data-el="notes" class="mt-4 space-y-2"></ul>
+  </Fragment>
+</WidgetFrame>

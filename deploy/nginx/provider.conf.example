@@ -1,0 +1,28 @@
+# Template for a new data provider (see /developers/ and data/providers/<id>.yml).
+# Copy into the kdp123.com server block, replace PROVIDER, the upstream and the endpoint list, then
+# back up the live file, run `nginx -t` and reload only if it passes.
+#
+# Rules every provider proxy follows:
+# - only the endpoints listed in data/providers/<id>.yml, GET unless the tool needs a small POST
+# - the visitor's cookies and auth headers never reach the provider; the provider's cookies never reach the visitor
+# - per-IP rate limit on our side, on top of whatever the provider enforces
+# - the provider sees the visitor's IP (X-Real-IP) so it can apply its own fair-use limits, and nothing else about them
+
+limit_req_zone $binary_remote_addr zone=kdp123_p_PROVIDER:1m rate=20r/m;   # goes in the http block, next to kdp123_kdptop
+
+location ~ "^/api/p/PROVIDER/(endpoint-a|endpoint-b/\d{1,15})$" {
+    limit_except GET { deny all; }
+    limit_req zone=kdp123_p_PROVIDER burst=10 nodelay;
+    limit_req_status 429;
+    proxy_pass https://api.provider.example/public/$1$is_args$args;
+    proxy_ssl_server_name on;
+    proxy_set_header Host api.provider.example;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header Cookie "";
+    proxy_set_header Authorization "";
+    proxy_set_header Referer "https://kdp123.com/";
+    proxy_hide_header Set-Cookie;
+    proxy_connect_timeout 5s;
+    proxy_read_timeout 15s;
+}

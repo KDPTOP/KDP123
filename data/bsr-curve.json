@@ -1,0 +1,8 @@
+{
+  "provider": "kdptop",
+  "model": "bsr-power-v1",
+  "formula": "daily units = A x BSR^-exp",
+  "A": { "books": 12000, "kindle": 18000 },
+  "exp": 0.85,
+  "synced_at": "2026-11-10"
+}

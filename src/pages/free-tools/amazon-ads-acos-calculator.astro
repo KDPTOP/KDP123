@@ -1,0 +1,44 @@
+---
+import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/amazon-ads-acos-calculator/Widget.astro';
+
+const sources = [
+  'https://advertising.amazon.com/library/guides/acos-advertising-cost-of-sales',
+  'https://kdp.amazon.com/en_US/help/topic/G201499010',
+];
+const faq = [
+  {
+    q: 'What is a good ACoS for a KDP book?',
+    a: 'Below your break-even ACoS, which is your royalty divided by the list price. A $12.99 paperback earning $3.19 breaks even at 24.6% ACoS; above that each ad sale loses money before page reads and follow-on sales.',
+  },
+  {
+    q: 'Why does Amazon report a different ACoS than my profit suggests?',
+    a: 'The ads console measures sales at list price, not your royalty. That is why the break-even point is royalty divided by price, not 100%.',
+  },
+  {
+    q: 'How high can I bid per click?',
+    a: 'To break even, at most royalty x conversion rate. With a $3.19 royalty and 10% of clicks buying, that is about $0.32 a click.',
+  },
+];
+---
+
+<FreeToolPage
+  slug="amazon-ads-acos-calculator"
+  answer="ACoS is ad spend divided by ad sales. For a book, break-even ACoS is your royalty divided by the list price, because the ads console counts sales at list price. Enter price, royalty, cost per click and conversion rate to see the ACoS, the ad cost per sale and the highest bid that still breaks even."
+  faq={faq}
+  sources={sources}
+>
+  <Widget />
+
+  <Fragment slot="how">
+    <h2>The formulas</h2>
+    <ul>
+      <li>Break-even ACoS = royalty / list price.</li>
+      <li>Ad cost per sale = cost per click / conversion rate.</li>
+      <li>ACoS = ad cost per sale / list price, or ad spend / ad sales from a report.</li>
+      <li>Max cost per click to break even = royalty x conversion rate.</li>
+    </ul>
+    <p>Example: a $12.99 paperback with a $3.19 royalty breaks even at 24.6% ACoS. At $0.65 a click and 10% conversion, each sale costs $6.50 in ads, an ACoS of 50.0% and a loss of $3.31 per ad sale. The highest break-even bid is $0.32.</p>
+    <p>Get the royalty from the <a href="/free-tools/royalty-calculator/">royalty calculator</a>. Kindle+ page reads and sales of other books in a series are not counted here.</p>
+  </Fragment>
+</FreeToolPage>

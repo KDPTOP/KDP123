@@ -1,0 +1,45 @@
+---
+import { readFileSync } from 'node:fs';
+import { parse } from 'yaml';
+import WidgetFrame from '../WidgetFrame.astro';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+interface Rate { month: string; rate: number; source: string; checked_at: string }
+const rates: Rate[] = (parse(readFileSync('data/kenp-rates.yml', 'utf8'))?.rates ?? [])
+  .filter((r: Rate) => r.rate > 0 && /^https:\/\/kdp\.amazon\.com\//.test(r.source))
+  .sort((a: Rate, b: Rate) => b.month.localeCompare(a.month));
+---
+
+<WidgetFrame slug="kenp-calculator" variant={variant}>
+  <form class="grid gap-4 sm:grid-cols-2">
+    <label class="field">KENP pages read<input class="input" name="pages" type="number" min="0" step="1" value="25000" inputmode="numeric" /></label>
+    <label class="field">KENP rate (USD per page)
+      <input class="input" name="rate" type="number" min="0" max="0.05" step="0.000001" placeholder="from your KDP report" value={rates[0]?.rate} inputmode="decimal" />
+    </label>
+    {rates.length > 0 && (
+      <label class="field sm:col-span-2">Announced rates
+        <select class="input" data-nostate data-el="rates">
+          {rates.map((r) => <option value={r.rate}>{r.month}: ${r.rate} per page</option>)}
+        </select>
+      </label>
+    )}
+    <label class="field">Book length (KENPC)<input class="input" name="kenpc" type="number" min="1" step="1" value="350" inputmode="numeric" /></label>
+    <label class="field">Ebook royalty per sale (optional)<input class="input" name="sale" type="number" min="0" step="0.01" placeholder="e.g. 3.40" inputmode="decimal" /></label>
+    <p class="text-xs text-muted sm:col-span-2">
+      The rate changes every month. Find it in your KDP Reports (royalty divided by pages read) or in Amazon's monthly KDP Select Global Fund announcement around the 15th.
+      {rates.length === 0 && ' We only prefill a rate once we have checked it on Amazon’s own page.'}
+    </p>
+  </form>
+  <Fragment slot="out">
+    <dl class="grid grid-cols-2 gap-3">
+      <div class="stat stat-hero col-span-2"><dt>Estimated page-read earnings</dt><dd data-k="earn">-</dd></div>
+      <div class="stat"><dt>Per full read</dt><dd data-k="per">-</dd></div>
+      <div class="stat"><dt>Full reads</dt><dd data-k="reads">-</dd></div>
+      <div class="stat col-span-2" data-el="match" hidden><dt>Pages read to equal one sale</dt><dd data-k="match">-</dd></div>
+    </dl>
+    <ul data-el="notes" class="mt-4 space-y-2"></ul>
+  </Fragment>
+</WidgetFrame>

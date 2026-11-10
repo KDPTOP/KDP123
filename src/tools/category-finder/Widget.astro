@@ -1,0 +1,41 @@
+---
+import WidgetFrame from '../WidgetFrame.astro';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+---
+
+<WidgetFrame slug="category-finder" variant={variant} stack>
+  <form class="grid gap-4">
+    <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Look up by">
+      <label class="chip"><input type="radio" name="mode" value="recommend" checked />Describe my book</label>
+      <label class="chip"><input type="radio" name="mode" value="resolve" />ASIN, ISBN or Amazon link</label>
+      <label class="chip"><input type="radio" name="mode" value="node" />Check a category</label>
+    </div>
+    <label class="field" data-mode="recommend">What is the book about?
+      <textarea class="input min-h-20" name="text" maxlength="3000" placeholder="e.g. A cozy mystery about a small-town librarian who solves a murder at the local bakery"></textarea>
+    </label>
+    <label class="field" data-mode="resolve" hidden>ASIN, ISBN or Amazon URL
+      <input class="input" name="q" maxlength="2000" placeholder="e.g. B0C1234567 or https://www.amazon.com/dp/..." />
+    </label>
+    <label class="field" data-mode="node" hidden>Amazon category ID or Best Sellers link
+      <input class="input" name="node" maxlength="500" placeholder="e.g. 10134 or https://www.amazon.com/gp/bestsellers/books/10134" />
+    </label>
+    <div class="flex flex-wrap items-end gap-3">
+      <label class="field" data-mode-not="node">Format
+        <select class="input" name="store">
+          <option value="books">Paperback or hardcover</option>
+          <option value="kindle">Kindle ebook</option>
+        </select>
+      </label>
+      <button class="btn-primary" type="submit">Look up</button>
+    </div>
+  </form>
+  <Fragment slot="out">
+    <p data-el="status" class="text-sm"></p>
+    <ol data-el="out" class="mt-3 space-y-3"></ol>
+    <p data-el="more" class="mt-3 text-sm" hidden><a data-full href="/free-tools/category-finder/">See every match on the full page</a></p>
+  </Fragment>
+</WidgetFrame>

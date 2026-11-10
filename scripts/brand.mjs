@@ -34,16 +34,19 @@ writeFileSync('public/logo-horizontal-light.svg', lockup(await wordmark(NAVY)));
 writeFileSync('public/logo-horizontal-dark.svg', lockup(await wordmark('#ffffff')));
 
 const icon = (bg, scale) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">${bg ? `<rect width="512" height="512" fill="${bg}"/>` : ''}<svg x="${256 - 230 * scale}" y="${256 - 258 * scale}" width="${460 * scale}" height="${516 * scale}" viewBox="0 0 100 112">${markInner}</svg></svg>`;
+// Browser-tab icon: the mark on a white rounded tile with a hairline border, as on the brand board,
+// so it reads at 16px on light and dark tab bars.
+const tile = (scale) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect x="8" y="8" width="496" height="496" rx="112" fill="#ffffff" stroke="#d9dde5" stroke-width="16"/><svg x="${256 - 230 * scale}" y="${256 - 258 * scale}" width="${460 * scale}" height="${516 * scale}" viewBox="0 0 100 112">${markInner}</svg></svg>`;
 const png = (svg, size) => new Resvg(svg, { fitTo: { mode: 'width', value: size } }).render().asPng();
 
-writeFileSync('public/favicon.svg', mark);
+writeFileSync('public/favicon.svg', tile(0.74));
 const small = {};
-for (const s of [16, 32, 48]) small[s] = png(icon(null, 1), s);
+for (const s of [16, 32, 48]) small[s] = png(tile(s === 16 ? 0.8 : 0.74), s);
 for (const s of [16, 32, 48]) writeFileSync(`public/favicon-${s}.png`, small[s]);
 writeFileSync('public/apple-touch-icon.png', png(icon('#ffffff', 0.78), 180));
 writeFileSync('public/icon-192.png', png(icon('#ffffff', 0.78), 192));
 writeFileSync('public/icon-512.png', png(icon('#ffffff', 0.78), 512));
-writeFileSync('public/icon-maskable-512.png', png(icon('#ffffff', 0.6), 512));
+writeFileSync('public/icon-maskable-512.png', png(icon(NAVY, 0.6), 512));
 
 // favicon.ico holding the 16/32/48 PNGs.
 const sizes = [16, 32, 48];
@@ -67,9 +70,9 @@ writeFileSync('public/site.webmanifest', JSON.stringify({
   background_color: '#fbfbfa',
   theme_color: NAVY,
   icons: [
-    { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
-    { src: '/icon-512.png', sizes: '512x512', type: 'image/png' },
-    { src: '/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+    { src: '/icon-192.png?v=2', sizes: '192x192', type: 'image/png' },
+    { src: '/icon-512.png?v=2', sizes: '512x512', type: 'image/png' },
+    { src: '/icon-maskable-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
   ],
 }, null, 2) + '\n');
 console.log('Brand files written to public/.');

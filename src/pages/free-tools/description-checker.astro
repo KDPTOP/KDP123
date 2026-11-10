@@ -1,5 +1,6 @@
 ---
 import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/description-checker/Widget.astro';
 
 const sources = [
   'https://kdp.amazon.com/en_US/help/topic/G201189630',
@@ -20,13 +21,6 @@ const faq = [
     a: 'Content checks are pattern matches, so treat yellow notes as things to look at, not rejections. Red notes break KDP\'s stated rules: length, unsupported tags and unclosed tags.',
   },
 ];
-const sample = `**A small town. A missing baker. One very nosy librarian.**
-
-When the owner of Maple Street's only bakery disappears the night before the harvest fair, Nora Bell is sure the police have it wrong.
-
-- A cozy mystery with no gore or swearing
-- Book one of the Maple Street series
-- Includes the bakery's famous cinnamon roll recipe`;
 ---
 
 <FreeToolPage
@@ -35,29 +29,7 @@ When the owner of Maple Street's only bakery disappears the night before the har
   faq={faq}
   sources={sources}
 >
-  <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Input type">
-    <label class="chip"><input type="radio" name="mode" value="text" class="mr-1.5" checked />Plain text to HTML</label>
-    <label class="chip"><input type="radio" name="mode" value="html" class="mr-1.5" />Check my HTML</label>
-  </div>
-  <label class="field mt-4">Your description
-    <textarea id="desc-in" class="input min-h-56 font-mono text-sm" spellcheck="true">{sample}</textarea>
-  </label>
-  <p class="mt-1 text-xs text-muted" data-mode="text">Blank line = new paragraph. Lines starting with "- " = bullet list, "1. " = numbered list, "# " = heading. **bold** and *italic*.</p>
-
-  <div class="mt-4 flex flex-wrap items-center justify-between gap-2">
-    <p class="text-sm"><span id="desc-count" class="font-semibold tabular-nums">0</span> / 4,000 characters, tags included</p>
-    <button type="button" id="desc-copy" class="btn-ghost">Copy HTML</button>
-  </div>
-  <div class="mt-1 h-2 overflow-hidden rounded bg-line"><div id="desc-bar" class="h-full bg-accent"></div></div>
-
-  <ul id="desc-issues" class="mt-4 space-y-2" aria-live="polite"></ul>
-
-  <details class="mt-4" open>
-    <summary class="cursor-pointer text-sm font-medium">HTML to paste into KDP</summary>
-    <textarea id="desc-html" class="input mt-2 min-h-32 font-mono text-xs" readonly></textarea>
-  </details>
-  <h3 class="mt-4 text-sm font-medium">Preview</h3>
-  <div id="desc-preview" class="prose-kdp mt-1 rounded border border-line bg-paper p-4 text-sm"></div>
+  <Widget />
 
   <Fragment slot="how">
     <h2>What it checks</h2>
@@ -65,65 +37,7 @@ When the owner of Maple Street's only bakery disappears the night before the har
       <li><strong>Errors</strong> (KDP rejects or misrenders these): over 4,000 characters, unsupported tags such as &lt;h2&gt; or &lt;span&gt;, unclosed or overlapping tags, stray angle brackets.</li>
       <li><strong>Warnings</strong> (content KDP does not allow; check by eye): URLs, emails and phone numbers, prices and ordering language, time-sensitive wording, reviews and ratings, review requests, emojis and invisible characters.</li>
     </ul>
+    <p>Example: <code>&lt;h2&gt;Praise&lt;/h2&gt;&lt;p&gt;Only $2.99 this week!&lt;/p&gt;</code> gets an error for the unsupported &lt;h2&gt; tag (use &lt;h4&gt; to &lt;h6&gt;) and warnings for the price and for "this week", which goes out of date.</p>
     <p>The preview uses this site's styles, not Amazon's, so spacing will differ slightly on the detail page.</p>
   </Fragment>
 </FreeToolPage>
-
-<script>
-  import { checkDescription, formatDescription, ALLOWED_TAGS, DESCRIPTION_MAX } from '../../lib/calc/listing';
-
-  const input = document.getElementById('desc-in') as HTMLTextAreaElement;
-  const htmlOut = document.getElementById('desc-html') as HTMLTextAreaElement;
-  const preview = document.getElementById('desc-preview')!;
-  const issuesEl = document.getElementById('desc-issues')!;
-  const count = document.getElementById('desc-count')!;
-  const bar = document.getElementById('desc-bar')!;
-  const modes = document.querySelectorAll<HTMLInputElement>('input[name="mode"]');
-  const mode = () => [...modes].find((m) => m.checked)!.value;
-
-  // Preview renders only the tags KDP supports, with every attribute dropped.
-  function safePreview(html: string) {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    const walk = (node: Node, into: Node) => {
-      for (const child of [...node.childNodes]) {
-        if (child.nodeType === Node.TEXT_NODE) into.appendChild(document.createTextNode(child.textContent ?? ''));
-        else if (child.nodeType === Node.ELEMENT_NODE) {
-          const tag = (child as Element).tagName.toLowerCase();
-          if (ALLOWED_TAGS.includes(tag)) walk(child, into.appendChild(document.createElement(tag)));
-          else walk(child, into);
-        }
-      }
-    };
-    const frag = document.createDocumentFragment();
-    walk(doc.body, frag);
-    preview.replaceChildren(frag);
-  }
-
-  function run() {
-    const html = mode() === 'text' ? formatDescription(input.value) : input.value;
-    document.querySelectorAll<HTMLElement>('[data-mode="text"]').forEach((el) => (el.hidden = mode() !== 'text'));
-    htmlOut.value = html;
-    const r = checkDescription(html);
-    count.textContent = r.length.toLocaleString('en-US');
-    bar.style.width = `${Math.min(100, (r.length / DESCRIPTION_MAX) * 100)}%`;
-    bar.className = `h-full ${r.length > DESCRIPTION_MAX ? 'bg-red-600' : 'bg-accent'}`;
-    const items = r.issues.length ? r.issues.map((i) => [i.level === 'error' ? 'issue-error' : 'issue-warn', i.text]) : [['issue-ok', 'No problems found.']];
-    issuesEl.replaceChildren(...items.map(([cls, text]) => Object.assign(document.createElement('li'), { className: cls, textContent: text })));
-    safePreview(html);
-  }
-
-  document.getElementById('desc-copy')!.addEventListener('click', async (e) => {
-    const btn = e.currentTarget as HTMLButtonElement;
-    try {
-      await navigator.clipboard.writeText(htmlOut.value);
-      btn.textContent = 'Copied';
-    } catch {
-      htmlOut.select();
-      btn.textContent = 'Press Ctrl+C / Cmd+C';
-    }
-    setTimeout(() => (btn.textContent = 'Copy HTML'), 2000);
-  });
-  input.addEventListener('input', run);
-  modes.forEach((m) => m.addEventListener('change', run));
-  run();
-</script>

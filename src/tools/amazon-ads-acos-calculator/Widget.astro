@@ -1,0 +1,34 @@
+---
+import WidgetFrame from '../WidgetFrame.astro';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+---
+
+<WidgetFrame slug="amazon-ads-acos-calculator" variant={variant}>
+  <form class="grid gap-4 sm:grid-cols-2">
+    <label class="field">List price (USD)<input class="input" name="price" type="number" min="0.99" max="250" step="0.01" value="12.99" inputmode="decimal" /></label>
+    <label class="field">Royalty per sale (USD)<input class="input" name="royalty" type="number" min="0" step="0.01" value="3.19" inputmode="decimal" /></label>
+    <label class="field">Average cost per click (USD)<input class="input" name="cpc" type="number" min="0.01" step="0.01" value="0.65" inputmode="decimal" /></label>
+    <label class="field">Conversion rate (% of clicks that buy)<input class="input" name="cvr" type="number" min="0.1" max="100" step="0.1" value="10" inputmode="decimal" /></label>
+    <p class="text-xs text-muted sm:col-span-2">Don't know your royalty? <a data-el="roy" href="/free-tools/royalty-calculator/">Work it out from price and pages</a>.</p>
+    <fieldset class="grid gap-4 rounded-xl border border-dashed border-line p-3 sm:col-span-2 sm:grid-cols-2" data-full-only>
+      <legend class="px-1 text-sm font-medium">From a campaign report (optional)</legend>
+      <label class="field">Ad spend (USD)<input class="input" name="spend" type="number" min="0" step="0.01" placeholder="e.g. 120" inputmode="decimal" /></label>
+      <label class="field">Ad sales (USD)<input class="input" name="sales" type="number" min="0" step="0.01" placeholder="e.g. 300" inputmode="decimal" /></label>
+    </fieldset>
+  </form>
+  <Fragment slot="out">
+    <dl class="grid grid-cols-2 gap-3">
+      <div class="stat stat-hero col-span-2"><dt>Break-even ACoS</dt><dd data-k="be">-</dd></div>
+      <div class="stat"><dt>ACoS at these numbers</dt><dd data-k="acos">-</dd></div>
+      <div class="stat"><dt>Ad cost per sale</dt><dd data-k="cps">-</dd></div>
+      <div class="stat"><dt>Profit per ad sale</dt><dd data-k="profit">-</dd></div>
+      <div class="stat"><dt>Max CPC to break even</dt><dd data-k="maxcpc">-</dd></div>
+      <div class="stat col-span-2" data-el="report" hidden><dt>Campaign ACoS (spend / sales)</dt><dd data-k="report">-</dd></div>
+    </dl>
+    <ul data-el="notes" class="mt-4 space-y-2"></ul>
+  </Fragment>
+</WidgetFrame>

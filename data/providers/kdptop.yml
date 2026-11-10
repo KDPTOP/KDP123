@@ -1,0 +1,45 @@
+name: KDPTop
+tool: kdptop
+same_team: true
+url: https://kdptop.com
+attribution: KDPTop crawls Amazon.com bestseller and new release lists daily for about 11,000 Books and Kindle Store categories.
+link_out: https://kdptop.com/tools/kdp-category
+terms_url: https://kdptop.com/terms
+added_at: 2026-11-10
+endpoints:
+  - path: /api/kdptop/placement/resolve
+    upstream: https://kdptop.com/api/public/placement/resolve
+    purpose: Categories for a book by ASIN, ISBN or Amazon link
+    sends: The ASIN, ISBN or link you paste and the format
+    used_by: [category-finder]
+    limit: 10 lookups a day per visitor
+  - path: /api/kdptop/placement/recommend
+    upstream: https://kdptop.com/api/public/placement/recommend
+    purpose: Categories that match a description of a book
+    sends: The description you type and the format
+    used_by: [category-finder]
+    limit: 30 lookups a day per visitor
+  - path: /api/kdptop/category/{node_id}
+    upstream: https://kdptop.com/api/public/category/{node_id}
+    purpose: Latest snapshot of one Amazon category
+    sends: The category number
+    used_by: [category-finder]
+    limit: 60 lookups a day per visitor
+  - path: /api/kdptop/keywords/suggest
+    upstream: https://kdptop.com/api/public/keywords/suggest
+    purpose: Related search phrases from KDPTop's keyword library
+    sends: The seed phrase you type
+    used_by: [keyword-builder]
+    limit: 30 lookups a day per visitor
+  - path: /api/kdptop/bsr-curve
+    upstream: https://kdptop.com/api/public/bsr-curve
+    purpose: The BSR-to-sales curve KDPTop uses
+    sends: Nothing
+    used_by: [bsr-sales-estimator]
+    limit: Cached for an hour
+  - path: /api/kdptop/today
+    upstream: https://kdptop.com/api/public/today
+    purpose: Today's breakout new book and list counts for the home page
+    sends: Nothing
+    used_by: [home]
+    limit: Cached for ten minutes

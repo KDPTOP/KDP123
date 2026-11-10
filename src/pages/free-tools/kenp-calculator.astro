@@ -1,0 +1,44 @@
+---
+import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/kenp-calculator/Widget.astro';
+
+const sources = [
+  'https://kdp.amazon.com/en_US/help/topic/G201541130',
+  'https://kdp.amazon.com/en_US/help/topic/G5HHMLVVEW48MQYW',
+  'https://kdp.amazon.com/en_US/help/topic/GNRKU6NDYY2AGTTK',
+];
+const faq = [
+  {
+    q: 'What is the KENP rate this month?',
+    a: 'Amazon divides the monthly KDP Select Global Fund by the total KENP read and announces it around the 15th of the following month. It changes every month, so the calculator uses the rate you enter from your KDP reports.',
+  },
+  {
+    q: 'Is there a limit on how many pages one reader pays for?',
+    a: 'Yes. Each customer pays for at most 3,000 KENP per title, and only the first time they read each page.',
+  },
+  {
+    q: 'Does a reader who reads and then listens pay twice?',
+    a: 'No. Each page pays only the first time that subscriber consumes it in either format. Images, charts and graphs count toward KENP.',
+  },
+];
+---
+
+<FreeToolPage
+  slug="kenp-calculator"
+  answer="Kindle+ (formerly Kindle Unlimited) earnings are KENP pages read times that month's KENP rate. The rate changes monthly and is announced around the 15th, so enter the one from your KDP report. Add your book's KENPC to see what one full read pays and how many pages equal one sale."
+  faq={faq}
+  sources={sources}
+>
+  <Widget />
+
+  <Fragment slot="how">
+    <h2>The formulas</h2>
+    <ul>
+      <li>Earnings = KENP read x KENP rate.</li>
+      <li>One full read = min(KENPC, 3,000) x KENP rate.</li>
+      <li>Pages to match one sale = ebook royalty per sale / KENP rate, rounded up.</li>
+    </ul>
+    <p>Example with an illustrative rate of $0.0045 per page (not a current rate): 10,000 KENP read earns $45.00. A book with a KENPC of 300 pays $1.35 per full read, and a $3.40 sale equals 756 pages read.</p>
+    <p>KDP Select bonuses are paid separately and are not included.</p>
+  </Fragment>
+</FreeToolPage>

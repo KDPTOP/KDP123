@@ -1,5 +1,6 @@
 ---
 import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/cover-size-calculator/Widget.astro';
 
 const sources = [
   'https://kdp.amazon.com/en_US/help/topic/G201953020',
@@ -20,7 +21,6 @@ const faq = [
     a: 'No. Hardcover case laminate covers add a 0.51 in wrap and 0.4 in hinges, so use KDP\'s cover calculator and template generator for hardcovers.',
   },
 ];
-const trims = ['5 x 8', '5.25 x 8', '5.5 x 8.5', '6 x 9', '6.14 x 9.21', '7 x 10', '8 x 10', '8.25 x 11', '8.5 x 8.5', '8.5 x 11'];
 ---
 
 <FreeToolPage
@@ -29,38 +29,7 @@ const trims = ['5 x 8', '5.25 x 8', '5.5 x 8.5', '6 x 9', '6.14 x 9.21', '7 x 10
   faq={faq}
   sources={sources}
 >
-  <form id="cov" class="grid gap-4 sm:grid-cols-2" onsubmit="return false">
-    <label class="field sm:col-span-2">Trim size (inches)
-      <select class="input" name="preset">
-        {trims.map((t) => <option value={t} selected={t === '6 x 9'}>{t} in</option>)}
-        <option value="custom">Custom size</option>
-      </select>
-    </label>
-    <label class="field" data-custom hidden>Trim width (in)<input class="input" name="w" type="number" min="4" max="8.5" step="0.01" value="6" inputmode="decimal" /></label>
-    <label class="field" data-custom hidden>Trim height (in)<input class="input" name="h" type="number" min="6" max="11.69" step="0.01" value="9" inputmode="decimal" /></label>
-    <label class="field">Page count<input class="input" name="pages" type="number" min="24" max="828" step="1" value="300" inputmode="numeric" /></label>
-    <label class="field">Paper
-      <select class="input" name="paper">
-        <option value="white">White paper, black ink</option>
-        <option value="cream">Cream paper, black ink</option>
-        <option value="groundwood">Groundwood paper</option>
-        <option value="premium_color">Premium color (white)</option>
-      </select>
-    </label>
-  </form>
-
-  <div class="mt-6" aria-live="polite">
-    <dl class="grid grid-cols-2 gap-3 sm:grid-cols-4">
-      <div class="stat"><dt>Full cover width</dt><dd data-k="w">-</dd></div>
-      <div class="stat"><dt>Full cover height</dt><dd data-k="h">-</dd></div>
-      <div class="stat"><dt>Spine width</dt><dd data-k="spine">-</dd></div>
-      <div class="stat"><dt>Pixels at 300 DPI</dt><dd data-k="px">-</dd></div>
-    </dl>
-    <p class="mt-2 text-sm text-muted" data-k="mm"></p>
-    <p id="cov-spine" class="mt-4"></p>
-    <svg id="cov-svg" class="mt-4 w-full" role="img" aria-label="Cover layout"></svg>
-    <p class="mt-2 text-xs text-muted">Grey: bleed (trimmed off). Dashed: trim lines. Blue: spine. Keep text 0.125 in inside the trim lines, and leave the lower right of the back cover clear if KDP adds the barcode for you.</p>
-  </div>
+  <Widget />
 
   <Fragment slot="how">
     <h2>How it is calculated</h2>
@@ -70,47 +39,7 @@ const trims = ['5 x 8', '5.25 x 8', '5.5 x 8.5', '6 x 9', '6.14 x 9.21', '7 x 10
       <li>Width = 0.125 + trim width + spine + trim width + 0.125 in. Height = 0.125 + trim height + 0.125 in.</li>
       <li>Pixels are inches x 300, rounded up, since KDP wants 300 DPI or more.</li>
     </ul>
+    <p>Example: a 6 x 9 in paperback with 300 pages on white paper has a 300 x 0.002252 = 0.676 in spine. The full cover is 0.125 + 6 + 0.676 + 6 + 0.125 = 12.926 in wide and 9.25 in tall, or 3,878 x 2,775 pixels at 300 DPI.</p>
     <p>KDP's own pages disagree slightly on standard color paper, so for that ink, and for any final file, generate the template in <a href="https://kdp.amazon.com/en_US/cover-calculator" rel="noopener">KDP's cover calculator</a>.</p>
   </Fragment>
 </FreeToolPage>
-
-<script>
-  import { paperbackCover, px300, MM, BLEED, SPINE_TEXT_MIN_PAGES, type Paper } from '../../lib/calc/listing';
-
-  const form = document.getElementById('cov') as HTMLFormElement;
-  const svg = document.getElementById('cov-svg')!;
-  const spineEl = document.getElementById('cov-spine')!;
-  const q = (k: string) => document.querySelector(`[data-k="${k}"]`)!;
-  const inch = (v: number) => `${v.toFixed(3).replace(/0+$/, '').replace(/\.$/, '')} in`;
-
-  function run() {
-    const f = new FormData(form);
-    const preset = String(f.get('preset'));
-    document.querySelectorAll<HTMLElement>('[data-custom]').forEach((el) => (el.hidden = preset !== 'custom'));
-    const [w, h] = preset === 'custom' ? [Number(f.get('w')), Number(f.get('h'))] : preset.split(' x ').map(Number);
-    const pages = Math.max(24, Math.min(828, Number(f.get('pages')) || 0));
-    const c = paperbackCover(w, h, pages, f.get('paper') as Paper);
-    q('w').textContent = inch(c.width);
-    q('h').textContent = inch(c.height);
-    q('spine').textContent = inch(c.spine);
-    q('px').textContent = `${px300(c.width).toLocaleString('en-US')} x ${px300(c.height).toLocaleString('en-US')}`;
-    q('mm').textContent = `In millimetres: ${(c.width * MM).toFixed(1)} x ${(c.height * MM).toFixed(1)} mm, spine ${(c.spine * MM).toFixed(2)} mm. Calculated for ${c.pages} pages.`;
-    spineEl.className = c.spineText ? 'issue-ok' : 'issue-warn';
-    spineEl.textContent = c.spineText
-      ? `Spine text allowed. With 0.0625 in clearance each side, the text area is ${inch(c.spineTextWidth)} wide.`
-      : `No spine text: KDP needs at least ${SPINE_TEXT_MIN_PAGES} pages. Leave the spine blank or use a plain color.`;
-
-    const W = c.width, H = c.height, b = BLEED;
-    const x1 = b + w, x2 = x1 + c.spine;
-    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-    svg.innerHTML = `
-      <rect x="0" y="0" width="${W}" height="${H}" fill="#e3e6ec"/>
-      <rect x="${b}" y="${b}" width="${W - 2 * b}" height="${H - 2 * b}" fill="#fff" stroke="#14171f" stroke-width="0.02" stroke-dasharray="0.08 0.06"/>
-      <rect x="${x1}" y="${b}" width="${c.spine}" height="${H - 2 * b}" fill="#eaf0ff" stroke="#1f4fd6" stroke-width="0.015"/>
-      <text x="${b + w / 2}" y="${H / 2}" font-size="0.45" text-anchor="middle" fill="#5b6270">Back</text>
-      <text x="${x2 + w / 2}" y="${H / 2}" font-size="0.45" text-anchor="middle" fill="#5b6270">Front</text>`;
-  }
-
-  form.addEventListener('input', run);
-  run();
-</script>

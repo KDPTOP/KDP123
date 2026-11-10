@@ -1,5 +1,6 @@
 ---
 import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/royalty-calculator/Widget.astro';
 import { SOURCES, RULES_DATE } from '../../lib/calc/royalty';
 
 const faq = [
@@ -29,45 +30,7 @@ const faq = [
   sources={SOURCES}
   poweredBy={`Rates and printing costs as published by KDP, checked ${RULES_DATE}. This is the same royalty model KDPTop uses in its calculator.`}
 >
-  <form id="roy" class="grid gap-4 sm:grid-cols-2" onsubmit="return false">
-    <fieldset class="sm:col-span-2">
-      <legend class="text-sm font-medium">Format</legend>
-      <div class="mt-1 flex flex-wrap gap-2">
-        <label class="chip"><input type="radio" name="format" value="paperback" class="mr-1.5" checked />Paperback</label>
-        <label class="chip"><input type="radio" name="format" value="hardcover" class="mr-1.5" />Hardcover</label>
-        <label class="chip"><input type="radio" name="format" value="ebook" class="mr-1.5" />Kindle ebook</label>
-      </div>
-    </fieldset>
-    <label class="field">List price (USD)<input class="input" name="price" type="number" min="0.99" max="250" step="0.01" value="12.99" inputmode="decimal" /></label>
-    <label class="field" data-print>Page count<input class="input" name="pages" type="number" min="24" max="828" step="1" value="300" inputmode="numeric" /></label>
-    <label class="field" data-print>Ink and paper
-      <select class="input" name="ink">
-        <option value="black">Black ink (white or cream paper)</option>
-        <option value="standard_color">Standard color (paperback only)</option>
-        <option value="premium_color">Premium color</option>
-      </select>
-    </label>
-    <label class="field" data-print>Trim size
-      <select class="input" name="trim">
-        <option value="regular">Regular, up to 6.12 x 9 in (6 x 9, 5 x 8)</option>
-        <option value="large">Large, over 6.12 in wide or 9 in tall (8.5 x 11)</option>
-      </select>
-    </label>
-    <label class="field" data-ebook hidden>File size after conversion (MB)<input class="input" name="mb" type="number" min="0.01" max="650" step="0.01" value="1" inputmode="decimal" /></label>
-  </form>
-
-  <div class="mt-6" aria-live="polite">
-    <p id="roy-error" class="issue-error" hidden></p>
-    <dl id="roy-out" class="grid grid-cols-2 gap-3 sm:grid-cols-4">
-      <div class="stat"><dt>Royalty per sale</dt><dd data-k="royalty">-</dd></div>
-      <div class="stat"><dt>Royalty rate</dt><dd data-k="rate">-</dd></div>
-      <div class="stat" data-print><dt>Printing cost</dt><dd data-k="cost">-</dd></div>
-      <div class="stat" data-print><dt>Minimum list price</dt><dd data-k="min">-</dd></div>
-      <div class="stat" data-paperback><dt>Expanded Distribution</dt><dd data-k="expanded">-</dd></div>
-      <div class="stat" data-ebook hidden><dt>Delivery fee</dt><dd data-k="delivery">-</dd></div>
-    </dl>
-    <ul id="roy-notes" class="mt-4 space-y-2"></ul>
-  </div>
+  <Widget />
 
   <Fragment slot="how">
     <h2>How it is calculated</h2>
@@ -76,68 +39,7 @@ const faq = [
       <li><strong>Printing cost:</strong> a fixed charge plus a per-page charge that depends on binding, ink and whether the trim is regular or large. Black-ink paperbacks of 24 to 110 pages pay a flat $2.30 (regular) or $2.84 (large).</li>
       <li><strong>Kindle ebook:</strong> 70% of (list price - $0.15 per MB) when the price is $2.99 to $12.99 and the book qualifies; otherwise 35% of list price.</li>
     </ul>
+    <p>Example: a 300-page black-ink 6 x 9 in paperback at $12.99 costs $1.00 + 300 x $0.012 = $4.60 to print, so the royalty is 0.6 x $12.99 - $4.60 = $3.19. A 1 MB Kindle ebook at $4.99 earns 0.7 x ($4.99 - $0.15) = $3.39.</p>
     <p>Figures are for Amazon.com in USD before tax withholding. Other marketplaces use their own rates, printing costs and currencies, so check the KDP pages for those.</p>
   </Fragment>
 </FreeToolPage>
-
-<script>
-  import { calculate, RuleError, type Format, type Ink, type Trim } from '../../lib/calc/royalty';
-
-  const form = document.getElementById('roy') as HTMLFormElement;
-  const err = document.getElementById('roy-error')!;
-  const out = document.getElementById('roy-out')!;
-  const notesEl = document.getElementById('roy-notes')!;
-  const usd = (v: number) => (v < 0 ? '-$' : '$') + Math.abs(v).toFixed(2);
-  const set = (k: string, v: string) => (out.querySelector(`[data-k="${k}"]`)!.textContent = v);
-
-  function show(selector: string, on: boolean) {
-    document.querySelectorAll<HTMLElement>(selector).forEach((el) => (el.hidden = !on));
-  }
-
-  function run() {
-    const f = new FormData(form);
-    const format = f.get('format') as Format;
-    show('[data-print]', format !== 'ebook');
-    show('[data-paperback]', format === 'paperback');
-    show('[data-ebook]', format === 'ebook');
-    notesEl.replaceChildren();
-    try {
-      const r = calculate({
-        format,
-        price: Number(f.get('price')),
-        pages: Number(f.get('pages')),
-        ink: f.get('ink') as Ink,
-        trim: f.get('trim') as Trim,
-        fileMb: Number(f.get('mb')) || 1,
-      });
-      err.hidden = true;
-      out.hidden = false;
-      set('royalty', usd(r.royalty));
-      set('rate', `${Math.round(r.rate * 100)}%`);
-      if (r.printCost !== null) set('cost', usd(r.printCost));
-      if (r.minPrice !== null) set('min', usd(r.minPrice));
-      if (r.expandedRoyalty !== null) set('expanded', usd(r.expandedRoyalty));
-      if (r.delivery !== null) set('delivery', usd(r.delivery));
-      const notes: [string, string][] = [];
-      if (r.notes.includes('below_min_price')) notes.push(['issue-error', `KDP will not accept this price: the minimum for this book is ${usd(r.minPrice!)}.`]);
-      if (r.notes.includes('price_cliff')) notes.push(['issue-warn', `Below $9.99 the rate is 50%. At $9.99 this book would earn ${usd(r.cliffRoyalty!)} per sale.`]);
-      if (r.notes.includes('ebook_35')) notes.push(['issue-warn', 'Outside $2.99-$12.99 an ebook earns 35%. Price it inside the band to qualify for 70%.']);
-      if (r.royalty <= 0 && !r.notes.includes('below_min_price')) notes.push(['issue-error', 'This price earns nothing per sale.']);
-      if (format === 'paperback' && r.expandedRoyalty !== null && r.expandedRoyalty <= 0) notes.push(['issue-warn', 'Expanded Distribution pays nothing at this price: 40% of the list price does not cover the printing cost.']);
-      for (const [cls, text] of notes) {
-        const li = document.createElement('li');
-        li.className = cls;
-        li.textContent = text;
-        notesEl.append(li);
-      }
-    } catch (e) {
-      if (!(e instanceof RuleError)) throw e;
-      err.textContent = e.message;
-      err.hidden = false;
-      out.hidden = true;
-    }
-  }
-
-  form.addEventListener('input', run);
-  run();
-</script>

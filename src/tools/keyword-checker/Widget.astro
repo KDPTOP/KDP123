@@ -1,0 +1,35 @@
+---
+import WidgetFrame from '../WidgetFrame.astro';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+const defaults = ['cozy mystery small town', 'amateur sleuth librarian', 'bakery mystery', 'best cozy mystery books', 'kindle unlimited mystery', '', ''];
+---
+
+<WidgetFrame slug="keyword-checker" variant={variant}>
+  <form class="grid gap-4">
+    <div class="grid gap-3 sm:grid-cols-2">
+      <label class="field">Title<input class="input" name="title" value="The Baker Who Wasn't There" /></label>
+      <label class="field">Subtitle (optional)<input class="input" name="subtitle" value="A Maple Street Cozy Mystery" /></label>
+      <label class="field" data-full-only>Category names (optional)<input class="input" name="categories" placeholder="e.g. Cozy Culinary Mysteries" /></label>
+      <label class="field" data-full-only>Authors to avoid (optional, comma-separated)<input class="input" name="authors" placeholder="Names of other authors you write like" /></label>
+    </div>
+    <fieldset>
+      <legend class="text-sm font-medium">Your seven keyword slots</legend>
+      <ol class="mt-2 grid gap-2">
+        {defaults.map((v, i) => (
+          <li class="flex items-center gap-2">
+            <span class="w-5 text-right text-sm text-muted tabular-nums">{i + 1}</span>
+            <input class="input py-2" name="slot" value={v} aria-label={`Keyword slot ${i + 1}`} />
+          </li>
+        ))}
+      </ol>
+    </fieldset>
+  </form>
+  <Fragment slot="out">
+    <div data-el="out" class="space-y-3"></div>
+    <p class="mt-4 text-sm text-muted">Need phrases to try? Use the <a href="/free-tools/keyword-builder/">keyword builder</a>, or see <a href="/c/keywords-categories/">keyword research tools</a>.</p>
+  </Fragment>
+</WidgetFrame>

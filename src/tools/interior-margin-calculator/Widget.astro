@@ -1,0 +1,37 @@
+---
+import WidgetFrame from '../WidgetFrame.astro';
+import { TRIMS } from '../../lib/calc/trims';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+---
+
+<WidgetFrame slug="interior-margin-calculator" variant={variant}>
+  <form class="grid gap-4 sm:grid-cols-2">
+    <label class="field">Trim size
+      <select class="input" name="trim">
+        {TRIMS.map((t) => <option value={t} selected={t === '6 x 9'}>{t} in</option>)}
+      </select>
+    </label>
+    <label class="field">Page count<input class="input" name="pages" type="number" min="24" max="828" step="2" value="240" inputmode="numeric" /></label>
+    <fieldset class="sm:col-span-2">
+      <legend class="text-sm font-medium">Images or color to the page edge?</legend>
+      <div class="mt-1.5 flex flex-wrap gap-2">
+        <label class="chip"><input type="radio" name="bleed" value="no" checked />No bleed</label>
+        <label class="chip"><input type="radio" name="bleed" value="yes" />With bleed</label>
+      </div>
+    </fieldset>
+  </form>
+  <Fragment slot="out">
+    <dl class="grid grid-cols-2 gap-3">
+      <div class="stat stat-hero col-span-2"><dt>Inside margin (gutter), minimum</dt><dd data-k="gutter">-</dd></div>
+      <div class="stat"><dt>Top, bottom, outside, minimum</dt><dd data-k="outside">-</dd></div>
+      <div class="stat"><dt>File page size</dt><dd data-k="page">-</dd></div>
+      <div class="stat col-span-2"><dt>Largest text block at these margins</dt><dd data-k="text">-</dd></div>
+    </dl>
+    <svg data-el="diagram" viewBox="0 0 220 150" class="mt-4 w-full max-w-sm" role="img" aria-label="Page spread with margins"></svg>
+    <ul data-el="notes" class="mt-4 space-y-2"></ul>
+  </Fragment>
+</WidgetFrame>

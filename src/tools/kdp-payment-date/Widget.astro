@@ -1,0 +1,39 @@
+---
+import WidgetFrame from '../WidgetFrame.astro';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+---
+
+<WidgetFrame slug="kdp-payment-date" variant={variant}>
+  <form class="grid gap-4 sm:grid-cols-2">
+    <label class="field sm:col-span-2">Month of the sales<input class="input" name="month" type="month" data-default-month /></label>
+    <fieldset class="sm:col-span-2">
+      <legend class="text-sm font-medium">Sold through</legend>
+      <div class="mt-1.5 flex flex-wrap gap-2">
+        <label class="chip"><input type="radio" name="channel" value="amazon" checked />Amazon (ebook, print)</label>
+        <label class="chip"><input type="radio" name="channel" value="expanded" />Expanded Distribution</label>
+      </div>
+    </fieldset>
+    <label class="field sm:col-span-2">Payment method
+      <select class="input" name="method">
+        <option value="deposit">Direct deposit</option>
+        <option value="deposit_india">Direct deposit, bank in India</option>
+        <option value="wire">Wire transfer</option>
+        <option value="check">Check</option>
+      </select>
+    </label>
+  </form>
+  <Fragment slot="out">
+    <dl class="grid grid-cols-2 gap-3">
+      <div class="stat stat-hero col-span-2"><dt>KDP pays on about</dt><dd data-k="date">-</dd></div>
+      <div class="stat"><dt>Days from today</dt><dd data-k="days">-</dd></div>
+      <div class="stat"><dt>In your bank</dt><dd data-k="arrive">-</dd></div>
+    </dl>
+    <p class="mt-4 text-sm font-medium">Next payments</p>
+    <ul data-el="next" class="mt-2 divide-y divide-line rounded-xl border border-line text-sm"></ul>
+    <ul data-el="notes" class="mt-4 space-y-2"></ul>
+  </Fragment>
+</WidgetFrame>

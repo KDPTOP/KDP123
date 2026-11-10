@@ -1,0 +1,44 @@
+---
+import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/interior-margin-calculator/Widget.astro';
+import { GUTTERS, mm } from '../../tools/interior-margin-calculator/logic';
+
+const sources = [
+  'https://kdp.amazon.com/en_US/help/topic/GVBQ3CMEQW3W2VL6',
+  'https://kdp.amazon.com/en_US/help/topic/G201857950',
+];
+const faq = [
+  {
+    q: 'What gutter does KDP need?',
+    a: 'It depends on page count: 0.375 in for 24 to 150 pages, rising to 0.875 in for 701 to 828 pages. Thicker books need more room because the pages curve into the spine.',
+  },
+  {
+    q: 'What size should my PDF be with bleed?',
+    a: 'Trim width + 0.125 in by trim height + 0.25 in. A 6 x 9 in book with bleed uses 6.125 x 9.25 in pages.',
+  },
+  {
+    q: 'Are these the margins I should use?',
+    a: 'They are KDP\'s minimums. Most novels use 0.75 to 1 in on the outside, top and bottom for comfort, and a little more than the minimum gutter.',
+  },
+];
+const ranges = GUTTERS.map(([max, g], i) => [i === 0 ? 24 : GUTTERS[i - 1][0] + 1, max, g] as const);
+---
+
+<FreeToolPage
+  slug="interior-margin-calculator"
+  answer="KDP's minimum inside margin (gutter) grows with page count, from 0.375 in for 24 to 150 pages to 0.875 in for 701 to 828. The top, bottom and outside margins must be at least 0.25 in without bleed or 0.375 in with bleed. Enter trim size and page count to get the margins, PDF page size and text block."
+  faq={faq}
+  sources={sources}
+>
+  <Widget />
+
+  <Fragment slot="how">
+    <h2>KDP minimum margins</h2>
+    <table>
+      <thead><tr><th>Page count</th><th>Inside (gutter)</th></tr></thead>
+      <tbody>{ranges.map(([a, b, g]) => <tr><td>{a} to {b}</td><td>{g} in ({mm(g)} mm)</td></tr>)}</tbody>
+    </table>
+    <p>Outside, top and bottom: at least 0.25 in without bleed, 0.375 in with bleed. With bleed the page is trim width + 0.125 in by trim height + 0.25 in.</p>
+    <p>Example: a 6 x 9 in book with 240 pages and no bleed needs a 0.5 in gutter and 0.25 in elsewhere, leaving a text block of up to 5.25 x 8.5 in.</p>
+  </Fragment>
+</FreeToolPage>

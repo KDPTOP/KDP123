@@ -1,0 +1,31 @@
+---
+import WidgetFrame from '../WidgetFrame.astro';
+import Icon from '../../components/Icon.astro';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+---
+
+<WidgetFrame slug="isbn-validator" variant={variant}>
+  <form class="grid gap-4">
+    <label class="field">ISBN-10 or ISBN-13<input class="input font-mono" name="isbn" type="text" value="978-0-306-40615-7" autocomplete="off" spellcheck="false" inputmode="text" /></label>
+    <p class="text-xs text-muted">Hyphens and spaces are ignored. Nothing you type leaves your browser.</p>
+  </form>
+  <Fragment slot="out">
+    <dl class="grid grid-cols-2 gap-3">
+      <div class="stat stat-hero col-span-2"><dt>Check digit</dt><dd data-k="status">-</dd></div>
+      <div class="stat col-span-2 sm:col-span-1"><dt>ISBN-13</dt><dd data-k="isbn13" class="font-mono">-</dd></div>
+      <div class="stat col-span-2 sm:col-span-1"><dt>ISBN-10</dt><dd data-k="isbn10" class="font-mono">-</dd></div>
+    </dl>
+    <figure data-el="barcode-box" class="mt-4 rounded-xl border border-line bg-white p-3" hidden>
+      <div data-el="barcode" class="flex justify-center [&_svg]:h-auto [&_svg]:max-w-full"></div>
+      <figcaption class="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs text-muted">
+        <span>EAN-13 barcode preview</span>
+        <button type="button" class="btn-ghost px-2 py-1 text-xs" data-el="download"><Icon name="download" class="size-3.5" />SVG</button>
+      </figcaption>
+    </figure>
+    <ul data-el="notes" class="mt-4 space-y-2"></ul>
+  </Fragment>
+</WidgetFrame>

@@ -1,0 +1,20 @@
+---
+import WidgetFrame from '../WidgetFrame.astro';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+---
+
+<WidgetFrame slug="ebook-price-checker" variant={variant}>
+  <form class="grid gap-4">
+    <label class="field">Ebook list price (USD)<input class="input" name="price" type="number" min="0" step="0.01" value="4.99" inputmode="decimal" /></label>
+    <label class="field">File size after conversion (MB)<input class="input" name="mb" type="number" min="0" step="0.1" value="2" inputmode="decimal" /></label>
+    <label class="field">Print edition list price (optional)<input class="input" name="print" type="number" min="0" step="0.01" placeholder="e.g. 14.99" inputmode="decimal" /></label>
+  </form>
+  <Fragment slot="out">
+    <ul data-el="out" class="space-y-2"></ul>
+    <p class="mt-4 text-sm"><a data-el="roy" href="/free-tools/royalty-calculator/?format=ebook">See the royalty per sale at this price</a></p>
+  </Fragment>
+</WidgetFrame>

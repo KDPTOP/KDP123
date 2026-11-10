@@ -1,0 +1,52 @@
+---
+import WidgetFrame from '../WidgetFrame.astro';
+import { TRIMS as trims } from '../../lib/calc/trims';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+---
+
+<WidgetFrame slug="cover-size-calculator" variant={variant}>
+  <form class="grid gap-4 sm:grid-cols-2">
+    <label class="field sm:col-span-2">Trim size (inches)
+      <select class="input" name="preset">
+        {trims.map((t) => <option value={t} selected={t === '6 x 9'}>{t} in</option>)}
+        <option value="custom">Custom size</option>
+      </select>
+    </label>
+    <label class="field" data-custom hidden>Trim width (in)<input class="input" name="w" type="number" min="4" max="8.5" step="0.01" value="6" inputmode="decimal" /></label>
+    <label class="field" data-custom hidden>Trim height (in)<input class="input" name="h" type="number" min="6" max="11.69" step="0.01" value="9" inputmode="decimal" /></label>
+    <label class="field">Page count<input class="input" name="pages" type="number" min="24" max="828" step="1" value="300" inputmode="numeric" /></label>
+    <label class="field">Paper
+      <select class="input" name="paper">
+        <option value="white">White paper, black ink</option>
+        <option value="cream">Cream paper, black ink</option>
+        <option value="groundwood">Groundwood paper</option>
+        <option value="premium_color">Premium color (white)</option>
+      </select>
+    </label>
+    <div class="sm:col-span-2">
+      <p class="text-sm font-medium">Check your cover image <span class="font-normal text-muted">(optional, stays on your device)</span></p>
+      <label data-el="drop" class="mt-1.5 flex cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border border-dashed border-line bg-paper px-4 py-5 text-center text-sm text-muted transition hover:border-brand/50">
+        <span>Drop a JPG or PNG here, or click to choose</span>
+        <input type="file" accept="image/png,image/jpeg" class="sr-only" data-nostate data-el="file" />
+      </label>
+      <p data-el="img" class="mt-2" hidden></p>
+    </div>
+  </form>
+
+  <Fragment slot="out">
+    <dl class="grid grid-cols-2 gap-3">
+      <div class="stat stat-hero"><dt>Full cover width</dt><dd data-k="w">-</dd></div>
+      <div class="stat stat-hero"><dt>Full cover height</dt><dd data-k="h">-</dd></div>
+      <div class="stat"><dt>Spine width</dt><dd data-k="spine">-</dd></div>
+      <div class="stat"><dt>Pixels at 300 DPI</dt><dd data-k="px">-</dd></div>
+    </dl>
+    <p class="mt-2 text-sm text-muted" data-k="mm"></p>
+    <p data-el="spine" class="mt-4"></p>
+    <svg data-el="svg" class="mt-4 w-full" role="img" aria-label="Cover layout"></svg>
+    <p class="mt-2 text-xs text-muted">Grey: bleed (trimmed off). Dashed: trim lines. Orange: spine. Keep text 0.125 in inside the trim lines, and leave the lower right of the back cover clear if KDP adds the barcode for you.</p>
+  </Fragment>
+</WidgetFrame>

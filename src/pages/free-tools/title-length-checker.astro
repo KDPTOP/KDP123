@@ -1,0 +1,50 @@
+---
+import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/title-length-checker/Widget.astro';
+
+const sources = [
+  'https://kdp.amazon.com/en_US/help/topic/G201097560',
+  'https://kdp.amazon.com/en_US/help/topic/GW7J4WEKBVU25YEC',
+  'https://kdp.amazon.com/en_US/help/topic/G2BWJN2BY98T5PV2',
+];
+const faq = [
+  {
+    q: 'How long can a KDP title and subtitle be?',
+    a: 'Title plus subtitle must be under 200 characters combined. The checker counts both fields together, including spaces, and treats 199 as the ceiling.',
+  },
+  {
+    q: 'Does the subtitle count toward the 200 characters?',
+    a: 'Yes. KDP sets the limit for title and subtitle together, so a long subtitle leaves less room for the title.',
+  },
+  {
+    q: 'Can I put "bestselling" or "free" in my title?',
+    a: 'No. KDP does not allow sales-rank claims such as "#1 bestseller" or promotional words such as "free" in the title or subtitle.',
+  },
+  {
+    q: 'Does the title have to match the cover?',
+    a: 'Yes. The title you enter must match the title on the cover exactly. The checker cannot see your cover, so compare them yourself.',
+  },
+];
+---
+
+<FreeToolPage
+  slug="title-length-checker"
+  answer="KDP needs title plus subtitle to stay under 200 characters combined, with no HTML, promotional words, sales-rank claims or unauthorized trademarks, and the title must match the cover. Type both fields to see the count, the characters left and anything KDP is likely to reject."
+  faq={faq}
+  sources={sources}
+>
+  <Widget />
+
+  <Fragment slot="how">
+    <h2>How the count works</h2>
+    <p>Characters used = title length + subtitle length, after trimming spaces at each end. Characters left = 199 - characters used.</p>
+    <p>Example: "The Quiet Garden" (16 characters) with the subtitle "A Novel of Second Chances" (25 characters) uses 41 characters and leaves 158.</p>
+    <h2>What it flags</h2>
+    <ul>
+      <li>Over the limit, HTML tags, placeholder titles such as "Untitled", and fields that are only punctuation.</li>
+      <li>Sales-rank claims ("bestselling", "#1") and promotional words ("free", "on sale").</li>
+      <li>Amazon names such as Kindle or Audible, and generic words repeated to stuff keywords.</li>
+      <li>A title over 60 characters: allowed, but Amazon notes shoppers tend to skim past long titles.</li>
+    </ul>
+  </Fragment>
+</FreeToolPage>

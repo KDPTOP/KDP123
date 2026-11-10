@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+import type { PinKind } from '../lib/pins';
+
+interface Props {
+  kind: Exclude<PinKind, 'link'>;
+  id: string;
+  name: string;
+  href: string;
+  class?: string;
+}
+const { kind, id, name, href, class: cls = 'btn-icon' } = Astro.props;
+---
+
+<button type="button" class:list={[cls, 'pin-btn']} data-pin={kind} data-pin-id={id} data-pin-name={name} data-pin-href={href} aria-pressed="false" aria-label={`Pin ${name} to My tools`} title="Pin to My tools" data-pagefind-ignore>
+  <Icon name="star" class="size-4" />
+</button>

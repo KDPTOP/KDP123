@@ -1,0 +1,23 @@
+---
+import { getEntry } from 'astro:content';
+import Icon from './Icon.astro';
+
+interface Props {
+  provider: string;
+  /** Limit the "what is sent" line to the endpoints this tool uses. */
+  tool?: string;
+  class?: string;
+}
+const { provider, tool, class: cls } = Astro.props;
+const p = await getEntry('providers', provider);
+if (!p) throw new Error(`Unknown data provider "${provider}" (data/providers/${provider}.yml)`);
+const used = p.data.endpoints.filter((e) => !tool || e.used_by.includes(tool));
+const sends = [...new Set(used.map((e) => e.sends).filter((s) => s !== 'Nothing'))];
+---
+
+<aside class:list={['flex flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-line bg-paper px-3 py-2 text-xs text-muted', cls]} data-provider={provider} aria-label={`Data source: ${p.data.name}`}>
+  <span class="inline-flex items-center gap-1.5 font-medium text-ink"><Icon name="chart" class="size-3.5" />Data from {p.data.name}</span>
+  {p.data.same_team && <span class="badge badge-brand">same team as KDP123</span>}
+  {sends.length > 0 && <span>Sends: {sends.join('; ').toLowerCase()}. No cookies, no account.</span>}
+  <a href={p.data.link_out} rel="noopener" target="_blank" class="ml-auto inline-flex items-center gap-0.5 font-medium">Open in {p.data.name} for more<Icon name="arrowUpRight" class="size-3" /></a>
+</aside>

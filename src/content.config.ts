@@ -230,4 +230,34 @@ const reports = defineCollection({
   }),
 });
 
-export const collections = { tools, facts, best, compare, glossary, reports };
+// Outside services whose data a KDP123 tool shows. Every call goes through a same-origin proxy on
+// kdp123.com that drops cookies and auth headers and rate-limits per IP (deploy/nginx/provider.conf.example).
+const providers = defineCollection({
+  loader: glob({ pattern: '*.yml', base: './data/providers' }),
+  schema: z.object({
+    name: z.string(),
+    /** The provider's listing in the directory. */
+    tool: z.string(),
+    same_team: z.boolean().default(false),
+    url: z.url(),
+    attribution: z.string().min(10),
+    link_out: z.url(),
+    terms_url: z.url().optional(),
+    added_at: z.coerce.date(),
+    endpoints: z
+      .array(
+        z.object({
+          path: z.string().startsWith('/api/'),
+          upstream: z.string(),
+          purpose: z.string(),
+          /** What the visitor's browser sends through the proxy. */
+          sends: z.string(),
+          used_by: z.array(z.string()).min(1),
+          limit: z.string(),
+        }),
+      )
+      .min(1),
+  }),
+});
+
+export const collections = { tools, facts, best, compare, glossary, reports, providers };

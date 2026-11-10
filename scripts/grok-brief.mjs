@@ -160,6 +160,24 @@ ${batches(fitTools, 'A', 0)}
 ## 8. B 组：其他工具（${otherTools.length} 个，查 best_for、not_ideal_for 和价格条款）
 
 ${batches(otherTools, 'B', fitTools.length)}
+
+## 9. C 组：免费计算器要用的 KDP 规则数字（2 项）
+
+这组不查工具，只查 Amazon 自己的页面。**来源只能是 kdp.amazon.com 或 amazon.com 下的页面**，evidence 照抄原文。查不到就写 \`unverified\`，计算器会继续让用户自己填。输出一个 \`C.jsonl\`，每项一行：
+
+| # | key | 要查什么 | 用在哪里 |
+|---|---|---|---|
+| C1 | \`kenp_rate\` | 最近 6 个月 Amazon.com 每月公布的 KENP 单价（美元每页），以及当月 KDP Select Global Fund 总额。通常在次月 15 日前后公布 | KENP 计算器默认单价（data/kenp-rates.yml） |
+| C2 | \`keyword_slot_chars\` | KDP 填写图书详情时，7 个关键词框每个框最多能填多少个字符（或字节），以及是否包含空格 | 关键词组合工具的「每格字符上限」默认值 |
+
+输出格式（每行一个 JSON 对象）：
+
+\`\`\`json
+{"key":"kenp_rate","month":"2026-09","value":0.0045,"fund_usd":60000000,"source":"https://kdp.amazon.com/...","evidence":"verbatim sentence","checked_at":"2026-11-12"}
+{"key":"keyword_slot_chars","value":50,"unit":"characters","includes_spaces":true,"source":"https://kdp.amazon.com/...","evidence":"verbatim sentence","checked_at":"2026-11-12"}
+\`\`\`
+
+C1 每个月一行。上面的数字是虚构的格式示例，不能照抄。C 组由编辑手动写入 data/kenp-rates.yml 和关键词工具，不经过导入脚本。
 `;
 
 writeFileSync(out, md);

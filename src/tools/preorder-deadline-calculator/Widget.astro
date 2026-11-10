@@ -1,0 +1,31 @@
+---
+import WidgetFrame from '../WidgetFrame.astro';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+---
+
+<WidgetFrame slug="preorder-deadline-calculator" variant={variant}>
+  <form class="grid gap-4 sm:grid-cols-2">
+    <fieldset class="sm:col-span-2">
+      <legend class="text-sm font-medium">Format</legend>
+      <div class="mt-1.5 flex flex-wrap gap-2">
+        <label class="chip"><input type="radio" name="kind" value="ebook" checked />Kindle ebook pre-order</label>
+        <label class="chip"><input type="radio" name="kind" value="print" />Paperback or hardcover</label>
+      </div>
+    </fieldset>
+    <label class="field">Release date (GMT)<input class="input" name="release" type="date" /></label>
+    <label class="field" data-ebook>Pre-order set up on<input class="input" name="created" type="date" /></label>
+  </form>
+  <Fragment slot="out">
+    <dl class="grid grid-cols-2 gap-3">
+      <div class="stat stat-hero col-span-2"><dt data-el="hero-label">Final file due by</dt><dd data-k="deadline">-</dd></div>
+      <div class="stat"><dt>Days left</dt><dd data-k="left">-</dd></div>
+      <div class="stat"><dt data-el="limit-label">Latest release you can set</dt><dd data-k="limit">-</dd></div>
+      <div class="stat col-span-2" data-ebook><dt>Latest date if you postpone</dt><dd data-k="postpone">-</dd></div>
+    </dl>
+    <ul data-el="notes" class="mt-4 space-y-2"></ul>
+  </Fragment>
+</WidgetFrame>

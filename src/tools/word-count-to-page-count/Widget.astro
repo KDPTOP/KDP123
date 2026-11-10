@@ -1,0 +1,43 @@
+---
+import WidgetFrame from '../WidgetFrame.astro';
+import { TRIMS } from '../../lib/calc/trims';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+---
+
+<WidgetFrame slug="word-count-to-page-count" variant={variant}>
+  <form class="grid gap-4 sm:grid-cols-2">
+    <label class="field">Word count<input class="input" name="words" type="number" min="100" max="2000000" step="100" value="80000" inputmode="numeric" /></label>
+    <label class="field">Trim size
+      <select class="input" name="trim">
+        {TRIMS.map((t) => <option value={t} selected={t === '6 x 9'}>{t} in</option>)}
+      </select>
+    </label>
+    <label class="field">Body font size
+      <select class="input" name="font">
+        <option value="10">10 pt (dense)</option>
+        <option value="11" selected>11 pt (typical novel)</option>
+        <option value="12">12 pt</option>
+        <option value="14">14 pt (large print)</option>
+        <option value="16">16 pt (large print)</option>
+      </select>
+    </label>
+    <label class="field">Chapters<input class="input" name="chapters" type="number" min="0" max="500" step="1" value="25" inputmode="numeric" /></label>
+    <label class="field sm:col-span-2" data-full-only>Front and back matter pages<input class="input" name="extra" type="number" min="0" max="100" step="1" value="8" inputmode="numeric" /></label>
+  </form>
+  <Fragment slot="out">
+    <dl class="grid grid-cols-2 gap-3">
+      <div class="stat stat-hero col-span-2"><dt>Estimated printed pages</dt><dd data-k="pages">-</dd></div>
+      <div class="stat"><dt>Words per page</dt><dd data-k="wpp">-</dd></div>
+      <div class="stat"><dt>Pages of body text</dt><dd data-k="text">-</dd></div>
+    </dl>
+    <p class="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+      <a data-el="cover" href="/free-tools/cover-size-calculator/">Cover and spine for this page count</a>
+      <a data-el="roy" href="/free-tools/royalty-calculator/">Printing cost and royalty</a>
+    </p>
+    <ul data-el="notes" class="mt-4 space-y-2"></ul>
+  </Fragment>
+</WidgetFrame>

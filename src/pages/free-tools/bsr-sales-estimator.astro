@@ -1,5 +1,6 @@
 ---
 import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/bsr-sales-estimator/Widget.astro';
 import { SITE } from '../../lib/site';
 import { BSR_CURVE, dailySales } from '../../lib/calc/bsr';
 
@@ -28,22 +29,7 @@ const faq = [
   sources={sources}
   poweredBy="Curve from KDPTop's sales model, by the team behind KDP123. Calculated in your browser."
 >
-  <form id="bsr" class="grid gap-4 sm:grid-cols-3" onsubmit="return false">
-    <label class="field">Best Sellers Rank<input class="input" name="rank" type="number" min="1" step="1" value="50000" inputmode="numeric" /></label>
-    <label class="field">Store
-      <select class="input" name="store">
-        <option value="books">Books (paperback, hardcover)</option>
-        <option value="kindle">Kindle Store (ebooks)</option>
-      </select>
-    </label>
-    <label class="field">Royalty per sale, optional (USD)<input class="input" name="royalty" type="number" min="0" step="0.01" placeholder="e.g. 3.19" inputmode="decimal" /></label>
-  </form>
-  <dl class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3" aria-live="polite">
-    <div class="stat"><dt>Sales per day (estimate)</dt><dd data-k="day">-</dd></div>
-    <div class="stat"><dt>Sales per month (30 days)</dt><dd data-k="month">-</dd></div>
-    <div class="stat"><dt>Royalty per month</dt><dd data-k="money">-</dd></div>
-  </dl>
-  <p class="mt-2 text-sm text-muted">Estimate only. Rank weights recent activity more heavily, so one good day can lift it well above what the book sells on average. <a href="/free-tools/royalty-calculator/">Work out your royalty per sale</a>.</p>
+  <Widget />
 
   <Fragment slot="how">
     <h2>Rank to sales on this curve</h2>
@@ -51,6 +37,7 @@ const faq = [
       <thead><tr><th>BSR</th><th>Print books / day</th><th>Kindle ebooks / day</th></tr></thead>
       <tbody>{ranks.map((r) => <tr><td>{r.toLocaleString('en-US')}</td><td>{dailySales(r, 'books')}</td><td>{dailySales(r, 'kindle')}</td></tr>)}</tbody>
     </table>
+    <p>The curve is daily sales = A x BSR^-{BSR_CURVE.exp}, with A = {BSR_CURVE.A.books.toLocaleString('en-US')} for print books and {BSR_CURVE.A.kindle.toLocaleString('en-US')} for Kindle ebooks. Example: a paperback ranked 25,000 in Books sells about {BSR_CURVE.A.books.toLocaleString('en-US')} / 25,000^{BSR_CURVE.exp} = {dailySales(25000, 'books')} copies a day, roughly {Math.round(dailySales(25000, 'books')! * 30)} a month.</p>
     <h2>Limits</h2>
     <ul>
       <li>Only for the overall Amazon.com rank in Books or the Kindle Store, not sub-category ranks.</li>
@@ -60,23 +47,3 @@ const faq = [
     </ul>
   </Fragment>
 </FreeToolPage>
-
-<script>
-  import { dailySales, type Store } from '../../lib/calc/bsr';
-
-  const form = document.getElementById('bsr') as HTMLFormElement;
-  const q = (k: string) => document.querySelector(`[data-k="${k}"]`)!;
-
-  function run() {
-    const f = new FormData(form);
-    const d = dailySales(Math.round(Number(f.get('rank'))), f.get('store') as Store);
-    const royalty = Number(f.get('royalty'));
-    q('day').textContent = d === null ? '-' : `~${d.toLocaleString('en-US')}`;
-    const month = d === null ? null : d * 30;
-    q('month').textContent = month === null ? '-' : `~${Math.round(month).toLocaleString('en-US')}`;
-    q('money').textContent = month !== null && royalty > 0 ? `~$${Math.round(month * royalty).toLocaleString('en-US')}` : '-';
-  }
-
-  form.addEventListener('input', run);
-  run();
-</script>

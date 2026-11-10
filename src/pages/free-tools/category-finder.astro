@@ -1,5 +1,6 @@
 ---
 import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/category-finder/Widget.astro';
 import { SITE } from '../../lib/site';
 
 const sources = [
@@ -31,29 +32,7 @@ const faq = [
   remote
   poweredBy="Category data and lookups by KDPTop, from the team behind KDP123. Your query is sent to KDPTop's public API to answer it. Guests get a limited number of free lookups per day."
 >
-  <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Look up by">
-    <label class="chip"><input type="radio" name="mode" value="recommend" class="mr-1.5" checked />Describe my book</label>
-    <label class="chip"><input type="radio" name="mode" value="resolve" class="mr-1.5" />ASIN, ISBN or Amazon link</label>
-  </div>
-  <form id="cat" class="mt-4 grid gap-4">
-    <label class="field" data-mode="recommend">What is the book about?
-      <textarea class="input min-h-24" name="text" maxlength="3000" placeholder="e.g. A cozy mystery about a small-town librarian who solves a murder at the local bakery"></textarea>
-    </label>
-    <label class="field" data-mode="resolve" hidden>ASIN, ISBN or Amazon URL
-      <input class="input" name="q" maxlength="2000" placeholder="e.g. B0C1234567 or https://www.amazon.com/dp/..." />
-    </label>
-    <div class="flex flex-wrap items-end gap-4">
-      <label class="field">Format
-        <select class="input" name="store">
-          <option value="books">Paperback or hardcover</option>
-          <option value="kindle">Kindle ebook</option>
-        </select>
-      </label>
-      <button class="btn" type="submit">Find categories</button>
-    </div>
-  </form>
-  <p id="cat-status" class="mt-4 text-sm" aria-live="polite"></p>
-  <ol id="cat-out" class="mt-4 space-y-3"></ol>
+  <Widget />
   <p class="mt-6 text-sm text-muted">For a Go / Crowded / Watch / Skip verdict on each category and daily list history, open the full <a href={`${SITE.related.url}/tools/kdp-category`} rel="noopener">KDPTop category finder</a>.</p>
 
   <Fragment slot="how">
@@ -63,104 +42,9 @@ const faq = [
       <li><strong>Books in category</strong> is how many products Amazon lists there. Smaller categories need fewer sales to reach the top 100.</li>
       <li><strong>Median price and reviews</strong> are for today's top 100 bestsellers: what you are competing with on price and social proof.</li>
       <li><strong>Other format</strong> is the matching category for the ebook (or print) edition, since each format picks its own three.</li>
+      <li><strong>Check a category</strong> takes an Amazon category number or Best Sellers link and shows KDPTop's latest snapshot of it, including how many of today's top 100 are new releases: a high share means new books can break in.</li>
     </ul>
+    <p>Example: describe the book as "cozy mystery with a baker sleuth in a seaside village", pick Paperback, and compare the suggestions. Between two honest fits, the one with fewer books and lower median reviews among its top 100 is the easier list to reach.</p>
     <p>Pick categories that describe the book honestly. Amazon removes categories that do not match the content.</p>
   </Fragment>
 </FreeToolPage>
-
-<script>
-  interface Metrics { date?: string; median_price?: number | null; median_reviews?: number | null; price_p25?: number | null; price_p75?: number | null }
-  interface Cat {
-    node_id: number; store: string; name: string; kdp_path: string; selectable: boolean; product_count?: number | null;
-    amazon_url?: string; list?: { best_url?: string; new_url?: string; metrics?: { best?: Metrics | null } } | null;
-    twin?: { kdp_path?: string; selectable?: boolean } | null;
-  }
-
-  const form = document.getElementById('cat') as HTMLFormElement;
-  const status = document.getElementById('cat-status')!;
-  const out = document.getElementById('cat-out')!;
-  const modes = document.querySelectorAll<HTMLInputElement>('input[name="mode"]');
-  const mode = () => [...modes].find((m) => m.checked)!.value as 'recommend' | 'resolve';
-  const KDPTOP = 'https://kdptop.com/tools/kdp-category';
-
-  modes.forEach((m) => m.addEventListener('change', () => {
-    document.querySelectorAll<HTMLElement>('[data-mode]').forEach((el) => (el.hidden = el.dataset.mode !== mode()));
-  }));
-
-  const el = <K extends keyof HTMLElementTagNameMap>(tag: K, props: Partial<HTMLElementTagNameMap[K]> = {}, ...kids: (Node | string)[]) => {
-    const e = Object.assign(document.createElement(tag), props);
-    e.append(...kids);
-    return e;
-  };
-  const num = (v?: number | null) => (v == null ? '-' : Math.round(v).toLocaleString('en-US'));
-  const usd = (v?: number | null) => (v == null ? '-' : `$${v.toFixed(2)}`);
-  const safeUrl = (u?: string) => (u && /^https:\/\/www\.amazon\.com\//.test(u) ? u : undefined);
-
-  function card(n: Cat, i: number) {
-    const m = n.list?.metrics?.best ?? null;
-    const li = el('li', { className: 'rounded-lg border border-line p-4' });
-    const head = el('div', { className: 'flex flex-wrap items-baseline justify-between gap-2' },
-      el('p', { className: 'font-semibold' }, `${i + 1}. ${n.name}`),
-      el('span', { className: n.selectable ? 'badge badge-ok' : 'badge badge-warn' }, n.selectable ? 'Selectable in KDP' : 'Not selectable in KDP'));
-    li.append(head, el('p', { className: 'mt-1 break-words font-mono text-xs text-muted' }, n.kdp_path));
-    const stats = el('dl', { className: 'mt-3 grid grid-cols-2 gap-2 text-sm sm:grid-cols-4' });
-    const stat = (k: string, v: string) => stats.append(el('div', {}, el('dt', { className: 'text-xs text-muted' }, k), el('dd', { className: 'font-medium tabular-nums' }, v)));
-    stat('Books in category', num(n.product_count));
-    stat('Median price, top 100', usd(m?.median_price));
-    stat('Middle half of prices', m?.price_p25 != null && m?.price_p75 != null ? `${usd(m.price_p25)}-${usd(m.price_p75)}` : '-');
-    stat('Median reviews, top 100', num(m?.median_reviews));
-    li.append(stats);
-    if (n.twin?.kdp_path) li.append(el('p', { className: 'mt-2 text-xs text-muted' }, `Other format: ${n.twin.kdp_path}${n.twin.selectable === false ? ' (not selectable)' : ''}`));
-    const links = el('p', { className: 'mt-2 flex flex-wrap gap-x-4 text-sm' });
-    const best = safeUrl(n.list?.best_url ?? n.amazon_url);
-    const fresh = safeUrl(n.list?.new_url);
-    if (best) links.append(el('a', { href: best, rel: 'noopener nofollow', textContent: 'Best sellers on Amazon' }));
-    if (fresh) links.append(el('a', { href: fresh, rel: 'noopener nofollow', textContent: 'New releases' }));
-    if (m?.date) links.append(el('span', { className: 'text-muted', textContent: `List data ${m.date}` }));
-    li.append(links);
-    return li;
-  }
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const f = new FormData(form);
-    const store = String(f.get('store'));
-    const btn = form.querySelector('button')!;
-    let req: Request;
-    if (mode() === 'recommend') {
-      const text = String(f.get('text')).trim();
-      if (text.length < 2) { status.textContent = 'Write a sentence or two about the book first.'; return; }
-      req = new Request('/api/kdptop/placement/recommend', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text, store, use_ai: false }) });
-    } else {
-      const q = String(f.get('q')).trim();
-      if (!q) { status.textContent = 'Paste an ASIN, ISBN or Amazon link first.'; return; }
-      req = new Request(`/api/kdptop/placement/resolve?${new URLSearchParams({ q, store })}`);
-    }
-    btn.disabled = true;
-    status.textContent = 'Looking up categories…';
-    out.replaceChildren();
-    try {
-      const res = await fetch(req);
-      if (res.status === 429) {
-        status.replaceChildren('You have used today\'s free lookups. Try again tomorrow, or continue on ', el('a', { href: KDPTOP, rel: 'noopener', textContent: 'KDPTop' }), ' with a free account.');
-        return;
-      }
-      if (!res.ok) throw new Error(String(res.status));
-      const data = await res.json();
-      const nodes: Cat[] = (mode() === 'recommend' ? data.recommendations : data.nodes) ?? [];
-      const title = data.product?.title as string | undefined;
-      if (!nodes.length) {
-        status.textContent = mode() === 'resolve' && data.kind === 'asin'
-          ? 'No category data for this product yet. Amazon data for new or rare products can take a while; try again later or describe the book instead.'
-          : 'No matching categories. Try different words: genre, audience, setting or book type.';
-        return;
-      }
-      status.textContent = `${nodes.length} categor${nodes.length === 1 ? 'y' : 'ies'}${title ? ` for "${title}"` : ''}, best match first.`;
-      out.replaceChildren(...nodes.map(card));
-    } catch {
-      status.textContent = 'The lookup failed. Please try again in a minute.';
-    } finally {
-      btn.disabled = false;
-    }
-  });
-</script>

@@ -1,7 +1,8 @@
 // Checks the built site (dist/) for the SEO rules in src/lib/seo.ts. Exits 1 on any error.
 //   npm run build && npm run check
 import { existsSync, readFileSync, globSync } from 'node:fs';
-import { dirname, relative } from 'node:path';
+import { dirname, relative, join } from 'node:path';
+import { gzipSync } from 'node:zlib';
 
 const DIST = 'dist';
 const ORIGIN = 'https://kdp123.com';
@@ -32,6 +33,12 @@ const titles = new Map();
 const descs = new Map();
 const indexable = new Set();
 const noindex = new Set();
+const ANSWER_WORDS = [35, 75];
+const HOME_JS_MAX = 60 * 1024;
+const T_INLINKS_MIN = 3;
+const calculators = existsSync(`${DIST}/calculators.json`) ? JSON.parse(readFileSync(`${DIST}/calculators.json`, 'utf8')).calculators : [];
+const tInlinks = new Map();
+const text = (html) => unescape(html.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
 
 for (const file of globSync(`${DIST}/**/index.html`)) {
   const html = readFileSync(file, 'utf8');
@@ -78,10 +85,59 @@ for (const file of globSync(`${DIST}/**/index.html`)) {
   }
   if (crumbs > 1) err(page, `${crumbs} BreadcrumbList blocks`);
 
+  for (const m of html.matchAll(/href="\/t\/([a-z0-9-]+)\/"/g)) {
+    if (page === `/t/${m[1]}/`) continue;
+    tInlinks.set(m[1], (tInlinks.get(m[1]) ?? new Set()).add(page));
+  }
+
+  const calc = calculators.find((c) => page === `/free-tools/${c.slug}/`);
+  if (calc) {
+    const answer = text(html.match(/<p class="answer[^"]*">([\s\S]*?)<\/p>/)?.[1] ?? '');
+    const words = answer ? answer.split(' ').length : 0;
+    if (!words) err(page, 'free tool page without an answer paragraph');
+    else if (words < ANSWER_WORDS[0] || words > ANSWER_WORDS[1]) warn(page, `answer paragraph is ${words} words (aim for 40 to 60)`);
+    const howHtml = html.match(/<div[^>]*data-how[^>]*>([\s\S]*?)<\/div>\s*(?:<h2|<dl|<\/div>)/)?.[1] ?? '';
+    const how = text(howHtml);
+    if (!/=/.test(how) && !/<(table|ol)\b/.test(howHtml) && (howHtml.match(/<li\b/g)?.length ?? 0) < 2) err(page, 'free tool page without a formula, rule list or steps in the how section');
+    if (!/\bExample\b/i.test(how)) err(page, 'free tool page without a worked example');
+    if (calc.data_provider && !html.includes(`data-provider="${calc.data_provider}"`)) err(page, `uses ${calc.data_provider} data but shows no DataSource line`);
+  }
+
   for (const img of html.matchAll(/<img\b[^>]*>/g)) {
     if (!/\salt=/.test(img[0])) err(page, `<img> without alt: ${img[0].slice(0, 80)}`);
     else if (!/\swidth=/.test(img[0]) || !/\sheight=/.test(img[0])) warn(page, `<img> without width/height: ${img[0].slice(0, 80)}`);
   }
+}
+
+for (const file of globSync(`${DIST}/t/*/index.html`)) {
+  const slug = file.split('/').at(-2);
+  if (meta(readFileSync(file, 'utf8'), 'name', 'robots')?.includes('noindex')) continue;
+  const n = tInlinks.get(slug)?.size ?? 0;
+  if (n < T_INLINKS_MIN) err(`/t/${slug}/`, `only ${n} internal pages link here (need ${T_INLINKS_MIN})`);
+}
+
+// First-load JS on the home page: scripts in the HTML plus their static imports, not lazy import() chunks.
+{
+  const html = readFileSync(`${DIST}/index.html`, 'utf8');
+  const seen = new Set();
+  let bytes = 0;
+  const add = (src) => {
+    const file = join(DIST, src.replace(/^https:\/\/kdp123\.com/, ''));
+    if (seen.has(file) || !existsSync(file)) return;
+    seen.add(file);
+    const js = readFileSync(file);
+    bytes += gzipSync(js).length;
+    for (const m of js.toString().matchAll(/(?:^|[;\s}])import\s*(?:[\w*{}\s,$]+from\s*)?["']([^"']+\.js)["']/g)) add(join(dirname(file.slice(DIST.length)), m[1]));
+  };
+  for (const m of html.matchAll(/<script\b[^>]*\bsrc="([^"]+\.js)"/g)) add(m[1]);
+  for (const m of html.matchAll(/<link rel="modulepreload" href="([^"]+)"/g)) add(m[1]);
+  for (const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)) {
+    if (/application\/ld\+json/.test(m[0])) continue;
+    bytes += gzipSync(m[1]).length;
+    for (const i of m[1].matchAll(/import\s*(?:[\w*{}\s,$]+from\s*)?["']([^"']+\.js)["']/g)) add(i[1]);
+  }
+  if (bytes > HOME_JS_MAX) err('/', `first-load JS is ${(bytes / 1024).toFixed(1)} KB gzip (max ${HOME_JS_MAX / 1024} KB)`);
+  else console.log(`seo-lint: home first-load JS ${(bytes / 1024).toFixed(1)} KB gzip`);
 }
 
 for (const [t, pages] of titles) if (pages.length > 1) err(pages.join(', '), `duplicate title: ${t}`);

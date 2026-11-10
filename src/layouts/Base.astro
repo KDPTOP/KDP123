@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import Seo from '../components/Seo.astro';
 import CompareTray from '../components/CompareTray.astro';
+import CommandPalette from '../components/CommandPalette.astro';
+import Icon from '../components/Icon.astro';
 import { SITE } from '../lib/site';
 import { STAGES } from '../lib/taxonomy';
 import { fitTitle, clampDescription, type Crumb } from '../lib/seo';
@@ -26,6 +28,8 @@ interface Props {
   markdownAlt?: string;
   /** Include this page in the Pagefind index. Off by default so list pages do not crowd out the pages they link to. */
   searchable?: boolean;
+  /** Full-bleed pages (the home page) lay out their own width. */
+  wide?: boolean;
 }
 const {
   title,
@@ -41,11 +45,22 @@ const {
   noindex = false,
   markdownAlt,
   searchable = false,
+  wide = false,
 } = Astro.props;
 const path = canonicalPath ?? Astro.url.pathname;
 const fullTitle = exactTitle ? title : fitTitle(titleVariants ?? [title]);
 const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
-const logoSvg = mark.replace('<svg ', '<svg aria-hidden="true" class="h-8 w-auto" ').replace(/ role="img" aria-label="KDP123"/, '');
+const logoSvg = mark.replace('<svg ', '<svg aria-hidden="true" class="h-7 w-auto" ').replace(/ role="img" aria-label="KDP123"/, '');
+const NAV = [
+  { href: '/free-tools/', label: 'Tools', match: ['/free-tools/'] },
+  { href: '/tools/', label: 'Directory', match: ['/tools/', '/t/', '/c/', '/stages/', '/compare/'] },
+  { href: '/facts/', label: 'KDP facts', match: ['/facts/', '/glossary/'] },
+  { href: '/best/', label: 'Guides', match: ['/best/'] },
+  { href: '/research/', label: 'Market data', match: ['/research/', '/reports/'] },
+];
+const here = Astro.url.pathname;
+const active = (m: string[]) => m.some((p) => here.startsWith(p));
+const footerLink = 'text-slate-300 hover:text-white';
 ---
 
 <!doctype html>
@@ -53,6 +68,14 @@ const logoSvg = mark.replace('<svg ', '<svg aria-hidden="true" class="h-8 w-auto
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (() => {
+        try {
+          const t = localStorage.getItem('kdp123.theme');
+          if (t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.dataset.theme = 'dark';
+        } catch {}
+      })();
+    </script>
     <Seo
       title={fullTitle}
       description={clampDescription(description)}
@@ -67,66 +90,135 @@ const logoSvg = mark.replace('<svg ', '<svg aria-hidden="true" class="h-8 w-auto
     />
   </head>
   <body class="min-h-screen">
-    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:bg-white focus:p-2">Skip to content</a>
-    <header class="border-b border-line bg-white">
-      <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
-        <a href="/" class="flex items-center gap-2 no-underline hover:no-underline" aria-label="KDP123 home">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:bg-white focus:p-2">Skip to content</a>
+    <header class="sticky top-0 z-30 border-b border-line/80 bg-white/80 backdrop-blur-xl">
+      <div class="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4">
+        <a href="/" class="flex shrink-0 items-center gap-2 no-underline hover:no-underline" aria-label="KDP123 home">
           <Fragment set:html={logoSvg} />
-          <span class="text-xl font-extrabold tracking-tight text-ink">KDP<span class="text-brand">123</span></span>
+          <span class="text-lg font-extrabold tracking-tight text-ink">KDP<span class="text-brand">123</span></span>
         </a>
-        <nav aria-label="Primary" class="flex flex-wrap gap-x-4 gap-y-1 text-sm">
-          {STAGES.map((s) => <a href={`/stages/${s.slug}/`} class="text-ink">{s.name}</a>)}
-          <a href="/facts/" class="font-medium">KDP facts</a>
-          <a href="/free-tools/" class="font-medium">Free tools</a>
-          <a href="/best/" class="font-medium">Guides</a>
-          <a href="/research/" class="font-medium">Market data</a>
-          <a href="/tools/" class="font-medium">All tools</a>
-          <a href="/search/" class="text-ink">Search</a>
+        <nav aria-label="Primary" class="ml-4 hidden items-center gap-1 text-sm md:flex">
+          {NAV.map((n) => (
+            <a href={n.href} class:list={['rounded-lg px-2.5 py-1.5 no-underline hover:bg-surface-2 hover:no-underline', active(n.match) ? 'font-medium text-ink' : 'text-muted hover:text-ink']} aria-current={active(n.match) ? 'page' : undefined}>{n.label}</a>
+          ))}
         </nav>
+        <button type="button" data-cmdk-open class="ml-auto flex h-9 min-w-0 items-center gap-2 rounded-xl border border-line bg-paper px-3 text-sm text-muted transition hover:border-ink/20 sm:w-64" aria-label="Search tools or run a calculator">
+          <Icon name="search" class="size-4 shrink-0" />
+          <span class="hidden truncate sm:inline">Search or calculate…</span>
+          <span class="kbd ml-auto hidden sm:inline-flex" data-cmdk-hint>⌘K</span>
+        </button>
+        <button type="button" class="btn-icon" data-theme-toggle aria-label="Switch light or dark theme">
+          <Icon name="moon" class="size-4 dark-hide" /><Icon name="sun" class="size-4 light-hide" />
+        </button>
+        <button type="button" class="btn-icon md:hidden" data-menu-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
+          <Icon name="menu" class="size-5" />
+        </button>
       </div>
+      <nav id="mobile-nav" aria-label="Mobile" class="hidden border-t border-line px-4 py-3 md:hidden">
+        <ul class="grid grid-cols-2 gap-1 text-sm">
+          {NAV.map((n) => <li><a href={n.href} class="block rounded-lg px-2 py-2 text-ink no-underline hover:bg-surface-2">{n.label}</a></li>)}
+          <li><a href="/search/" class="block rounded-lg px-2 py-2 text-ink no-underline hover:bg-surface-2">Search</a></li>
+        </ul>
+        <p class="eyebrow mt-3 px-2">Directory by stage</p>
+        <ul class="mt-1 grid grid-cols-3 gap-1 text-sm">
+          {STAGES.map((s) => <li><a href={`/stages/${s.slug}/`} class="block rounded-lg px-2 py-1.5 text-muted no-underline hover:bg-surface-2">{s.name}</a></li>)}
+        </ul>
+      </nav>
     </header>
-    <main id="main" class="mx-auto max-w-6xl px-4 py-8" {...(searchable && !noindex ? { 'data-pagefind-body': '' } : {})}>
+    <main id="main" class={wide ? '' : 'mx-auto max-w-6xl px-4 py-8'} {...(searchable && !noindex ? { 'data-pagefind-body': '' } : {})}>
       <slot />
     </main>
-    <footer class="mt-16 border-t border-line bg-white">
-      <div class="mx-auto grid max-w-6xl gap-6 px-4 py-8 text-sm text-muted md:grid-cols-4">
+    <footer class="mt-20 bg-[#0b0f19] text-sm text-slate-400">
+      <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-4">
         <div>
-          <img src="/logo-horizontal-light.svg" alt="KDP123" width="143" height="40" loading="lazy" />
+          <img src="/logo-horizontal-dark.svg" alt="KDP123" width="143" height="40" loading="lazy" />
           <p class="mt-3">{SITE.tagline}.</p>
-          <p class="mt-2">Not affiliated with Amazon. "Amazon", "Kindle" and "KDP" are trademarks of Amazon.com, Inc.</p>
+          <p class="mt-2 text-xs">Not affiliated with Amazon. "Amazon", "Kindle" and "KDP" are trademarks of Amazon.com, Inc.</p>
         </div>
         <div>
-          <p class="font-semibold text-ink">Find tools</p>
-          <ul class="mt-2 space-y-1">
-            {STAGES.map((s) => <li><a href={`/stages/${s.slug}/`}>KDP {s.name.toLowerCase()} tools</a></li>)}
-            <li><a href="/compare/pick/">Compare tools side by side</a></li>
+          <p class="font-semibold text-white">Find tools</p>
+          <ul class="mt-3 space-y-1.5">
+            <li><a class={footerLink} href="/free-tools/">Free KDP calculators</a></li>
+            {STAGES.map((s) => <li><a class={footerLink} href={`/stages/${s.slug}/`}>KDP {s.name.toLowerCase()} tools</a></li>)}
+            <li><a class={footerLink} href="/compare/pick/">Compare tools side by side</a></li>
           </ul>
         </div>
         <div>
-          <p class="font-semibold text-ink">About the data</p>
-          <ul class="mt-2 space-y-1">
-            <li><a href="/methodology/">Methodology and disclosures</a></li>
-            <li><a href="/glossary/">KDP glossary</a></li>
-            <li><a href="/data/">Open data (CC BY 4.0)</a></li>
-            <li><a href="/changes/">Price and plan changes</a></li>
-            <li><a href="/changelog/">Changelog and corrections</a></li>
-            <li><a href="/sitemap/">Site map</a></li>
-            <li><a href={SITE.github}>Source on GitHub (MIT)</a></li>
+          <p class="font-semibold text-white">About the data</p>
+          <ul class="mt-3 space-y-1.5">
+            <li><a class={footerLink} href="/methodology/">Methodology and disclosures</a></li>
+            <li><a class={footerLink} href="/glossary/">KDP glossary</a></li>
+            <li><a class={footerLink} href="/data/">Open data (CC BY 4.0)</a></li>
+            <li><a class={footerLink} href="/developers/">Data providers and API partners</a></li>
+            <li><a class={footerLink} href="/changes/">Price and plan changes</a></li>
+            <li><a class={footerLink} href="/changelog/">Changelog and corrections</a></li>
+            <li><a class={footerLink} href="/sitemap/">Site map</a></li>
+            <li><a class={footerLink} href={SITE.github}>Source on GitHub (MIT)</a></li>
           </ul>
         </div>
         <div>
-          <p class="font-semibold text-ink">Follow and contribute</p>
-          <ul class="mt-2 space-y-1">
-            <li><a href="/newsletter/">Monthly email</a> · <a href="/rss.xml">RSS</a></li>
-            <li><a href="/submit/">Suggest or correct a listing</a></li>
-            <li><a href="/about/">About KDP123</a> · <a href="mailto:hello@kdp123.com">hello@kdp123.com</a></li>
-            <li><a href="/llms.txt">llms.txt</a></li>
+          <p class="font-semibold text-white">Follow and contribute</p>
+          <ul class="mt-3 space-y-1.5">
+            <li><a class={footerLink} href="/newsletter/">Monthly email</a> · <a class={footerLink} href="/rss.xml">RSS</a></li>
+            <li><a class={footerLink} href="/submit/">Suggest or correct a listing</a></li>
+            <li><a class={footerLink} href="/about/">About KDP123</a> · <a class={footerLink} href="mailto:hello@kdp123.com">hello@kdp123.com</a></li>
+            <li><a class={footerLink} href="/llms.txt">llms.txt</a></li>
           </ul>
-          <p class="mt-4 font-semibold text-ink">From the same team</p>
-          <p class="mt-2"><a href={SITE.related.url} rel="noopener">KDPTop</a>: daily Amazon bestseller lists and KDP category research.</p>
+          <p class="mt-5 font-semibold text-white">From the same team</p>
+          <p class="mt-2"><a class={footerLink} href={SITE.related.url} rel="noopener">KDPTop</a>: daily Amazon bestseller lists and KDP category research.</p>
         </div>
       </div>
     </footer>
+    <CommandPalette />
     <CompareTray />
+    <script>
+      const root = document.documentElement;
+      document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+        const dark = root.dataset.theme !== 'dark';
+        if (dark) root.dataset.theme = 'dark';
+        else delete root.dataset.theme;
+        try {
+          localStorage.setItem('kdp123.theme', dark ? 'dark' : 'light');
+        } catch {}
+      });
+      const menu = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+      menu?.addEventListener('click', () => {
+        const nav = document.getElementById('mobile-nav')!;
+        const open = nav.classList.toggle('hidden') === false;
+        menu.setAttribute('aria-expanded', String(open));
+      });
+
+      import { readPins, togglePin, openPref, type Pin } from '../lib/pins';
+      const syncPins = () => {
+        const on = new Set(readPins().map((p) => `${p.kind}:${p.id}`));
+        document.querySelectorAll<HTMLElement>('[data-pin]').forEach((b) => b.setAttribute('aria-pressed', String(on.has(`${b.dataset.pin}:${b.dataset.pinId}`))));
+      };
+      document.addEventListener('click', (e) => {
+        const b = (e.target as Element).closest<HTMLElement>('[data-pin]');
+        if (!b) return;
+        e.preventDefault();
+        e.stopPropagation();
+        const d = b.dataset;
+        togglePin({ kind: d.pin as Pin['kind'], id: d.pinId!, name: d.pinName!, href: d.pinHref! });
+      });
+      // Directory cards link to the vendor's site unless the visitor chose "details first".
+      const syncCards = () => {
+        const details = openPref() === 'details';
+        document.querySelectorAll<HTMLAnchorElement>('a[data-site][data-details]').forEach((a) => {
+          a.href = details ? a.dataset.details! : a.dataset.site!;
+          if (details) a.removeAttribute('target');
+          else a.target = '_blank';
+          a.dataset.mode = details ? 'details' : 'site';
+        });
+      };
+      addEventListener('pins-change', syncPins);
+      addEventListener('open-pref-change', syncCards);
+      addEventListener('storage', (e) => {
+        if (e.key === 'kdp123.pins') syncPins();
+        if (e.key === 'kdp123.open') syncCards();
+      });
+      syncPins();
+      syncCards();
+    </script>
   </body>
 </html>

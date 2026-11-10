@@ -1,0 +1,25 @@
+---
+import WidgetFrame from '../WidgetFrame.astro';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant } = Astro.props;
+---
+
+<WidgetFrame slug="title-length-checker" variant={variant}>
+  <form class="grid gap-4">
+    <label class="field">Title<input class="input" name="title" type="text" value="The Baker Who Knew Too Much" autocomplete="off" /></label>
+    <label class="field">Subtitle (optional)<input class="input" name="subtitle" type="text" value="A Cozy Cornish Village Mystery" autocomplete="off" /></label>
+    <p class="text-xs text-muted">Counted the way KDP counts: every character in the two fields, spaces included.</p>
+  </form>
+  <Fragment slot="out">
+    <dl class="grid grid-cols-2 gap-3">
+      <div class="stat stat-hero col-span-2"><dt>Characters left (of 199)</dt><dd data-k="left">-</dd></div>
+      <div class="stat"><dt>Title</dt><dd data-k="title">-</dd></div>
+      <div class="stat"><dt>Subtitle</dt><dd data-k="subtitle">-</dd></div>
+    </dl>
+    <div class="mt-3 h-2 overflow-hidden rounded-full bg-surface-2" aria-hidden="true"><div data-el="bar" class="h-full rounded-full bg-ok transition-all" style="width:0"></div></div>
+    <ul data-el="notes" class="mt-4 space-y-2"></ul>
+  </Fragment>
+</WidgetFrame>

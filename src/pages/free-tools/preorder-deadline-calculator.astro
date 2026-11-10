@@ -1,0 +1,48 @@
+---
+import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/preorder-deadline-calculator/Widget.astro';
+
+const sources = [
+  'https://kdp.amazon.com/en_US/help/topic/G201499380',
+  'https://kdp.amazon.com/en_US/help/topic/G201499440',
+  'https://kdp.amazon.com/en_US/help/topic/GDTMGBCWHAY35NK4',
+];
+const faq = [
+  {
+    q: 'When is the final manuscript due for a Kindle pre-order?',
+    a: 'At least 72 hours before the release date. Release dates are in GMT, so for a March 1 release the file is due by February 26 at 00:00 GMT.',
+  },
+  {
+    q: 'How far ahead can I set up a pre-order?',
+    a: 'Up to 18 months for pre-orders created on or after September 2, 2026, and 12 months for older ones.',
+  },
+  {
+    q: 'What happens if I miss the deadline?',
+    a: 'The pre-order is canceled. The first miss or cancellation is forgiven once per account; a second removes pre-order privileges for 6 months.',
+  },
+  {
+    q: 'Can I put a paperback on pre-order?',
+    a: 'No. For print books KDP offers a scheduled release up to 90 days ahead, with the detail page hidden until release day and changes locked from 5 days before.',
+  },
+];
+---
+
+<FreeToolPage
+  slug="preorder-deadline-calculator"
+  answer="For a Kindle ebook pre-order, the final manuscript is due at least 72 hours before the release date (00:00 GMT three days before), or the pre-order is canceled. Pre-orders created on or after September 2, 2026 can be up to 18 months ahead. Print books have no pre-orders, only a scheduled release up to 90 days ahead."
+  faq={faq}
+  sources={sources}
+>
+  <Widget />
+
+  <Fragment slot="how">
+    <h2>How the dates are worked out</h2>
+    <ul>
+      <li>Final file deadline = release date - 3 days, at 00:00 GMT.</li>
+      <li>Latest release = setup date + 18 months (12 months for pre-orders created before September 2, 2026).</li>
+      <li>Latest postponed date = original release + 6 months, using at most 2 postponements.</li>
+      <li>Print: latest scheduled release = today + 90 days; changes locked from release - 5 days.</li>
+    </ul>
+    <p>Example: a pre-order set up on October 1, 2026 for March 1, 2027 needs the final file by February 26, 2027 at 00:00 GMT. It could have been set as late as April 1, 2028, and can be postponed to no later than September 1, 2027.</p>
+  </Fragment>
+</FreeToolPage>

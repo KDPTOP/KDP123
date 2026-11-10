@@ -1,0 +1,163 @@
+---
+import Icon from './Icon.astro';
+import { MAX_LINKS } from '../lib/pins';
+
+interface Props {
+  /** Calculators offered as one-tap pins while the list is empty. */
+  suggest?: { id: string; name: string; href: string }[];
+}
+const { suggest = [] } = Astro.props;
+---
+
+<section class="card p-4 md:p-5" aria-labelledby="my-tools-h" data-my-tools data-pagefind-ignore>
+  <div class="flex flex-wrap items-center gap-2">
+    <h2 id="my-tools-h" class="flex items-center gap-2 text-base font-semibold"><Icon name="star" class="size-4 text-brand" />My tools</h2>
+    <span class="text-xs text-muted">Saved in this browser only. No account.</span>
+    <div class="ml-auto flex items-center gap-1">
+      <button type="button" class="btn-ghost px-2 py-1 text-xs" data-act="add" aria-expanded="false"><Icon name="plus" class="size-3.5" />Link</button>
+      <button type="button" class="btn-ghost px-2 py-1 text-xs" data-act="edit" aria-pressed="false">Edit</button>
+    </div>
+  </div>
+
+  <form class="mt-3 grid gap-2 sm:grid-cols-[1fr_2fr_auto]" data-el="add" hidden>
+    <label class="sr-only" for="mt-name">Name</label>
+    <input id="mt-name" name="name" class="input py-2 text-sm" placeholder="Name (optional)" maxlength="80" />
+    <label class="sr-only" for="mt-url">Address</label>
+    <input id="mt-url" name="url" class="input py-2 text-sm" placeholder="https://…" inputmode="url" required />
+    <button class="btn px-3">Add</button>
+    <p class="text-xs text-muted sm:col-span-3" data-el="add-msg">Up to {MAX_LINKS} of your own links, https only.</p>
+  </form>
+
+  <ul class="mt-3 flex flex-wrap gap-2" data-el="list"></ul>
+  <p class="mt-1 text-sm text-muted" data-el="empty">
+    Tap <Icon name="star" class="inline size-3.5 align-[-2px]" /> on any calculator or directory tool to keep it here, or add your own links.
+    {suggest.length > 0 && (
+      <span class="mt-3 flex flex-wrap items-center gap-2">
+        Start with
+        {suggest.map((s) => <button type="button" class="chip gap-1 text-xs" data-suggest={s.id} data-name={s.name} data-href={s.href}><Icon name="plus" class="size-3" />{s.name}</button>)}
+      </span>
+    )}
+  </p>
+
+  <div class="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted" data-el="io" hidden>
+    <button type="button" class="inline-flex items-center gap-1 hover:text-ink" data-act="export"><Icon name="download" class="size-3.5" />Export JSON</button>
+    <label class="inline-flex cursor-pointer items-center gap-1 hover:text-ink"><Icon name="upload" class="size-3.5" />Import JSON<input type="file" accept="application/json,.json" class="sr-only" data-act="import" /></label>
+    <span data-el="io-msg" role="status"></span>
+  </div>
+</section>
+
+<script>
+  import { readPins, writePins, movePin, addLink, exportPins, importPins, type Pin } from '../lib/pins';
+  import { iconSvg, type IconName } from '../lib/icons';
+  import { FREE_TOOLS } from '../lib/freeTools';
+
+  const icons = new Map<string, IconName>(FREE_TOOLS.map((t) => [t.slug, t.icon]));
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-my-tools]')) {
+    const q = <T extends HTMLElement>(s: string) => root.querySelector<T>(s)!;
+    const list = q('[data-el="list"]');
+    const empty = q('[data-el="empty"]');
+    const io = q('[data-el="io"]');
+    const ioMsg = q('[data-el="io-msg"]');
+    const addForm = q<HTMLFormElement>('[data-el="add"]');
+    const addMsg = q('[data-el="add-msg"]');
+    const addBtn = q<HTMLButtonElement>('[data-act="add"]');
+    const editBtn = q<HTMLButtonElement>('[data-act="edit"]');
+    let editing = false;
+
+    const iconFor = (p: Pin): IconName => (p.kind === 'calc' ? icons.get(p.id) ?? 'calculator' : p.kind === 'tool' ? 'grid' : 'link');
+
+    function item(p: Pin, i: number, n: number) {
+      const li = document.createElement('li');
+      li.className = 'flex items-center gap-0.5';
+      const a = document.createElement('a');
+      a.href = p.href;
+      a.className = 'inline-flex max-w-56 items-center gap-1.5 rounded-lg border border-line bg-paper px-2.5 py-1.5 text-sm text-ink no-underline transition hover:border-ink/25 hover:no-underline';
+      if (p.kind === 'link') {
+        a.target = '_blank';
+        a.rel = 'noopener nofollow';
+      }
+      a.innerHTML = iconSvg(iconFor(p), `size-3.5 shrink-0 ${p.kind === 'calc' ? 'text-brand' : 'text-muted'}`);
+      const name = document.createElement('span');
+      name.className = 'truncate';
+      name.textContent = p.name;
+      a.append(name);
+      if (p.kind === 'calc') {
+        a.addEventListener('click', (e) => {
+          if (!document.querySelector('[data-workbench]') || e.metaKey || e.ctrlKey) return;
+          e.preventDefault();
+          window.dispatchEvent(new CustomEvent('workbench-open', { detail: { slug: p.id, params: {} } }));
+        });
+      }
+      li.append(a);
+      if (editing) {
+        const btn = (icon: IconName, label: string, fn: () => void, disabled = false) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'btn-icon size-7';
+          b.disabled = disabled;
+          b.setAttribute('aria-label', `${label} ${p.name}`);
+          b.innerHTML = iconSvg(icon, 'size-3.5');
+          b.addEventListener('click', fn);
+          return b;
+        };
+        li.append(
+          btn('chevronUp', 'Move up', () => movePin(i, -1), i === 0),
+          btn('chevronDown', 'Move down', () => movePin(i, 1), i === n - 1),
+          btn('trash', 'Remove', () => writePins(readPins().filter((_, j) => j !== i))),
+        );
+      }
+      return li;
+    }
+
+    function render() {
+      const pins = readPins();
+      list.replaceChildren(...pins.map((p, i) => item(p, i, pins.length)));
+      empty.hidden = pins.length > 0;
+      io.hidden = !editing;
+      editBtn.setAttribute('aria-pressed', String(editing));
+      editBtn.textContent = editing ? 'Done' : 'Edit';
+    }
+
+    root.querySelectorAll<HTMLButtonElement>('[data-suggest]').forEach((b) =>
+      b.addEventListener('click', () => {
+        const pins = readPins();
+        if (!pins.some((p) => p.kind === 'calc' && p.id === b.dataset.suggest)) writePins([...pins, { kind: 'calc', id: b.dataset.suggest!, name: b.dataset.name!, href: b.dataset.href! }]);
+      }),
+    );
+    addBtn.addEventListener('click', () => {
+      addForm.hidden = !addForm.hidden;
+      addBtn.setAttribute('aria-expanded', String(!addForm.hidden));
+      if (!addForm.hidden) addForm.querySelector<HTMLInputElement>('[name="url"]')!.focus();
+    });
+    addForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fd = new FormData(addForm);
+      const err = addLink(String(fd.get('name') ?? ''), String(fd.get('url') ?? ''));
+      addMsg.textContent = err ?? 'Added.';
+      addMsg.classList.toggle('text-bad', !!err);
+      if (!err) addForm.reset();
+    });
+    editBtn.addEventListener('click', () => {
+      editing = !editing;
+      render();
+    });
+    q('[data-act="export"]').addEventListener('click', () => {
+      const url = URL.createObjectURL(new Blob([exportPins()], { type: 'application/json' }));
+      const a = Object.assign(document.createElement('a'), { href: url, download: 'kdp123-my-tools.json' });
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+    q<HTMLInputElement>('[data-act="import"]').addEventListener('change', async (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (!file) return;
+      const err = file.size > 100_000 ? 'That file is too large.' : importPins(await file.text());
+      ioMsg.textContent = err ?? 'Imported.';
+      (e.target as HTMLInputElement).value = '';
+    });
+
+    addEventListener('pins-change', render);
+    addEventListener('storage', (e) => e.key === 'kdp123.pins' && render());
+    render();
+  }
+</script>

@@ -1,0 +1,51 @@
+---
+import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/keyword-builder/Widget.astro';
+
+const sources = [
+  'https://kdp.amazon.com/en_US/help/topic/G201298500',
+  'https://kdp.amazon.com/en_US/help/topic/G200652170',
+  'https://kdp.amazon.com/en_US/help/topic/G201097560',
+];
+const faq = [
+  {
+    q: 'How many keywords can I add on KDP?',
+    a: 'Seven keyword slots per book. Each slot can hold a word or a short phrase, and KDP suggests phrases readers actually search for.',
+  },
+  {
+    q: 'Should I repeat words from my title in the keywords?',
+    a: 'No. Amazon lists words already in your title, subtitle or other metadata as wasted keywords, so the builder points them out.',
+  },
+  {
+    q: 'Do "coloring book" and "coloring books" need separate slots?',
+    a: 'No. They are the same search for practical purposes, so the builder keeps one and moves the other to the duplicates list.',
+  },
+  {
+    q: 'Where do the suggested phrases come from?',
+    a: 'From KDPTop\'s keyword database, built by the same team as KDP123. Only the phrase you type into the suggestion box is sent; your list stays in your browser.',
+  },
+];
+---
+
+<FreeToolPage
+  slug="keyword-builder"
+  answer="KDP gives each book seven keyword slots. Paste your keyword ideas, one per line or separated by commas: the builder removes plural, spacing and hyphen duplicates, drops words Amazon prohibits or lists as wasted, and fills the seven slots for you to copy. Phrase ideas from KDPTop are optional."
+  faq={faq}
+  sources={sources}
+  remote
+  poweredBy="Phrase suggestions from KDPTop's keyword data, by the team behind KDP123. Building the slots runs in your browser; only the Suggest box is sent, with a daily limit for guests."
+>
+  <Widget />
+
+  <Fragment slot="how">
+    <h2>How it builds the slots</h2>
+    <ol>
+      <li>Clean each idea: lower case, quotes and stray symbols removed, spaces collapsed.</li>
+      <li>Drop prohibited or wasted words: sales-rank claims, promotional words, Amazon program names, time-sensitive words and a bare "book" or "novel".</li>
+      <li>Remove duplicates that differ only by plural, spacing or hyphens.</li>
+      <li>Fill the seven slots in your order. Extra phrases are listed as leftovers.</li>
+    </ol>
+    <p>Example: "cozy mystery, cozy mysteries, Cozy-Mystery, free kindle books, baking mystery" becomes two slots, "cozy mystery" and "baking mystery". Two lines are duplicates and "free kindle books" is dropped for promotional and Amazon wording.</p>
+    <p>For checking slots you already have, use the <a href="/free-tools/keyword-checker/">keyword checker</a>.</p>
+  </Fragment>
+</FreeToolPage>

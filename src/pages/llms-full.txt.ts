@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { getTools, priceLabel, isoDate, SITE } from '../lib/site';
 import { categoryBySlug } from '../lib/taxonomy';
 import { getFacts } from '../lib/facts';
+import { FREE_TOOLS } from '../lib/freeTools';
 
 const yn = (v?: boolean) => (v === undefined ? 'not stated' : v ? 'yes' : 'no');
 
@@ -26,6 +27,13 @@ export const GET: APIRoute = async () => {
     out.push(`## ${f.data.title}`, `Q: ${f.data.question}`, `A: ${f.data.answer}`);
     for (const k of f.data.key_facts) out.push(`- ${k.label}: ${k.value}`);
     out.push(`- page: ${SITE.url}/facts/${f.id}/`, `- sources: ${f.data.sources.join(' ')}`, `- checked: ${isoDate(f.data.verified_at)}`, '');
+  }
+  out.push('# Free calculators', '', `Browser tools built on the KDP facts above. Add the URL parameters to prefill a result. JSON: ${SITE.url}/calculators.json`, '');
+  for (const t of FREE_TOOLS) {
+    out.push(`## ${t.name}`, t.blurb, `- page: ${SITE.url}/free-tools/${t.slug}/`, `- formula: ${t.formula}`);
+    out.push(`- url parameters: ${Object.entries(t.params).map(([k, v]) => `${k} (${v})`).join('; ')}`);
+    if (t.provider) out.push(`- data from: ${t.provider}, see ${SITE.url}/developers/#${t.provider}`);
+    out.push(`- based on: ${t.facts.map((f) => `${SITE.url}/facts/${f}/`).join(' ')}`, '');
   }
   return new Response(out.join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 };

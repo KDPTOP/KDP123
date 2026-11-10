@@ -1,0 +1,40 @@
+---
+import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/kdp-payment-date/Widget.astro';
+
+const sources = [
+  'https://kdp.amazon.com/en_US/help/topic/GK2MKZUL6U3SFBPZ',
+  'https://kdp.amazon.com/en_US/help/topic/GJD7DFFX6X88AK46',
+  'https://kdp.amazon.com/en_US/help/topic/G8BKPU9AGVZSF9QF',
+];
+const faq = [
+  {
+    q: 'When does KDP pay royalties?',
+    a: 'Monthly, about 60 days after the end of the month of sale. January sales are paid at the end of March. Paperback Expanded Distribution sales take about 90 days.',
+  },
+  {
+    q: 'How long until the money is in my bank?',
+    a: 'Direct deposit takes 1 to 5 business days after the payment date (7 to 10 for banks in India), wire 5 to 10 days, and a check up to 30 days.',
+  },
+  {
+    q: 'Is there a minimum payment?',
+    a: 'Direct deposit has no minimum in the US. Wire and check payments wait until you reach a threshold per marketplace, such as $100 for Amazon.com after tax withholding.',
+  },
+];
+---
+
+<FreeToolPage
+  slug="kdp-payment-date"
+  answer="KDP pays each month's royalties about 60 days after that month ends, so January sales are paid at the end of March; paperback Expanded Distribution sales take about 90 days. Pick the month of the sales to see the expected payment date, the days left and when the money should reach your bank."
+  faq={faq}
+  sources={sources}
+>
+  <Widget />
+
+  <Fragment slot="how">
+    <h2>How the date is worked out</h2>
+    <p>Expected payment date = the last day of the second month after the month of sale (third month for Expanded Distribution). Arrival = payment date + the transfer time for your payment method.</p>
+    <p>Example: March 2027 Amazon sales are expected on May 31, 2027. With direct deposit (1 to 5 business days) the money arrives between June 1 and June 7, 2027.</p>
+    <p>KDP says "about", so treat the date as the end of the expected month, not a promise. Payments below the wire or check threshold roll over to a later month.</p>
+  </Fragment>
+</FreeToolPage>

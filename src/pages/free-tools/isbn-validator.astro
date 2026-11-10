@@ -1,0 +1,48 @@
+---
+import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/isbn-validator/Widget.astro';
+
+const sources = [
+  'https://kdp.amazon.com/en_US/help/topic/G201834170',
+  'https://kdp.amazon.com/en_US/help/topic/GTJ8LBXL6Z4WV5QX',
+  'https://kdp.amazon.com/en_US/help/topic/G8BYTM8CVK74676V',
+];
+const faq = [
+  {
+    q: 'How is the ISBN-13 check digit calculated?',
+    a: 'Multiply the first 12 digits alternately by 1 and 3, add them up, and take (10 - sum mod 10) mod 10. For 978-0-306-40615 the sum is 93, so the check digit is 7.',
+  },
+  {
+    q: 'Can every ISBN-13 be converted to ISBN-10?',
+    a: 'Only ISBNs starting with 978. ISBNs starting with 979 have no ISBN-10 form.',
+  },
+  {
+    q: 'Do I need a barcode on my KDP cover?',
+    a: 'No. KDP can add one for you in the lower right of the back cover. If you supply your own, keep it in the barcode area of KDP\'s cover template.',
+  },
+  {
+    q: 'Does a valid check digit mean KDP will accept my ISBN?',
+    a: 'Not by itself. KDP also checks that the title, author and imprint match the ISBN agency record exactly.',
+  },
+];
+---
+
+<FreeToolPage
+  slug="isbn-validator"
+  answer="An ISBN's last digit is a check digit. For ISBN-13, multiply the first 12 digits alternately by 1 and 3, add them up, and the check digit is (10 - sum mod 10) mod 10. Paste an ISBN-10 or ISBN-13 to check it, convert between the two and download an EAN-13 barcode as SVG."
+  faq={faq}
+  sources={sources}
+>
+  <Widget />
+
+  <Fragment slot="how">
+    <h2>The check digit formulas</h2>
+    <ul>
+      <li>ISBN-13: sum of the first 12 digits weighted 1, 3, 1, 3 and so on; check = (10 - sum mod 10) mod 10.</li>
+      <li>ISBN-10: sum of the first 9 digits weighted 10 down to 2; check = (11 - sum mod 11) mod 11, written as X when it is 10.</li>
+      <li>ISBN-10 to 13: prefix 978, drop the old check digit and work out a new ISBN-13 check digit.</li>
+    </ul>
+    <p>Example: 978-0-306-40615-7 gives a weighted sum of 93 for its first 12 digits, so the check digit is 7 and the ISBN is valid. Its ISBN-10 is 0306406152.</p>
+    <p>The barcode is a standard EAN-13 drawn in your browser. Print it at 100% and check that it scans before relying on it.</p>
+  </Fragment>
+</FreeToolPage>

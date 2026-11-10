@@ -1,0 +1,9 @@
+# Announced KENP rates (USD per page read, Amazon.com) used to prefill the KENP calculator.
+# Only add a month with a source on Amazon's own pages (the KDP Select Global Fund announcement).
+# Months nobody has checked stay out: the calculator then asks the visitor for the rate instead.
+#
+# - month: 2026-09
+#   rate: 0.00000
+#   source: https://kdp.amazon.com/...
+#   checked_at: 2026-10-16
+rates: []

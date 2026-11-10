@@ -1,0 +1,44 @@
+---
+import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/word-count-to-page-count/Widget.astro';
+
+const sources = [
+  'https://kdp.amazon.com/en_US/help/topic/GVBQ3CMEQW3W2VL6',
+  'https://kdp.amazon.com/en_US/help/topic/G201834180',
+  'https://kdp.amazon.com/en_US/help/topic/G201857950',
+];
+const faq = [
+  {
+    q: 'How many pages is 80,000 words?',
+    a: 'About 250 pages as a 6 x 9 in paperback in 11 pt type with 25 chapters, or more on a smaller trim or with a larger font.',
+  },
+  {
+    q: 'Why is this only an estimate?',
+    a: 'Page count depends on the font, line spacing, margins, chapter openings and images in your file. KDP counts the pages of the final interior you upload.',
+  },
+  {
+    q: 'What are KDP\'s page count limits?',
+    a: 'Paperbacks need at least 24 pages and can have up to 828 on white paper with black ink; the maximum is lower for some papers and trim sizes. Hardcovers allow 75 to 550 pages.',
+  },
+];
+---
+
+<FreeToolPage
+  slug="word-count-to-page-count"
+  answer="An 80,000-word novel is about 250 pages as a 6 x 9 in KDP paperback in 11 pt type. Enter your word count, trim size, font size and chapters for an estimate, then send the page count to the cover and royalty calculators. It is an estimate; KDP counts pages from your final file."
+  faq={faq}
+  sources={sources}
+>
+  <Widget />
+
+  <Fragment slot="how">
+    <h2>How the estimate works</h2>
+    <ol>
+      <li>Text block = trim width - 0.75 in outside margin - the KDP gutter for the page count, by trim height - 1.5 in.</li>
+      <li>Characters per line = text width in points / (font size x 0.5). Lines per page = text height / (font size x 1.2).</li>
+      <li>Words per page = characters per line / 6 x lines x 0.85, allowing for paragraph ends and dialogue.</li>
+      <li>Pages = words / words per page + half a page per chapter + front and back matter, rounded up to an even number, at least 24.</li>
+    </ol>
+    <p>Example: 80,000 words on 6 x 9 in at 11 pt gives about 352 words a page and 228 pages of text. Adding 13 pages for 25 chapter openings and 8 pages of front and back matter gives 250 pages.</p>
+  </Fragment>
+</FreeToolPage>

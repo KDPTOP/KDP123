@@ -1,5 +1,6 @@
 ---
 import FreeToolPage from '../../components/FreeToolPage.astro';
+import Widget from '../../tools/ebook-price-checker/Widget.astro';
 
 const sources = [
   'https://kdp.amazon.com/en_US/help/topic/G200634560',
@@ -27,13 +28,7 @@ const faq = [
   faq={faq}
   sources={sources}
 >
-  <form id="ebp" class="grid gap-4 sm:grid-cols-3" onsubmit="return false">
-    <label class="field">Ebook list price (USD)<input class="input" name="price" type="number" min="0" step="0.01" value="4.99" inputmode="decimal" /></label>
-    <label class="field">File size after conversion (MB)<input class="input" name="mb" type="number" min="0" step="0.1" value="2" inputmode="decimal" /></label>
-    <label class="field">Print edition list price (optional)<input class="input" name="print" type="number" min="0" step="0.01" placeholder="e.g. 14.99" inputmode="decimal" /></label>
-  </form>
-  <ul id="ebp-out" class="mt-6 space-y-2" aria-live="polite"></ul>
-  <p class="mt-4 text-sm"><a href="/free-tools/royalty-calculator/">See the royalty per sale at this price</a></p>
+  <Widget />
 
   <Fragment slot="how">
     <h2>What it checks</h2>
@@ -41,36 +36,7 @@ const faq = [
       <li>35% option: $0.99 to $200 under 3 MB, $1.99 to $200 from 3 MB, $2.99 to $200 from 10 MB.</li>
       <li>70% option: $2.99 to $12.99, and no more than 80% of the print edition's Amazon list price.</li>
     </ul>
+    <p>Example: if the paperback is $14.99, the ebook can be at most $11.99 on the 70% option ($14.99 x 0.8 = $11.992, rounded down to the cent). A 5 MB ebook cannot be $0.99: from 3 MB the 35% option starts at $1.99.</p>
     <p>Limits are for Amazon.com in USD. Other marketplaces have their own tables, for example £1.77 to £12.99 in the UK on the 70% option. The 70% option also needs the book to be eligible in the buyer's country; see the linked pages.</p>
   </Fragment>
 </FreeToolPage>
-
-<script>
-  import { ebookPriceCheck } from '../../lib/calc/listing';
-
-  const form = document.getElementById('ebp') as HTMLFormElement;
-  const out = document.getElementById('ebp-out')!;
-  const usd = (v: number) => `$${v.toFixed(2)}`;
-
-  function run() {
-    const f = new FormData(form);
-    const price = Number(f.get('price'));
-    const mb = Number(f.get('mb')) || 0;
-    const print = Number(f.get('print')) || undefined;
-    const r = ebookPriceCheck(price, mb, print);
-    const rows: [string, string][] = [];
-    if (!(price > 0)) rows.push(['issue-error', 'KDP does not allow a free list price. Free days need KDP Select.']);
-    else {
-      rows.push(r.ok35
-        ? ['issue-ok', `35% option: OK (allowed ${usd(r.min35)} to ${usd(r.max35)} for a ${mb} MB file).`]
-        : ['issue-error', `35% option: not allowed. For a ${mb} MB file the price must be ${usd(r.min35)} to ${usd(r.max35)}.`]);
-      if (r.ok70) rows.push(['issue-ok', `70% option: OK (allowed ${usd(r.min70)} to ${usd(r.max70)}${print ? `, capped by the ${usd(print)} print edition` : ''}).`]);
-      else if (r.max70 < r.min70) rows.push(['issue-error', `70% option: not possible. The print edition at ${usd(print!)} would need the ebook below ${usd(r.min70)}.`]);
-      else rows.push(['issue-warn', `70% option: not allowed. Price it ${usd(r.min70)} to ${usd(r.max70)}${print && r.max70 < 12.99 ? ` (20% below the ${usd(print)} print edition)` : ''}.`]);
-    }
-    out.replaceChildren(...rows.map(([cls, text]) => Object.assign(document.createElement('li'), { className: cls, textContent: text })));
-  }
-
-  form.addEventListener('input', run);
-  run();
-</script>

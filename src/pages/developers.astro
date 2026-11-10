@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { SITE, isoDate } from '../lib/site';
+import { freeTool, FREE_TOOLS } from '../lib/freeTools';
+
+const providers = (await getCollection('providers')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const usedBy = (id: string) => (id === 'home' ? { name: 'Home page "Today on KDP" strip', href: '/' } : FREE_TOOLS.some((t) => t.slug === id) ? { name: freeTool(id).short, href: `/free-tools/${id}/` } : { name: id, href: '/' });
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Data providers and API partners',
+  url: `${SITE.url}/developers/`,
+  description: 'Which outside APIs KDP123 tools call, what each sends, the limits, and the rules a provider must meet to plug in.',
+};
+---
+
+<Base title="Data providers and API partners" titleVariants={['KDP123 Data Providers & API Partners', 'Data providers and API partners']} description="Which outside APIs the KDP123 tools call, what each request sends, the daily limits, and the rules a KDP data provider must meet to plug in. No paid placement." jsonLd={jsonLd}>
+  <article class="prose-kdp max-w-3xl">
+    <h1 class="text-4xl font-bold">Data providers and API partners</h1>
+    <p>Most KDP123 tools run entirely in your browser. A few need live data, such as Amazon category lists or keyword phrases. Those requests go through KDP123's own server to a named provider, and the tool shows a "Data from" line saying who answered and what was sent.</p>
+
+    <h2>How requests are handled</h2>
+    <ul>
+      <li><strong>No account, no cookies.</strong> KDP123 strips cookies and login headers before forwarding, and drops any cookie the provider sends back. Providers never see your KDP123 session, because there is none.</li>
+      <li><strong>Only what the tool needs.</strong> Each endpoint below lists exactly what it sends, for example the phrase you typed. Your other inputs stay in your browser.</li>
+      <li><strong>Read-only and rate-limited.</strong> Only GET requests to listed paths are forwarded, with a per-IP limit at our server and the provider's own daily limit.</li>
+      <li><strong>Fails quietly.</strong> If a provider is down, the part of the tool that needs it hides; the rest keeps working.</li>
+    </ul>
+
+    <h2>Current providers</h2>
+    {providers.map((p) => (
+      <section id={p.id} class="not-prose mt-6 rounded-2xl border border-line bg-surface p-5">
+        <h3 class="flex flex-wrap items-center gap-2 text-lg font-semibold">
+          <a href={p.data.url}>{p.data.name}</a>
+          {p.data.same_team && <span class="badge">Same team as KDP123</span>}
+        </h3>
+        <p class="mt-2 text-sm text-muted">{p.data.attribution} Added {isoDate(p.data.added_at)}.{p.data.terms_url && <> <a href={p.data.terms_url}>Terms</a>.</>}</p>
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="text-xs uppercase text-muted"><tr><th class="py-2 pr-4">Endpoint</th><th class="py-2 pr-4">What it returns</th><th class="py-2 pr-4">Sends</th><th class="py-2 pr-4">Limit</th><th class="py-2">Used by</th></tr></thead>
+            <tbody>
+              {p.data.endpoints.map((e) => (
+                <tr class="border-t border-line align-top">
+                  <td class="py-2 pr-4 font-mono text-xs">GET {e.path}</td>
+                  <td class="py-2 pr-4">{e.purpose}</td>
+                  <td class="py-2 pr-4">{e.sends}</td>
+                  <td class="py-2 pr-4">{e.limit}</td>
+                  <td class="py-2">{e.used_by.map((u, i) => <>{i > 0 && ', '}<a href={usedBy(u).href}>{usedBy(u).name}</a></>)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    ))}
+
+    <h2>Plugging in your API</h2>
+    <p>If you run a KDP data service and want a free KDP123 tool to use it, the API has to meet all of these:</p>
+    <ol>
+      <li><strong>Works without login.</strong> Visitors never sign up or connect an account to use the tool.</li>
+      <li><strong>No tracking of our visitors.</strong> No cookies, fingerprinting or resale of queries. We send only the query itself and a forwarded IP for your rate limit.</li>
+      <li><strong>Attribution and a link out are fine; a paywall is not.</strong> The tool shows your name and an "Open in" link to your site. The core answer has to be usable on KDP123.</li>
+      <li><strong>Free, and no effect on rankings.</strong> We do not pay for data and providers do not pay us. Providing data never changes how your own listing is ordered or described.</li>
+      <li><strong>Stated limits.</strong> Tell us the daily limit per visitor and the response cache time so the tool can say them.</li>
+      <li><strong>Sourced numbers.</strong> Explain how the data is collected, in a sentence we can show next to it.</li>
+    </ol>
+    <p>Each provider gets a <code>/api/p/&lt;provider&gt;/</code> path on our server, a <code>data/providers/&lt;provider&gt;.yml</code> entry and a forwarding rule; the templates are in the <a href={`${SITE.github}/tree/main/deploy/nginx`}>repository</a>. Email <a href="mailto:hello@kdp123.com">hello@kdp123.com</a> with your API docs.</p>
+
+    <h2>Calling KDP123 itself</h2>
+    <p>The directory is open data: <a href="/tools.json">tools.json</a> and <a href="/tools.csv">tools.csv</a> (CC BY 4.0). Every calculator's formula and URL parameters are in <a href="/calculators.json">calculators.json</a>, so a link such as <a href="/free-tools/royalty-calculator/?price=12.99&pages=300"><code>/free-tools/royalty-calculator/?price=12.99&amp;pages=300</code></a> opens a filled-in result.</p>
+  </article>
+</Base>
