@@ -3,10 +3,8 @@ url: https://bookbeam.io
 categories: [book-research, keywords-categories, analytics]
 tagline: BookBeam is a subscription web app and Chrome extension for niche research, keyword research and ongoing tracking of books on Amazon.
 summary: >-
-  BookBeam offers keyword and niche research, category history, a book tracker with keyword rank tracking, a USPTO and
-  EUIPO trademark checker, listing tools and BookBeam Create for KDP interiors. Data covers seven Amazon marketplaces.
-  Paid plans start at $47 a month, or $29 a month billed yearly; a limited Chrome Extension Lite is free.
-pricing: { model: subscription, from: 47, currency: USD, period: month, free_tier: true, refund_days: 7, note: "Basic $47/mo, $129 per 3 months, or $348/yr ($29/mo); Publisher $69/mo, $187 per 3 months, or $576/yr ($48/mo); Publisher Pro (5 seats) $119/mo, $327 per 3 months, or $984/yr ($82/mo). 7-day money-back guarantee. Free tier is the Chrome Extension Lite." }
+  BookBeam offers keyword and niche research, category history, a book tracker with keyword rank tracking, a USPTO and EUIPO trademark checker, listing tools and BookBeam Create for KDP interiors. Data covers seven Amazon marketplaces. Paid plans start at $47 a month, or $29 a month billed yearly; a limited Chrome Extension Lite is free.
+pricing: { model: subscription, from: 47, currency: USD, period: month, free_tier: true, refund_days: 7, note: "Basic $47/mo, $129 per 3 months, or $348/yr ($29/mo); Publisher $69/mo, $187 per 3 months, or $576/yr ($48/mo); Publisher Pro (5 seats) $119/mo, $327 per 3 months, or $984/yr ($82/mo). 7-day money-back guarantee. Free tier is the Chrome Extension Lite.", annual_from: 29 }
 platforms: [web, chrome-extension]
 kdp:
   outputs_kdp_files: true
@@ -18,10 +16,17 @@ pros:
 cons:
   - Monthly cost is higher than one-time tools
   - Lower plans cap history, searches and tracked books
-best_for: [Publishers who research and track a catalog seriously]
+best_for:
+  - Amazon publishers researching book niches, keywords, and categories
 alternatives: [publisher-rocket, kdspy, authorscout]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://bookbeam.io/
   - https://bookbeam.io/pricing/
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10
+price_history:
+  - date: 2026-11-10
+    kind: plan
+    note: "Yearly billing read on the vendor's pricing page: from $29/mo billed yearly."

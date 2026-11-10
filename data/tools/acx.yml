@@ -3,11 +3,7 @@ url: https://www.acx.com
 categories: [audio, official]
 tagline: ACX is Audible's audiobook marketplace for authors and rights holders that connects them with narrators and distributes finished audiobooks to Audible, Amazon and Apple Books.
 summary: >-
-  ACX (Audiobook Creation Exchange) lets a rights holder claim a book, hire a narrator or upload their own recording, and
-  publish the audiobook to Audible, Amazon and Apple Books. Under Audible's new royalty model, open to all creators since
-  May 26, 2026, exclusive distribution pays 50% and non-exclusive 30%; the older 40% / 25% model is being discontinued by
-  the end of 2026. It is open only to residents of the US, UK, Canada and Ireland. Eligible ACX audiobooks can now be
-  enrolled in KDP Select for Kindle+.
+  ACX (Audiobook Creation Exchange) lets a rights holder claim a book, hire a narrator or upload their own recording, and publish the audiobook to Audible, Amazon and Apple Books. Under Audible's new royalty model, open to all creators since May 26, 2026, exclusive distribution pays 50% and non-exclusive 30%; the older 40% / 25% model is being discontinued by the end of 2026. It is open only to residents of the US, UK, Canada and Ireland. Eligible ACX audiobooks can now be enrolled in KDP Select for Kindle+.
 official: true
 pricing: { model: free, currency: USD, note: "Free to join; Audible takes a share of each sale. Narrator fees or royalty splits depend on the deal you choose." }
 platforms: [web]
@@ -21,7 +17,8 @@ pros:
 cons:
   - Only residents of the US, UK, Canada and Ireland can sign up
   - Exclusive distribution limits sales to Audible, Amazon and Apple Books
-best_for: [KDP authors in the US, UK, Canada or Ireland turning a book into an audiobook]
+best_for:
+  - Authors and narrators creating audiobooks for Audible and Amazon
 alternatives: []
 status: published
 verified_at: 2026-11-09
@@ -29,3 +26,4 @@ sources:
   - https://www.acx.com/mp/blog/audible-new-royalty-model
   - https://kdp.amazon.com/en_US/help/topic/G201014330
   - https://www.acx.com
+features_checked_at: 2026-11-10

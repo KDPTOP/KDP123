@@ -3,9 +3,7 @@ url: https://kdp.amazon.com
 categories: [official]
 tagline: Amazon Kindle Direct Publishing is Amazon's free self-publishing platform for Kindle ebooks and print paperbacks and hardcovers.
 summary: >-
-  KDP is the platform most listings in this directory exist to serve. It is free to use, lets you publish ebooks and print
-  books, offers the optional KDP Select program for Kindle+ (formerly Kindle Unlimited), and publishes the official rules on content, AI
-  disclosure, royalties and printing. When another site contradicts KDP's help pages, the help pages win.
+  KDP is the platform most listings in this directory exist to serve. It is free to use, lets you publish ebooks and print books, offers the optional KDP Select program for Kindle+ (formerly Kindle Unlimited), and publishes the official rules on content, AI disclosure, royalties and printing. When another site contradicts KDP's help pages, the help pages win.
 official: true
 pricing: { model: free, currency: USD, note: "Free to publish; Amazon takes a share of each sale and charges print costs." }
 platforms: [web]
@@ -17,3 +15,6 @@ status: published
 verified_at: 2026-11-09
 sources:
   - https://kdp.amazon.com
+best_for:
+  - Authors self-publishing ebook, paperback, and hardcover books on Amazon
+features_checked_at: 2026-11-10

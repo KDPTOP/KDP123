@@ -3,12 +3,7 @@ url: https://www.amazon.com/gp/bestsellers/books
 categories: [book-research, official]
 tagline: Amazon Best Sellers is Amazon's free set of category rank lists for book researchers that shows the top-selling and hot new titles in Books and the Kindle Store.
 summary: >-
-  Amazon's Best Sellers lists show the top 100 titles in each Books and Kindle Store category, ranked by recent and
-  historical customer activity, with the Kindle Store split into Paid and Free lists; Hot New Releases ranks the
-  best-selling new and upcoming titles. For a KDP publisher
-  they are free, first-party data for spotting what sells in a niche and what new titles are breaking in. They show rank,
-  not sales numbers; ranks are relative and update at least daily, so turning them into sales estimates needs a
-  third-party tool.
+  Amazon's Best Sellers lists show the top 100 titles in each Books and Kindle Store category, ranked by recent and historical customer activity, with the Kindle Store split into Paid and Free lists; Hot New Releases ranks the best-selling new and upcoming titles. For a KDP publisher they are free, first-party data for spotting what sells in a niche and what new titles are breaking in. They show rank, not sales numbers; ranks are relative and update at least daily, so turning them into sales estimates needs a third-party tool.
 official: true
 pricing: { model: free, currency: USD }
 platforms: [web]
@@ -22,7 +17,8 @@ pros:
 cons:
   - No sales figures, search volume or history
   - Only the top 100 per category list is shown
-best_for: [Browsing what currently sells in a book category]
+best_for:
+  - Readers and publishers checking Amazon’s current bestselling books by sales
 alternatives: [bookbeam, kdspy, publisher-rocket]
 status: published
 verified_at: 2026-11-09
@@ -30,3 +26,4 @@ sources:
   - https://www.amazon.com/gp/bestsellers/books
   - https://www.amazon.com/gp/new-releases/books
   - https://kdp.amazon.com/en_US/help/topic/G201648140
+features_checked_at: 2026-11-10

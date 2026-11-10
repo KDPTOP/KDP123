@@ -3,10 +3,8 @@ url: https://authorscout.com
 categories: [book-research, analytics]
 tagline: AuthorScout is a book and niche discovery tool with history, categories and tracking for independent books, with a free plan.
 summary: >-
-  AuthorScout starts from the question of which books and niches deserve a closer look. It is built around independent-book
-  discovery, history, categories and tracking. It has a free plan, a Pro plan at $9.99 a month and a Publisher Pro plan at
-  $15.99 a month. Pricing is as published by the vendor in its own comparison page.
-pricing: { model: freemium, from: 9.99, currency: USD, period: month, free_tier: true, note: "Publisher Pro $15.99/mo. Prices from the vendor's own comparison page." }
+  AuthorScout starts from the question of which books and niches deserve a closer look. It is built around independent-book discovery, history, categories and tracking. It has a free plan, a Pro plan at $9.99 a month and a Publisher Pro plan at $15.99 a month. Pricing is as published by the vendor in its own comparison page.
+pricing: { model: freemium, from: 9.99, currency: USD, period: month, free_tier: true, note: "Publisher Pro $15.99/mo. Prices from the vendor's own comparison page.", region_note: USD subscriptions renew monthly; Paystack payments are available in naira and cover 30 days. }
 platforms: [web]
 kdp:
   outputs_kdp_files: false
@@ -17,3 +15,9 @@ status: published
 verified_at: 2026-11-09
 sources:
   - https://authorscout.com/blog/kdp-research-tools-compared
+best_for:
+  - Independent publishers researching Amazon titles, keywords, and categories
+not_ideal_for:
+  - Users who need a billed-annual plan rather than a monthly USD subscription
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

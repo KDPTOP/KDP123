@@ -3,11 +3,7 @@ url: https://www.bookbub.com/partners
 categories: [ads-promotion]
 tagline: BookBub Partners is a book marketing platform for authors that sells curated Featured Deal emails and self-serve auction ads to BookBub's readers.
 summary: >-
-  BookBub Featured Deals put a free or deeply discounted ebook (at least 50% off its recent price) in BookBub's daily genre
-  emails to readers in the US, UK, Canada and Australia; submission is free, editors select only 10-20% of eligible deals,
-  and you pay a flat fee only if selected. BookBub Ads is a separate self-serve CPM or CPC auction that places ads in BookBub
-  and Chirp emails and on bookbub.com, with no editorial review. It promotes ebooks across retailers, not just Amazon, and
-  BookBub does not guarantee clicks or sales for either product.
+  BookBub Featured Deals put a free or deeply discounted ebook (at least 50% off its recent price) in BookBub's daily genre emails to readers in the US, UK, Canada and Australia; submission is free, editors select only 10-20% of eligible deals, and you pay a flat fee only if selected. BookBub Ads is a separate self-serve CPM or CPC auction that places ads in BookBub and Chirp emails and on bookbub.com, with no editorial review. It promotes ebooks across retailers, not just Amazon, and BookBub does not guarantee clicks or sales for either product.
 pricing:
   model: paid
   from: 122
@@ -26,7 +22,8 @@ pros:
 cons:
   - Featured Deals are hard to get; only 10-20% of eligible submissions are selected
   - Fees for popular fiction categories run into the thousands of dollars at $2.99 and up
-best_for: [Running a price-promotion on a series starter or backlist ebook]
+best_for:
+  - Authors and publishers promoting books to BookBub’s reader audience
 alternatives: [written-word-media, ereader-news-today, robin-reads, the-fussy-librarian, amazon-ads]
 status: published
 verified_at: 2026-11-09
@@ -34,3 +31,6 @@ sources:
   - https://www.bookbub.com/partners/pricing
   - https://support.bookbub.com/articles/bookbubs-marketing-tools/
   - https://support.bookbub.com/articles/how-are-ads-priced/
+not_ideal_for:
+  - Authors who need every BookBub marketing tool outside the United States
+features_checked_at: 2026-11-10
