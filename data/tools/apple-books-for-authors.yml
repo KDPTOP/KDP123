@@ -3,10 +3,7 @@ url: https://authors.apple.com
 categories: [print-distribution]
 tagline: Apple Books for Authors is Apple's free portal for self-publishers that puts EPUB ebooks on Apple Books through an iTunes Connect account.
 summary: >-
-  Apple Books for Authors is Apple's guide and web publishing portal for selling ebooks on Apple Books directly; files
-  must pass EPUBCheck, and an ISBN is optional. Sign-up is free, and Apple states 70% royalties on every ebook regardless
-  of price with no file delivery fees (its homepage comparison with KDP is Apple's own claim). Selling the same ebook on
-  Apple Books conflicts with KDP Select ebook exclusivity.
+  Apple Books for Authors is Apple's guide and web publishing portal for selling ebooks on Apple Books directly; files must pass EPUBCheck, and an ISBN is optional. Sign-up is free, and Apple states 70% royalties on every ebook regardless of price with no file delivery fees (its homepage comparison with KDP is Apple's own claim). Selling the same ebook on Apple Books conflicts with KDP Select ebook exclusivity.
 pricing: { model: free, currency: USD, note: "Free iTunes Connect account. Apple states 70% royalties on every ebook regardless of price." }
 platforms: [web]
 kdp:
@@ -18,7 +15,8 @@ pros:
 cons:
   - Ebooks only; print is not offered
   - Requires an Apple Account and an EPUB that passes EPUBCheck
-best_for: [Wide authors who want Apple Books direct rather than through an aggregator]
+best_for:
+  - Authors self-publishing ebooks on Apple Books, including digital-narration audiobooks
 alternatives: [kobo-writing-life, google-play-books-partner, draft2digital]
 status: published
 verified_at: 2026-11-09
@@ -26,3 +24,4 @@ sources:
   - https://authors.apple.com/
   - https://authors.apple.com/support/3967-create-itunes-connect-account
   - https://kdp.amazon.com/en_US/help/topic/GD9PMU58BV24QFZ7
+features_checked_at: 2026-11-10

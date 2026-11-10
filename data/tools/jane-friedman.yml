@@ -3,11 +3,7 @@ url: https://janefriedman.com
 categories: [courses-blogs]
 tagline: Jane Friedman's site is a publishing industry blog and paid newsletter for authors that reports on trade and self-publishing business news.
 summary: >-
-  Jane Friedman, a former Writer's Digest publisher, runs a free site of articles on writing and publishing and The
-  Bottom Line, a weekly industry newsletter with a free version and paid tiers. It is the place to follow industry
-  changes such as retailer policy, AI and rights issues, not a step-by-step KDP tutorial. Her ethics statement says she
-  takes no affiliate fees for services or software and uses affiliate links only for books; her income comes from her
-  writing, teaching and subscriptions.
+  Jane Friedman, a former Writer's Digest publisher, runs a free site of articles on writing and publishing and The Bottom Line, a weekly industry newsletter with a free version and paid tiers. It is the place to follow industry changes such as retailer policy, AI and rights issues, not a step-by-step KDP tutorial. Her ethics statement says she takes no affiliate fees for services or software and uses affiliate links only for books; her income comes from her writing, teaching and subscriptions.
 pricing: { model: freemium, from: 79, currency: USD, period: year, free_tier: true, note: "Site and the free newsletter are free. The Bottom Line Business Level is $79/year; Supporter Level is $199/year." }
 platforms: [web]
 pros:
@@ -16,10 +12,12 @@ pros:
 cons:
   - In-depth analysis is behind the paid newsletter
   - Not a how-to resource for KDP setup or ads
-best_for: [Following publishing industry news and its effect on authors]
+best_for:
+  - Authors reading publishing-industry news and career advice from Jane Friedman
 alternatives: [writer-beware, the-creative-penn, alli]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://janefriedman.com/about/
   - https://janefriedman.com/subscribe-paid-newsletter/
+features_checked_at: 2026-11-10

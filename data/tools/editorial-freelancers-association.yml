@@ -3,10 +3,7 @@ url: https://www.the-efa.org
 categories: [editing]
 tagline: The Editorial Freelancers Association is a US association of freelance editors whose free directory and job list help authors hire editors and proofreaders.
 summary: >-
-  The EFA lets authors search its member directory by skill, genre and specialty or post a job to its members, at no
-  charge to clients, and it publishes a rate chart of median editing rates from its member survey. It is a professional
-  association, not an agency: you contract with and vet the editor yourself, and the EFA states that it neither sets nor
-  advises on rates. Use the rate chart to budget and ask candidates for a sample edit.
+  The EFA lets authors search its member directory by skill, genre and specialty or post a job to its members, at no charge to clients, and it publishes a rate chart of median editing rates from its member survey. It is a professional association, not an agency: you contract with and vet the editor yourself, and the EFA states that it neither sets nor advises on rates. Use the rate chart to budget and ask candidates for a sample edit.
 pricing: { model: free, currency: USD, note: "Free for clients to search the directory and post jobs; editors set their own rates." }
 platforms: [web]
 kdp:
@@ -18,10 +15,12 @@ pros:
 cons:
   - You vet and contract with editors yourself
   - Rate chart shows medians; individual rates vary widely
-best_for: [Finding a human editor or proofreader and checking what to budget]
+best_for:
+  - Authors hiring freelance editors, or editors joining the EFA community
 alternatives: [prowritingaid, grammarly]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.the-efa.org/hiring/
   - https://www.the-efa.org/rates/
+features_checked_at: 2026-11-10

@@ -3,12 +3,8 @@ url: https://payhip.com
 categories: [direct-sales]
 tagline: Payhip is an online store builder for creators that lets KDP publishers sell ebooks, PDFs and printables directly, on a free or flat-fee plan.
 summary: >-
-  Payhip provides a storefront, checkout and file delivery for digital products, with every feature on every plan; the
-  plans differ only in transaction fee. It collects and remits EU/UK VAT and US/Canadian sales tax on digital sales. It
-  does not print books or list them on Amazon. If your ebook is enrolled in KDP Select, selling the same ebook on Payhip
-  breaks the Select exclusivity rule; print and other formats may be sold elsewhere. PayPal or Stripe processing fees
-  apply on top.
-pricing: { model: freemium, from: 29, currency: USD, period: month, free_tier: true, note: "Free plan with 5% transaction fee; Plus $29/month with 2%; Pro $99/month with no Payhip fee. PayPal/Stripe fees extra." }
+  Payhip provides a storefront, checkout and file delivery for digital products, with every feature on every plan; the plans differ only in transaction fee. It collects and remits EU/UK VAT and US/Canadian sales tax on digital sales. It does not print books or list them on Amazon. If your ebook is enrolled in KDP Select, selling the same ebook on Payhip breaks the Select exclusivity rule; print and other formats may be sold elsewhere. PayPal or Stripe processing fees apply on top.
+pricing: { model: freemium, from: 29, currency: USD, period: month, free_tier: true, note: "Free plan with 5% transaction fee; Plus $29/month with 2%; Pro $99/month with no Payhip fee. PayPal/Stripe fees extra.", region_note: "Payhip automatically collects, reports and remits digital EU/UK VAT as well as US/Canadian sales tax on your behalf." }
 platforms: [web]
 kdp:
   touches_kdp_account: false
@@ -19,10 +15,13 @@ pros:
 cons:
   - Payment processor fees are charged on top of Payhip's fee
   - Selling a KDP Select ebook here breaks exclusivity
-best_for: [Running your own store for ebooks and printables]
+best_for:
+  - Creators selling digital downloads, courses, coaching, memberships, or physical goods
 alternatives: [gumroad, draft2digital]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://payhip.com/pricing
   - https://kdp.amazon.com/en_US/help/topic/GD9PMU58BV24QFZ7
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

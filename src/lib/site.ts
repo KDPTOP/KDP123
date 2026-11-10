@@ -72,7 +72,7 @@ export function priceTerms(t: Tool): string[] {
   if (p.per) out.push(`Priced per ${p.per}`);
   if (p.trial_days) out.push(`${p.trial_days}-day free trial`);
   if (p.refund_days !== undefined) out.push(p.refund_days ? `${p.refund_days}-day refund window` : 'No refunds');
-  if (p.region_note) out.push(p.region_note);
+  if (p.region_note) out.push(p.region_note.replace(/\.$/, ''));
   return out;
 }
 

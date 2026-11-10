@@ -3,11 +3,7 @@ url: https://book2color.com/en
 categories: [low-content, ai-tools]
 tagline: Book2Color is a web-based AI coloring book generator for KDP sellers that creates line-art pages and exports interior PDFs in KDP trim sizes.
 summary: >-
-  Book2Color generates coloring pages from text prompts using Google's Imagen models, arranges them into a book and
-  exports a PDF interior with margins and bleed for standard KDP trim sizes. Its terms grant commercial rights only for
-  images made with paid credits; free-tier output is for personal, non-commercial use, even though the homepage says all
-  plans include commercial rights. The images are AI-generated, so KDP requires you to disclose them when you publish.
-  The domain was registered in January 2026, so the service has a short track record.
+  Book2Color generates coloring pages from text prompts using Google's Imagen models, arranges them into a book and exports a PDF interior with margins and bleed for standard KDP trim sizes. Its terms grant commercial rights only for images made with paid credits; free-tier output is for personal, non-commercial use, even though the homepage says all plans include commercial rights. The images are AI-generated, so KDP requires you to disclose them when you publish. The domain was registered in January 2026, so the service has a short track record.
 pricing: { model: freemium, from: 9.99, currency: USD, period: month, free_tier: true, note: "Basic $9.99/month for 100 image credits, Pro $19.99/month for 600. Used credits are non-refundable." }
 platforms: [web]
 kdp:
@@ -20,7 +16,8 @@ pros:
 cons:
   - Free-tier images cannot be used commercially
   - AI-generated images must be disclosed to KDP, and niches full of AI coloring books are crowded
-best_for: [Producing AI coloring book interiors quickly]
+best_for:
+  - Amazon KDP sellers making AI coloring book interiors and covers
 alternatives: [kdp-coloring-book-studio, colorcraft, midjourney]
 status: published
 verified_at: 2026-11-09
@@ -28,3 +25,16 @@ sources:
   - https://book2color.com/en/pricing
   - https://book2color.com/en/legal/terms
   - https://kdp.amazon.com/en_US/help/topic/G200672390
+kdp_fit:
+  cover: native
+  interior: native
+  print: native
+  ebook: unverified
+  manual_steps: []
+  sources:
+    - https://book2color.com/en/features
+    - https://book2color.com/en
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Users who need free-plan exports beyond the stated limits
+features_checked_at: 2026-11-10

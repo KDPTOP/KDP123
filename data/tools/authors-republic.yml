@@ -3,11 +3,7 @@ url: https://www.authorsrepublic.com
 categories: [audio]
 tagline: Author's Republic is a free, non-exclusive audiobook distributor for indie authors that sends finished audiobooks to retail, library and streaming channels for 20% of royalties.
 summary: >-
-  Author's Republic distributes audiobooks to Audible, Apple, Spotify, Google Play, library platforms such as Hoopla and
-  Libby, and music streaming services; it is free to use, pays 80% of earned royalties, and offers narrator hiring. You can
-  opt out of Amazon/Audible if you already sell there through ACX non-exclusively, but an ACX title under an exclusive
-  agreement (required to enroll an ACX audiobook in KDP Select) cannot go wide. It is testing distribution of AI-narrated
-  audiobooks, which not all retailers accept.
+  Author's Republic distributes audiobooks to Audible, Apple, Spotify, Google Play, library platforms such as Hoopla and Libby, and music streaming services; it is free to use, pays 80% of earned royalties, and offers narrator hiring. You can opt out of Amazon/Audible if you already sell there through ACX non-exclusively, but an ACX title under an exclusive agreement (required to enroll an ACX audiobook in KDP Select) cannot go wide. It is testing distribution of AI-narrated audiobooks, which not all retailers accept.
 pricing: { model: free, currency: USD, note: "Free to use. Authors receive 80% of earned royalties. Production services are priced separately." }
 platforms: [web]
 kdp:
@@ -19,7 +15,8 @@ pros:
 cons:
   - Takes 20% of royalties on every channel
   - Delivering the same audiobook to a store through two distributors breaks its terms
-best_for: [Wide audiobook distribution without upfront fees]
+best_for:
+  - Authors producing and distributing audiobooks to Audible, Apple, and Spotify
 alternatives: [spotify-for-authors, streetlib, publishdrive]
 status: published
 verified_at: 2026-11-09
@@ -27,3 +24,4 @@ sources:
   - https://www.authorsrepublic.com/
   - https://www.authorsrepublic.com/learn/faqs
   - https://kdp.amazon.com/en_US/help/topic/GD9PMU58BV24QFZ7
+features_checked_at: 2026-11-10

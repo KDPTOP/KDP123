@@ -3,12 +3,8 @@ url: https://gumroad.com
 categories: [direct-sales]
 tagline: Gumroad is a storefront and checkout for creators that lets KDP publishers sell PDFs, printables and ebooks directly, with no monthly fee.
 summary: >-
-  Gumroad hosts product pages and handles payment and file delivery for digital products such as printable planner
-  PDFs, templates, ebooks and courses, and has acted as merchant of record for sales tax since January 2025. It does not
-  print books or list them on Amazon. If your ebook is enrolled in KDP Select, selling the same ebook on Gumroad breaks
-  the Select exclusivity rule; print and other formats may be sold elsewhere. Templates you buy from other sellers on
-  Gumroad come with each seller's own license, so check it before using them in a KDP book.
-pricing: { model: free, currency: USD, note: "No monthly fee. Gumroad keeps 10% + $0.50 per direct sale and 30% on sales through its Discover marketplace." }
+  Gumroad hosts product pages and handles payment and file delivery for digital products such as printable planner PDFs, templates, ebooks and courses, and has acted as merchant of record for sales tax since January 2025. It does not print books or list them on Amazon. If your ebook is enrolled in KDP Select, selling the same ebook on Gumroad breaks the Select exclusivity rule; print and other formats may be sold elsewhere. Templates you buy from other sellers on Gumroad come with each seller's own license, so check it before using them in a KDP book.
+pricing: { model: free, currency: USD, note: "No monthly fee. Gumroad keeps 10% + $0.50 per direct sale and 30% on sales through its Discover marketplace.", region_note: "Gumroad, as merchant of record, collects and remits sales tax, VAT, and GST on global sales." }
 platforms: [web]
 kdp:
   touches_kdp_account: false
@@ -19,10 +15,15 @@ pros:
 cons:
   - Higher per-sale fees than subscription storefronts at volume
   - Selling a KDP Select ebook here breaks exclusivity
-best_for: [Selling printable PDFs and digital editions direct to readers]
+best_for:
+  - Creators selling ebooks or other digital products without a monthly Gumroad fee
 alternatives: [payhip, draft2digital]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://gumroad.com/pricing
   - https://kdp.amazon.com/en_US/help/topic/GD9PMU58BV24QFZ7
+not_ideal_for:
+  - Sellers of physical goods, which Gumroad’s pricing FAQ does not permit
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

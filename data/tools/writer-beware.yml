@@ -3,11 +3,7 @@ url: https://writerbeware.blog
 categories: [courses-blogs]
 tagline: Writer Beware is a free blog and research service for writers that exposes publishing scams, predatory services and bad contract terms.
 summary: >-
-  Writer Beware was founded in 1998 by Victoria Strauss and A.C. Crispin and is sponsored by the Science Fiction and
-  Fantasy Writers Association. Its blog reports on scams and industry problems, including overpriced marketing
-  services and companies that impersonate real agents and publishers, and it answers writers' questions about specific
-  companies by email for free. It is volunteer-run: SFWA pays its expenses and staff receive no pay. It does not teach
-  how to publish or market.
+  Writer Beware was founded in 1998 by Victoria Strauss and A.C. Crispin and is sponsored by the Science Fiction and Fantasy Writers Association. Its blog reports on scams and industry problems, including overpriced marketing services and companies that impersonate real agents and publishers, and it answers writers' questions about specific companies by email for free. It is volunteer-run: SFWA pays its expenses and staff receive no pay. It does not teach how to publish or market.
 pricing: { model: free, currency: USD }
 platforms: [web]
 pros:
@@ -16,10 +12,12 @@ pros:
 cons:
   - Warns about bad actors but does not recommend good services
   - Covers traditional publishing heavily, not just self-publishing
-best_for: [Checking a publisher, agent or marketing offer for red flags]
+best_for:
+  - Writers researching literary scams, schemes, and industry pitfalls
 alternatives: [alli, absolute-write, jane-friedman]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://writerbeware.blog/about/
   - https://writerbeware.blog/
+features_checked_at: 2026-11-10

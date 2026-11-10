@@ -3,11 +3,7 @@ url: https://absolutewrite.com/forums/index.php
 categories: [communities]
 tagline: Absolute Write Water Cooler is a free, moderated writers' forum known for its Bewares board, where members report on publishers, agents and services.
 summary: >-
-  Absolute Write, founded in 1998, is a free forum for writers, editors and agents with boards on craft, publishing and
-  a large Bewares, Recommendations and Background Check section that is useful for vetting a service before you pay.
-  It is still active in late 2026, but it leans toward traditional publishing, and writers report that new account
-  approvals have stalled since 2025. It has a zero-tolerance rule against AI-generated or AI-assisted content,
-  including posts and avatars, with bans for breaking it.
+  Absolute Write, founded in 1998, is a free forum for writers, editors and agents with boards on craft, publishing and a large Bewares, Recommendations and Background Check section that is useful for vetting a service before you pay. It is still active in late 2026, but it leans toward traditional publishing, and writers report that new account approvals have stalled since 2025. It has a zero-tolerance rule against AI-generated or AI-assisted content, including posts and avatars, with bans for breaking it.
 pricing: { model: free, currency: USD }
 platforms: [web]
 pros:
@@ -16,10 +12,14 @@ pros:
 cons:
   - New registrations reportedly go unapproved for months
   - Leans toward traditional publishing; little on KDP tactics
-best_for: [Researching a publisher or service's reputation]
+best_for:
+  - Writers joining a free moderated community of writers, agents, and editors
 alternatives: [writer-beware, alli, kboards-writers-cafe]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://absolutewrite.com/forums/index.php
   - https://www.reddit.com/r/PubTips/comments/1vvm7pp/discussion_absolute_write_water_cooler/
+not_ideal_for:
+  - Writers looking for paid classes, workshops, or other paid services here
+features_checked_at: 2026-11-10

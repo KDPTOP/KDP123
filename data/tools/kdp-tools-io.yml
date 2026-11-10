@@ -3,12 +3,8 @@ url: https://kdptools.io
 categories: [keywords-categories, book-research, ai-tools]
 tagline: KDP Tools is a web toolkit for KDP publishers with free royalty, KENP and spine calculators plus credit-based AI niche, keyword and category tools.
 summary: >-
-  kdptools.io bundles dozens of free calculators (royalty, KENP, spine width, print cost, readability) with credit-based
-  tools such as Niche Research, which reads current Amazon.com results for a keyword, a seven-backend-keyword generator,
-  a category matcher and a book tracker for reviews and BSR. Many of its tools are AI-driven, so suggestions need
-  checking and AI-generated content must be disclosed to KDP. The site is ad-supported, and its niche research covers
-  Amazon.com only.
-pricing: { model: freemium, from: 9.99, currency: USD, period: month, free_tier: true, note: "Subscriptions from $9.99/month with 400 credits; credit packs from $2.99. Credits valid for 12 months. Many calculators are free without login." }
+  kdptools.io bundles dozens of free calculators (royalty, KENP, spine width, print cost, readability) with credit-based tools such as Niche Research, which reads current Amazon.com results for a keyword, a seven-backend-keyword generator, a category matcher and a book tracker for reviews and BSR. Many of its tools are AI-driven, so suggestions need checking and AI-generated content must be disclosed to KDP. The site is ad-supported, and its niche research covers Amazon.com only.
+pricing: { model: freemium, from: 9.99, currency: USD, period: month, free_tier: true, note: "Subscriptions from $9.99/month with 400 credits; credit packs from $2.99. Credits valid for 12 months. Many calculators are free without login.", region_note: "Paid options are listed in US dollars, with credit packs from $2.99 and subscriptions from $9.99/mo." }
 platforms: [web]
 kdp:
   marketplaces: [us]
@@ -19,7 +15,8 @@ pros:
 cons:
   - Niche research reads Amazon.com only
   - AI-generated scores and category matches are not Amazon data
-best_for: [Quick KDP calculations and low-cost keyword ideas]
+best_for:
+  - Authors using free KDP royalty, print-cost, and spine calculators
 alternatives: [kdpeasy, book-bolt, publisher-rocket]
 status: published
 verified_at: 2026-11-09
@@ -27,3 +24,5 @@ sources:
   - https://kdptools.io/pricing
   - https://kdptools.io/niche-research
   - https://kdptools.io/
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

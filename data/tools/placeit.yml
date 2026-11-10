@@ -3,11 +3,8 @@ url: https://placeit.net
 categories: [cover-design]
 tagline: Placeit is an Envato-owned browser mockup and template site for sellers and authors that makes book mockups and simple book cover designs.
 summary: >-
-  Placeit has a large library of paperback, hardcover and Kindle device mockups plus editable book cover templates, all
-  run in the browser. Downloads are PNG images (MP4 for video), so it does not produce the single PDF print wrap with
-  spine that KDP requires for paperbacks; you assemble that elsewhere. It is a general marketing-asset site for many
-  kinds of sellers, not a KDP-specific tool, and template quality varies.
-pricing: { model: subscription, from: 7.47, currency: USD, period: month, note: "The headline $7.47/mo is the annual plan ($89.69 billed yearly); third-party reviews list the monthly plan at $14.95. One-month minimum once you download anything." }
+  Placeit has a large library of paperback, hardcover and Kindle device mockups plus editable book cover templates, all run in the browser. Downloads are PNG images (MP4 for video), so it does not produce the single PDF print wrap with spine that KDP requires for paperbacks; you assemble that elsewhere. It is a general marketing-asset site for many kinds of sellers, not a KDP-specific tool, and template quality varies.
+pricing: { model: subscription, from: 7.47, currency: USD, period: month, note: "The headline $7.47/mo is the annual plan ($89.69 billed yearly); third-party reviews list the monthly plan at $14.95. One-month minimum once you download anything.", annual_from: 7.47 }
 platforms: [web]
 kdp:
   touches_kdp_account: false
@@ -18,7 +15,8 @@ pros:
 cons:
   - PNG/MP4 downloads only, no print-ready PDF cover wrap
   - Headline price assumes yearly billing
-best_for: [Quick 3D book and device mockups for marketing]
+best_for:
+  - Sellers making product mockups, logos, and merch designs
 alternatives: [book-brush, canva, diy-book-covers]
 status: published
 verified_at: 2026-11-09
@@ -26,3 +24,9 @@ sources:
   - https://placeit.net/pricing
   - https://kdp.amazon.com/en_US/help/topic/G201953020
   - https://hauld.app/blog/placeit-pricing-vs-alternatives
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10
+price_history:
+  - date: 2026-11-10
+    kind: plan
+    note: "Yearly billing read on the vendor's pricing page: from $7.47/mo billed yearly."

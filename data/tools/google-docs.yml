@@ -3,11 +3,7 @@ url: https://workspace.google.com/products/docs/
 categories: [writing-formatting]
 tagline: Google Docs is Google's free browser-based word processor for drafting and sharing manuscripts, with comments, suggestions and EPUB, DOCX and PDF downloads.
 summary: >-
-  Google Docs is free with a Google account and is good for drafting and for collaborating with editors and beta readers
-  through comments and suggested edits. It can download DOCX or EPUB for a Kindle ebook, but its page setup offers only
-  preset paper sizes with no custom trim, mirrored margins or bleed, so it cannot produce a 6x9 or 5x8 print interior
-  without an add-on. Gemini AI drafting is built in on some plans; text it generates must be disclosed to KDP as
-  AI-generated.
+  Google Docs is free with a Google account and is good for drafting and for collaborating with editors and beta readers through comments and suggested edits. It can download DOCX or EPUB for a Kindle ebook, but its page setup offers only preset paper sizes with no custom trim, mirrored margins or bleed, so it cannot produce a 6x9 or 5x8 print interior without an add-on. Gemini AI drafting is built in on some plans; text it generates must be disclosed to KDP as AI-generated.
 pricing: { model: free, currency: USD, note: "Free with a Google account; Google Workspace plans add business features." }
 platforms: [web, ios, android]
 kdp:
@@ -20,7 +16,8 @@ pros:
 cons:
   - No custom page sizes for KDP trim sizes
   - EPUB export is basic and needs checking in Kindle Previewer
-best_for: [Drafting and sharing a manuscript with editors and beta readers]
+best_for:
+  - Writers drafting and collaborating on manuscripts in a Google Account
 alternatives: [microsoft-word, scrivener, dabble, atticus]
 status: published
 verified_at: 2026-11-09
@@ -28,3 +25,18 @@ sources:
   - https://workspace.google.com/products/docs/
   - https://support.google.com/docs/answer/10296604
   - https://kdp.amazon.com/en_US/help/topic/GVBQ3CMEQW3W2VL6
+kdp_fit:
+  interior: manual
+  print: manual
+  cover: unverified
+  ebook: unverified
+  manual_steps:
+    - Open File then Page setup, switch to Pages, and set paper size and margins
+    - Download a PDF with File then Download, or File then Print and Save as PDF
+  sources:
+    - https://support.google.com/docs/answer/10296604
+    - https://support.google.com/docs/answer/49114
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Pageless documents that still need paper size and margins
+features_checked_at: 2026-11-10

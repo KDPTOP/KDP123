@@ -3,13 +3,8 @@ url: https://www.getbookreport.com
 categories: [analytics]
 tagline: Book Report is a sales and ad-spend dashboard for self-published authors that imports KDP and wide-retailer data through a browser extension.
 summary: >-
-  Book Report gathers royalty data from KDP and wide platforms (such as Draft2Digital, Kobo, Apple Books, Google Play,
-  IngramSpark and ACX) plus Amazon and Facebook ad spend, and reports earnings, net earnings after ads and series
-  read-through by book. It imports data by having its browser extension request your dashboard reports and by storing
-  your session cookies on its servers to refresh data later; it never asks for your password, but this does access
-  your KDP account. It does no research, formatting or publishing. Its address is getbookreport.com; bookreport.co is a
-  parked domain unrelated to it.
-pricing: { model: freemium, from: 19, currency: USD, period: month, free_tier: true, note: "14-day free trial, no card. Free if you track under $1,000/month in publishing earnings; Core $19/month up to $5,000/month tracked, up to Enterprise $249. Two months free with annual billing." }
+  Book Report gathers royalty data from KDP and wide platforms (such as Draft2Digital, Kobo, Apple Books, Google Play, IngramSpark and ACX) plus Amazon and Facebook ad spend, and reports earnings, net earnings after ads and series read-through by book. It imports data by having its browser extension request your dashboard reports and by storing your session cookies on its servers to refresh data later; it never asks for your password, but this does access your KDP account. It does no research, formatting or publishing. Its address is getbookreport.com; bookreport.co is a parked domain unrelated to it.
+pricing: { model: freemium, from: 19, currency: USD, period: month, free_tier: true, note: "14-day free trial, no card. Free if you track under $1,000/month in publishing earnings; Core $19/month up to $5,000/month tracked, up to Enterprise $249. Two months free with annual billing.", trial_days: 14 }
 platforms: [web, chrome-extension, firefox-extension]
 kdp:
   outputs_kdp_files: false
@@ -21,7 +16,8 @@ pros:
 cons:
   - Stores your KDP session cookies on its servers to update data
   - Price rises with the earnings you track
-best_for: [Tracking royalties, ad spend and series read-through across retailers]
+best_for:
+  - Authors tracking book sales, series read-through, and ad spend in one place
 alternatives: [keepa]
 status: published
 verified_at: 2026-11-09
@@ -29,3 +25,5 @@ sources:
   - https://www.getbookreport.com/
   - https://www.getbookreport.com/docs/under-the-hood/howitworks
   - https://www.getbookreport.com/docs/getting-started
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

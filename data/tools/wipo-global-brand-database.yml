@@ -3,11 +3,7 @@ url: https://branddb.wipo.int/
 categories: [legal-isbn]
 tagline: The WIPO Global Brand Database is a free international trademark search for checking a book series or brand name against Madrid System and national registers.
 summary: >-
-  Run by the World Intellectual Property Organization, the Global Brand Database searches international trademarks under
-  the Madrid System plus collections from participating national and regional offices, with brand name, owner, Nice
-  class and image search. It is useful for checking a series or imprint name before selling in several Amazon stores at
-  once. WIPO notes it is not a real-time copy of every register, so also search the national office for each country you
-  care about and get legal advice for anything valuable.
+  Run by the World Intellectual Property Organization, the Global Brand Database searches international trademarks under the Madrid System plus collections from participating national and regional offices, with brand name, owner, Nice class and image search. It is useful for checking a series or imprint name before selling in several Amazon stores at once. WIPO notes it is not a real-time copy of every register, so also search the national office for each country you care about and get legal advice for anything valuable.
 official: true
 pricing: { model: free, currency: USD, note: "Free; an optional free WIPO account saves searches." }
 platforms: [web]
@@ -17,10 +13,14 @@ pros:
 cons:
   - National collections can lag behind the source registers
   - Reports are limited to 180 records and bulk downloading is not allowed
-best_for: [A first worldwide check on a series or imprint name]
+best_for:
+  - People searching international and national trademark collections in WIPO’s brand database
 alternatives: [euipo-tmview, uspto-trademark-search]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.wipo.int/en/web/global-brand-database
   - https://www.wipo.int/en/web/global-brand-database/faqs_branddb
+not_ideal_for:
+  - Searches that must also cover national registers not included in the database
+features_checked_at: 2026-11-10

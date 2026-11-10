@@ -3,10 +3,7 @@ url: https://www.netgalley.com
 categories: [reviews-arc]
 tagline: NetGalley is a digital review copy platform for publishers and authors that offers advance copies to librarians, booksellers, media and reviewers.
 summary: >-
-  NetGalley lists your digital review copy for its professional members to request; you approve readers and see feedback
-  and reports. A direct per-title listing is aimed at self-published authors and small presses, while resellers and author
-  co-ops offer shorter, cheaper listings but control the listing and support. Reviews may land on NetGalley, Goodreads or
-  Amazon, and none are guaranteed. Under Amazon's rules a free copy is fine only if a review is not required or steered.
+  NetGalley lists your digital review copy for its professional members to request; you approve readers and see feedback and reports. A direct per-title listing is aimed at self-published authors and small presses, while resellers and author co-ops offer shorter, cheaper listings but control the listing and support. Reviews may land on NetGalley, Goodreads or Amazon, and none are guaranteed. Under Amazon's rules a free copy is fine only if a review is not required or steered.
 pricing:
   model: paid
   from: 575
@@ -24,7 +21,9 @@ pros:
 cons:
   - Expensive for a single self-published title
   - Many downloads never turn into reviews
-best_for: [Trade-facing launches that need librarian and bookseller attention]
+best_for:
+  - Reviewers, librarians, and booksellers requesting free digital galleys
+  - Publishers and authors offering digital review copies to industry readers
 alternatives: [booksprout, booksirens, hidden-gems-books, goodreads]
 status: published
 verified_at: 2026-11-09
@@ -32,3 +31,6 @@ sources:
   - https://netgalleyclient.zendesk.com/hc/en-us/articles/19260193294103-How-NetGalley-Works-with-Resellers
   - https://www.netgalley.com/
   - https://kdp.amazon.com/en_US/help/topic/G202101910
+not_ideal_for:
+  - Title listings that lack an ISBN-13, which NetGalley requires to set up a book
+features_checked_at: 2026-11-10

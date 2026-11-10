@@ -3,11 +3,7 @@ url: https://www.lulu.com
 categories: [print-distribution]
 tagline: Lulu is a print-on-demand and distribution platform for self-publishers that sells through its own bookstore, retail channels and the author's own store.
 summary: >-
-  Lulu prints books on demand and sells them on the Lulu Bookstore, through Global Distribution (Amazon, Ingram and ebook
-  stores) or from your own Shopify, Wix or WooCommerce store via Lulu Direct. Publishing is free; Lulu keeps 20% of gross
-  profit on print and 10% on ebooks, and Global Distribution adds a one-time $4.99 review fee per new title. Print
-  distribution cannot opt out of Amazon, so a Lulu-distributed paperback can duplicate a KDP paperback. Ebooks sent to
-  retailers through Lulu conflict with KDP Select.
+  Lulu prints books on demand and sells them on the Lulu Bookstore, through Global Distribution (Amazon, Ingram and ebook stores) or from your own Shopify, Wix or WooCommerce store via Lulu Direct. Publishing is free; Lulu keeps 20% of gross profit on print and 10% on ebooks, and Global Distribution adds a one-time $4.99 review fee per new title. Print distribution cannot opt out of Amazon, so a Lulu-distributed paperback can duplicate a KDP paperback. Ebooks sent to retailers through Lulu conflict with KDP Select.
 pricing: { model: free, currency: USD, note: "Free to publish. Creator gets 80% of gross profit on print (90% on ebooks) after print cost and retailer share. One-time $4.99 Global Distribution review fee. Lulu Direct: you pay print and shipping and keep the sale." }
 platforms: [web]
 kdp:
@@ -20,7 +16,8 @@ pros:
 cons:
   - Print Global Distribution always includes Amazon, with no opt-out
   - Retail listings can take 12 weeks or more
-best_for: [Selling print books from your own website with automated fulfillment]
+best_for:
+  - Authors printing books on demand and selling them direct or through retailers
 alternatives: [bookvault, ingramspark, blurb]
 status: published
 verified_at: 2026-11-09
@@ -28,3 +25,4 @@ sources:
   - https://www.lulu.com/sell/sell-on-lulu
   - https://help.lulu.com/en/support/solutions/articles/64000255597-publishing-a-print-book-for-global-distribution
   - https://help.lulu.com/en/support/solutions/articles/64000262744-creator-revenue-guide
+features_checked_at: 2026-11-10

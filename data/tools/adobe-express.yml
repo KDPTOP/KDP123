@@ -3,12 +3,7 @@ url: https://www.adobe.com/express/
 categories: [cover-design]
 tagline: Adobe Express is Adobe's template-based online design app for quick graphics that KDP publishers use for ebook covers, ads and social images.
 summary: >-
-  Adobe Express offers templates, Adobe Stock assets, Adobe Fonts and Firefly generative AI in a browser and mobile app.
-  Premium Adobe Stock assets inside Express carry the "Limited License – Adobe Express": you may not put them into
-  merchandise or template files for sale unless the final work is an original work of authorship, you cannot export
-  them as stand-alone files, and you cannot use them in new projects after your paid membership ends. It is a general
-  design tool, so you size print covers yourself from KDP's cover calculator. Images generated with Firefly count as
-  AI-generated content that KDP requires you to disclose.
+  Adobe Express offers templates, Adobe Stock assets, Adobe Fonts and Firefly generative AI in a browser and mobile app. Premium Adobe Stock assets inside Express carry the "Limited License – Adobe Express": you may not put them into merchandise or template files for sale unless the final work is an original work of authorship, you cannot export them as stand-alone files, and you cannot use them in new projects after your paid membership ends. It is a general design tool, so you size print covers yourself from KDP's cover calculator. Images generated with Firefly count as AI-generated content that KDP requires you to disclose.
 pricing: { model: freemium, from: 9.99, currency: USD, period: month, free_tier: true, note: "Premium is US$9.99/month on Adobe's plans page; also included with most Creative Cloud plans." }
 platforms: [web, ios, android]
 kdp:
@@ -20,7 +15,9 @@ pros:
 cons:
   - Premium assets cannot be used in new work after you cancel
   - Template-based covers can look generic
-best_for: [Ebook covers and marketing graphics for Creative Cloud users]
+best_for:
+  - Self-publishers making book covers from free templates
+  - Creators laying out multi-page eBooks to export as PDF
 alternatives: [canva, affinity, creative-fabrica]
 status: published
 verified_at: 2026-11-09
@@ -28,3 +25,20 @@ sources:
   - https://www.adobe.com/creativecloud/plans.html?filter=all-apps&plan=individual
   - https://stock.adobe.com/license-terms
   - https://helpx.adobe.com/express/web/adobe-express-subscription/premium.html
+kdp_fit:
+  cover: manual
+  interior: manual
+  print: manual
+  ebook: unverified
+  manual_steps:
+    - Enter custom Width and Height values, or pick a suggested size, then resize the page
+    - Open File > Bleed and margins and enter Top, Left, Bottom, and Right margin values
+    - Set a custom cover size for the cover type, page count, and genre you need
+  sources:
+    - https://www.adobe.com/express/create/cover/book
+    - https://helpx.adobe.com/express/web/print-and-export/margin-bleed-crop-marks.html
+    - https://helpx.adobe.com/express/web/arrange-layers-and-pages/change-page-size.html
+  checked_at: 2026-11-10
+not_ideal_for:
+  - Users who need auto-apply brand kits on the free plan
+features_checked_at: 2026-11-10

@@ -3,10 +3,7 @@ url: https://www.literatureandlatte.com/scrivener/overview
 categories: [writing-formatting]
 tagline: Scrivener is a desktop writing app for long manuscripts that organizes drafts and research and compiles them to EPUB, PDF and Word.
 summary: >-
-  Scrivener splits a manuscript into scenes and chapters you can rearrange, keeps research beside the draft, and uses a
-  Compile step to export EPUB ebooks and PDFs at a custom page size for print. A KDP publisher can produce upload-ready
-  files with it, but Compile settings take time to learn and many authors still move the text to a dedicated formatter
-  for polished print interiors. Mac and Windows licenses are sold separately, and the iOS app is a separate App Store purchase.
+  Scrivener splits a manuscript into scenes and chapters you can rearrange, keeps research beside the draft, and uses a Compile step to export EPUB ebooks and PDFs at a custom page size for print. A KDP publisher can produce upload-ready files with it, but Compile settings take time to learn and many authors still move the text to a dedicated formatter for polished print interiors. Mac and Windows licenses are sold separately, and the iOS app is a separate App Store purchase.
 pricing: { model: one-time, from: 59.99, currency: USD, period: one-time, refund_days: 30, note: "Price is per platform (macOS or Windows); a Mac + Windows bundle is $95.98 and the iOS app is $23.99. Free trial lasts 30 days of actual use." }
 platforms: [mac, windows, ios]
 kdp:
@@ -19,7 +16,8 @@ pros:
 cons:
   - Compile is complex; print layout is less polished than Vellum or Atticus
   - Separate licenses needed for Mac, Windows and iOS
-best_for: [Drafting and organizing long or research-heavy books]
+best_for:
+  - Authors drafting long manuscripts and compiling to Word, EPUB, or PDF
 alternatives: [atticus, vellum, dabble, novelcrafter]
 status: published
 verified_at: 2026-11-09
@@ -27,3 +25,14 @@ sources:
   - https://www.literatureandlatte.com/scrivener/overview
   - https://www.literatureandlatte.com/store/scrivener
   - https://www.literatureandlatte.com/scrivener/faqs
+kdp_fit:
+  ebook: native
+  print: manual
+  cover: unverified
+  interior: unverified
+  manual_steps:
+    - Use Compile to set the output format and any page formatting required for your printer
+  sources:
+    - https://www.literatureandlatte.com/scrivener/overview
+  checked_at: 2026-11-10
+features_checked_at: 2026-11-10

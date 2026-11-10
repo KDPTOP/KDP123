@@ -3,12 +3,8 @@ url: https://www.novelcrafter.com
 categories: [writing-formatting, ai-tools]
 tagline: Novelcrafter is a browser-based novel writing app with a story wiki and optional AI that connects to the AI provider and key you choose.
 summary: >-
-  Novelcrafter organizes a book or series around a Codex of characters, places and lore, with planning views and optional
-  AI for summarizing, drafting from scene beats and chat. On AI plans you bring your own API key, so AI usage is billed by
-  that provider on top of the subscription. It exports only Word and Markdown and says it cannot format a book for
-  publication, so you need a formatter for KDP files. KDP requires disclosure of AI-generated text; AI used only for
-  editing or brainstorming does not need disclosure.
-pricing: { model: subscription, from: 4, currency: USD, period: month, note: "Scribe $4/month has no AI; AI starts with Hobbyist at $8/month plus your own AI provider costs. 21-day free trial, no free plan." }
+  Novelcrafter organizes a book or series around a Codex of characters, places and lore, with planning views and optional AI for summarizing, drafting from scene beats and chat. On AI plans you bring your own API key, so AI usage is billed by that provider on top of the subscription. It exports only Word and Markdown and says it cannot format a book for publication, so you need a formatter for KDP files. KDP requires disclosure of AI-generated text; AI used only for editing or brainstorming does not need disclosure.
+pricing: { model: subscription, from: 4, currency: USD, period: month, note: "Scribe $4/month has no AI; AI starts with Hobbyist at $8/month plus your own AI provider costs. 21-day free trial, no free plan.", per: user, trial_days: 21, region_note: "Plan cards show USD monthly prices, and the page states prices have been localized to your region." }
 platforms: [web]
 kdp:
   outputs_kdp_files: false
@@ -20,7 +16,8 @@ pros:
 cons:
   - No publication formatting; exports DOCX and Markdown only
   - Needs an internet connection
-best_for: [Series authors who want a story bible with optional AI]
+best_for:
+  - Writers planning and drafting novels in a browser with optional AI keys
 alternatives: [sudowrite, scrivener, dabble, plottr]
 status: published
 verified_at: 2026-11-09
@@ -28,3 +25,8 @@ sources:
   - https://www.novelcrafter.com/pricing
   - https://www.novelcrafter.com/help/faq/export/format-for-export
   - https://kdp.amazon.com/en_US/help/topic/G200672390
+not_ideal_for:
+  - Users who need a free plan rather than a 21-day trial
+  - Teams that want one shared subscription instead of a plan per user
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

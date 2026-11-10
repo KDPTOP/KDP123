@@ -3,12 +3,8 @@ url: https://datadive.tools
 categories: [keywords-categories]
 tagline: Data Dive is a subscription niche and keyword analysis tool for Amazon FBA private-label sellers, with listing building and rank tracking.
 summary: >-
-  Data Dive analyzes the competitor ASINs in a niche to surface shared keywords and keyword roots, builds keyword-weighted
-  listings, tracks organic rank (Rank Radar) and generates PPC campaigns. It is built for FBA private-label sellers, and
-  its production-cost profit calculator and Seller Central connection do not apply to KDP. Its keyword and rank-tracking
-  tools work on ASINs, so a publisher could point them at competing books, but its site does not mention books or offer
-  any book-specific support.
-pricing: { model: subscription, from: 39, currency: USD, period: month, note: "Starter is $39/month billed monthly or $32/month billed yearly. Standard is $124/month billed yearly." }
+  Data Dive analyzes the competitor ASINs in a niche to surface shared keywords and keyword roots, builds keyword-weighted listings, tracks organic rank (Rank Radar) and generates PPC campaigns. It is built for FBA private-label sellers, and its production-cost profit calculator and Seller Central connection do not apply to KDP. Its keyword and rank-tracking tools work on ASINs, so a publisher could point them at competing books, but its site does not mention books or offer any book-specific support.
+pricing: { model: subscription, from: 39, currency: USD, period: month, note: "Starter is $39/month billed monthly or $32/month billed yearly. Standard is $124/month billed yearly.", annual_from: 32 }
 platforms: [web]
 kdp:
   outputs_kdp_files: false
@@ -19,9 +15,16 @@ pros:
 cons:
   - No book-specific features or guidance
   - PPC deployment and account features assume a Seller Central account, not KDP
-best_for: [Publishers who also run a private-label Amazon brand]
+best_for:
+  - Amazon FBA sellers validating niches, listings, and keywords before launch
 alternatives: [helium-10, merchantwords, publisher-rocket]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://datadive.tools/pricing/
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10
+price_history:
+  - date: 2026-11-10
+    kind: plan
+    note: "Yearly billing read on the vendor's pricing page: from $32/mo billed yearly."

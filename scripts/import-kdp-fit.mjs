@@ -164,10 +164,14 @@ for (const [n, line] of readFileSync(file, 'utf8').split('\n').entries()) {
 if (write && touched.length) {
   const logFile = 'data/changelog.json';
   const entries = JSON.parse(readFileSync(logFile, 'utf8'));
-  entries.unshift({
-    date: today,
-    note: `Checked KDP fit, audience and pricing terms for ${touched.length} ${touched.length === 1 ? 'tool' : 'tools'} against each vendor's own pages: ${touched.join(', ')}.`,
-  });
+  // The feed uses the date as guid, so one entry per day: merge into today's entry if it exists.
+  const re = /Checked KDP fit, audience and pricing terms for \d+ tools? against each vendor's own pages: ([^.]*)\./;
+  const entry = entries.find((e) => e.date === today);
+  const prior = entry?.note.match(re);
+  const ids = [...new Set([...(prior ? prior[1].split(', ') : []), ...touched])].sort();
+  const sentence = `Checked KDP fit, audience and pricing terms for ${ids.length} ${ids.length === 1 ? 'tool' : 'tools'} against each vendor's own pages: ${ids.join(', ')}.`;
+  if (!entry) entries.unshift({ date: today, note: sentence });
+  else entry.note = prior ? entry.note.replace(re, sentence) : `${entry.note} ${sentence}`;
   writeFileSync(logFile, JSON.stringify(entries, null, 2) + '\n');
 }
 console.log(`\n${accepted} claims accepted, ${rejected} rejected, ${touched.length} tools ${write ? 'updated' : 'would change (dry run; add --write)'}`);

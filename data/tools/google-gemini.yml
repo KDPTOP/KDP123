@@ -3,12 +3,8 @@ url: https://gemini.google.com
 categories: [ai-tools]
 tagline: Google Gemini is Google's AI assistant for writing, research and image generation, with paid tiers sold as Google AI plans.
 summary: >-
-  Gemini can draft and edit text, run Deep Research reports, and generate or edit images with Google's Nano Banana
-  models. It does not produce KDP-ready interiors or cover files. KDP's content guidelines require you to disclose
-  AI-generated text, images or translations when you publish; using AI only to edit or brainstorm your own work is
-  AI-assisted and does not need disclosure. Paid plans bundle Google cloud storage and other Google services, so part of
-  the price is not for the AI.
-pricing: { model: freemium, from: 4.99, currency: USD, period: month, free_tier: true, note: "Google AI Plus $4.99/mo, Google AI Pro $19.99/mo, Ultra from $99.99/mo (US prices). Plus only includes the Flash model." }
+  Gemini can draft and edit text, run Deep Research reports, and generate or edit images with Google's Nano Banana models. It does not produce KDP-ready interiors or cover files. KDP's content guidelines require you to disclose AI-generated text, images or translations when you publish; using AI only to edit or brainstorm your own work is AI-assisted and does not need disclosure. Paid plans bundle Google cloud storage and other Google services, so part of the price is not for the AI.
+pricing: { model: freemium, from: 4.99, currency: USD, period: month, free_tier: true, note: "Google AI Plus $4.99/mo, Google AI Pro $19.99/mo, Ultra from $99.99/mo (US prices). Plus only includes the Flash model. Google AI Pro is $199.99 billed yearly.", region_note: Availability varies by country; some Gemini benefits are US-only or language-restricted. }
 platforms: [web, ios, android]
 kdp:
   outputs_kdp_files: false
@@ -20,7 +16,8 @@ pros:
 cons:
   - Model access and limits differ sharply between plans
   - AI-generated text and images must be disclosed to KDP
-best_for: [Research, drafting help and quick image ideas]
+best_for:
+  - Individuals using Gemini for writing, image generation, and research
 alternatives: [chatgpt, adobe-firefly]
 status: published
 verified_at: 2026-11-09
@@ -28,3 +25,8 @@ sources:
   - https://gemini.google/subscriptions/
   - https://one.google.com/about/google-ai-plans/
   - https://kdp.amazon.com/en_US/help/topic/G200672390
+not_ideal_for:
+  - Workspace accounts, which cannot sign up for Google AI consumer plans
+  - Users in countries where a chosen Google AI plan is not available
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

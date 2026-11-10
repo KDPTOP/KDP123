@@ -3,10 +3,7 @@ url: https://business.pinterest.com
 categories: [ads-promotion]
 tagline: Pinterest Business is Pinterest's free business account and ads platform for promoting Pins to people searching and browsing ideas.
 summary: >-
-  A free Pinterest business account adds analytics and lets authors pin book covers, quotes or printables that link to a
-  book page or signup page, and run auction-priced ads. It suits visual niches such as cookbooks, coloring, journals,
-  crafts and children's books more than most fiction. Ads are not available in every country, and like other off-Amazon
-  ads, sales on Amazon from Pinterest clicks are hard to attribute.
+  A free Pinterest business account adds analytics and lets authors pin book covers, quotes or printables that link to a book page or signup page, and run auction-priced ads. It suits visual niches such as cookbooks, coloring, journals, crafts and children's books more than most fiction. Ads are not available in every country, and like other off-Amazon ads, sales on Amazon from Pinterest clicks are hard to attribute.
 pricing:
   model: freemium
   currency: USD
@@ -23,7 +20,8 @@ pros:
 cons:
   - New business accounts can only be created on desktop
   - Ads are unavailable in some countries
-best_for: [Promoting visual nonfiction and low-content books with pins]
+best_for:
+  - Businesses signing up for a free Pinterest business account to run ads
 alternatives: [meta-ads-manager, amazon-ads]
 status: published
 verified_at: 2026-11-09
@@ -31,3 +29,4 @@ sources:
   - https://help.pinterest.com/en/business/article/get-a-business-account
   - https://help.pinterest.com/en/business/article/set-your-bid
   - https://business.pinterest.com/
+features_checked_at: 2026-11-10

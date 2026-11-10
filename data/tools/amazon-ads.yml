@@ -3,9 +3,7 @@ url: https://advertising.amazon.com
 categories: [official, ads-promotion]
 tagline: Amazon Ads is Amazon's on-platform advertising console, used by KDP publishers to promote books with sponsored ads.
 summary: >-
-  Amazon Ads is where KDP publishers run Sponsored Products and related ad types for their books. Many publishers report
-  it as the best return when run with tight targeting, but results vary by niche. Publisher Rocket and similar tools
-  generate keyword ideas to use in it.
+  Amazon Ads is where KDP publishers run Sponsored Products and related ad types for their books. Many publishers report it as the best return when run with tight targeting, but results vary by niche. Publisher Rocket and similar tools generate keyword ideas to use in it.
 official: true
 pricing: { model: paid, currency: USD, note: "Pay per click; you set your own budget." }
 platforms: [web]
@@ -16,3 +14,6 @@ verified_at: 2026-11-09
 sources:
   - https://advertising.amazon.com
   - https://www.reddit.com/r/KDP/comments/1vqvzgl/kdp_marketing_newbie_who_should_i_learn_from/
+best_for:
+  - Businesses running Sponsored ads, display, video, or audio campaigns on Amazon
+features_checked_at: 2026-11-10

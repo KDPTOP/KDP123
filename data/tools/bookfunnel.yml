@@ -3,11 +3,8 @@ url: https://bookfunnel.com
 categories: [email-tools, reviews-arc, direct-sales]
 tagline: BookFunnel is an ebook and audiobook delivery service for authors that sends reader magnets, review copies and direct-sale files to readers.
 summary: >-
-  BookFunnel hosts your ebook (and optionally audiobook) files and delivers them to readers through download and giveaway
-  pages, group promos, mailing-list integrations, ARC delivery and direct-sales fulfillment. It is not an email service
-  provider; it connects to one. BookFunnel's own knowledge base advises against giving away even a sample of a KDP Select
-  book and suggests a separate reader magnet instead; sales promos that link to Amazon are fine.
-pricing: { model: subscription, from: 30, currency: USD, period: year, refund_days: 30, note: "First-Time Author plan $30/year (500 downloads/month, no email collection or mailing-list integration). Mid-List $20/month or $200/year. Audiobook delivery is an add-on." }
+  BookFunnel hosts your ebook (and optionally audiobook) files and delivers them to readers through download and giveaway pages, group promos, mailing-list integrations, ARC delivery and direct-sales fulfillment. It is not an email service provider; it connects to one. BookFunnel's own knowledge base advises against giving away even a sample of a KDP Select book and suggests a separate reader magnet instead; sales promos that link to Amazon are fine.
+pricing: { model: subscription, from: 30, currency: USD, period: year, refund_days: 30, note: "First-Time Author plan $30/year (500 downloads/month, no email collection or mailing-list integration). Mid-List $20/month or $200/year. Audiobook delivery is an add-on.", annual_from: 2.5 }
 platforms: [web]
 kdp:
   touches_kdp_account: false
@@ -18,7 +15,8 @@ pros:
 cons:
   - Email collection and mailing-list integration need the $200/year plan or higher
   - Cannot be used to give away a KDP Select ebook
-best_for: [Delivering reader magnets and ARCs]
+best_for:
+  - Indie authors delivering reader magnets, ARCs, and direct-sale ebooks
 alternatives: [shopify]
 status: published
 verified_at: 2026-11-09
@@ -26,3 +24,9 @@ sources:
   - https://bookfunnel.com/pricing/
   - https://authors.bookfunnel.com/help/kdp-select-kindle-unlimited-books-in-group-promos/
   - https://kdp.amazon.com/en_US/help/topic/GD9PMU58BV24QFZ7
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10
+price_history:
+  - date: 2026-11-10
+    kind: plan
+    note: "Yearly billing read on the vendor's pricing page: from $2.5/mo billed yearly."

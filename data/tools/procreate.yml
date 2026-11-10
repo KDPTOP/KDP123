@@ -3,10 +3,7 @@ url: https://procreate.com
 categories: [cover-design, low-content]
 tagline: Procreate is an iPad drawing and painting app for illustrators that KDP publishers use to draw coloring pages, cover art and picture book illustrations.
 summary: >-
-  Procreate is a raster illustration app for iPad and Apple Pencil, sold as a one-time purchase. KDP publishers use it
-  to draw original line art for coloring books and art for covers and children's books, then lay the pages out in
-  another app; it does not assemble book interiors or calculate spine width. Procreate has publicly committed to no
-  generative AI in its apps, so artwork drawn in it is your own and does not need an AI disclosure to KDP.
+  Procreate is a raster illustration app for iPad and Apple Pencil, sold as a one-time purchase. KDP publishers use it to draw original line art for coloring books and art for covers and children's books, then lay the pages out in another app; it does not assemble book interiors or calculate spine width. Procreate has publicly committed to no generative AI in its apps, so artwork drawn in it is your own and does not need an AI disclosure to KDP.
 pricing: { model: one-time, from: 12.99, currency: USD, period: one-time, note: "US App Store price. iPad only; Procreate Pocket for iPhone is a separate purchase." }
 platforms: [ios]
 kdp:
@@ -19,7 +16,8 @@ pros:
 cons:
   - iPad only
   - Needs a separate layout app for full interiors and print covers
-best_for: [Drawing original coloring pages and cover illustrations]
+best_for:
+  - Artists making digital art in the Procreate studio on iPad
 alternatives: [affinity, adobe-express, kdp-coloring-book-studio]
 status: published
 verified_at: 2026-11-09
@@ -27,3 +25,4 @@ sources:
   - https://procreate.com/procreate
   - https://apps.apple.com/us/app/procreate/id425073498
   - https://procreate.com/ai
+features_checked_at: 2026-11-10

@@ -3,11 +3,8 @@ url: https://draft2digital.com
 categories: [writing-formatting, print-distribution]
 tagline: Draft2Digital is an ebook and print-on-demand distribution service for publishing wide that also formats Word manuscripts into EPUB and print PDF.
 summary: >-
-  Draft2Digital converts a Word document into an ebook EPUB or print-ready paperback PDF with layout templates, and you
-  can download those files free even if you do not publish through it. Publishing requires a $20 one-time activation
-  fee; it then takes about 10% of the retail price as commission and distributes to many retailers and libraries. D2D
-  Print paperbacks also reach Amazon. It does not accept content generated entirely by AI without extensive human editing.
-pricing: { model: freemium, from: 20, currency: USD, period: one-time, free_tier: true, note: "Formatting and file download are free. To publish: $20 one-time non-refundable activation fee; $12/yr maintenance fee for accounts with titles in distribution earning under $100/yr (waived the first year); commission of about 10% of retail price per sale." }
+  Draft2Digital converts a Word document into an ebook EPUB or print-ready paperback PDF with layout templates, and you can download those files free even if you do not publish through it. Publishing requires a $20 one-time activation fee; it then takes about 10% of the retail price as commission and distributes to many retailers and libraries. D2D Print paperbacks also reach Amazon. It does not accept content generated entirely by AI without extensive human editing.
+pricing: { model: freemium, from: 20, currency: USD, period: one-time, free_tier: true, note: "Formatting and file download are free. To publish: $20 one-time non-refundable activation fee; $12/yr maintenance fee for accounts with titles in distribution earning under $100/yr (waived the first year); commission of about 10% of retail price per sale.", region_note: "Activation and fees are in USD; store taxes depend on location, and non-US publishers face 30% US withholding unless a tax treaty form is filed." }
 price_history:
   - date: 2026-11-09
     from: 20
@@ -30,3 +27,21 @@ verified_at: 2026-11-09
 sources:
   - https://draft2digital.com/
   - https://draft2digital.com/faq/
+kdp_fit:
+  cover: native
+  interior: native
+  ebook: native
+  print: native
+  manual_steps:
+    - Choose a listed paperback trim size and review the converted interior and wrap cover
+  sources:
+    - https://draft2digital.com/faq/
+  checked_at: 2026-11-10
+best_for:
+  - Authors converting Word files to EPUB and paperback PDF
+  - Authors distributing ebooks to multiple stores from one account
+not_ideal_for:
+  - Print books already in KDP Print Expanded Distribution
+  - Authors who need automatic Amazon ebook distribution without an invite
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10

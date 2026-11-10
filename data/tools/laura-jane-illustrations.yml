@@ -3,11 +3,7 @@ url: https://www.laurajaneillustrations.com
 categories: [courses-blogs]
 tagline: Laura Jane Illustrations is an illustrator's site for artists that sells Published & Printed, a self-paced course on making low-content and creative books for KDP.
 summary: >-
-  Laura Jane Jones is a freelance illustrator who sells her own planners, calendars and art, and runs a YouTube channel
-  and Patreon. Her KDP course, Published & Printed, has six modules covering KDP setup, interior layout in InDesign or
-  Canva, covers from KDP's cover template in Canva, Procreate or Illustrator, listings, A+ Content and organic launch
-  marketing, with feedback on your files. It suits artists making creative journals and coloring books rather than
-  publishers looking for volume or niche-research systems.
+  Laura Jane Jones is a freelance illustrator who sells her own planners, calendars and art, and runs a YouTube channel and Patreon. Her KDP course, Published & Printed, has six modules covering KDP setup, interior layout in InDesign or Canva, covers from KDP's cover template in Canva, Procreate or Illustrator, listings, A+ Content and organic launch marketing, with feedback on your files. It suits artists making creative journals and coloring books rather than publishers looking for volume or niche-research systems.
 pricing: { model: one-time, from: 320, currency: EUR, period: one-time, note: "EUR 320 in one payment, or 3 x EUR 107 or 6 x EUR 54; the page estimates about US$375. A free KDP workshop is also offered." }
 platforms: [web]
 kdp:
@@ -19,10 +15,12 @@ pros:
 cons:
   - Priced in euros and higher than many KDP courses
   - Little on keyword or niche research
-best_for: [Illustrators publishing their first creative journal or coloring book]
+best_for:
+  - People following Laura Jane’s illustration, coloring-book, and KDP tutorials
 alternatives: [the-home-boss, low-content-profits, procreate]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.laurajaneillustrations.com/kdp
   - https://www.laurajaneillustrations.com/
+features_checked_at: 2026-11-10
