@@ -1,0 +1,12 @@
+{
+  // Deployed to the kdp123 Cloudflare account; only handles the routes below.
+  "name": "kdp123-newsletter",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-01",
+  "routes": [{ "pattern": "kdp123.com/api/subscribe*", "zone_name": "kdp123.com" }],
+  "workers_dev": false,
+  "vars": { "FROM": "kdp123 <news@kdp123.com>", "SEGMENT_ID": "c27be705-538f-49d8-9f78-6f6b8ad69133" },
+  "ratelimits": [{ "name": "LIMITER", "namespace_id": "1232", "simple": { "limit": 5, "period": 60 } }],
+  // Secrets (wrangler secret put): RESEND_API_KEY (full access: contacts need it), TURNSTILE_SECRET, SIGNING_KEY.
+  "observability": { "enabled": true }
+}
