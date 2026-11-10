@@ -3,16 +3,17 @@ url: https://www.learnselfpublishing.com
 categories: [courses-blogs, communities]
 tagline: Self Publishing Formula, now branded Learn Self Publishing with James Blatch, sells author courses and runs the Self Publishing Show podcast and events.
 summary: >-
-  Self Publishing Formula's site is now branded "Learn Self Publishing with James Blatch". It sells courses on launches,
-  advertising and author business, runs The Self Publishing Show podcast with James Blatch and Cecelia Mecca, and holds
-  paid Self Publishing Show Live events in London and the USA. Older guides describe it as Mark Dawson's brand; the
-  current site is led by James Blatch. The free content leans toward fiction authors and promotes its paid courses.
+  Self Publishing Formula's site is now branded "Learn Self Publishing with James Blatch". It sells courses on launches, advertising and author business, runs The Self Publishing Show podcast with James Blatch and Cecelia Mecca, and holds paid Self Publishing Show Live events in London and the USA. Older guides describe it as Mark Dawson's brand; the current site is led by James Blatch. The free content leans toward fiction authors and promotes its paid courses.
 pricing: { model: freemium, currency: USD, free_tier: true, note: "Podcast and newsletter are free; courses and live events are sold separately with prices per course." }
 platforms: [web]
-best_for: [Fiction authors learning ads, email lists and launches]
+best_for:
+  - Authors taking Learn Self Publishing courses and joining its author community
 alternatives: [the-self-publishing-show, kindlepreneur, the-creative-penn]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.learnselfpublishing.com
   - https://www.learnselfpublishing.com/podcast-sps-audio
+not_ideal_for:
+  - People looking only for the separate Self Publishing Show podcast pages
+features_checked_at: 2026-11-10

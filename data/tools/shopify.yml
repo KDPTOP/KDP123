@@ -3,11 +3,8 @@ url: https://www.shopify.com
 categories: [direct-sales]
 tagline: Shopify is a general ecommerce platform for small businesses that authors can use to run their own store and sell books directly to readers.
 summary: >-
-  Shopify hosts an online store with checkout, payments and email campaigns. It is a generic store builder, not a book
-  tool: it does not print books or deliver ebook files itself, so authors pair it with apps such as Lulu Direct or
-  Bookvault for print fulfillment. Selling an ebook from your own store conflicts with KDP Select if that ebook is
-  enrolled.
-pricing: { model: subscription, from: 39, currency: USD, period: month, free_tier: false, note: "Basic $39/month or $29/month billed yearly, plus card fees from 2.9% + 30¢. Offer shown: 3-day trial, then $1/month for 3 months." }
+  Shopify hosts an online store with checkout, payments and email campaigns. It is a generic store builder, not a book tool: it does not print books or deliver ebook files itself, so authors pair it with apps such as Lulu Direct or Bookvault for print fulfillment. Selling an ebook from your own store conflicts with KDP Select if that ebook is enrolled.
+pricing: { model: subscription, from: 39, currency: USD, period: month, free_tier: false, note: "Basic $39/month or $29/month billed yearly, plus card fees from 2.9% + 30¢. Offer shown: 3-day trial, then $1/month for 3 months.", annual_from: 29, trial_days: 3, region_note: Plan prices on the opened pricing page are shown in USD. }
 platforms: [web, ios, android]
 kdp:
   touches_kdp_account: false
@@ -16,10 +13,17 @@ pros:
   - You keep customer data and set your own prices
 cons:
   - Needs separate apps for print fulfillment and ebook delivery
-best_for: [Authors building a direct-sales store]
+best_for:
+  - Businesses selling online, in person, or through Shopify’s commerce tools
 alternatives: [lulu, bookvault, bookfunnel]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.shopify.com/pricing
   - https://www.lulu.com/sell/sell-on-lulu
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10
+price_history:
+  - date: 2026-11-10
+    kind: plan
+    note: "Yearly billing read on the vendor's pricing page: from $29/mo billed yearly."

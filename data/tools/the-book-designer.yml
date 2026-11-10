@@ -3,10 +3,7 @@ url: https://www.thebookdesigner.com
 categories: [courses-blogs]
 tagline: The Book Designer is a free blog for self-publishers about book design, interior layout, fonts and production, founded by Joel Friedlander.
 summary: >-
-  The Book Designer was started by book designer Joel Friedlander in 2009 and was bought by selfpublishing.com at the
-  end of 2020, shortly before his death. It keeps an archive of his articles plus newer guides on trim sizes, margins,
-  fonts and covers that apply to KDP print books. It is now owned by Chandler Bolt's selfpublishing.com (Self-Publishing
-  School) and promotes that company's training and programs, so it is no longer an independent voice.
+  The Book Designer was started by book designer Joel Friedlander in 2009 and was bought by selfpublishing.com at the end of 2020, shortly before his death. It keeps an archive of his articles plus newer guides on trim sizes, margins, fonts and covers that apply to KDP print books. It is now owned by Chandler Bolt's selfpublishing.com (Self-Publishing School) and promotes that company's training and programs, so it is no longer an independent voice.
 pricing: { model: free, currency: USD }
 platforms: [web]
 pros:
@@ -15,10 +12,12 @@ pros:
 cons:
   - Owned by selfpublishing.com and funnels readers to its paid programs
   - Newer posts drift into general content beyond book design
-best_for: [Learning print interior layout and typography basics]
+best_for:
+  - Authors reading articles on book design, typography, production, and self-publishing
 alternatives: [self-publishing-school, creativindie, reedsy-blog]
 status: published
 verified_at: 2026-11-09
 sources:
   - https://www.thebookdesigner.com/about/
   - https://www.thebookdesigner.com/
+features_checked_at: 2026-11-10

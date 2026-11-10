@@ -3,11 +3,7 @@ url: https://storyoriginapp.com
 categories: [email-tools, reviews-arc, ads-promotion]
 tagline: StoryOrigin is an author marketing app for building mailing lists, arranging newsletter swaps and group promos, and managing review copies.
 summary: >-
-  StoryOrigin delivers reader magnets and ARC files, connects them to your email service, and lets you arrange newsletter
-  swaps and group promos with other authors. Its review-copy tools show each reviewer's history and completion rate and
-  send automated follow-ups; it can also distribute audiobook promo codes and build simple author sites. It is not an email
-  sender itself, so you still need a provider such as MailerLite or Kit. Amazon lets you give free review copies only if
-  you do not require a review or try to influence it, so treat follow-ups as reminders, not conditions.
+  StoryOrigin delivers reader magnets and ARC files, connects them to your email service, and lets you arrange newsletter swaps and group promos with other authors. Its review-copy tools show each reviewer's history and completion rate and send automated follow-ups; it can also distribute audiobook promo codes and build simple author sites. It is not an email sender itself, so you still need a provider such as MailerLite or Kit. Amazon lets you give free review copies only if you do not require a review or try to influence it, so treat follow-ups as reminders, not conditions.
 pricing:
   model: freemium
   from: 10
@@ -15,6 +11,8 @@ pricing:
   period: month
   free_tier: true
   note: "Standard plan is $10/month or $100/year; extra pen-name accounts get 50% off yearly. Basic is free (file delivery, universal links, word count tracking). Guided setup has a separate fee."
+  annual_from: 8.33
+  region_note: Lemon Squeezy acts as the Merchant of Record and will collect & remit sales tax and VAT for you
 platforms: [web]
 kdp:
   outputs_kdp_files: false
@@ -26,7 +24,8 @@ pros:
 cons:
   - Needs a separate email service provider to send newsletters
   - Swap and group promo results depend on the other authors' lists
-best_for: [Indie authors growing a list through cross-promotion with other authors]
+best_for:
+  - Authors building mailing lists, running ARC reviews, and arranging newsletter swaps
 alternatives: [booksprout, booksirens, mailerlite, kit]
 status: published
 verified_at: 2026-11-09
@@ -34,3 +33,9 @@ sources:
   - https://storyoriginapp.com/pricing
   - https://storyoriginapp.com/
   - https://kdp.amazon.com/en_US/help/topic/G202101910
+features_checked_at: 2026-11-10
+price_checked_at: 2026-11-10
+price_history:
+  - date: 2026-11-10
+    kind: plan
+    note: "Yearly billing read on the vendor's pricing page: from $8.33/mo billed yearly."
