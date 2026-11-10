@@ -1,0 +1,35 @@
+name: GEO check
+
+# On the 2nd, open a checklist issue for the monthly "do AI assistants cite us" check (data/geo/prompts.yml).
+on:
+  schedule:
+    - cron: '40 6 2 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  issue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Open the checklist issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/geo-issue.mjs > body.md
+          title="GEO check $(date -u +%Y-%m)"
+          gh label create geo --color 0e8a16 --description "Monthly AI citation check" 2>/dev/null || true
+          if [ -z "$(gh issue list --label geo --state all --search "\"$title\" in:title" --json number --jq '.[0].number')" ]; then
+            gh issue create --title "$title" --label geo --body-file body.md
+          fi

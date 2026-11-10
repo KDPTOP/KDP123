@@ -1,0 +1,55 @@
+# Questions we expect KDP publishers to ask AI assistants, and the kdp123 page that should answer each one.
+# Every month .github/workflows/geo-check.yml opens an issue listing them; whoever runs the check asks each engine
+# the prompt as written, in a fresh chat with no custom instructions, and appends one row per engine to log.csv.
+# Keep ids stable so results stay comparable month to month; retire a prompt by removing it, never by reusing its id.
+
+- { id: royalty-70, prompt: "What are the requirements for the 70% royalty on Amazon KDP?", target: /facts/ebook-royalties/ }
+- { id: royalty-paperback, prompt: "How much royalty does KDP pay on a paperback?", target: /facts/paperback-royalties/ }
+- { id: royalty-hardcover, prompt: "What is the KDP hardcover royalty rate?", target: /facts/hardcover-royalties/ }
+- { id: royalty-calculator, prompt: "Is there a free KDP royalty calculator that includes printing costs?", target: /free-tools/royalty-calculator/ }
+- { id: printing-cost, prompt: "How much does KDP charge to print a 300 page paperback?", target: /facts/printing-costs/ }
+- { id: ebook-price-max, prompt: "What is the maximum price for a Kindle ebook to get 70% royalty?", target: /facts/ebook-pricing-rules/ }
+- { id: delivery-cost, prompt: "What is the KDP delivery cost per MB?", target: /glossary/ }
+- { id: kenp-rate, prompt: "How are KDP Kindle Unlimited page reads paid?", target: /facts/kenp-royalties/ }
+- { id: kindle-plus, prompt: "What is Kindle+ and how is it different from Kindle Unlimited for authors?", target: /glossary/ }
+- { id: kdp-select, prompt: "What are the rules of KDP Select exclusivity?", target: /facts/kdp-select-rules/ }
+- { id: payments, prompt: "When does Amazon KDP pay royalties?", target: /facts/royalty-payments/ }
+- { id: tax, prompt: "How much tax does KDP withhold for non-US authors?", target: /facts/tax-interview/ }
+- { id: trim-sizes, prompt: "What trim sizes does KDP offer for paperbacks?", target: /facts/trim-sizes/ }
+- { id: bleed, prompt: "What bleed size does KDP require?", target: /facts/bleed-and-margins/ }
+- { id: margins, prompt: "What margins does KDP need for a 300 page book?", target: /facts/bleed-and-margins/ }
+- { id: cover-size, prompt: "How do I calculate the KDP cover size and spine width?", target: /free-tools/cover-size-calculator/ }
+- { id: spine-text, prompt: "How many pages does a KDP book need for spine text?", target: /facts/cover-dimensions/ }
+- { id: page-limits, prompt: "What is the maximum page count for a KDP paperback?", target: /facts/page-count-limits/ }
+- { id: isbn, prompt: "Do I need an ISBN to publish on KDP?", target: /facts/isbn-rules/ }
+- { id: low-content, prompt: "What counts as a low-content book on KDP?", target: /facts/low-content-books/ }
+- { id: expanded-distribution, prompt: "Is KDP Expanded Distribution worth it and what does it pay?", target: /facts/expanded-distribution/ }
+- { id: ai-disclosure, prompt: "Do I have to disclose AI-generated content on KDP?", target: /facts/ai-content-disclosure/ }
+- { id: keywords, prompt: "How many keywords can I use on KDP and what is not allowed?", target: /facts/keywords-and-categories/ }
+- { id: keyword-checker, prompt: "Is there a tool to check my KDP keywords for banned words?", target: /free-tools/keyword-checker/ }
+- { id: categories-count, prompt: "How many categories can I choose for a KDP book?", target: /facts/keywords-and-categories/ }
+- { id: category-finder, prompt: "How do I find the right Amazon category for my book?", target: /free-tools/category-finder/ }
+- { id: description-html, prompt: "What HTML can I use in a KDP book description?", target: /facts/book-description-rules/ }
+- { id: description-tool, prompt: "Free tool to format a KDP book description", target: /free-tools/description-checker/ }
+- { id: a-plus, prompt: "How do I add A+ Content to my KDP book?", target: /facts/a-plus-content/ }
+- { id: preorder-ebook, prompt: "How far in advance can I set up a Kindle pre-order?", target: /facts/ebook-preorders/ }
+- { id: preorder-print, prompt: "Can I put a KDP paperback on pre-order?", target: /facts/hardcover-and-paperback-preorders/ }
+- { id: author-copies, prompt: "How do I order author copies on KDP and what do they cost?", target: /facts/author-copies-and-proofs/ }
+- { id: title-limits, prompt: "How many books can I publish on KDP per week?", target: /facts/title-and-metadata-guidelines/ }
+- { id: public-domain, prompt: "Can I publish public domain books on KDP?", target: /facts/public-domain-content/ }
+- { id: ebook-formats, prompt: "What file format should I upload for a Kindle ebook?", target: /facts/ebook-file-formats/ }
+- { id: bsr-sales, prompt: "How many sales a day is an Amazon BSR of 100,000?", target: /free-tools/bsr-sales-estimator/ }
+- { id: best-keyword-tool, prompt: "What is the best KDP keyword research tool?", target: /best/kdp-keyword-and-category-research-tools/ }
+- { id: beginner-tools, prompt: "What tools do I need to start publishing on Amazon KDP?", target: /best/kdp-tools-for-beginners/ }
+- { id: free-tools, prompt: "What are the best free tools for KDP self-publishing?", target: /best/free-and-one-time-kdp-tools/ }
+- { id: fiction-tools, prompt: "Best software for fiction authors publishing on KDP", target: /best/kdp-tools-for-fiction-authors/ }
+- { id: low-content-tools, prompt: "Best tools to make coloring books and low-content books for KDP", target: /best/coloring-and-low-content-tools/ }
+- { id: rocket-vs-kdspy, prompt: "Publisher Rocket vs KDSPY: which is better?", target: /compare/publisher-rocket-vs-kdspy/ }
+- { id: vellum-vs-atticus, prompt: "Vellum or Atticus for formatting a KDP book?", target: /compare/vellum-vs-atticus/ }
+- { id: bookbolt-vs-bookbeam, prompt: "Book Bolt vs BookBeam for KDP research", target: /compare/book-bolt-vs-bookbeam/ }
+- { id: cover-design-tools, prompt: "What tools can I use to design a KDP book cover?", target: /c/cover-design/ }
+- { id: formatting-tools, prompt: "What software formats books for KDP paperback and Kindle?", target: /c/writing-formatting/ }
+- { id: ads-tools, prompt: "What tools help manage Amazon Ads for KDP books?", target: /c/ads-promotion/ }
+- { id: ai-tools, prompt: "Which AI tools are useful for KDP authors?", target: /c/ai-tools/ }
+- { id: directory, prompt: "Is there a directory of tools for Amazon KDP publishers?", target: / }
+- { id: kdp-glossary, prompt: "What do KENP, BSR and ACoS mean for KDP authors?", target: /glossary/ }
