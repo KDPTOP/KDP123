@@ -35,6 +35,7 @@ const indexable = new Set();
 const noindex = new Set();
 const ANSWER_WORDS = [35, 75];
 const HOME_JS_MAX = 60 * 1024;
+const HOME_HTML_MAX = 150 * 1024;
 const T_INLINKS_MIN = 3;
 const calculators = existsSync(`${DIST}/calculators.json`) ? JSON.parse(readFileSync(`${DIST}/calculators.json`, 'utf8')).calculators : [];
 const tInlinks = new Map();
@@ -44,6 +45,7 @@ for (const file of globSync(`${DIST}/**/index.html`)) {
   const html = readFileSync(file, 'utf8');
   const rel = relative(DIST, dirname(file)).replace(/\\/g, '/');
   const page = `/${rel ? rel + '/' : ''}`;
+  if (page.startsWith('/drawer/')) continue;
   const robots = meta(html, 'name', 'robots') ?? '';
   const isNoindex = robots.includes('noindex');
   (isNoindex ? noindex : indexable).add(`${ORIGIN}${page}`);
@@ -111,7 +113,9 @@ for (const file of globSync(`${DIST}/**/index.html`)) {
 
 for (const file of globSync(`${DIST}/t/*/index.html`)) {
   const slug = file.split('/').at(-2);
-  if (meta(readFileSync(file, 'utf8'), 'name', 'robots')?.includes('noindex')) continue;
+  const html = readFileSync(file, 'utf8');
+  if (!/<a [^>]*data-visit[\s>]/.test(html)) err(`/t/${slug}/`, 'no Visit button in the sidebar');
+  if (meta(html, 'name', 'robots')?.includes('noindex')) continue;
   const n = tInlinks.get(slug)?.size ?? 0;
   if (n < T_INLINKS_MIN) err(`/t/${slug}/`, `only ${n} internal pages link here (need ${T_INLINKS_MIN})`);
 }
@@ -119,6 +123,7 @@ for (const file of globSync(`${DIST}/t/*/index.html`)) {
 // First-load JS on the home page: scripts in the HTML plus their static imports, not lazy import() chunks.
 {
   const html = readFileSync(`${DIST}/index.html`, 'utf8');
+  if (html.length > HOME_HTML_MAX) err('/', `home HTML is ${(html.length / 1024).toFixed(0)} KB (max ${HOME_HTML_MAX / 1024} KB)`);
   const seen = new Set();
   let bytes = 0;
   const add = (src) => {
@@ -137,7 +142,7 @@ for (const file of globSync(`${DIST}/t/*/index.html`)) {
     for (const i of m[1].matchAll(/import\s*(?:[\w*{}\s,$]+from\s*)?["']([^"']+\.js)["']/g)) add(i[1]);
   }
   if (bytes > HOME_JS_MAX) err('/', `first-load JS is ${(bytes / 1024).toFixed(1)} KB gzip (max ${HOME_JS_MAX / 1024} KB)`);
-  else console.log(`seo-lint: home first-load JS ${(bytes / 1024).toFixed(1)} KB gzip`);
+  else console.log(`seo-lint: home first-load JS ${(bytes / 1024).toFixed(1)} KB gzip, HTML ${(html.length / 1024).toFixed(0)} KB`);
 }
 
 for (const [t, pages] of titles) if (pages.length > 1) err(pages.join(', '), `duplicate title: ${t}`);

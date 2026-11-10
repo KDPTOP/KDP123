@@ -60,6 +60,9 @@ export function priceLabel(t: Tool): string {
   }
 }
 
+/** priceLabel for tight spots (cards, compact tables): "Free tier, from $9/mo". */
+export const priceShort = (t: Tool): string => priceLabel(t).replace('Free tier, paid from', 'Free tier, from');
+
 /** The price terms beyond the headline: yearly billing, unit, trial, refund and regional differences. */
 export function priceTerms(t: Tool): string[] {
   const p = t.data.pricing;

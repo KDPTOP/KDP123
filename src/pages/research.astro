@@ -59,7 +59,7 @@ const jsonLd = [
     {
       reports.map((r) => (
         <article class="rounded-lg border border-line bg-white p-5" id={r.slug}>
-          <p class="text-xs uppercase tracking-wide text-muted">{r.type} · {r.window} · {r.version}</p>
+          <p class="text-xs font-medium text-muted">{r.type} · {r.window} · {r.version}</p>
           <h2 class="mt-1 text-xl font-semibold"><a href={r.url}>{r.title}</a></h2>
           <p class="mt-2 text-sm text-muted">{r.summary}</p>
           {r.headline.length > 0 && (

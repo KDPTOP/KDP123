@@ -70,7 +70,7 @@ const jsonLd = [
           const link = outbound(t);
           return (
             <li class="rounded-lg border border-line bg-white p-4">
-              <p class="text-xs uppercase tracking-wide text-muted">{i + 1}. {p.label}</p>
+              <p class="text-xs font-medium text-muted">{i + 1}. {p.label}</p>
               <h3 class="mt-1 text-xl font-semibold">
                 <a href={`/t/${t.id}/`}>{t.data.name}</a>
                 {t.data.related_to_directory && <span class="badge badge-warn ml-2 align-middle">Same team as KDP123</span>}

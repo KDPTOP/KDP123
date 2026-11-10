@@ -2,7 +2,7 @@
 import ToolLogo from './ToolLogo.astro';
 import Icon from './Icon.astro';
 import PinButton from './PinButton.astro';
-import { outbound, priceLabel, type Tool } from '../lib/site';
+import { outbound, priceLabel, priceShort, type Tool } from '../lib/site';
 
 interface Props {
   tool: Tool;
@@ -12,7 +12,7 @@ interface Props {
 const { tool: t, layout = 'tile' } = Astro.props;
 const link = outbound(t);
 const details = `/t/${t.id}/`;
-const sub = t.data.related_to_directory ? 'Same team' : priceLabel(t);
+const sub = t.data.related_to_directory ? 'Same team' : priceShort(t);
 ---
 
 <div class:list={['tool-card group relative', layout === 'row' ? 'tool-card-row' : '']} data-pagefind-ignore>
@@ -22,25 +22,22 @@ const sub = t.data.related_to_directory ? 'Same team' : priceLabel(t);
     target="_blank"
     data-site={link.href}
     data-details={details}
-    class:list={[
-      'flex h-full rounded-xl border border-transparent text-ink no-underline transition hover:border-line hover:bg-surface hover:no-underline',
-      layout === 'row' ? 'items-center gap-3 px-2 py-2' : 'flex-col items-center gap-1.5 p-2 pt-3 text-center',
-    ]}
+    class:list={['tc-link', layout === 'row' ? 'tc-row' : 'tc-tile']}
     title={`${t.data.name}: open the website`}
   >
     <ToolLogo tool={t} size={layout === 'row' ? 28 : 40} />
     <span class:list={['min-w-0', layout === 'row' ? 'flex-1' : 'w-full']}>
       <span class:list={['flex items-center gap-0.5 text-xs font-medium leading-tight sm:text-sm', layout === 'tile' ? 'justify-center' : '']}>
-        <span class={layout === "tile" ? "line-clamp-2 break-words" : "truncate"}>{t.data.name}</span>
+        <span class={layout === "tile" ? "line-clamp-2 hyphens-auto" : "truncate"}>{t.data.name}</span>
         <Icon name="arrowUpRight" class="size-3 shrink-0 text-muted opacity-0 transition group-hover:opacity-100" />
       </span>
-      <span class:list={['block truncate text-xs text-muted', layout === 'tile' && !t.data.related_to_directory ? 'max-sm:hidden' : '']}>{sub}</span>
+      <span class:list={['block text-xs leading-snug text-muted', layout === 'tile' ? 'line-clamp-2' : 'truncate', layout === 'tile' && !t.data.related_to_directory ? 'max-sm:hidden' : '']}>{sub}</span>
     </span>
   </a>
-  <a href={details} class="tc-info absolute top-0.5 left-0.5 flex size-6 items-center justify-center rounded-md text-muted no-underline hover:bg-surface-2 hover:text-ink" aria-label={`${t.data.name} details, price and alternatives`} title="Details">
+  <a href={details} class="tc-info" aria-label={`${t.data.name} details, price and alternatives`} title="Details">
     <Icon name="info" class="size-3.5" />
   </a>
-  <PinButton kind="tool" id={t.id} name={t.data.name} href={details} class="tc-pin absolute top-0.5 right-0.5 flex size-6 items-center justify-center rounded-md text-muted hover:bg-surface-2 hover:text-ink" />
+  <PinButton kind="tool" id={t.id} name={t.data.name} href={details} class="tc-pin" />
   <div class="tc-preview" role="tooltip">
     <p class="font-medium text-ink">{t.data.name}</p>
     <p class="mt-0.5 text-muted">{t.data.tagline}</p>

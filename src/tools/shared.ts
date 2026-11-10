@@ -1,5 +1,5 @@
 // Helpers shared by every tool widget. A widget is a [data-tool="slug"] element that may appear on its own
-// page or inside the home-page workbench, so widgets look things up inside their root, never by global id.
+// page or inside the tool drawer, so widgets look things up inside their root, never by global id.
 import { iconSvg } from '../lib/icons';
 
 export const $ = <T extends Element = HTMLElement>(root: ParentNode, sel: string) => root.querySelector<T>(sel)!;
@@ -70,7 +70,7 @@ export function bindForm(root: HTMLElement, form: HTMLFormElement, params: URLSe
     const qs = formParams(form).toString();
     fulls.forEach((a) => (a.href = `/free-tools/${slug}/${qs ? `?${qs}` : ''}`));
   };
-  // Writes the address bar: ?a=b on the tool page, ?tool=slug&a=b in the home workbench.
+  // Writes the address bar: ?a=b on the tool page, ?tool=slug&a=b for the drawer on the home page.
   const sync = () => {
     const p = formParams(form);
     if (location.pathname === `/free-tools/${slug}/`) history.replaceState(null, '', `${location.pathname}${p.size ? `?${p}` : ''}`);

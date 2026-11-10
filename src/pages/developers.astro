@@ -38,7 +38,7 @@ const jsonLd = {
         <p class="mt-2 text-sm text-muted">{p.data.attribution} Added {isoDate(p.data.added_at)}.{p.data.terms_url && <> <a href={p.data.terms_url}>Terms</a>.</>}</p>
         <div class="mt-4 overflow-x-auto">
           <table class="w-full text-left text-sm">
-            <thead class="text-xs uppercase text-muted"><tr><th class="py-2 pr-4">Endpoint</th><th class="py-2 pr-4">What it returns</th><th class="py-2 pr-4">Sends</th><th class="py-2 pr-4">Limit</th><th class="py-2">Used by</th></tr></thead>
+            <thead class="text-xs font-medium text-muted"><tr><th class="py-2 pr-4">Endpoint</th><th class="py-2 pr-4">What it returns</th><th class="py-2 pr-4">Sends</th><th class="py-2 pr-4">Limit</th><th class="py-2">Used by</th></tr></thead>
             <tbody>
               {p.data.endpoints.map((e) => (
                 <tr class="border-t border-line align-top">

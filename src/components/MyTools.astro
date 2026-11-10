@@ -3,23 +3,24 @@ import Icon from './Icon.astro';
 import { MAX_LINKS } from '../lib/pins';
 
 interface Props {
-  /** Calculators offered as one-tap pins while the list is empty. */
-  suggest?: { id: string; name: string; href: string }[];
+  /** Width of the row label, so it lines up with the row above it. */
+  labelClass?: string;
 }
-const { suggest = [] } = Astro.props;
+const { labelClass = '' } = Astro.props;
 ---
 
-<section class="card p-4 md:p-5" aria-labelledby="my-tools-h" data-my-tools data-pagefind-ignore>
-  <div class="flex flex-wrap items-center gap-2">
-    <h2 id="my-tools-h" class="flex items-center gap-2 text-base font-semibold"><Icon name="star" class="size-4 text-brand" />My tools</h2>
-    <span class="text-xs text-muted">Saved in this browser only. No account.</span>
-    <div class="ml-auto flex items-center gap-1">
-      <button type="button" class="btn-ghost px-2 py-1 text-xs" data-act="add" aria-expanded="false"><Icon name="plus" class="size-3.5" />Link</button>
-      <button type="button" class="btn-ghost px-2 py-1 text-xs" data-act="edit" aria-pressed="false">Edit</button>
-    </div>
+<section class="flex flex-wrap items-center gap-2" aria-labelledby="my-tools-h" data-my-tools data-pagefind-ignore>
+  <h2 id="my-tools-h" class:list={['flex shrink-0 items-center gap-1.5 text-sm font-semibold', labelClass]}><Icon name="star" class="size-4 text-brand" />My tools</h2>
+  <ul class="flex flex-wrap gap-2" data-el="list"></ul>
+  <p class="text-sm text-muted" data-el="empty">
+    Tap <Icon name="star" class="inline size-3.5 align-[-2px]" /> on any calculator or tool to keep it here. Saved in this browser, no account.
+  </p>
+  <div class="ml-auto flex items-center gap-1">
+    <button type="button" class="btn-ghost px-2 py-1 text-xs" data-act="add" aria-expanded="false"><Icon name="plus" class="size-3.5" />Link</button>
+    <button type="button" class="btn-ghost px-2 py-1 text-xs" data-act="edit" aria-pressed="false" data-el="edit">Edit</button>
   </div>
 
-  <form class="mt-3 grid gap-2 sm:grid-cols-[1fr_2fr_auto]" data-el="add" hidden>
+  <form class="mt-1 grid basis-full gap-2 sm:grid-cols-[1fr_2fr_auto]" data-el="add" hidden>
     <label class="sr-only" for="mt-name">Name</label>
     <input id="mt-name" name="name" class="input py-2 text-sm" placeholder="Name (optional)" maxlength="80" />
     <label class="sr-only" for="mt-url">Address</label>
@@ -28,18 +29,7 @@ const { suggest = [] } = Astro.props;
     <p class="text-xs text-muted sm:col-span-3" data-el="add-msg">Up to {MAX_LINKS} of your own links, https only.</p>
   </form>
 
-  <ul class="mt-3 flex flex-wrap gap-2" data-el="list"></ul>
-  <p class="mt-1 text-sm text-muted" data-el="empty">
-    Tap <Icon name="star" class="inline size-3.5 align-[-2px]" /> on any calculator or directory tool to keep it here, or add your own links.
-    {suggest.length > 0 && (
-      <span class="mt-3 flex flex-wrap items-center gap-2">
-        Start with
-        {suggest.map((s) => <button type="button" class="chip gap-1 text-xs" data-suggest={s.id} data-name={s.name} data-href={s.href}><Icon name="plus" class="size-3" />{s.name}</button>)}
-      </span>
-    )}
-  </p>
-
-  <div class="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted" data-el="io" hidden>
+  <div class="flex basis-full flex-wrap items-center gap-3 text-xs text-muted" data-el="io" hidden>
     <button type="button" class="inline-flex items-center gap-1 hover:text-ink" data-act="export"><Icon name="download" class="size-3.5" />Export JSON</button>
     <label class="inline-flex cursor-pointer items-center gap-1 hover:text-ink"><Icon name="upload" class="size-3.5" />Import JSON<input type="file" accept="application/json,.json" class="sr-only" data-act="import" /></label>
     <span data-el="io-msg" role="status"></span>
@@ -84,7 +74,7 @@ const { suggest = [] } = Astro.props;
       a.append(name);
       if (p.kind === 'calc') {
         a.addEventListener('click', (e) => {
-          if (!document.querySelector('[data-workbench]') || e.metaKey || e.ctrlKey) return;
+          if (!document.querySelector('[data-workbench]') || e.metaKey || e.ctrlKey || e.shiftKey) return;
           e.preventDefault();
           window.dispatchEvent(new CustomEvent('workbench-open', { detail: { slug: p.id, params: {} } }));
         });
@@ -114,17 +104,13 @@ const { suggest = [] } = Astro.props;
       const pins = readPins();
       list.replaceChildren(...pins.map((p, i) => item(p, i, pins.length)));
       empty.hidden = pins.length > 0;
+      list.hidden = pins.length === 0;
+      editBtn.hidden = pins.length === 0 && !editing;
       io.hidden = !editing;
       editBtn.setAttribute('aria-pressed', String(editing));
       editBtn.textContent = editing ? 'Done' : 'Edit';
     }
 
-    root.querySelectorAll<HTMLButtonElement>('[data-suggest]').forEach((b) =>
-      b.addEventListener('click', () => {
-        const pins = readPins();
-        if (!pins.some((p) => p.kind === 'calc' && p.id === b.dataset.suggest)) writePins([...pins, { kind: 'calc', id: b.dataset.suggest!, name: b.dataset.name!, href: b.dataset.href! }]);
-      }),
-    );
     addBtn.addEventListener('click', () => {
       addForm.hidden = !addForm.hidden;
       addBtn.setAttribute('aria-expanded', String(!addForm.hidden));

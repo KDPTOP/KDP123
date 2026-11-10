@@ -1,5 +1,5 @@
 ---
-import { priceLabel, isoDate, outbound, type Tool } from '../lib/site';
+import { priceLabel, priceShort, isoDate, outbound, type Tool } from '../lib/site';
 import { categoryBySlug } from '../lib/taxonomy';
 import ToolLogo from './ToolLogo.astro';
 import Icon from './Icon.astro';
@@ -9,14 +9,40 @@ interface Props {
   tools: Tool[];
   showCategory?: boolean;
   filterable?: boolean;
+  /** Short list for the home page: name with a one-line description, price, details. No KDP or Checked columns. */
+  compact?: boolean;
 }
-const { tools, showCategory = false, filterable = false } = Astro.props;
+const { tools, showCategory = false, filterable = false, compact = false } = Astro.props;
+// Full table: one DOM for both layouts. Below md each row is a card, so the filter script only ever hides <tr> elements.
 ---
 
-<!-- One DOM for both layouts: below md each row is a card, so the filter script only ever hides <tr> elements. -->
+{compact ? (
+  <ul class="divide-y divide-line rounded-xl border border-line bg-white">
+    {tools.map((t) => {
+      const link = outbound(t);
+      return (
+        <li class="relative flex min-h-15 items-center gap-3 px-3 py-2.5">
+          <ToolLogo tool={t} size={28} />
+          <div class="min-w-0 flex-1">
+            <a href={link.href} rel={link.rel} target="_blank" data-site={link.href} data-details={`/t/${t.id}/`} class="inline-flex max-w-full items-center gap-1 text-sm font-medium" title={`${t.data.name}: open the website`}>
+              <span class="truncate">{t.data.name}</span>
+              <Icon name="arrowUpRight" class="size-3 shrink-0 text-muted" />
+            </a>
+            <p class="line-clamp-1 text-xs text-muted">{t.data.tagline}</p>
+          </div>
+          <span class="max-w-36 shrink-0 text-right text-xs leading-snug text-ink">{priceShort(t)}</span>
+          <span class="flex shrink-0 items-center" data-pagefind-ignore>
+            <a href={`/t/${t.id}/`} class="btn-icon size-8" aria-label={`${t.data.name} details`} title={`Details, alternatives. Checked ${isoDate(t.data.verified_at)}`}><Icon name="info" class="size-4" /></a>
+            <PinButton kind="tool" id={t.id} name={t.data.name} href={`/t/${t.id}/`} class="btn-icon size-8" />
+          </span>
+        </li>
+      );
+    })}
+  </ul>
+) : (
 <div class="md:overflow-x-auto md:rounded-lg md:border md:border-line md:bg-white">
   <table class="block w-full text-left text-sm md:table md:min-w-[720px]" data-tool-table={filterable ? '' : undefined}>
-    <thead class="hidden border-b border-line bg-paper text-xs uppercase tracking-wide text-muted md:table-header-group">
+    <thead class="hidden border-b border-line bg-paper text-xs text-muted md:table-header-group">
       <tr>
         <th class="px-3 py-2 font-medium">Tool</th>
         <th class="px-3 py-2 font-medium">What it is</th>
@@ -81,3 +107,4 @@ const { tools, showCategory = false, filterable = false } = Astro.props;
     </tbody>
   </table>
 </div>
+)}

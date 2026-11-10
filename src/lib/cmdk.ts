@@ -73,7 +73,7 @@ export const calcHref = (slug: string, params: Record<string, string>) => {
   return `/free-tools/${slug}/${qs ? `?${qs}` : ''}`;
 };
 
-/** Primary action: calculators open in the home workbench when there is one; tools open their site. */
+/** Primary action: calculators open in the tool drawer when the page has one; tools open their site. */
 export function activate(h: Hit, alt = false) {
   if (h.kind === 'calc') {
     const bench = document.querySelector('[data-workbench]');

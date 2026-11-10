@@ -1,0 +1,207 @@
+---
+// Site-wide calculator drawer and the floating "Tools" button that opens it. Calculators load on demand from
+// /drawer/<slug>/, so a page carries only this list. Opened by [data-drawer-open], the workbench-open event
+// (⌘K and My tools), and ?tool=slug links.
+import Icon from './Icon.astro';
+import { TOOL_GROUPS, freeToolsInGroup } from '../lib/freeTools';
+
+const groups = TOOL_GROUPS.map((g) => ({ ...g, tools: freeToolsInGroup(g.id) })).filter((g) => g.tools.length);
+---
+
+<button type="button" class="drawer-fab" data-drawer-open="" aria-haspopup="dialog" aria-controls="tool-drawer">
+  <Icon name="calculator" class="size-4" />Tools
+</button>
+
+<dialog id="tool-drawer" class="drawer" data-workbench data-view="list" aria-labelledby="drawer-h" data-pagefind-ignore>
+  <div class="flex h-full flex-col">
+    <div class="flex h-14 shrink-0 items-center gap-2 border-b border-line px-3 md:px-4">
+      <button type="button" class="btn-icon drawer-back" data-drawer-back aria-label="All calculators"><Icon name="chevronUp" class="size-4 -rotate-90" /></button>
+      <h2 id="drawer-h" class="text-base font-semibold">Free KDP calculators</h2>
+      <a href="/free-tools/" class="ml-auto text-sm text-muted">All tools page</a>
+      <button type="button" class="btn-icon" data-drawer-close aria-label="Close calculators"><Icon name="x" class="size-5" /></button>
+    </div>
+    <div class="drawer-body">
+      <nav class="drawer-nav" aria-label="Calculators">
+        <label class="sr-only" for="drawer-q">Filter calculators</label>
+        <input id="drawer-q" type="search" class="input py-2 text-sm" placeholder="Filter: royalty, cover, ISBN…" autocomplete="off" data-drawer-q />
+        {groups.map((g) => (
+          <div class="mt-4" data-drawer-group>
+            <p class="px-2 text-xs font-semibold text-muted">{g.name}</p>
+            <ul class="mt-1 space-y-0.5">
+              {g.tools.map((t) => (
+                <li>
+                  <a href={`/free-tools/${t.slug}/`} data-open={t.slug} data-k={`${t.name} ${t.short} ${t.keywords.join(' ')}`.toLowerCase()} class="bench-link">
+                    <span class="bench-ico"><Icon name={t.icon} class="size-4" /></span>{t.short}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        <p class="mt-4 hidden px-2 text-sm text-muted" data-drawer-none>No calculator matches. Try the search box at the top of the page for directory tools.</p>
+      </nav>
+      <div class="drawer-main" data-drawer-main>
+        <p class="text-sm text-muted" data-drawer-msg role="status"></p>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import { boot, prefill } from '../tools/boot';
+
+  const LAST = 'kdp123.lastTool';
+  const dlg = document.getElementById('tool-drawer') as HTMLDialogElement;
+  const main = dlg.querySelector<HTMLElement>('[data-drawer-main]')!;
+  const msg = dlg.querySelector<HTMLElement>('[data-drawer-msg]')!;
+  const q = dlg.querySelector<HTMLInputElement>('[data-drawer-q]')!;
+  const links = [...dlg.querySelectorAll<HTMLAnchorElement>('a[data-open]')];
+  const slugs = new Set(links.map((a) => a.dataset.open!));
+  // Only the home page writes ?tool=slug&… to the address bar, so other pages keep their own query.
+  const home = location.pathname === '/';
+  const narrow = matchMedia('(max-width: 767px)');
+  const cache = new Map<string, Promise<string>>();
+  let opener: Element | null = null;
+  let current = '';
+
+  const fragment = (slug: string) => {
+    let p = cache.get(slug);
+    if (!p) {
+      p = fetch(`/drawer/${slug}/`).then((r) => (r.ok ? r.text() : Promise.reject(new Error(String(r.status)))));
+      p.catch(() => cache.delete(slug));
+      cache.set(slug, p);
+    }
+    return p;
+  };
+
+  function show() {
+    if (dlg.open) return;
+    opener = document.activeElement;
+    dlg.showModal();
+  }
+  const setView = (v: 'list' | 'tool') => (dlg.dataset.view = v);
+
+  async function open(slug: string, params = new URLSearchParams()) {
+    if (!slugs.has(slug)) return false;
+    show();
+    setView('tool');
+    current = slug;
+    for (const a of links) {
+      if (a.dataset.open === slug) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    }
+    let panel = main.querySelector<HTMLElement>(`[data-panel="${slug}"]`);
+    if (!panel) {
+      msg.textContent = 'Loading…';
+      msg.hidden = false;
+      for (const p of main.querySelectorAll<HTMLElement>('[data-panel]')) p.hidden = true;
+      try {
+        const doc = new DOMParser().parseFromString(await fragment(slug), 'text/html');
+        panel = doc.querySelector<HTMLElement>('[data-panel]');
+      } catch {}
+      if (current !== slug) return true;
+      if (!panel) {
+        msg.replaceChildren('This calculator did not load. ', Object.assign(document.createElement('a'), { href: `/free-tools/${slug}/`, textContent: 'Open its page instead' }), '.');
+        return true;
+      }
+      main.append(panel);
+      dispatchEvent(new Event('pins-change'));
+    }
+    msg.hidden = true;
+    for (const p of main.querySelectorAll<HTMLElement>('[data-panel]')) {
+      p.hidden = p !== panel;
+      p.toggleAttribute('data-active', home && p === panel);
+    }
+    const root = panel.querySelector<HTMLElement>('[data-tool]')!;
+    if (params.size) await prefill(root, params);
+    else await boot(root, params);
+    try {
+      localStorage.setItem(LAST, slug);
+    } catch {}
+    if (home) {
+      history.replaceState(null, '', `/?${new URLSearchParams([['tool', slug], ...params])}`);
+      root.dispatchEvent(new Event('tool-sync'));
+    }
+    main.scrollTop = 0;
+    panel.querySelector<HTMLElement>('[data-panel-h]')?.focus({ preventScroll: true });
+    return true;
+  }
+
+  function openDefault() {
+    show();
+    if (narrow.matches) {
+      setView('list');
+      dlg.querySelector<HTMLElement>('#drawer-h')?.focus();
+      return;
+    }
+    let last: string | null = null;
+    try {
+      last = localStorage.getItem(LAST);
+    } catch {}
+    open(last && slugs.has(last) ? last : links[0].dataset.open!).then(() => q.focus());
+  }
+
+  dlg.addEventListener('close', () => {
+    if (dlg.open) return;
+    current = '';
+    for (const p of main.querySelectorAll('[data-panel]')) p.removeAttribute('data-active');
+    if (home && new URLSearchParams(location.search).has('tool')) history.replaceState(null, '', `/${location.hash}`);
+    if (opener instanceof HTMLElement && opener.isConnected && !opener.closest('dialog:not([open])')) opener.focus();
+    opener = null;
+  });
+  dlg.addEventListener('click', (e) => {
+    if (e.target === dlg) dlg.close();
+  });
+  dlg.querySelector('[data-drawer-close]')!.addEventListener('click', () => dlg.close());
+  dlg.querySelector('[data-drawer-back]')!.addEventListener('click', () => {
+    setView('list');
+    dlg.querySelector<HTMLElement>(`a[data-open="${current}"]`)?.focus();
+  });
+
+  for (const a of links) {
+    a.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      open(a.dataset.open!);
+    });
+    a.addEventListener('pointerenter', () => fragment(a.dataset.open!), { once: true });
+  }
+
+  q.addEventListener('input', () => {
+    const words = q.value.toLowerCase().split(/\s+/).filter(Boolean);
+    for (const a of links) a.parentElement!.hidden = !words.every((w) => a.dataset.k!.includes(w));
+    for (const g of dlg.querySelectorAll<HTMLElement>('[data-drawer-group]')) g.hidden = !g.querySelector('li:not([hidden])');
+    dlg.querySelector('[data-drawer-none]')!.classList.toggle('hidden', links.some((a) => !a.parentElement!.hidden));
+  });
+  q.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    const hit = links.find((a) => !a.parentElement!.hidden);
+    if (hit) open(hit.dataset.open!);
+  });
+
+  // Anything on the page can open the drawer: [data-drawer-open="slug"], or an empty value for the list.
+  document.addEventListener('click', (e) => {
+    const t = (e.target as Element).closest<HTMLElement>('[data-drawer-open]');
+    if (!t || (e as MouseEvent).metaKey || (e as MouseEvent).ctrlKey || (e as MouseEvent).shiftKey) return;
+    e.preventDefault();
+    const slug = t.dataset.drawerOpen;
+    if (slug) open(slug);
+    else openDefault();
+  });
+  document.addEventListener('pointerover', (e) => {
+    const slug = (e.target as Element).closest<HTMLElement>('[data-drawer-open]')?.dataset.drawerOpen;
+    if (slug && slugs.has(slug)) fragment(slug);
+  });
+  addEventListener('workbench-open', (e) => {
+    const { slug, params } = (e as CustomEvent<{ slug: string; params: Record<string, string> }>).detail;
+    open(slug, new URLSearchParams(params));
+  });
+
+  const sp = new URLSearchParams(location.search);
+  const want = sp.get('tool');
+  if (want && slugs.has(want)) {
+    sp.delete('tool');
+    open(want, sp);
+  }
+</script>

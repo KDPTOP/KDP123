@@ -1,13 +1,14 @@
 import type { APIRoute } from 'astro';
 import { SITE } from '../lib/site';
 
-// Search and AI-answer crawlers are welcome. /go/ is outbound redirects only.
+// Search and AI-answer crawlers are welcome. /go/ is outbound redirects only; /drawer/ holds calculator fragments.
 export const GET: APIRoute = () =>
   new Response(
     [
       'User-agent: *',
       'Allow: /',
       'Disallow: /go/',
+      'Disallow: /drawer/',
       '',
       `Sitemap: ${SITE.url}/sitemap-index.xml`,
       '',

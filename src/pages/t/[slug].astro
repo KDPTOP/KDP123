@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { getTools, priceLabel, priceTerms, checkDates, linkCheck, platformsLabel, isoDate, outbound, toolDescription, SITE } from '../../lib/site';
+import { FREE_TOOLS, freeTool } from '../../lib/freeTools';
+import { getTools, priceLabel, priceShort, priceTerms, checkDates, linkCheck, platformsLabel, isoDate, outbound, toolDescription, SITE } from '../../lib/site';
 import { categoryBySlug, FIT_SCOPES, FIT_SCOPE_INFO, FIT_LEVEL_INFO } from '../../lib/taxonomy';
 import { citationCounts } from '../../lib/cited';
 import ToolLogo from '../../components/ToolLogo.astro';
@@ -49,6 +50,11 @@ const baseHost = (u: string) => new URL(u).hostname.replace(/^www\./, '').split(
 const vendorSources = d.sources.filter((u) => baseHost(u) === baseHost(d.url) || (d.official && /amazon\.|audible\.|acx\.com/.test(u))).length;
 const otherSources = d.sources.length - vendorSources;
 const watchOut = d.not_ideal_for.length > 0 ? d.not_ideal_for : d.cons.slice(0, 2);
+const relatedCalcs = FREE_TOOLS.filter((c) => c.category && d.categories.includes(c.category as never)).slice(0, 4);
+const calcs = relatedCalcs.length
+  ? { related: true, list: relatedCalcs }
+  : { related: false, list: ['royalty-calculator', 'cover-size-calculator', 'kenp-calculator'].map(freeTool) };
+const similar = [...alts, ...sameCategory].slice(0, 3);
 
 const entity: Record<string, unknown> = softwarePlatforms
   ? {
@@ -104,31 +110,80 @@ const jsonLd = [
     <a href="/">Home</a> / <a href={`/c/${d.categories[0]}/`}>{category?.name}</a> / {d.name}
   </nav>
 
-  <article class="mt-2 max-w-3xl" data-pagefind-filter="type:Tool" data-pagefind-meta={`type:${d.official ? 'Official source' : 'Tool'}`}>
-    <div class="flex items-center gap-4">
-      <ToolLogo tool={tool} size={56} class="border border-line" />
-      <div>
-        <h1 class="text-4xl font-bold">{d.name}</h1>
-        <div class="mt-1 flex flex-wrap gap-1">
-          {d.official && <span class="badge badge-ok">Official Amazon</span>}
-          {d.related_to_directory && <span class="badge badge-warn">Same team as KDP123</span>}
-          {d.affiliate && <span class="badge">Affiliate link</span>}
-          {d.vendor_verified && <span class="badge badge-ok">Verified by vendor</span>}
+  <article class="mt-2 grid gap-x-10 gap-y-6 lg:grid-cols-[minmax(0,1fr)_300px]" data-pagefind-filter="type:Tool" data-pagefind-meta={`type:${d.official ? 'Official source' : 'Tool'}`}>
+    <header class="min-w-0">
+      <div class="flex items-center gap-4">
+        <ToolLogo tool={tool} size={56} class="border border-line" />
+        <div>
+          <h1 class="text-4xl font-bold">{d.name}</h1>
+          <div class="mt-1 flex flex-wrap gap-1">
+            {d.official && <span class="badge badge-ok">Official Amazon</span>}
+            {d.related_to_directory && <span class="badge badge-warn">Same team as KDP123</span>}
+            {d.affiliate && <span class="badge">Affiliate link</span>}
+            {d.vendor_verified && <span class="badge badge-ok">Verified by vendor</span>}
+          </div>
         </div>
       </div>
-    </div>
+      <p class="mt-4 max-w-3xl text-lg leading-7">{d.tagline}</p>
+    </header>
 
-    <p class="mt-4 text-lg leading-7">{d.tagline}</p>
-    <p class="mt-4 flex flex-wrap items-center gap-3">
-      <a href={link.href} rel={link.rel} target="_blank" class="btn-primary">Visit {d.name}<Icon name="arrowUpRight" class="size-4" /></a>
-      <PinButton kind="tool" id={tool.id} name={d.name} href={`/t/${tool.id}/`} class="btn-ghost size-10 px-0" />
-      <label class="inline-flex cursor-pointer items-center gap-2 text-sm text-muted" data-pagefind-ignore>
-        <input type="checkbox" data-compare={tool.id} data-compare-name={d.name} class="size-4 accent-[var(--color-brand)]" /> Add to compare
-      </label>
-      {d.affiliate && <span class="text-xs text-muted">We may earn a commission. It does not change rankings or text.</span>}
-    </p>
+    <aside class="lg:sticky lg:top-20 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-start" aria-label={`${d.name} at a glance`} data-pagefind-ignore>
+      <div class="rounded-xl border border-line p-4">
+        <a href={link.href} rel={link.rel} target="_blank" class="btn-primary w-full" data-visit>Visit {d.name}<Icon name="arrowUpRight" class="size-4" /></a>
+        <dl class="mt-4 space-y-2 text-sm">
+          <div class="flex justify-between gap-3"><dt class="text-muted">Price</dt><dd class="text-right font-medium">{priceShort(tool)}</dd></div>
+          <div class="flex justify-between gap-3"><dt class="text-muted">Price checked</dt><dd class="tabular-nums">{dates.price}</dd></div>
+        </dl>
+        <div class="mt-4 flex items-center gap-3 border-t border-line pt-3 text-sm">
+          <PinButton kind="tool" id={tool.id} name={d.name} href={`/t/${tool.id}/`} class="btn-ghost size-9 px-0" />
+          <label class="inline-flex cursor-pointer items-center gap-2 text-muted">
+            <input type="checkbox" data-compare={tool.id} data-compare-name={d.name} class="size-4 accent-[var(--color-brand)]" /> Add to compare
+          </label>
+        </div>
+        {d.affiliate && <p class="mt-2 text-xs text-muted">We may earn a commission. It does not change rankings or text.</p>}
+      </div>
 
-    <section class="mt-6 rounded-xl border border-line bg-white" aria-labelledby="summary-h">
+      {showFit && (
+        <div class="mt-4 rounded-xl border border-line p-4">
+          <h2 class="text-sm font-semibold">KDP fit</h2>
+          <ul class="mt-2 space-y-1.5 text-sm">
+            {FIT_SCOPES.map((k) => (
+              <li class="flex items-center justify-between gap-2"><span>{FIT_SCOPE_INFO[k].name}</span><span class={`badge ${FIT_LEVEL_INFO[d.kdp_fit[k]].badge}`}>{FIT_LEVEL_INFO[d.kdp_fit[k]].label}</span></li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div class="mt-4 rounded-xl border border-line p-4">
+        <h2 class="text-sm font-semibold">{calcs.related ? 'Free calculators for this' : 'Free KDP calculators'}</h2>
+        <ul class="mt-1 -mx-2">
+          {calcs.list.map((c) => (
+            <li><a href={`/free-tools/${c.slug}/`} data-drawer-open={c.slug} class="list-card flex-row items-center justify-start gap-2"><Icon name={c.icon} class="size-4 shrink-0 text-brand-deep" />{c.short}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      {similar.length > 0 && (
+        <div class="mt-4 rounded-xl border border-line p-4">
+          <h2 class="text-sm font-semibold">Similar tools</h2>
+          <ul class="mt-2 space-y-2.5 text-sm">
+            {similar.map((a) => {
+              const out = outbound(a);
+              return (
+                <li class="flex items-center gap-2">
+                  <ToolLogo tool={a} size={24} />
+                  <a href={out.href} rel={out.rel} target="_blank" data-site={out.href} data-details={`/t/${a.id}/`} class="min-w-0 flex-1 truncate font-medium">{a.data.name}</a>
+                  <a href={`/t/${a.id}/`} class="btn-icon size-7" aria-label={`${a.data.name} details`} title="Details"><Icon name="info" class="size-3.5" /></a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+    </aside>
+
+    <div class="min-w-0 max-w-3xl">
+    <section class="rounded-xl border border-line bg-white" aria-labelledby="summary-h">
       <h2 id="summary-h" class="sr-only">Is it right for you</h2>
       <dl class="divide-y divide-line text-sm">
         <div class="grid gap-1 px-4 py-3 sm:grid-cols-4"><dt class="font-medium">What it does</dt><dd class="sm:col-span-3">{category?.name}{d.categories.length > 1 ? `, plus ${d.categories.slice(1).map((c) => categoryBySlug(c)?.name).join(', ')}` : ''}. {d.kdp.outputs_kdp_files ? 'Outputs files you can upload to KDP.' : ''}</dd></div>
@@ -157,7 +212,7 @@ const jsonLd = [
         <p class="mt-1 text-sm text-muted">Whether {d.name} makes each kind of KDP file with KDP's specs built in, or only if you enter them yourself.</p>
         <div class="mt-3 overflow-x-auto rounded-lg border border-line bg-white">
           <table class="w-full text-left text-sm">
-            <thead class="border-b border-line bg-paper text-xs uppercase tracking-wide text-muted">
+            <thead class="border-b border-line bg-paper text-xs font-medium text-muted">
               <tr><th class="px-4 py-2 font-medium">Output</th><th class="px-4 py-2 font-medium">What that means</th><th class="px-4 py-2 font-medium">{d.name}</th></tr>
             </thead>
             <tbody class="divide-y divide-line">
@@ -186,7 +241,11 @@ const jsonLd = [
       </>
     )}
 
-    <h2 class="mt-8 text-2xl font-semibold">Price and check dates</h2>
+    <details class="group mt-8">
+    <summary class="flex cursor-pointer list-none items-center gap-2 [&::-webkit-details-marker]:hidden">
+      <h2 class="text-2xl font-semibold">Price, specs and check dates</h2>
+      <Icon name="chevronDown" class="size-5 text-muted transition group-open:rotate-180" />
+    </summary>
     <dl class="mt-3 divide-y divide-line rounded-lg border border-line bg-white text-sm">
       <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Price</dt><dd class="col-span-2">{priceLabel(tool)}{d.pricing.note ? ` (${d.pricing.note})` : ''}</dd></div>
       {terms.map((x) => <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Terms</dt><dd class="col-span-2">{x}</dd></div>)}
@@ -200,6 +259,7 @@ const jsonLd = [
       <div class="grid grid-cols-3 gap-2 px-4 py-2"><dt class="text-muted">Link checked</dt><dd class="col-span-2">{linkStatus?.ok ? `${linkStatus.checked_at}, site answered` : linkStatus?.failed_at ? `Did not answer on ${linkStatus.failed_at}${linkStatus.checked_at ? `; last answered ${linkStatus.checked_at}` : ''}` : 'Not yet'}</dd></div>
     </dl>
     <p class="mt-1 text-xs text-muted">A working link is not the same as a checked price: each date above is tracked on its own.</p>
+    </details>
 
     {d.price_history.length > 0 && (
       <>
@@ -252,5 +312,6 @@ const jsonLd = [
     <ul class="mt-2 list-disc pl-6 text-sm">{d.sources.map((s) => <li><a href={s} rel="noopener">{s}</a></li>)}</ul>
 
     <p class="mt-8 text-sm text-muted">Something wrong or out of date? <a href="/submit/">Send a correction</a>. <a href={`/t/${tool.id}.md`}>Plain-text version</a>.</p>
+    </div>
   </article>
 </Base>

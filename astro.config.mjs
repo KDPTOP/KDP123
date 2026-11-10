@@ -15,8 +15,8 @@ export default defineConfig({
   build: { format: 'directory' },
   integrations: [
     sitemap({
-      // /go/ redirects, search results, the compare picker and the 404 page are not content.
-      filter: (page) => !page.includes('/go/') && !page.endsWith('/search/') && !page.endsWith('/compare/pick/'),
+      // /go/ redirects, drawer fragments, search results, the compare picker and the 404 page are not content.
+      filter: (page) => !page.includes('/go/') && !page.includes('/drawer/') && !page.endsWith('/search/') && !page.endsWith('/compare/pick/'),
       // One sitemap per content type, so Search Console reports indexing for each separately. The rest go to sitemap-pages.
       chunks: {
         tools: section(['/t/', '/c/', '/stages/', '/tools/']),

@@ -1,0 +1,29 @@
+---
+// HTML fragment for the tool drawer: fetched when a calculator is opened, never visited directly
+// (robots.txt disallows /drawer/ and the sitemap skips it).
+import Icon from '../../components/Icon.astro';
+import PinButton from '../../components/PinButton.astro';
+import { FREE_TOOLS, type FreeTool } from '../../lib/freeTools';
+
+type WidgetModule = { default: (props: { variant?: 'compact' | 'full' }) => unknown };
+const widgets = import.meta.glob<WidgetModule>('../../tools/*/Widget.astro', { eager: true });
+
+export function getStaticPaths() {
+  return FREE_TOOLS.map((tool) => ({ params: { slug: tool.slug }, props: { tool } }));
+}
+const { tool } = Astro.props as { tool: FreeTool };
+const Widget = widgets[`../../tools/${tool.slug}/Widget.astro`]!.default as any;
+---
+
+<div data-panel={tool.slug}>
+  <div class="mb-5 flex items-start gap-3">
+    <span class="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-soft text-brand-deep"><Icon name={tool.icon} class="size-5" /></span>
+    <div class="min-w-0 flex-1">
+      <h3 class="text-lg leading-tight font-semibold" tabindex="-1" data-panel-h>{tool.name}</h3>
+      <p class="mt-0.5 text-sm text-muted">{tool.blurb}</p>
+      {tool.provider === 'kdptop' && <p class="mt-1 text-xs text-muted">Uses live data from <a href="/developers/#kdptop">KDPTop</a>, made by the same team.</p>}
+    </div>
+    <PinButton kind="calc" id={tool.slug} name={tool.short} href={`/free-tools/${tool.slug}/`} />
+  </div>
+  <Widget variant="compact" />
+</div>

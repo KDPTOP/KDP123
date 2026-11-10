@@ -47,5 +47,10 @@ export const ICONS = {
 
 export type IconName = keyof typeof ICONS;
 
+/** Icons repeated on every card and table row. Icon.astro points at one <symbol> each (spriteSvg, in the layout). */
+export const SPRITE: readonly IconName[] = ['star', 'info', 'arrowUpRight', 'arrowRight'];
+export const spriteSvg = () =>
+  `<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">${SPRITE.map((n) => `<symbol id="i-${n}" viewBox="0 0 24 24">${ICONS[n]}</symbol>`).join('')}</svg>`;
+
 export const iconSvg = (name: IconName, cls = 'size-4') =>
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="${cls}">${ICONS[name]}</svg>`;

@@ -3,8 +3,10 @@ import '../styles/global.css';
 import Seo from '../components/Seo.astro';
 import CompareTray from '../components/CompareTray.astro';
 import CommandPalette from '../components/CommandPalette.astro';
+import ToolDrawer from '../components/ToolDrawer.astro';
 import Icon from '../components/Icon.astro';
 import { SITE } from '../lib/site';
+import { spriteSvg } from '../lib/icons';
 import { STAGES } from '../lib/taxonomy';
 import { fitTitle, clampDescription, type Crumb } from '../lib/seo';
 import mark from '../../public/logo-mark.svg?raw';
@@ -60,7 +62,7 @@ const NAV = [
 ];
 const here = Astro.url.pathname;
 const active = (m: string[]) => m.some((p) => here.startsWith(p));
-const footerLink = 'text-slate-300 hover:text-white';
+const footerLink = 'text-slate-300 hover:text-slate-50';
 ---
 
 <!doctype html>
@@ -90,6 +92,7 @@ const footerLink = 'text-slate-300 hover:text-white';
     />
   </head>
   <body class="min-h-screen">
+    <Fragment set:html={spriteSvg()} />
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:bg-white focus:p-2">Skip to content</a>
     <header class="sticky top-0 z-30 border-b border-line/80 bg-white/80 backdrop-blur-xl">
       <div class="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4">
@@ -136,7 +139,7 @@ const footerLink = 'text-slate-300 hover:text-white';
           <p class="mt-2 text-xs">Not affiliated with Amazon. "Amazon", "Kindle" and "KDP" are trademarks of Amazon.com, Inc.</p>
         </div>
         <div>
-          <p class="font-semibold text-white">Find tools</p>
+          <p class="font-semibold text-slate-50">Find tools</p>
           <ul class="mt-3 space-y-1.5">
             <li><a class={footerLink} href="/free-tools/">Free KDP calculators</a></li>
             {STAGES.map((s) => <li><a class={footerLink} href={`/stages/${s.slug}/`}>KDP {s.name.toLowerCase()} tools</a></li>)}
@@ -144,7 +147,7 @@ const footerLink = 'text-slate-300 hover:text-white';
           </ul>
         </div>
         <div>
-          <p class="font-semibold text-white">About the data</p>
+          <p class="font-semibold text-slate-50">About the data</p>
           <ul class="mt-3 space-y-1.5">
             <li><a class={footerLink} href="/methodology/">Methodology and disclosures</a></li>
             <li><a class={footerLink} href="/glossary/">KDP glossary</a></li>
@@ -157,20 +160,21 @@ const footerLink = 'text-slate-300 hover:text-white';
           </ul>
         </div>
         <div>
-          <p class="font-semibold text-white">Follow and contribute</p>
+          <p class="font-semibold text-slate-50">Follow and contribute</p>
           <ul class="mt-3 space-y-1.5">
             <li><a class={footerLink} href="/newsletter/">Monthly email</a> · <a class={footerLink} href="/rss.xml">RSS</a></li>
             <li><a class={footerLink} href="/submit/">Suggest or correct a listing</a></li>
             <li><a class={footerLink} href="/about/">About KDP123</a> · <a class={footerLink} href="mailto:hello@kdp123.com">hello@kdp123.com</a></li>
             <li><a class={footerLink} href="/llms.txt">llms.txt</a></li>
           </ul>
-          <p class="mt-5 font-semibold text-white">From the same team</p>
+          <p class="mt-5 font-semibold text-slate-50">From the same team</p>
           <p class="mt-2"><a class={footerLink} href={SITE.related.url} rel="noopener">KDPTop</a>: daily Amazon bestseller lists and KDP category research.</p>
         </div>
       </div>
     </footer>
     <CommandPalette />
     <CompareTray />
+    {!here.startsWith('/free-tools/') && <ToolDrawer />}
     <script>
       const root = document.documentElement;
       document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {

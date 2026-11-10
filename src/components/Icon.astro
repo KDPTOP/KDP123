@@ -1,5 +1,5 @@
 ---
-import { iconSvg, type IconName } from '../lib/icons';
+import { iconSvg, SPRITE, type IconName } from '../lib/icons';
 
 interface Props {
   name: IconName;
@@ -8,4 +8,4 @@ interface Props {
 const { name, class: cls = 'size-4' } = Astro.props;
 ---
 
-<Fragment set:html={iconSvg(name, cls)} />
+{SPRITE.includes(name) ? <svg class:list={['i', cls]} aria-hidden="true"><use href={`#i-${name}`} /></svg> : <Fragment set:html={iconSvg(name, cls)} />}

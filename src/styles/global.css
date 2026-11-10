@@ -4,7 +4,7 @@
 /* Light and dark palettes. Components use the Tailwind names below, which point at these variables,
    so a page switches theme by flipping one attribute on <html>. "white" is the card surface. */
 :root {
-  --bg: #f6f7f9;
+  --bg: #ffffff;
   --surface: #ffffff;
   --surface-2: #f1f3f6;
   --ink: #0e1320;
@@ -18,7 +18,7 @@
   --ok: #13723e;
   --warn: #8a5a00;
   --bad: #c42121;
-  --shadow: 0 1px 2px rgb(14 19 32 / 0.04), 0 4px 16px rgb(14 19 32 / 0.04);
+  --shadow: 0 1px 2px rgb(14 19 32 / 0.04);
   --shadow-lift: 0 2px 4px rgb(14 19 32 / 0.05), 0 12px 32px rgb(14 19 32 / 0.08);
   --dot: rgb(14 19 32 / 0.07);
   color-scheme: light;
@@ -72,7 +72,9 @@
   body { @apply bg-paper font-sans text-ink antialiased; font-feature-settings: 'cv11', 'ss01'; }
   h1, h2, h3 { @apply font-sans font-semibold tracking-tight; }
   h1 { letter-spacing: -0.025em; }
-  a { @apply text-accent underline-offset-2 hover:underline; }
+  /* Links are ink, not blue: orange on hover. Links inside running text keep a thin underline so colour is not the only cue. */
+  a { @apply text-ink underline-offset-2 hover:text-brand-deep hover:underline; }
+  :where(p, li, dd, td, figcaption) a:not([class]) { @apply underline decoration-ink/25 hover:decoration-brand; }
   :focus-visible { @apply outline-2 outline-offset-2 outline-accent; }
   :root[data-theme='dark'] .dark-hide, :root:not([data-theme='dark']) .light-hide { display: none; }
   ::selection { background: color-mix(in srgb, var(--brand) 25%, transparent); }
@@ -89,17 +91,32 @@
   .prose-kdp ul { @apply my-4 list-disc pl-6 leading-7; }
   .prose-kdp ol { @apply my-4 list-decimal pl-6 leading-7; }
   .prose-kdp li { @apply my-1; }
-  .prose-kdp a { @apply underline decoration-accent/30 hover:decoration-accent; }
+  .prose-kdp a { @apply underline decoration-ink/25 hover:decoration-brand; }
   .prose-kdp strong { @apply font-semibold; }
   .prose-kdp code { @apply rounded bg-surface-2 px-1 font-mono text-sm; }
   .prose-kdp table { @apply my-4 w-full border-collapse text-sm; }
   .prose-kdp th { @apply border-b border-line px-3 py-2 text-left font-semibold; }
   .prose-kdp td { @apply border-b border-line px-3 py-2 align-top; }
 
-  .card, .card-link { @apply rounded-2xl border border-line bg-white; box-shadow: var(--shadow); }
-  .card-link { @apply block text-ink no-underline transition duration-150 hover:-translate-y-0.5 hover:border-brand/40 hover:no-underline; }
-  .card-link:hover { box-shadow: var(--shadow-lift); }
-  .eyebrow { @apply text-xs font-semibold tracking-wide text-muted uppercase; }
+  .card, .card-link { @apply rounded-xl border border-line bg-white; box-shadow: var(--shadow); }
+  .card-link { @apply block text-ink no-underline transition duration-150 hover:border-ink/25 hover:text-ink hover:no-underline; }
+  .eyebrow { @apply text-xs font-semibold text-muted; }
+
+  /* Home: calculator tiles, shortcut pills, link rows inside cards, directory stage tabs. */
+  .quick-tile { @apply flex h-full items-center gap-2.5 rounded-xl border border-line bg-surface-2/60 p-3 text-sm leading-tight text-ink sm:items-start sm:gap-3 sm:p-4 sm:text-base sm:leading-normal no-underline transition hover:border-brand/50 hover:bg-brand-soft hover:text-ink hover:no-underline; }
+  .quick-ico { @apply flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-brand-deep; box-shadow: var(--shadow); }
+  .pill { @apply inline-flex items-center gap-1 rounded-lg border border-line bg-white px-2.5 py-1.5 text-sm text-ink no-underline transition hover:border-ink/25 hover:text-ink hover:no-underline; }
+  .list-card { @apply flex min-h-11 flex-col justify-center rounded-lg px-2 py-1.5 text-sm text-ink no-underline transition hover:bg-surface-2 hover:text-ink hover:no-underline; }
+  .stage-tab { @apply -mb-px shrink-0 cursor-pointer border-b-2 border-transparent px-3 py-2.5 text-sm font-medium whitespace-nowrap text-muted transition hover:text-ink; }
+  .stage-tab[aria-selected='true'] { @apply border-brand text-ink; }
+
+  /* Directory card (ToolCard): the link, then the ⓘ and star buttons in its corners. */
+  .tc-link { @apply flex h-full rounded-xl border border-transparent text-ink no-underline transition hover:border-line hover:bg-surface hover:text-ink hover:no-underline; }
+  .tc-tile { @apply flex-col items-center gap-1.5 p-2 pt-3 text-center; }
+  .tc-row { @apply items-center gap-3 p-2; }
+  .tc-info, .tc-pin { @apply absolute top-0.5 flex size-6 cursor-pointer items-center justify-center rounded-md text-muted no-underline hover:bg-surface-2 hover:text-ink; }
+  .tc-info { @apply left-0.5; }
+  .tc-pin { @apply right-0.5; }
 
   .badge { @apply inline-flex items-center rounded-md bg-surface-2 px-1.5 py-0.5 text-xs font-medium text-muted; }
   .badge-ok { @apply bg-ok/10 text-ok; }
@@ -150,6 +167,13 @@
   .scroll-x::-webkit-scrollbar { display: none; }
 }
 
+svg.i {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .pin-btn[aria-pressed='true'] {
   color: var(--brand);
 }
@@ -217,7 +241,84 @@
   }
 }
 
-/* Home workbench rail */
+/* Tool drawer and its floating button */
+.drawer-fab {
+  @apply fixed right-4 bottom-4 z-[35] inline-flex cursor-pointer items-center gap-2 rounded-full bg-ink px-4 py-3 text-sm font-medium text-white transition hover:bg-ink/85;
+  box-shadow: var(--shadow-lift);
+}
+body:has(#compare-tray:not([hidden])) .drawer-fab {
+  bottom: 5rem;
+}
+body:has(.drawer[open]) {
+  overflow: hidden;
+}
+.drawer {
+  margin: 0 0 0 auto;
+  width: min(960px, 100vw);
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-lift);
+}
+.drawer::backdrop {
+  background: rgb(10 13 20 / 0.35);
+}
+.drawer[open] {
+  animation: drawer-in 0.2s ease-out;
+}
+@keyframes drawer-in {
+  from {
+    transform: translateX(32px);
+    opacity: 0;
+  }
+}
+.drawer-body {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+}
+.drawer-nav {
+  overflow-y: auto;
+  padding: 1rem 0.75rem;
+}
+.drawer-main {
+  overflow-y: auto;
+  min-width: 0;
+  padding: 1rem;
+}
+.drawer-back {
+  display: none;
+}
+.drawer .tool-grid .tool-out {
+  top: 0;
+}
+@media (min-width: 768px) {
+  .drawer-body {
+    grid-template-columns: 216px minmax(0, 1fr);
+  }
+  .drawer-nav {
+    border-right: 1px solid var(--line);
+  }
+  .drawer-main {
+    padding: 1.5rem;
+  }
+}
+@media (max-width: 767px) {
+  .drawer[data-view='tool'] .drawer-nav,
+  .drawer[data-view='list'] .drawer-main {
+    display: none;
+  }
+  .drawer[data-view='tool'] .drawer-back {
+    display: inline-flex;
+  }
+}
+
+/* Calculator list rail (drawer) */
 .bench-link {
   @apply flex items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm text-ink no-underline transition hover:bg-surface-2 hover:no-underline;
 }
@@ -231,11 +332,4 @@
 .bench-link[aria-current='true'] .bench-ico {
   @apply border-transparent bg-brand text-white;
   color: #fff;
-}
-.bench-chip {
-  @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-sm whitespace-nowrap text-ink no-underline hover:no-underline;
-}
-.bench-chip[aria-current='true'] {
-  @apply border-ink bg-ink;
-  color: var(--bg);
 }

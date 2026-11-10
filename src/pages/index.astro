@@ -3,27 +3,20 @@ import Base from '../layouts/Base.astro';
 import ToolTable from '../components/ToolTable.astro';
 import ToolCard from '../components/ToolCard.astro';
 import Icon from '../components/Icon.astro';
-import PinButton from '../components/PinButton.astro';
 import MyTools from '../components/MyTools.astro';
-import TeamPick from '../components/TeamPick.astro';
 import { getTools, SITE, isoDate } from '../lib/site';
 import { STAGES, CATEGORIES, nonEmpty } from '../lib/taxonomy';
 import { getFacts } from '../lib/facts';
 import research from '../../data/research/reports.json';
 import { addedDates } from '../lib/added';
-import { TOOL_GROUPS, freeToolsInGroup, type FreeTool } from '../lib/freeTools';
+import { FREE_TOOLS, freeTool } from '../lib/freeTools';
 import { getBest } from '../lib/best';
 import { getReports, monthName } from '../lib/reports';
 import { getCompares, compareTitle } from '../lib/compare';
 import { citationCounts } from '../lib/cited';
 import { websiteLd, organizationLd } from '../lib/seo';
 
-type WidgetModule = { default: (props: { variant?: 'compact' | 'full' }) => unknown };
-const widgets = import.meta.glob<WidgetModule>('../tools/*/Widget.astro', { eager: true });
-const widgetOf = (slug: string) => widgets[`../tools/${slug}/Widget.astro`]?.default;
-const groups = TOOL_GROUPS.map((g) => ({ ...g, tools: freeToolsInGroup(g.id).filter((t) => widgetOf(t.slug)) })).filter((g) => g.tools.length);
-const benchTools: FreeTool[] = groups.flatMap((g) => g.tools);
-const first = benchTools[0];
+const QUICK = ['royalty-calculator', 'cover-size-calculator', 'kenp-calculator', 'keyword-checker', 'word-count-to-page-count', 'amazon-ads-acos-calculator'].map(freeTool);
 
 const lists = await getBest();
 const [monthly] = await getReports();
@@ -31,16 +24,17 @@ const compares = await getCompares();
 const cited = await citationCounts();
 const tools = await getTools();
 const facts = await getFacts();
-const liveCategories = nonEmpty(tools.flatMap((t) => t.data.categories));
 const countOf = (cat: string) => tools.filter((t) => t.data.categories.includes(cat as never)).length;
+const liveCategories = nonEmpty(tools.flatMap((t) => t.data.categories)).sort((a, b) => countOf(b.slug) - countOf(a.slug));
+const CHIPS = 10;
 const stageOf = (cat: string) => CATEGORIES.find((x) => x.slug === cat)?.stage;
 const stageCount = (stage: string) => tools.filter((t) => t.data.categories.some((c) => stageOf(c) === stage)).length;
 const official = tools.filter((t) => t.data.official);
 const byChecked = [...tools].sort((a, b) => +(b.data.verified_at ?? 0) - +(a.data.verified_at ?? 0));
 const lastChecked = isoDate(byChecked[0]?.data.verified_at);
 
-// Each tool sits in the stage of its first category, so it appears once in the grid.
-const GRID_SIZE = 8;
+// Each tool sits in the stage of its first category, so it appears once in the directory.
+const GRID_SIZE = 5;
 const grid = STAGES.map((s) => {
   const inStage = tools
     .filter((t) => stageOf(t.data.categories[0]) === s.slug && !t.data.related_to_directory)
@@ -58,23 +52,27 @@ const addedAt = (id: string) => added.get(id)?.getTime() ?? Date.now();
 const latest = byChecked
   .filter((t) => !t.data.official && !t.data.related_to_directory)
   .sort((a, b) => addedAt(b.id) - addedAt(a.id) || +(b.data.verified_at ?? 0) - +(a.data.verified_at ?? 0))
-  .slice(0, 6);
+  .slice(0, 5);
 const changes = tools
   .flatMap((t) => t.data.price_history.map((h) => ({ tool: t, ...h })))
   .sort((a, b) => b.date.getTime() - a.date.getTime())
-  .slice(0, 5);
-const reports = research.reports.slice(0, 3);
+  .slice(0, 3);
+const guides = [
+  ...lists.map(({ list }) => ({ href: `/best/${list.id}/`, title: list.data.title })),
+  ...compares.map(({ cmp, a, b }) => ({ href: `/compare/${cmp.id}/`, title: compareTitle(a, b) })),
+].slice(0, 5);
+const market = [
+  ...(monthly ? [{ href: `/reports/${monthly.data.month}/`, title: `KDP market report, ${monthName(monthly.data.month)}` }] : []),
+  ...research.reports.map((r) => ({ href: `/research/#${r.slug}`, title: r.title.replace(/\s*\([A-Z][a-z]+ \d{4}\)$/, '') })),
+].slice(0, 5);
 
 const MY_KDP = [
-  { name: 'KDP Bookshelf', href: 'https://kdp.amazon.com/en_US/bookshelf', note: 'Your titles' },
-  { name: 'KDP Reports', href: 'https://kdpreports.amazon.com/', note: 'Sales and KENP' },
-  { name: 'Amazon Ads', href: 'https://advertising.amazon.com/', note: 'Campaigns' },
-  { name: 'Author Central', href: 'https://author.amazon.com/', note: 'Author page' },
-  { name: 'Best Sellers in Books', href: 'https://www.amazon.com/gp/bestsellers/books', note: 'Amazon.com' },
-  { name: 'Hot New Releases', href: 'https://www.amazon.com/gp/new-releases/books', note: 'Amazon.com' },
-  { name: 'KDP Help', href: 'https://kdp.amazon.com/en_US/help', note: 'Official rules' },
-  { name: 'KDP Community', href: 'https://www.kdpcommunity.com/', note: 'Forum' },
-  { name: 'KDPTop', href: SITE.related.url, note: 'Same team: daily lists' },
+  { name: 'Bookshelf', href: 'https://kdp.amazon.com/en_US/bookshelf' },
+  { name: 'KDP Reports', href: 'https://kdpreports.amazon.com/' },
+  { name: 'Amazon Ads', href: 'https://advertising.amazon.com/' },
+  { name: 'Author Central', href: 'https://author.amazon.com/' },
+  { name: 'KDP Help', href: 'https://kdp.amazon.com/en_US/help' },
+  { name: 'KDPTop (same team)', href: SITE.related.url },
 ];
 const TRY = ['$12.99 200 pages', 'BSR 25000', '80k words', 'kindle $4.99', 'cover 300 pages'];
 
@@ -82,7 +80,7 @@ const itemListLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Free KDP calculators',
-  itemListElement: benchTools.map((t, i) => ({
+  itemListElement: FREE_TOOLS.map((t, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     item: { '@type': 'WebApplication', name: t.name, url: `${SITE.url}/free-tools/${t.slug}/`, applicationCategory: 'BusinessApplication', operatingSystem: 'Any', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
@@ -93,25 +91,16 @@ const description = `Free KDP calculators for royalties, cover size, KENP, ad AC
 ---
 
 <Base title="KDP Tools & Free Calculators for Amazon Authors | KDP123" exactTitle {description} jsonLd={jsonLd} wide>
-  <section class="hero-bg relative overflow-hidden border-b border-line">
-    <div class="glow" aria-hidden="true"></div>
-    <div class="relative mx-auto max-w-6xl px-4 pt-8 pb-8 md:pt-12 md:pb-10">
-      <div data-today hidden class="mb-5 flex flex-wrap items-center gap-x-4 gap-y-1.5 rounded-xl border border-line bg-surface/70 px-3 py-2 text-xs text-muted backdrop-blur" aria-label="Today on Amazon KDP">
-        <span class="inline-flex items-center gap-1.5 font-medium text-ink"><span class="size-1.5 rounded-full bg-ok"></span>Today on Amazon</span>
-        <span data-k="lists"></span>
-        <span data-k="pick" class="min-w-0"></span>
-        <span data-k="niche"></span>
-        <a href="/developers/#kdptop" class="ml-auto text-muted hover:text-ink">Data: KDPTop (same team)</a>
-      </div>
-
+  <section class="hero-bg border-b border-line">
+    <div class="mx-auto max-w-5xl px-4 pt-10 pb-8 md:pt-14 md:pb-10">
       <h1 class="max-w-3xl text-4xl leading-[1.1] font-bold tracking-tight md:text-5xl">Free KDP tools and calculators, all in one place</h1>
       <p class="mt-3 max-w-2xl text-base text-muted md:text-lg">
-        Work out royalties, cover sizes, KENP payouts and keyword slots right here, then jump to any of {tools.length} checked KDP tools. No sign-up, no ads, no paid rankings.
+        Work out royalties, cover sizes, KENP payouts and keyword slots, then jump to any of {tools.length} checked KDP tools. No sign-up, no ads, no paid rankings.
       </p>
 
       <div class="relative mt-6 max-w-2xl" data-home-cmdk>
-        <div class="glass flex items-center gap-3 rounded-2xl border border-line px-4 shadow-lg focus-within:border-brand/60">
-          <Icon name="sparkles" class="size-5 shrink-0 text-brand" />
+        <div class="flex items-center gap-3 rounded-2xl border-2 border-ink/80 bg-white px-4 transition focus-within:border-brand focus-within:ring-4 focus-within:ring-brand/15">
+          <Icon name="search" class="size-5 shrink-0 text-muted" />
           <label for="home-q" class="sr-only">Search tools or type numbers to calculate</label>
           <input
             id="home-q"
@@ -134,84 +123,98 @@ const description = `Free KDP calculators for royalties, cover size, KENP, ad AC
         Try
         {TRY.map((t) => <button type="button" class="chip px-2.5 py-0.5 text-xs" data-try={t}>{t}</button>)}
       </p>
+      <p data-today hidden class="mt-4 flex max-w-full items-center gap-x-4 overflow-hidden text-xs whitespace-nowrap text-muted" aria-label="Today on Amazon KDP">
+        <span class="inline-flex shrink-0 items-center gap-1.5 font-medium text-ink"><span class="size-1.5 rounded-full bg-ok"></span>Today on Amazon</span>
+        <span data-k="lists" class="shrink-0 max-sm:hidden"></span>
+        <span data-k="pick" class="min-w-0 truncate"></span>
+        <a href="/developers/#kdptop" class="ml-auto shrink-0 text-muted">Data: KDPTop, same team</a>
+      </p>
     </div>
   </section>
 
-  <section id="workbench" data-workbench class="mx-auto max-w-6xl scroll-mt-16 px-4 pt-8" aria-labelledby="bench-h">
-    <h2 id="bench-h" class="sr-only">Free KDP calculators</h2>
-    <div class="grid gap-4 lg:grid-cols-[232px_minmax(0,1fr)] lg:gap-6">
-      <nav aria-label="Calculators" class="min-w-0 lg:sticky lg:top-20 lg:self-start">
-        <ul class="scroll-x -mx-4 flex gap-2 px-4 pb-1 lg:hidden">
-          {benchTools.map((t) => (
-            <li class="shrink-0">
-              <a href={`/free-tools/${t.slug}/`} data-open={t.slug} class="bench-chip"><Icon name={t.icon} class="size-3.5" />{t.short}</a>
-            </li>
-          ))}
-        </ul>
-        <div class="hidden space-y-5 lg:block">
-          {groups.map((g) => (
-            <div>
-              <p class="eyebrow px-2">{g.name}</p>
-              <ul class="mt-1.5 space-y-0.5">
-                {g.tools.map((t) => (
-                  <li>
-                    <a href={`/free-tools/${t.slug}/`} data-open={t.slug} class="bench-link"><span class="bench-ico"><Icon name={t.icon} class="size-4" /></span>{t.short}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-          <a href="/free-tools/" class="flex items-center gap-1 px-2 text-sm">All free tools <Icon name="arrowRight" class="size-3.5" /></a>
-        </div>
-      </nav>
-
-      <div class="card min-w-0 p-4 md:p-6">
-        {benchTools.map((t) => {
-          const Widget = widgetOf(t.slug)! as any;
-          return (
-            <div data-panel={t.slug} hidden={t.slug !== first.slug} aria-labelledby={`p-${t.slug}`}>
-              <div class="mb-5 flex items-start gap-3">
-                <span class="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-soft text-brand-deep"><Icon name={t.icon} class="size-5" /></span>
-                <div class="min-w-0 flex-1">
-                  <h3 id={`p-${t.slug}`} class="text-lg leading-tight font-semibold"><a href={`/free-tools/${t.slug}/`} class="text-ink">{t.name}</a></h3>
-                  <p class="mt-0.5 text-sm text-muted">{t.blurb}</p>
-                  {t.provider === 'kdptop' && <p class="mt-1 text-xs text-muted">Uses live data from <a href="/developers/#kdptop">KDPTop</a>, made by the same team.</p>}
-                </div>
-                <PinButton kind="calc" id={t.slug} name={t.short} href={`/free-tools/${t.slug}/`} />
-              </div>
-              <Widget variant="compact" />
-            </div>
-          );
-        })}
+  <div class="mx-auto max-w-5xl px-4">
+    <section class="mt-10" aria-labelledby="calc-h">
+      <div class="flex items-baseline justify-between gap-4">
+        <h2 id="calc-h" class="text-xl font-semibold">Free calculators</h2>
+        <a href="/free-tools/" data-drawer-open="" class="text-sm font-medium">All {FREE_TOOLS.length} calculators</a>
       </div>
-    </div>
-  </section>
-
-  <section class="mx-auto mt-8 grid max-w-6xl gap-4 px-4 lg:grid-cols-2 lg:gap-6">
-    <MyTools suggest={benchTools.slice(0, 4).map((t) => ({ id: t.slug, name: t.short, href: `/free-tools/${t.slug}/` }))} />
-    <section class="card p-4 md:p-5" aria-labelledby="my-kdp-h">
-      <h2 id="my-kdp-h" class="flex items-center gap-2 text-base font-semibold"><Icon name="bookOpen" class="size-4 text-brand" />My KDP</h2>
-      <ul class="mt-3 grid grid-cols-2 gap-1.5 sm:grid-cols-3">
-        {MY_KDP.map((l) => (
+      <ul class="mt-4 grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-3">
+        {QUICK.map((t) => (
           <li>
-            <a href={l.href} rel="noopener" target="_blank" class="flex h-full flex-col rounded-lg border border-line bg-paper px-2.5 py-1.5 text-ink no-underline transition hover:border-ink/25 hover:no-underline">
-              <span class="flex items-center gap-1 text-sm font-medium">{l.name}<Icon name="arrowUpRight" class="size-3 shrink-0 text-muted" /></span>
-              <span class="text-xs text-muted">{l.note}</span>
+            <a href={`/free-tools/${t.slug}/`} data-drawer-open={t.slug} class="quick-tile">
+              <span class="quick-ico"><Icon name={t.icon} class="size-5" /></span>
+              <span class="min-w-0">
+                <span class="block font-semibold text-ink">{t.short}</span>
+                <span class="mt-0.5 line-clamp-2 text-sm text-muted max-sm:hidden">{t.blurb}</span>
+              </span>
             </a>
           </li>
         ))}
       </ul>
     </section>
-  </section>
 
-  <div class="mx-auto max-w-6xl px-4 pb-4">
-    <section class="mt-14" aria-labelledby="grid">
+    <section class="mt-6 space-y-3 rounded-xl border border-line px-4 py-3" aria-label="Your shortcuts">
+      <div class="flex flex-wrap items-center gap-2" role="group" aria-labelledby="my-kdp-h">
+        <h2 id="my-kdp-h" class="flex w-24 shrink-0 items-center gap-1.5 text-sm font-semibold"><Icon name="bookOpen" class="size-4 text-brand" />My KDP</h2>
+        {MY_KDP.map((l) => <a href={l.href} rel="noopener" target="_blank" class="pill">{l.name}<Icon name="arrowUpRight" class="size-3 shrink-0 text-muted" /></a>)}
+      </div>
+      <div class="border-t border-line pt-3"><MyTools labelClass="w-24" /></div>
+    </section>
+
+    <div class="mt-12 grid gap-4 md:grid-cols-3">
+      {facts.length > 0 && (
+        <section class="card p-4" aria-labelledby="facts">
+          <div class="flex items-baseline justify-between gap-2">
+            <h2 id="facts" class="text-base font-semibold">KDP facts</h2>
+            <a href="/facts/" class="text-sm text-muted">All {facts.length}</a>
+          </div>
+          <ul class="mt-2 -mx-2">
+            {facts.slice(0, 5).map((f) => (
+              <li>
+                <a href={`/facts/${f.id}/`} class="list-card"><span class="line-clamp-2">{f.data.title}</span></a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      <section class="card p-4" aria-labelledby="guides">
+        <div class="flex items-baseline justify-between gap-2">
+          <h2 id="guides" class="text-base font-semibold">Shortlists and comparisons</h2>
+          <a href="/best/" class="text-sm text-muted">All</a>
+        </div>
+        <ul class="mt-2 -mx-2">
+          {guides.map((g) => (
+            <li>
+              <a href={g.href} class="list-card">
+                <span class="line-clamp-2">{g.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section class="card p-4" aria-labelledby="market">
+        <div class="flex items-baseline justify-between gap-2">
+          <h2 id="market" class="text-base font-semibold">KDP market data</h2>
+          <a href="/research/" class="text-sm text-muted">All reports</a>
+        </div>
+        <ul class="mt-2 -mx-2">
+          {market.map((m) => (
+            <li>
+              <a href={m.href} class="list-card">
+                <span class="line-clamp-2">{m.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+
+    <section class="mt-12" aria-labelledby="grid">
       <div class="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h2 id="grid" class="text-2xl font-semibold tracking-tight">KDP tools directory</h2>
-          <p class="mt-1 max-w-3xl text-sm text-muted">
-            {tools.length} tools, each with its price, KDP fit and the date we last checked it (latest {lastChecked}). Click a tool to open its website;
-            <Icon name="info" class="inline size-3.5 align-[-2px]" /> shows price, KDP fit and alternatives. KDPTop is made by the same team and labelled.
+          <h2 id="grid" class="text-xl font-semibold">KDP tools directory</h2>
+          <p class="mt-1 max-w-2xl text-sm text-muted">
+            {tools.length} tools with price, KDP fit and the date we last checked each one (latest {lastChecked}). <Icon name="info" class="inline size-3.5 align-[-2px]" /> opens details and alternatives. KDPTop is made by the same team and labelled.
           </p>
         </div>
         <label class="flex items-center gap-2 text-sm text-muted" data-pagefind-ignore>
@@ -222,153 +225,81 @@ const description = `Free KDP calculators for royalties, cover size, KENP, ad AC
           </select>
         </label>
       </div>
-      <div class="mt-5 grid gap-4 lg:grid-cols-2">
-        {grid.map(({ stage, picks, total }) => (
-          <div class="card p-4">
-            <div class="flex items-baseline justify-between gap-2">
-              <h3 class="text-base font-semibold"><a href={`/stages/${stage.slug}/`} class="text-ink">{stage.name}</a></h3>
-              <a href={`/stages/${stage.slug}/`} class="text-sm">All {total}</a>
-            </div>
-            <p class="text-sm text-muted">{stage.blurb}</p>
-            <ul class="mt-3 grid grid-cols-4 gap-1">
-              {picks.map((t) => <li><ToolCard tool={t} /></li>)}
-            </ul>
-          </div>
+      <div role="tablist" aria-label="Directory by stage" class="scroll-x mt-4 border-b border-line" data-tabs>
+        {grid.map(({ stage, total }, i) => (
+          <button type="button" role="tab" id={`tab-${stage.slug}`} aria-controls={`stage-${stage.slug}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} class="stage-tab">
+            {stage.name} <span class="text-muted">{total}</span>
+          </button>
         ))}
       </div>
+      {grid.map(({ stage, picks, total }, i) => (
+        <div role="tabpanel" id={`stage-${stage.slug}`} aria-labelledby={`tab-${stage.slug}`} hidden={i !== 0} class="pt-4">
+          <p class="text-sm text-muted">{stage.blurb}</p>
+          <ul class="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+            {picks.map((t) => <li><ToolCard tool={t} /></li>)}
+            <li>
+              <a href={`/stages/${stage.slug}/`} class="flex h-full min-h-24 flex-col items-center justify-center gap-1 rounded-xl border border-dashed border-line p-3 text-center text-sm font-medium text-ink hover:border-ink/30 hover:no-underline">
+                All {total} {stage.name.toLowerCase()} tools
+                <Icon name="arrowRight" class="size-4 text-muted" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      ))}
     </section>
 
-    <section class="mt-12" aria-labelledby="cats">
-      <h2 id="cats" class="text-xl font-semibold">Browse by category</h2>
+    <section class="mt-10" aria-labelledby="cats">
+      <h2 id="cats" class="text-base font-semibold">Browse by category</h2>
       <ul class="mt-3 flex flex-wrap gap-2">
-        {liveCategories.map((c) => (
-          <li>
-            <a href={`/c/${c.slug}/`} class="chip gap-1.5 no-underline hover:no-underline">{c.name} <span class="text-muted">{countOf(c.slug)}</span></a>
-          </li>
+        {liveCategories.slice(0, CHIPS).map((c) => (
+          <li><a href={`/c/${c.slug}/`} class="chip gap-1.5 no-underline hover:no-underline">{c.name} <span class="text-muted">{countOf(c.slug)}</span></a></li>
         ))}
       </ul>
+      {liveCategories.length > CHIPS && (
+        <details class="mt-2 text-sm">
+          <summary class="cursor-pointer text-muted hover:text-ink">{liveCategories.length - CHIPS} more categories</summary>
+          <ul class="mt-2 flex flex-wrap gap-2">
+            {liveCategories.slice(CHIPS).map((c) => (
+              <li><a href={`/c/${c.slug}/`} class="chip gap-1.5 no-underline hover:no-underline">{c.name} <span class="text-muted">{countOf(c.slug)}</span></a></li>
+            ))}
+          </ul>
+        </details>
+      )}
     </section>
 
-    <div class="mt-12 grid gap-10 lg:grid-cols-2">
-      {facts.length > 0 && (
-        <section aria-labelledby="facts">
-          <div class="flex items-baseline justify-between gap-4">
-            <h2 id="facts" class="text-xl font-semibold">KDP facts</h2>
-            <a href="/facts/" class="text-sm">All {facts.length} facts</a>
-          </div>
-          <p class="mt-1 text-sm text-muted">Royalties, print specs and program rules, sourced to Amazon’s help pages.</p>
-          <ul class="mt-3 space-y-1.5 text-sm">{facts.slice(0, 10).map((f) => <li><a href={`/facts/${f.id}/`}>{f.data.title}</a></li>)}</ul>
-        </section>
-      )}
-      <section aria-labelledby="guides">
+    <div class="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-8">
+      <section class="min-w-0" aria-labelledby="recent">
         <div class="flex items-baseline justify-between gap-4">
-          <h2 id="guides" class="text-xl font-semibold">Shortlists and comparisons</h2>
-          <a href="/best/" class="text-sm">All guides</a>
+          <h2 id="recent" class="text-xl font-semibold">Recently added</h2>
+          <span class="text-sm"><a href="/tools/" class="text-muted">All tools</a> <span class="text-line">|</span> <a href="/rss.xml" class="text-muted">RSS</a></span>
         </div>
-        <p class="mt-1 text-sm text-muted">Criteria first, then picks and the reason for each. Or <a href="/compare/pick/">pick any two or three tools</a> to compare.</p>
-        <ul class="mt-3 space-y-1.5 text-sm">
-          {lists.map(({ list }) => <li><a href={`/best/${list.id}/`}>{list.data.title}</a></li>)}
-          {compares.map(({ cmp, a, b }) => <li><a href={`/compare/${cmp.id}/`}>{compareTitle(a, b)}</a></li>)}
-        </ul>
+        <p class="mt-1 text-sm text-muted">Newest listings, each checked on the vendor's own site.</p>
+        <div class="mt-3"><ToolTable tools={latest} compact /></div>
+        {changes.length > 0 && (
+          <>
+            <h3 class="mt-5 text-sm font-semibold">Price and plan changes</h3>
+            <ul class="mt-1.5 space-y-1 text-sm">
+              {changes.map((c) => <li class="line-clamp-2"><span class="text-muted tabular-nums">{isoDate(c.date)}</span> <a href={`/t/${c.tool.id}/`} class="font-medium">{c.tool.data.name}</a>: {c.note}</li>)}
+            </ul>
+            <p class="mt-2 text-sm"><a href="/changes/" class="text-muted">All changes</a></p>
+          </>
+        )}
+      </section>
+      <section class="min-w-0" aria-labelledby="official">
+        <div class="flex items-baseline justify-between gap-4">
+          <h2 id="official" class="text-xl font-semibold">Official sources first</h2>
+          <a href="/c/official/" class="text-sm text-muted">All {official.length}</a>
+        </div>
+        <p class="mt-1 text-sm text-muted">When another site disagrees with Amazon's own pages, Amazon wins.</p>
+        <div class="mt-3"><ToolTable tools={official.slice(0, 6)} compact /></div>
       </section>
     </div>
-
-    <section class="mt-12" aria-labelledby="recent">
-      <div class="flex items-baseline justify-between gap-4">
-        <h2 id="recent" class="text-xl font-semibold">Recently added</h2>
-        <a href="/rss.xml" class="text-sm">RSS</a>
-      </div>
-      <p class="mt-1 text-sm text-muted">The newest listings, each checked on the vendor's own site.</p>
-      <div class="mt-3"><ToolTable tools={latest} showCategory /></div>
-      {changes.length > 0 && (
-        <>
-          <h3 class="mt-6 font-semibold">Price and plan changes</h3>
-          <ul class="mt-2 space-y-1 text-sm">
-            {changes.map((c) => <li><span class="text-muted">{isoDate(c.date)}</span> <a href={`/t/${c.tool.id}/`}>{c.tool.data.name}</a>: {c.note}</li>)}
-          </ul>
-          <p class="mt-2 text-sm"><a href="/changes/">All changes</a> · <a href="/changes/rss.xml">Changes RSS</a></p>
-        </>
-      )}
-    </section>
-
-    <section class="mt-12" aria-labelledby="market">
-      <div class="flex items-baseline justify-between gap-4">
-        <h2 id="market" class="text-xl font-semibold">KDP market data</h2>
-        <a href="/research/" class="text-sm">All reports</a>
-      </div>
-      <p class="mt-1 text-sm text-muted">Open data on book prices, reviews and niche competition, with CSV downloads.</p>
-      <ul class="mt-3 grid gap-x-8 gap-y-1.5 text-sm sm:grid-cols-2 lg:grid-cols-3">
-        {monthly && <li><a href={`/reports/${monthly.data.month}/`}>KDP market report, {monthName(monthly.data.month)}</a></li>}
-        {reports.map((r) => <li><a href={`/research/#${r.slug}`}>{r.title}</a></li>)}
-      </ul>
-      <div class="mt-6 max-w-3xl"><TeamPick /></div>
-    </section>
-
-    <section class="mt-12" aria-labelledby="official">
-      <h2 id="official" class="text-xl font-semibold">Official sources first</h2>
-      <p class="mt-1 text-sm text-muted">When another site disagrees with Amazon's own pages, Amazon's pages win.</p>
-      <div class="mt-3"><ToolTable tools={official} /></div>
-    </section>
   </div>
 </Base>
 
 <script>
-  import { boot, prefill } from '../tools/boot';
   import { mount } from '../lib/cmdk';
   import { openPref, setOpenPref } from '../lib/pins';
-
-  const LAST = 'kdp123.lastTool';
-  const bench = document.querySelector<HTMLElement>('[data-workbench]')!;
-  const panels = [...bench.querySelectorAll<HTMLElement>('[data-panel]')];
-  const links = [...bench.querySelectorAll<HTMLAnchorElement>('[data-open]')];
-
-  function open(slug: string, params?: URLSearchParams, opts: { scroll?: boolean; url?: boolean } = {}) {
-    const panel = panels.find((p) => p.dataset.panel === slug);
-    if (!panel) return false;
-    for (const p of panels) {
-      p.hidden = p !== panel;
-      p.toggleAttribute('data-active', p === panel);
-    }
-    for (const a of links) {
-      if (a.dataset.open === slug) {
-        a.setAttribute('aria-current', 'true');
-        if (a.closest('.scroll-x')) a.parentElement!.scrollIntoView({ inline: 'center', block: 'nearest' });
-      } else a.removeAttribute('aria-current');
-    }
-    const root = panel.querySelector<HTMLElement>('[data-tool]')!;
-    const p = params ?? new URLSearchParams();
-    if (p.size) prefill(root, p);
-    else boot(root, p);
-    try {
-      localStorage.setItem(LAST, slug);
-    } catch {}
-    if (opts.url !== false) history.replaceState(null, '', `${location.pathname}?${new URLSearchParams([['tool', slug], ...p])}`);
-    if (opts.scroll) bench.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
-    return true;
-  }
-
-  const sp = new URLSearchParams(location.search);
-  const want = sp.get('tool');
-  sp.delete('tool');
-  let last: string | null = null;
-  try {
-    last = localStorage.getItem(LAST);
-  } catch {}
-  if (!(want && open(want, sp, { url: false, scroll: true }))) {
-    if (!(last && open(last, undefined, { url: false }))) open(panels[0].dataset.panel!, undefined, { url: false });
-  }
-
-  for (const a of links) {
-    a.addEventListener('click', (e) => {
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-      e.preventDefault();
-      open(a.dataset.open!, undefined, { scroll: innerWidth < 1024 });
-    });
-  }
-  addEventListener('workbench-open', (e) => {
-    const { slug, params } = (e as CustomEvent<{ slug: string; params: Record<string, string> }>).detail;
-    open(slug, new URLSearchParams(params), { scroll: true });
-  });
 
   // Command box in the hero.
   const input = document.getElementById('home-q') as HTMLInputElement;
@@ -392,6 +323,31 @@ const description = `Free KDP calculators for royalties, cover size, KENP, ad AC
     });
   }
 
+  // Directory stage tabs, with arrow keys between tabs.
+  const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-tabs] [role="tab"]')];
+  const select = (tab: HTMLButtonElement, focus = false) => {
+    for (const t of tabs) {
+      const on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')!)!.hidden = !on;
+    }
+    if (focus) tab.focus();
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(t));
+    t.addEventListener('keydown', (e) => {
+      const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (e.key === 'Home' || e.key === 'End') {
+        e.preventDefault();
+        select(tabs[e.key === 'Home' ? 0 : tabs.length - 1], true);
+      } else if (step) {
+        e.preventDefault();
+        select(tabs[(i + step + tabs.length) % tabs.length], true);
+      }
+    });
+  });
+
   // Directory click preference.
   const pref = document.querySelector<HTMLSelectElement>('[data-open-pref]');
   if (pref) {
@@ -399,22 +355,20 @@ const description = `Free KDP calculators for royalties, cover size, KENP, ad AC
     pref.addEventListener('change', () => setOpenPref(pref.value as 'site' | 'details'));
   }
 
-  // "Today on Amazon" strip from KDPTop; stays hidden if the call fails.
+  // "Today on Amazon" line from KDPTop; stays hidden if the call fails.
   const bar = document.querySelector<HTMLElement>('[data-today]')!;
   fetch('/api/kdptop/today')
     .then((r) => (r.ok ? r.json() : null))
     .then((d) => {
       if (!d || !d.data_date) return;
       const set = (k: string, ...kids: (Node | string)[]) => bar.querySelector(`[data-k="${k}"]`)!.replaceChildren(...kids);
-      if (d.lists_updated_24h) set('lists', `${Number(d.lists_updated_24h).toLocaleString('en-US')} bestseller lists refreshed · ${d.data_date}`);
+      if (d.lists_updated_24h) set('lists', `${Number(d.lists_updated_24h).toLocaleString('en-US')} bestseller lists refreshed, ${d.data_date}`);
       const p = d.pick;
       if (p?.title && /^https:\/\/www\.amazon\.com\//.test(p.amazon_url ?? '')) {
         const a = Object.assign(document.createElement('a'), { href: p.amazon_url, rel: 'noopener nofollow', target: '_blank', className: 'font-medium text-ink' });
         a.textContent = p.title.length > 60 ? `${p.title.slice(0, 57)}…` : p.title;
         set('pick', 'Breakout: ', a, ` hit #${p.best_rank} in ${p.name}${p.days_to_best != null ? `, ${p.days_to_best} days after release` : ''}`);
       }
-      const n = d.top_categories?.[0];
-      if (n?.name) set('niche', `Top niche score: ${n.name}${n.median_price ? ` (median $${Number(n.median_price).toFixed(2)})` : ''}`);
       bar.hidden = false;
     })
     .catch(() => {});
