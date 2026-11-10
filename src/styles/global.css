@@ -102,21 +102,12 @@
   .card-link { @apply block text-ink no-underline transition duration-150 hover:border-ink/25 hover:text-ink hover:no-underline; }
   .eyebrow { @apply text-xs font-semibold text-muted; }
 
-  /* Home: calculator tiles, shortcut pills, link rows inside cards, directory stage tabs. */
-  .quick-tile { @apply flex h-full items-center gap-2.5 rounded-xl border border-line bg-surface-2/60 p-3 text-sm leading-tight text-ink sm:items-start sm:gap-3 sm:p-4 sm:text-base sm:leading-normal no-underline transition hover:border-brand/50 hover:bg-brand-soft hover:text-ink hover:no-underline; }
-  .quick-ico { @apply flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-brand-deep; box-shadow: var(--shadow); }
+  /* Home: calculator tiles in the hero, shortcut pills, link rows inside cards, directory links. */
+  .calc-tile { @apply flex h-full items-center gap-2.5 rounded-xl border border-line bg-white p-2.5 text-sm leading-tight text-ink no-underline transition hover:border-brand/50 hover:bg-brand-soft hover:text-ink hover:no-underline; }
+  .calc-ico { @apply flex size-8 shrink-0 items-center justify-center rounded-lg bg-brand-soft text-brand-deep; }
   .pill { @apply inline-flex items-center gap-1 rounded-lg border border-line bg-white px-2.5 py-1.5 text-sm text-ink no-underline transition hover:border-ink/25 hover:text-ink hover:no-underline; }
   .list-card { @apply flex min-h-11 flex-col justify-center rounded-lg px-2 py-1.5 text-sm text-ink no-underline transition hover:bg-surface-2 hover:text-ink hover:no-underline; }
-  .stage-tab { @apply -mb-px shrink-0 cursor-pointer border-b-2 border-transparent px-3 py-2.5 text-sm font-medium whitespace-nowrap text-muted transition hover:text-ink; }
-  .stage-tab[aria-selected='true'] { @apply border-brand text-ink; }
-
-  /* Directory card (ToolCard): the link, then the ⓘ and star buttons in its corners. */
-  .tc-link { @apply flex h-full rounded-xl border border-transparent text-ink no-underline transition hover:border-line hover:bg-surface hover:text-ink hover:no-underline; }
-  .tc-tile { @apply flex-col items-center gap-1.5 p-2 pt-3 text-center; }
-  .tc-row { @apply items-center gap-3 p-2; }
-  .tc-info, .tc-pin { @apply absolute top-0.5 flex size-6 cursor-pointer items-center justify-center rounded-md text-muted no-underline hover:bg-surface-2 hover:text-ink; }
-  .tc-info { @apply left-0.5; }
-  .tc-pin { @apply right-0.5; }
+  .dir-link { @apply flex min-h-9 min-w-0 items-center gap-2 rounded-lg px-1.5 py-1 text-sm text-ink no-underline transition hover:bg-surface-2 hover:text-ink hover:no-underline; }
 
   .badge { @apply inline-flex items-center rounded-md bg-surface-2 px-1.5 py-0.5 text-xs font-medium text-muted; }
   .badge-ok { @apply bg-ok/10 text-ok; }
@@ -179,66 +170,6 @@ svg.i {
 }
 .pin-btn[aria-pressed='true'] svg {
   fill: currentColor;
-}
-
-/* Directory cards: the card opens the vendor's site; ⓘ opens our details page; the star pins it. */
-.tool-card .tc-info,
-.tool-card .tc-pin {
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-.tool-card:hover .tc-info,
-.tool-card:hover .tc-pin,
-.tool-card:focus-within .tc-info,
-.tool-card:focus-within .tc-pin,
-.tool-card .tc-pin[aria-pressed='true'] {
-  opacity: 1;
-}
-@media (hover: none) {
-  .tool-card .tc-info,
-  .tool-card .tc-pin {
-    opacity: 1;
-  }
-}
-.tool-card-row .tc-info {
-  top: auto;
-  left: auto;
-  right: 2rem;
-  bottom: 50%;
-  transform: translateY(50%);
-}
-.tool-card-row .tc-pin {
-  top: 50%;
-  transform: translateY(-50%);
-}
-.tc-preview {
-  display: none;
-  position: absolute;
-  z-index: 30;
-  top: calc(100% + 4px);
-  left: 50%;
-  width: 15rem;
-  transform: translateX(-50%);
-  border: 1px solid var(--line);
-  border-radius: 0.75rem;
-  background: var(--surface);
-  box-shadow: var(--shadow-lift);
-  padding: 0.6rem 0.75rem;
-  font-size: 0.75rem;
-  line-height: 1.45;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.12s, visibility 0.12s;
-}
-@media (hover: hover) and (min-width: 768px) {
-  .tc-preview { display: block; }
-  .tool-card:hover .tc-preview,
-  .tool-card:focus-within .tc-preview {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 300ms;
-  }
 }
 
 /* Tool drawer and its floating button */
